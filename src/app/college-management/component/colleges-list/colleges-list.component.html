@@ -1,45 +1,30 @@
-<div class="mat-elevation-z8">
-  <table aria-label="Elements" class="full-width-table" mat-table matSort>
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Id</th>
-      <td *matCellDef="let row" mat-cell>{{row.id}}</td>
-    </ng-container>
+<div class="p-1">
+  <app-college-filter></app-college-filter>
+  <div class="mat-elevation-z8 mt-1 full-width-table">
+    <mat-table aria-label="Elements" matSort>
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
-      <td *matCellDef="let row" mat-cell>{{row.name}}</td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="name1">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Name1</th>
-      <td *matCellDef="let row" mat-cell>{{row.name}}</td>
-    </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple></mat-row>
+    </mat-table>
 
-    <ng-container matColumnDef="name2">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Name2</th>
-      <td *matCellDef="let row" mat-cell>{{row.name}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="name3">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Name3</th>
-      <td *matCellDef="let row" mat-cell>{{row.name}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="name4">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Name4</th>
-      <td *matCellDef="let row" mat-cell>{{row.name}}</td>
-    </ng-container>
-
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-  </table>
-  <mat-paginator #paginator
-                 [length]="dataSource?.data?.length"
-                 [pageIndex]="0"
-                 [pageSizeOptions]="[5, 10, 20]"
-                 [pageSize]="10"
-                 aria-label="Select page">
-  </mat-paginator>
+    <mat-paginator #paginator
+                   [length]="dataSource?.data?.length"
+                   [pageIndex]="0"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [pageSize]="10"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
 </div>
+

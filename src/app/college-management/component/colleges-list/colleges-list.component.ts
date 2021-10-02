@@ -16,7 +16,7 @@ export class CollegesListComponent implements AfterViewInit {
   dataSource: TableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'name1', 'name2', 'name3', 'name4'];
+  displayedColumns = ['id', 'name'];
 
   constructor() {
     this.dataSource = new TableDataSource();
