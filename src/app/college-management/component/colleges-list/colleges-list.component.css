@@ -33,3 +33,27 @@ mat-divider {
 mat-spinner {
   margin: 30px auto 0;
 }
+
+mat-header-row {
+  background-color: #673ab7;
+}
+
+mat-header-cell {
+  color: white;
+}
+
+/*mat-row:nth-child(even) {*/
+/*  background-color: lightgray;*/
+/*}*/
+
+mat-row:hover {
+  background-color: lightgray;
+}
+
+mat-row {
+  transition: 0.3s;
+}
+
+mat-row mat-icon :hover {
+  cursor: pointer;
+}

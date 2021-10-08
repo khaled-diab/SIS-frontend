@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CollegeFilterModel} from '../../model/college-filter-model';
-
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import {StatusType} from '../../model/status-Type';
+import {CollegeManagementService} from '../../service/college-management.service';
 
 @Component({
   selector: 'app-college-filter',
@@ -14,16 +10,23 @@ interface Food {
 })
 export class CollegeFilterComponent implements OnInit {
   collegeFilterModel: CollegeFilterModel = new CollegeFilterModel();
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+  statusTypes: StatusType[] = [
+    {value: 'Active', viewValue: 'Active'},
+    {value: 'Inactive', viewValue: 'Inactive'}
   ];
 
-  constructor() {
+  constructor(private collegeManagementService: CollegeManagementService) {
   }
 
   ngOnInit(): void {
   }
 
+  applyFilter(): void {
+    this.collegeManagementService.departmentFilterEvent.next(this.collegeFilterModel);
+  }
+
+  resetFilter(): void {
+    this.collegeFilterModel = new CollegeFilterModel();
+    this.collegeManagementService.departmentFilterEvent.next(this.collegeFilterModel);
+  }
 }

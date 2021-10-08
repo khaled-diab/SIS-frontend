@@ -1,33 +1,34 @@
-<mat-card>
+<mat-card class="mat-elevation-z8">
   <div class="container">
     <form>
       <div class="row">
         <div class="col text-center">
           <mat-form-field appearance="fill">
             <mat-label>English Name</mat-label>
-            <input matInput>
+            <input [(ngModel)]="collegeFilterModel.englishName" matInput name="collegeFilterModel.englishName">
           </mat-form-field>
         </div>
         <div class="col text-center">
           <mat-form-field appearance="fill">
             <mat-label>Arabic Name</mat-label>
-            <input matInput>
+            <input [(ngModel)]="collegeFilterModel.arabicName" matInput name="collegeFilterModel.arabicName">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col text-center">
           <mat-form-field appearance="fill">
-            <mat-label>Favorite food</mat-label>
-            <input matInput>
+            <mat-label>Code</mat-label>
+            <input [(ngModel)]="collegeFilterModel.code" matInput name="collegeFilterModel.code">
           </mat-form-field>
         </div>
         <div class="col text-center">
           <mat-form-field appearance="fill">
             <mat-label>Status</mat-label>
-            <mat-select placeholder="Select Status">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
+            <mat-select [(value)]="collegeFilterModel.status" placeholder="Select Status">
+              <mat-option *ngFor="let status of statusTypes"
+                          [value]="status.value">
+                {{status.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -35,8 +36,8 @@
       </div>
     </form>
     <div class="d-flex flex-row justify-content-end">
-      <button class="m-1" color="primary" mat-raised-button>Search</button>
-      <button class="m-1" color="warn" mat-raised-button>Reset</button>
+      <button (click)="applyFilter()" class="m-1" color="primary" mat-raised-button>Search</button>
+      <button (click)="resetFilter()" class="m-1" color="accent" mat-raised-button>Reset</button>
     </div>
   </div>
 </mat-card>

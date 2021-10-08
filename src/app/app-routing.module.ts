@@ -10,7 +10,7 @@ const appRoutes: Routes = [
     component: AppComponent
   },
   {
-    path: 'colleges-list',
+    path: 'colleges-management',
     loadChildren: () => import('./college-management/college-management.module').then(value => value.CollegeManagementModule)
   },
   {

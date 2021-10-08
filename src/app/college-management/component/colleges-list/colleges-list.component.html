@@ -46,7 +46,7 @@
     <mat-paginator #paginator
                    (page)="pageChangeEvent($event)"
                    [length]="tableData.totalElements"
-                   [pageIndex]="0"
+                   [pageIndex]="pageIndex"
                    [pageSizeOptions]="[5, 10, 20]"
                    [pageSize]="5"
                    aria-label="Select page"

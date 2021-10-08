@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatRippleModule} from '@angular/material/core';
 import {CollegeFilterComponent} from './component/college-filter/college-filter.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
@@ -19,13 +19,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {CollegeParentComponent} from './college-parent/college-parent.component';
 
 
 @NgModule({
   declarations: [
     CollegesListComponent,
     CreateCollegeComponent,
-    CollegeFilterComponent
+    CollegeFilterComponent,
+    CollegeParentComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDividerModule,
     MatMenuModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ]
 })
 export class CollegeManagementModule {

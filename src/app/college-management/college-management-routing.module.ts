@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {CollegeParentComponent} from './college-parent/college-parent.component';
 import {CollegesListComponent} from './component/colleges-list/colleges-list.component';
 import {CreateCollegeComponent} from './component/create-college/create-college.component';
 
@@ -7,12 +8,23 @@ import {CreateCollegeComponent} from './component/create-college/create-college.
 const appRoutes: Routes = [
   {
     path: '',
-    component: CollegesListComponent
+    component: CollegeParentComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'college-list',
+        pathMatch: 'full'
+      },
+      {
+        path: 'college-list',
+        component: CollegesListComponent
+      },
+      {
+        path: 'create-college',
+        component: CreateCollegeComponent
+      }
+    ]
   },
-  {
-    path: 'create-college',
-    component: CreateCollegeComponent
-  }
 ];
 
 
