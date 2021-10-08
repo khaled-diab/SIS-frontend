@@ -1,0 +1,13 @@
+mat-card {
+  width: 90%;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 60%;
+}
+
+.align {
+  display: flex;
+  align-content: space-around;
+}

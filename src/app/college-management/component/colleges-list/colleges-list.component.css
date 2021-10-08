@@ -23,3 +23,13 @@ mat-header-cell {
   opacity: 0.54 !important;
   transform: translateY(0px) !important;
 }
+
+mat-divider {
+
+  margin: 10px 5px 5px;
+  height: 5px;
+}
+
+mat-spinner {
+  margin: 30px auto 0;
+}

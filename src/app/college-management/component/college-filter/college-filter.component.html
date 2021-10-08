@@ -1,3 +1,42 @@
-<div class="m-1">
-  <p>college-filter works!</p>
-</div>
+<mat-card>
+  <div class="container">
+    <form>
+      <div class="row">
+        <div class="col text-center">
+          <mat-form-field appearance="fill">
+            <mat-label>English Name</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+        <div class="col text-center">
+          <mat-form-field appearance="fill">
+            <mat-label>Arabic Name</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <mat-form-field appearance="fill">
+            <mat-label>Favorite food</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+        <div class="col text-center">
+          <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select placeholder="Select Status">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="d-flex flex-row justify-content-end">
+      <button class="m-1" color="primary" mat-raised-button>Search</button>
+      <button class="m-1" color="warn" mat-raised-button>Reset</button>
+    </div>
+  </div>
+</mat-card>
