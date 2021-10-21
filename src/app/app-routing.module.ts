@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {NotFoundComponent} from './shared/component/not-found/not-found.component';
-import {AppComponent} from './app.component';
+import {NavMenuComponent} from './nav-menu/nav-menu.component';
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: AppComponent
-  },
-  {
-    path: 'colleges-management',
-    loadChildren: () => import('./college-management/college-management.module').then(value => value.CollegeManagementModule)
+    component: NavMenuComponent,
+    children: [
+      {
+        path: 'colleges-management',
+        loadChildren: () => import('./college-management/college-management.module').then(value => value.CollegeManagementModule)
+      }
+    ]
   },
   {
     path: 'not-found',

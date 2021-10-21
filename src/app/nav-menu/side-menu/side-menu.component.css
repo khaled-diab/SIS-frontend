@@ -1,0 +1,85 @@
+
+mat-expansion-panel {
+  background-color: #58319b !important;
+  color: white;
+}
+
+/*mat-list-item {*/
+/*  color: white !important;*/
+/*  width: 250px !important;*/
+/*}*/
+
+/*mat-nav-list {*/
+/*  width: 100%;*/
+/*}*/
+
+::ng-deep.mat-expansion-indicator:after {
+  color: white;
+}
+
+::ng-deep.mat-expansion-panel-body {
+  padding: 0 0 0 0 !important;
+}
+
+
+ul {
+  list-style: none;
+}
+
+li {
+  height: 50px;
+  width: 95%;
+  margin-bottom: 10px;
+  line-height: 50px;
+}
+
+li a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s ease;
+  border-radius: 12px;
+}
+
+li a:hover {
+  background-color: #4d2b88;
+  /*color: #673ab7;*/
+  cursor: pointer;
+}
+
+li a mat-icon {
+  height: 50px;
+  min-width: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.active {
+  background-color: white;
+  color: #4d2b88;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/*list-style-position: inside;*/
+
+.logo {
+  margin-bottom: 10px;
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.matIcon {
+  height: 50px;
+  min-width: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 60px;
+}
+
+/*.logo span {*/
+/*  text-align: center;*/
+/*}*/
