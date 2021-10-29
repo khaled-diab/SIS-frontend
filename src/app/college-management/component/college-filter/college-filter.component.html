@@ -4,40 +4,19 @@
       <div class="row">
         <div class="col text-center">
           <mat-form-field appearance="fill">
-            <mat-label>English Name</mat-label>
+            <mat-label>Search</mat-label>
             <input [(ngModel)]="collegeFilterModel.englishName" matInput name="collegeFilterModel.englishName">
           </mat-form-field>
         </div>
-        <div class="col text-center">
-          <mat-form-field appearance="fill">
-            <mat-label>Arabic Name</mat-label>
-            <input [(ngModel)]="collegeFilterModel.arabicName" matInput name="collegeFilterModel.arabicName">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col text-center">
-          <mat-form-field appearance="fill">
-            <mat-label>Code</mat-label>
-            <input [(ngModel)]="collegeFilterModel.code" matInput name="collegeFilterModel.code">
-          </mat-form-field>
-        </div>
-        <div class="col text-center">
-          <mat-form-field appearance="fill">
-            <mat-label>Status</mat-label>
-            <mat-select [(value)]="collegeFilterModel.status" placeholder="Select Status">
-              <mat-option *ngFor="let status of statusTypes"
-                          [value]="status.value">
-                {{status.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div class="col">
+          <div class="row">
+            <div class="col-6 mt-2">
+              <button (click)="applyFilter()" class="m-1" color="primary" mat-raised-button>Search</button>
+              <button (click)="resetFilter()" class="m-1" color="accent" mat-raised-button>Reset</button>
+            </div>
+          </div>
         </div>
       </div>
     </form>
-    <div class="d-flex flex-row justify-content-end">
-      <button (click)="applyFilter()" class="m-1" color="primary" mat-raised-button>Search</button>
-      <button (click)="resetFilter()" class="m-1" color="accent" mat-raised-button>Reset</button>
-    </div>
   </div>
 </mat-card>
