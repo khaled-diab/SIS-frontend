@@ -19,10 +19,16 @@ mat-header-cell {
   overflow: initial;
 }
 
-::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
-  opacity: 0.54 !important;
-  transform: translateY(0px) !important;
-}
+/*::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {*/
+/*  opacity: 0.54 !important;*/
+/*  transform: translateY(0px) !important;*/
+/*}*/
+
+/*::ng-deep  .mat-sort-header-arrow {*/
+/*  !*opacity: 0.99 !important;*!*/
+/*  !*transform: translateY(0px) !important;*!*/
+/*  color: white;*/
+/*}*/
 
 mat-divider {
 
@@ -35,7 +41,7 @@ mat-spinner {
 }
 
 mat-header-row {
-  background-color: #673ab7;
+  background-color: var(--main-color);
 }
 
 mat-header-cell {
@@ -54,6 +60,36 @@ mat-row {
   transition: 0.3s;
 }
 
-mat-row mat-icon :hover {
+/*mat-row mat-icon :hover {*/
+/*  cursor: pointer;*/
+/*}*/
+
+span mat-icon:hover {
   cursor: pointer;
+}
+
+mat-cell .options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-cell .options mat-icon + mat-icon {
+  margin-left: 15px;
+}
+
+mat-cell .options mat-icon {
+  cursor: pointer;
+}
+
+mat-cell .options mat-icon.eye {
+  color: #1E8B17;
+}
+
+mat-cell .options mat-icon.user-edit {
+  color: #393DB4;
+}
+
+mat-cell .options mat-icon.user-times {
+  color: #F00B0B;
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CollegeFilterModel} from '../../model/college-filter-model';
-import {StatusType} from '../../model/status-Type';
+import {CollegeFilterModel} from '../../../shared/model/college-management/college-filter-model';
+import {StatusType} from '../../../shared/model/college-management/status-Type';
 import {CollegeManagementService} from '../../service/college-management.service';
 
 @Component({

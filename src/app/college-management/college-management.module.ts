@@ -19,7 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {CollegeParentComponent} from './college-parent/college-parent.component';
+import {CollegeParentComponent} from './component/college-parent/college-parent.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {CollegeParentComponent} from './college-parent/college-parent.component'
     MatMenuModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ]
 })
 export class CollegeManagementModule {

@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {CollegeManagementService} from '../../service/college-management.service';
-import {CollegePage} from '../../model/college-page';
 import {Subscription} from 'rxjs';
-import {CollegeFilterModel} from '../../model/college-filter-model';
+import {CollegeFilterModel} from '../../../shared/model/college-management/college-filter-model';
+import {PageRequest} from '../../../shared/model/page-request';
+import {CollegeModel} from '../../../shared/model/college-management/college-model';
+import {Constants} from '../../../shared/constants';
 
 @Component({
   selector: 'app-colleges-list',
@@ -13,10 +15,16 @@ import {CollegeFilterModel} from '../../model/college-filter-model';
 export class CollegesListComponent implements OnInit {
 
   @ViewChild('paginator') paginator: MatPaginator;
-  tableData: CollegePage;
+  tableData: PageRequest<CollegeModel>;
   filterObject: CollegeFilterModel = new CollegeFilterModel();
-  displayedColumns = ['ID', 'EnglishName', 'ArabicName', 'Status', 'Code', 'Actions'];
+  displayedColumns = ['ID', 'EnglishName', 'ArabicName', 'Code', 'Actions'];
   pageIndex = 0;
+  idSortIcon = Constants.sortASCIcon;
+  englishNameSortIcon = Constants.sortASCIcon;
+  arabicNameSortIcon = Constants.sortDESCIcon;
+  codeSortIcon = Constants.sortASCIcon;
+  sortASCHint = Constants.sortASCHint;
+  sortDESCHint = Constants.sortDescHint;
 
   constructor(private collegeManagementService: CollegeManagementService) {
   }
@@ -60,5 +68,20 @@ export class CollegesListComponent implements OnInit {
       .subscribe(value => {
         this.tableData = value;
       });
+  }
+
+  idSortAction(): void {
+
+  }
+
+  englishNameSortAction(): void {
+
+  }
+
+  arabicNameSortAction(): void {
+  }
+
+  codeSortAction(): void {
+
   }
 }
