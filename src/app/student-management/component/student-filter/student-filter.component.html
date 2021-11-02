@@ -1,0 +1,30 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+    <form>
+      <div class="row">
+        <div class="col-6 text-center">
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Search</mat-label>
+            <input [(ngModel)]="studentFilterModel.filterValue" matInput name="collegeFilterModel.englishName">
+          </mat-form-field>
+          <div class="form-control">
+            <input type="search" class="">
+          </div>
+        </div>
+        <div class="col-6 text-left">
+          <button (click)="applyFilter()" class="m-1" color="primary" mat-raised-button>Search</button>
+          <button (click)="resetFilter()" class="m-1" color="accent" mat-raised-button>Reset</button>
+        </div>
+      </div>
+    </form>
+
+    <!--    <form class="form-row form">-->
+    <!--      <div class="form-group col-12 m-auto search-box ">-->
+    <!--        <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" placeholder="Search here"-->
+    <!--               type="email">-->
+    <!--        <button class="btn btn-primary search-btn" type="submit">Search</button>-->
+    <!--      </div>-->
+    <!--    </form>-->
+
+  </div>
+</mat-card>
