@@ -16,6 +16,7 @@ export class CollegesListComponent implements OnInit {
 
   @ViewChild('paginator') paginator: MatPaginator;
   tableData: PageRequest<CollegeModel>;
+   x:number;
   filterObject: CollegeFilterModel = new CollegeFilterModel();
   displayedColumns = ['ID', 'EnglishName', 'ArabicName', 'Code', 'Actions'];
   pageIndex = 0;

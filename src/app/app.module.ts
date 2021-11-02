@@ -16,6 +16,7 @@ import {MatListModule} from '@angular/material/list';
 import {SideMenuComponent} from './nav-menu/side-menu/side-menu.component';
 import {NavBarComponent} from './nav-menu/nav-bar/nav-bar.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {StudentManagementModule} from './student-management/student-management.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     BrowserModule,
     BrowserAnimationsModule,
     CollegeManagementModule,
+    StudentManagementModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,

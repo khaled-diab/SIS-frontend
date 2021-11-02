@@ -44,30 +44,30 @@
 </mat-accordion>
 <mat-accordion>
   <mat-expansion-panel
-    #collegeManagementExpansion1
-    (afterExpand)="closeOtherExpansions(collegeManagementExpansion1)"
+    #studentManagementExpansion
+    (afterExpand)="closeOtherExpansions2(studentManagementExpansion)"
     [expanded]="false"
     class="mat-expansion-panel-body">
     <mat-expansion-panel-header>
-      College Management
+     Student Management
     </mat-expansion-panel-header>
     <ul>
       <li [routerLinkActiveOptions]="{exact: true}"
           [routerLinkActive]="['active']"
-          [routerLink]="['/colleges-management','college-list']">
+          [routerLink]="['/students-management','student-list']">
         <a>
           <mat-icon>home</mat-icon>
           <span>
-            List Of Colleges
+            List Of Students
           </span>
         </a>
       </li>
       <li [routerLinkActive]="['active']"
-          [routerLink]="['/colleges-management','create-college']">
+          [routerLink]="['/students-management','student-list']">
         <a>
           <mat-icon>add</mat-icon>
           <span>
-            Add College
+            Add Student
           </span>
         </a>
       </li>
