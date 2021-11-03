@@ -16,3 +16,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.mat-sort-header-arrow {
+  color: #fff !important;
+  /*opacity: 1 !important;*/
+}

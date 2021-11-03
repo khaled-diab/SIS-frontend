@@ -1,51 +1,36 @@
 <div class="p-3">
   <app-college-filter></app-college-filter>
   <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-    <mat-table [dataSource]="tableData.data" aria-label="Elements">
+    <mat-table (matSortChange)="sortEvent($event)" [dataSource]="tableData.data" aria-label="Elements" matSort>
       <!-- Id Column -->
-      <ng-container matColumnDef="ID">
-        <mat-header-cell *matHeaderCellDef>Id
-          <span>
-            <button [matTooltip]="sortASCHint" mat-icon-button matTooltipPosition="above">
-              <mat-icon (click)="idSortAction()" class="m-1">{{idSortIcon}}</mat-icon>
-            </button>
-          </span>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Id
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="EnglishName">
-        <mat-header-cell *matHeaderCellDef>English Name
-          <span>
-            <button [matTooltip]="sortASCHint" mat-icon-button matTooltipPosition="above">
-              <mat-icon (click)="englishNameSortAction()" class="m-1">{{englishNameSortIcon}}</mat-icon>
-            </button>
-          </span>
+      <ng-container matColumnDef="nameEn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>English Name
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.nameEn}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="ArabicName">
-        <mat-header-cell *matHeaderCellDef>Arabic Name
-          <span>
-            <button [matTooltip]="sortDESCHint" mat-icon-button matTooltipPosition="above">
-              <mat-icon (click)="arabicNameSortAction()" class="m-1">{{arabicNameSortIcon}}</mat-icon>
-            </button>
-          </span>
+      <ng-container matColumnDef="nameAr">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
       </ng-container>
 
       <!-- Name Column -->
 
-      <ng-container matColumnDef="Code">
-        <mat-header-cell *matHeaderCellDef>Code
-          <span>
-            <button [matTooltip]="sortASCHint" mat-icon-button matTooltipPosition="above">
-              <mat-icon (click)="codeSortAction()" class="m-1">{{codeSortIcon}}</mat-icon>
-            </button>
-          </span>
+      <ng-container matColumnDef="code">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Code
+          <!--          <span>-->
+          <!--            <button [matTooltip]="sortASCHint" mat-icon-button matTooltipPosition="above">-->
+          <!--              <mat-icon (click)="codeSortAction()" class="m-1">{{codeSortIcon}}</mat-icon>-->
+          <!--            </button>-->
+          <!--          </span>-->
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
       </ng-container>
@@ -61,7 +46,7 @@
               <mat-icon class="user-edit">edit</mat-icon>
             </button>
             <button mat-icon-button>
-              <mat-icon class="user-times">person_add</mat-icon>
+              <mat-icon class="user-times">delete</mat-icon>
             </button>
           </div>
         </mat-cell>

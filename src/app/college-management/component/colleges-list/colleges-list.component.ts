@@ -6,6 +6,7 @@ import {CollegeFilterModel} from '../../../shared/model/college-management/colle
 import {PageRequest} from '../../../shared/model/page-request';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {Constants} from '../../../shared/constants';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-colleges-list',
@@ -17,7 +18,7 @@ export class CollegesListComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
   tableData: PageRequest<CollegeModel>;
   filterObject: CollegeFilterModel = new CollegeFilterModel();
-  displayedColumns = ['ID', 'EnglishName', 'ArabicName', 'Code', 'Actions'];
+  displayedColumns = ['id', 'nameEn', 'nameAr', 'code', 'Actions'];
   pageIndex = 0;
   idSortIcon = Constants.sortASCIcon;
   englishNameSortIcon = Constants.sortASCIcon;
@@ -83,5 +84,9 @@ export class CollegesListComponent implements OnInit {
 
   codeSortAction(): void {
 
+  }
+
+  sortEvent($event: Sort): void {
+    console.log($event);
   }
 }
