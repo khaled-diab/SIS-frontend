@@ -20,9 +20,9 @@
 
     <form class="form-row form">
       <div class="form-group col-12 m-auto search-box ">
-        <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" placeholder="Search here"
-               type="email">
-        <button class="btn btn-primary search-btn" type="submit">Search</button>
+        <input [(ngModel)]="collegeRequestModel.filterValue" class="form-control" id="exampleInputEmail1"
+               name="filterValue" placeholder="Search here" type="text">
+        <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button>
       </div>
     </form>
 

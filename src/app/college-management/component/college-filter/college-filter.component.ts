@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CollegeFilterModel} from '../../../shared/model/college-management/college-filter-model';
-import {StatusType} from '../../../shared/model/college-management/status-Type';
+import {CollegeRequestModel} from '../../../shared/model/college-management/college-request-model';
 import {CollegeManagementService} from '../../service/college-management.service';
 
 @Component({
@@ -9,11 +8,7 @@ import {CollegeManagementService} from '../../service/college-management.service
   styleUrls: ['./college-filter.component.css']
 })
 export class CollegeFilterComponent implements OnInit {
-  collegeFilterModel: CollegeFilterModel = new CollegeFilterModel();
-  statusTypes: StatusType[] = [
-    {value: 'Active', viewValue: 'Active'},
-    {value: 'Inactive', viewValue: 'Inactive'}
-  ];
+  collegeRequestModel: CollegeRequestModel = new CollegeRequestModel();
 
   constructor(private collegeManagementService: CollegeManagementService) {
   }
@@ -22,11 +17,11 @@ export class CollegeFilterComponent implements OnInit {
   }
 
   applyFilter(): void {
-    this.collegeManagementService.departmentFilterEvent.next(this.collegeFilterModel);
+    this.collegeManagementService.departmentFilterEvent.next(this.collegeRequestModel);
   }
 
   resetFilter(): void {
-    this.collegeFilterModel = new CollegeFilterModel();
-    this.collegeManagementService.departmentFilterEvent.next(this.collegeFilterModel);
+    this.collegeRequestModel = new CollegeRequestModel();
+    this.collegeManagementService.departmentFilterEvent.next(this.collegeRequestModel);
   }
 }

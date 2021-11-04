@@ -39,13 +39,13 @@
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <div class="options">
-            <button mat-icon-button>
+            <button (click)="viewCollege(row)" mat-icon-button>
               <mat-icon class="eye">visibility</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button (click)="editCollege(row)" mat-icon-button>
               <mat-icon class="user-edit">edit</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button (click)="deleteCollege(row)" mat-icon-button>
               <mat-icon class="user-times">delete</mat-icon>
             </button>
           </div>

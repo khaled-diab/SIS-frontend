@@ -1,7 +1,7 @@
 import {Constants} from '../../constants';
 
-export class CollegeFilterModel {
+export class CollegeRequestModel {
   filterValue: string;
-  sortDirection: string = Constants.ASC;
+  sortDirection: string | null = Constants.ASC;
   sortBy = 'nameAr';
 }
