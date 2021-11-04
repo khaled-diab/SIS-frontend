@@ -1,10 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {PageRequest} from '../../../shared/model/page-request';
-import {CollegeModel} from '../../../shared/model/college-management/college-model';
-import {CollegeFilterModel} from '../../../shared/model/college-management/college-filter-model';
 import {Constants} from '../../../shared/constants';
-import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 import {Subscription} from 'rxjs';
 import {StudentManagementService} from '../../service/student-management.service';
 import {StudentModel} from '../../../shared/model/student-management/student-model';
@@ -40,7 +37,7 @@ export class StudentsListComponent implements OnInit {
 
 
   pageChangeEvent(event: PageEvent): void {
-  this.studentManagementService.searchStudents(this.filterObject.filterValue, this.filterObject.collegeId, this.filterObject.departmentId, this.paginator.pageIndex, this.paginator.pageSize, this.filterObject )
+    this.studentManagementService.searchStudents(this.filterObject.filterValue, this.filterObject.collegeId, this.filterObject.departmentId, this.paginator.pageIndex, this.paginator.pageSize, this.filterObject)
       .subscribe(value => {
         this.tableData = value;
 
@@ -61,7 +58,10 @@ export class StudentsListComponent implements OnInit {
         this.filterObject = value;
         this.paginator.pageIndex = 0;
         this.studentManagementService
-          .searchStudents(this.filterObject.filterValue, this.filterObject.collegeId, this.filterObject.departmentId, 0, this.paginator.pageSize, this.filterObject )
+          .searchStudents(this.filterObject.filterValue,
+            this.filterObject.collegeId,
+            this.filterObject.departmentId,
+            0, this.paginator.pageSize, this.filterObject)
           .subscribe(filteredData => {
             this.tableData = filteredData;
             console.log('filter');
@@ -73,7 +73,7 @@ export class StudentsListComponent implements OnInit {
     const filter = new StudentFilterModel();
 
     return this.studentManagementService
-      .searchStudents(this.filterObject.filterValue, undefined, undefined, 0, 5, filter )
+      .searchStudents(this.filterObject.filterValue, undefined, undefined, 0, 5, filter)
       .subscribe(value => {
         this.tableData = value;
         console.log(value);
