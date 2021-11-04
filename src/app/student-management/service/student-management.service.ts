@@ -5,6 +5,7 @@ import {StudentModel} from '../../shared/model/student-management/student-model'
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {PageQueryUtil} from '../../shared/model/page-query';
 import {StudentFilterModel} from '../../shared/model/student-management/student-filter-model';
+import {CollegeModel} from "../../shared/model/college-management/college-model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,17 +42,17 @@ export class StudentManagementService {
   // //     .set('page', page)
   // //     .set('limit', limit)
   // // })}
-  searchStudents(attribute: string, collegeId: number, departmentId: number, page: number, limit: number, filter: StudentFilterModel): Observable<PageRequest<StudentModel>>{
+  searchStudents(attribute: string, collegeId: any, departmentId: any, page: number, limit: number, filter: StudentFilterModel): Observable<PageRequest<StudentModel>>{
     page++;
     if (attribute != undefined) {
-      if (collegeId == -1) {
+      if (collegeId == undefined) {
         return this.httpClient.post<PageRequest<StudentModel>>('http://localhost:5000/api/students/search/' + attribute, filter, {
           params: new HttpParams()
 
             .set('page', page)
             .set('limit', limit)
         });
-      } else if (collegeId != -1 && departmentId == -1) {
+      } else if (collegeId != undefined && departmentId == undefined) {
         return this.httpClient.post<PageRequest<StudentModel>>('http://localhost:5000/api/students/search/' + attribute, filter, {
           params: new HttpParams()
             .set('collegeId', collegeId)
@@ -69,13 +70,13 @@ export class StudentManagementService {
       });
 
     }else{
-      if (collegeId == -1){
+      if (collegeId == undefined){
         return this.httpClient.post<PageRequest<StudentModel>>('http://localhost:5000/api/students/search/', filter, {
           params: new HttpParams()
             .set('page', page)
             .set('limit', limit)
         });
-      }else if (collegeId != -1 && departmentId == -1){
+      }else if (collegeId != undefined && departmentId == undefined){
         console.log('hi');
         return this.httpClient.post<PageRequest<StudentModel>>('http://localhost:5000/api/students/search/', filter, {
           params: new HttpParams()
@@ -136,6 +137,11 @@ updateStudent(student: StudentModel): Observable < StudentModel > {
 deleteStudent(id: number): Observable < string > {
     return this.httpClient.delete<string>('http://localhost:5000/api/students/delete/' + id);
 
+  }
+
+  public getAllColleges():
+    Observable<CollegeModel[]> {
+    return this.httpClient.get <CollegeModel[]>('http://localhost:5000/api/colleges/all');
   }
 }
 

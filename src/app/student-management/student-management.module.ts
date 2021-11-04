@@ -17,6 +17,7 @@ import {StudentManagementRoutingModule} from './student-management-routing.modul
 import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -29,22 +30,23 @@ import {MatInputModule} from "@angular/material/input";
     StudentsListComponent
 
   ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    StudentManagementRoutingModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatButtonModule,
+        RouterModule,
+        StudentManagementRoutingModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule
+    ]
 })
 export class StudentManagementModule {
 }

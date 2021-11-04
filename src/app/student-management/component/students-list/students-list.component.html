@@ -4,7 +4,7 @@
     <mat-table [dataSource]="tableData.data" aria-label="Elements">
       <!-- Id Column -->
       <ng-container matColumnDef="UniversityId">
-        <mat-header-cell *matHeaderCellDef>UniversityId
+        <mat-header-cell *matHeaderCellDef>University Id
           <span>
             <button [matTooltip]="sortASCHint" mat-icon-button matTooltipPosition="above">
               <mat-icon (click)="idSortAction()" class="m-1">{{idSortIcon}}</mat-icon>
@@ -35,6 +35,26 @@
           </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="College">
+        <mat-header-cell *matHeaderCellDef>College
+          <span>
+            <button [matTooltip]="sortDESCHint" mat-icon-button matTooltipPosition="above">
+              <mat-icon (click)="arabicNameSortAction()" class="m-1">{{arabicNameSortIcon}}</mat-icon>
+            </button>
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.collegeDTO.nameEn}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Department">
+        <mat-header-cell *matHeaderCellDef>Department
+          <span>
+            <button [matTooltip]="sortDESCHint" mat-icon-button matTooltipPosition="above">
+              <mat-icon (click)="arabicNameSortAction()" class="m-1">{{arabicNameSortIcon}}</mat-icon>
+            </button>
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.departmentDTO.nameEn}}</mat-cell>
       </ng-container>
 
       <!-- Name Column -->

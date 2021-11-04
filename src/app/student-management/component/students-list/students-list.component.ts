@@ -22,7 +22,7 @@ export class StudentsListComponent implements OnInit {
   tableData: PageRequest<StudentModel>;
   x: number;
   filterObject: StudentFilterModel = new StudentFilterModel();
-  displayedColumns = ['UniversityId', 'EnglishName', 'ArabicName', 'Level', 'Actions'];
+  displayedColumns = ['UniversityId', 'EnglishName', 'ArabicName', 'College', 'Department', 'Level', 'Actions'];
   pageIndex = 0;
   idSortIcon = Constants.sortASCIcon;
   englishNameSortIcon = Constants.sortASCIcon;
@@ -40,7 +40,7 @@ export class StudentsListComponent implements OnInit {
 
 
   pageChangeEvent(event: PageEvent): void {
-    this.studentManagementService.getStudentsPage(event.pageIndex, event.pageSize)
+  this.studentManagementService.searchStudents(this.filterObject.filterValue, this.filterObject.collegeId, this.filterObject.departmentId, this.paginator.pageIndex, this.paginator.pageSize, this.filterObject )
       .subscribe(value => {
         this.tableData = value;
 
@@ -61,7 +61,7 @@ export class StudentsListComponent implements OnInit {
         this.filterObject = value;
         this.paginator.pageIndex = 0;
         this.studentManagementService
-          .searchStudents(this.filterObject.filterValue, 1, 1, 0, this.paginator.pageSize, this.filterObject )
+          .searchStudents(this.filterObject.filterValue, this.filterObject.collegeId, this.filterObject.departmentId, 0, this.paginator.pageSize, this.filterObject )
           .subscribe(filteredData => {
             this.tableData = filteredData;
             console.log('filter');
@@ -73,7 +73,7 @@ export class StudentsListComponent implements OnInit {
     const filter = new StudentFilterModel();
 
     return this.studentManagementService
-      .searchStudents(this.filterObject.filterValue, -1, -1, 0, 5, this.filterObject )
+      .searchStudents(this.filterObject.filterValue, undefined, undefined, 0, 5, filter )
       .subscribe(value => {
         this.tableData = value;
         console.log(value);
