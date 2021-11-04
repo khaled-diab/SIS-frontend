@@ -12,6 +12,10 @@ const appRoutes: Routes = [
       {
         path: 'colleges-management',
         loadChildren: () => import('./college-management/college-management.module').then(value => value.CollegeManagementModule)
+      },
+      {
+        path: 'students-management',
+        loadChildren: () => import('./student-management/student-management.module').then(value => value.StudentManagementModule)
       }
     ]
   },
