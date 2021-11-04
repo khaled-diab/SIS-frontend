@@ -109,3 +109,4 @@ export class CollegesListComponent implements OnInit {
     this.snackBar.open('College Deletion Failed', undefined, {duration: 4000});
   }
 }
+
