@@ -20,3 +20,13 @@ body {
   color: #fff !important;
   /*opacity: 1 !important;*/
 }
+
+.successSnackBar {
+  color: white;
+  background-color: #1E8B17;
+}
+
+.failedSnackBar {
+  color: white;
+  background-color: #F00B0B;
+}

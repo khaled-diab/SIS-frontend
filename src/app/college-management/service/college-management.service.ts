@@ -6,6 +6,7 @@ import {CollegeRequestModel} from '../../shared/model/college-management/college
 import {PageRequest} from '../../shared/model/page-request';
 import {CollegeModel} from '../../shared/model/college-management/college-model';
 import {Sort} from '@angular/material/sort';
+import {MessageResponse} from '../../shared/model/message-response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ import {Sort} from '@angular/material/sort';
 export class CollegeManagementService {
 
   departmentFilterEvent: Subject<CollegeRequestModel> = new Subject<CollegeRequestModel>();
+  collegeDeleteEvent: Subject<any> = new Subject<any>();
+
 
   constructor(private httpClient: HttpClient) {
   }
@@ -32,5 +35,9 @@ export class CollegeManagementService {
     }
     collegeRequestModel.sortBy = sort.active;
     return collegeRequestModel;
+  }
+
+  deleteCollege(id: number): Observable<MessageResponse> {
+    return this.httpClient.delete<MessageResponse>(Constants.deleteCollegeUrl + id);
   }
 }

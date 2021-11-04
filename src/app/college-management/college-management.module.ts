@@ -21,6 +21,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CollegeParentComponent} from './component/college-parent/college-parent.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {DeleteCollegeModalComponent} from './component/delete-college-modal/delete-college-modal.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -28,9 +31,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     CollegesListComponent,
     CreateCollegeComponent,
     CollegeFilterComponent,
-    CollegeParentComponent
+    CollegeParentComponent,
+    DeleteCollegeModalComponent
   ],
   imports: [
+    ModalModule.forRoot(),
     CommonModule,
     HttpClientModule,
     CollegeManagementRoutingModule,
@@ -49,8 +54,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSelectModule,
     MatProgressSpinnerModule,
     FormsModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+    MatSnackBarModule
+  ],
+  entryComponents: [DeleteCollegeModalComponent]
 })
 export class CollegeManagementModule {
 }
