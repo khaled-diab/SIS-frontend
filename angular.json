@@ -20,7 +20,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/sis-manager/",
             "outputPath": "dist/sis-manager",
             "index": "src/index.html",
             "main": "src/main.ts",
