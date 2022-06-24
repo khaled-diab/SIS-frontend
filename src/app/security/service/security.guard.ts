@@ -23,11 +23,11 @@ export class SecurityGuard implements CanActivate {
       if (localStorage.getItem(Constants.screens).includes(route.data.name)) {
         return true;
       } else {
-        // this.snackBar.open('You are not authorized to access this page',
-        //   undefined,
-        //   {duration: 4000, panelClass: 'failedSnackBar', horizontalPosition: 'center'});
-        // return this.router.createUrlTree(['/']);
-        return true;
+        this.snackBar.open('You are not authorized to access this page',
+          undefined,
+          {duration: 4000, panelClass: 'failedSnackBar', horizontalPosition: 'center'});
+        return this.router.createUrlTree(['/']);
+        // return true;
       }
     }
   }
