@@ -1,0 +1,282 @@
+/* Colors Variables */
+:root {
+  --main-color: #003147;
+  --secondary-color: #03A9F4;
+
+  --main-content-bg-color: #FFF;
+  --upperbar-bg-color: #F2F2F2;
+
+  --nav-bg-color: #003147;
+  --nav-hover-color: #03A9F4;
+
+  --label-txt-color: #C3C3C3;
+  --label-bg-color: #FFF;
+
+  --select-opt-bg-color: #F3F3F3;
+
+  --page-title: #003147;
+  --page-title: #0056F4;
+
+  --body-bg-color: #F2F2F2;
+
+  --table-bg-th-color: #003147;
+  --table-txt-color: #737373
+}
+
+
+/*=============================================*/
+/*Primary Styles*/
+@font-face {
+  /*src: url(./fonts/Poppins-Regular.ttf);*/
+  font-family: 'poppins';
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--body-bg-color);
+  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  width: 95%;
+  margin: auto;
+}
+
+
+
+/*============================================================================*/
+/* Wrapped Content */
+.main-content {
+  background: var(--main-content-bg-color);
+  padding: 50px 0 70px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.main-content .pageTitle h2 {
+  color: var(--main-color);
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  margin: 20px 0;
+  display: inline-block
+}
+
+.main-content .pageTitle h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  /*    width: 10%;*/
+  height: 5px;
+  margin-top: 20px;
+  background: var(--secondary-color);
+  animation: expand 5s 0.5s ease-in-out infinite;
+}
+
+@keyframes expand {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 20%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+
+.main-content .subTitle h4 {
+  font-size: 18px;
+  margin: 20px 0 5px;
+}
+.main-content .subTitle hr{
+  margin-bottom: 30px !important;
+}
+
+/*================================================================*/
+/* submission Form */
+
+.main-content .submission-form {
+  position: relative;
+  margin: 30px 0;
+}
+
+.main-content .submission-form .form-control {
+  margin: 12px 10px;
+  /*padding: 10px;*/
+}
+
+.main-content .custom-select {
+  margin: 12px 10px;
+  padding-left: 10px;
+}
+
+.main-content .form-control:focus,
+.main-content .custom-select:focus {
+  box-shadow: none;
+}
+
+.main-content .form-input {
+  position: relative;
+}
+
+.main-content .form-input label {
+  position: absolute;
+  top: -4px;
+  left: 30px;
+  background: #FFF;
+  padding: 0 10px;
+  /*    border: 1px solid #EEE;*/
+  font-size: 14px;
+  color: #C3C3C3;
+  font-weight: lighter
+}
+
+.main-content .form-input .down-caret,
+.calender {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  transform: translate(10px, -10px); /* my update -10px  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: calc(1.5em + 0.75rem + 18px); /* my update   18px */
+  background: var(--main-color);
+  color: #FFF;
+  border: none;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+
+.main-content .form-input mat-select > mat-option {
+  width: 100%;
+  background: var(--select-opt-bg-color);
+  color: #565656;
+  padding: 5px 10px
+}
+
+.main-content .form-input button[type="submit"], button[type="button"] {
+  width: auto;
+  display: block;
+  background: var(--main-color);
+  border: 1px solid var(--main-color);
+  padding: 1px 10px;
+}
+
+.main-content .form-input button[type="submit"]:hover, button[type="button"]:hover {
+  width: auto;
+  display: block;
+  background: transparent;
+  color: var(--main-color);
+}
+
+
+.full-width-table {
+  width: 80%;
+  /*margin-left: auto;*/
+  margin-right: auto;
+}
+
+mat-cell {
+  display: flex !important;
+  justify-content: center !important;
+
+}
+
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+mat-divider {
+
+  margin: 10px 5px 5px;
+  height: 5px;
+}
+
+mat-spinner {
+  margin: 30px auto 0;
+}
+
+mat-header-row {
+  background-color: var(--main-color);
+}
+
+mat-header-cell {
+  color: white;
+}
+
+mat-row:hover {
+  background-color: lightgray;
+}
+
+mat-row {
+  transition: 0.3s;
+}
+
+span mat-icon:hover {
+  cursor: pointer;
+}
+
+mat-cell .options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-cell .options mat-icon + mat-icon {
+  margin-left: 15px;
+}
+
+mat-cell .options mat-icon {
+  cursor: pointer;
+}
+
+mat-cell .options mat-icon.eye {
+  color: #1E8B17;
+}
+
+mat-cell .options mat-icon.user-edit {
+  color: #393DB4;
+}
+
+mat-cell .options mat-icon.user-times {
+  color: #F00B0B;
+}
+img {
+  border-radius: 50%;
+  width:50px;
+  height: 50px;
+}
+.add {
+  color: var(--main-color);
+  font-size: 35px;
+}
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: var(--main-color);
+}

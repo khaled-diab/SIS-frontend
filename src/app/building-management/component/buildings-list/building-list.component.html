@@ -1,0 +1,96 @@
+<div class="p-3">
+  <app-building-filter></app-building-filter>
+  <div class="d-flex justify-content-end mt-3">
+    <div class="col-1">
+      <button (click)="addOrUpdateBuilding(buildingModel)" class="align-content-center" mat-icon-button>
+        <mat-icon class="add" matTooltip="Add Building" matTooltipPosition="above">add_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
+    <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
+      <!-- Id Column -->
+      <ng-container matColumnDef="no">
+        <mat-header-cell *matHeaderCellDef>Id
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">{{i + 1}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="code">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Code
+          <!--          <span>-->
+          <!--            <button [matTooltip]="sortASCHint" mat-icon-button matTooltipPosition="above">-->
+          <!--              <mat-icon (click)="codeSortAction()" class="m-1">{{codeSortIcon}}</mat-icon>-->
+          <!--            </button>-->
+          <!--          </span>-->
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nameAr">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="nameEn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>English Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.nameEn}}</mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.status}}</mat-cell>
+      </ng-container>
+
+      <!-- College -->
+      <ng-container matColumnDef="college">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>College
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.collegeDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="options">
+            <button (click)="viewBuilding(row)" mat-icon-button>
+              <mat-icon class="eye">visibility</mat-icon>
+            </button>
+            <button (click)="addOrUpdateBuilding(row)" mat-icon-button>
+              <mat-icon class="user-edit">edit</mat-icon>
+            </button>
+            <button (click)="deleteBuilding(row)" mat-icon-button>
+              <mat-icon class="user-times">delete</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+                   [pageIndex]="pageIndex - 1"
+                   [pageSizeOptions]="[1, 3, 5, 10, 25, 35, 50]"
+                   [pageSize]="defaultPageSize"
+                   [length]=tableData.length
+                   showFirstLastButtons
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+  <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Preview</button>
+  <button mat-menu-item>Edit</button>
+  <button mat-menu-item>Delete</button>
+</mat-menu>

@@ -1,0 +1,168 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="pageTitle">
+          <h2>Add Timetable</h2>
+        </div>
+      </div>
+      <div class="col-12">
+
+        <!--  submission Form   -->
+        <div class="row">
+          <form [formGroup]="form2" class="submission-form col-sm-12 col-md-8 form"
+                id="form">
+            <div class="form-row form">
+
+              <!-- academic year -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Year</mat-label>
+                <mat-select #academicYearSelect [formControlName]="'academicYearMenu'" required>
+                  <mat-option *ngFor="let year of academicYears" [value]="year">
+                    {{year.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('academicYearMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- academic term -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Term</mat-label>
+                <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required
+                            [disabled]="isDisabled">
+                  <mat-option *ngFor="let Term of academicTerms" [value]="Term">
+                    {{Term.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('academicTermMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- college -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>College</mat-label>
+                <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
+                  <mat-option *ngFor="let col of colleges" [value]="col">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('collegeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- department -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Department</mat-label>
+                <mat-select #departmentSelect [formControlName]="'departmentMenu'" required
+                            [disabled]="isDisabled">
+                  <mat-option *ngFor="let dept of departments" [value]="dept">
+                    {{dept.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('departmentMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- faculty Member -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Faculty Member</mat-label>
+                <mat-select #facultyMemberSelect [formControlName]="'facultyMemberMenu'" required
+                            [disabled]="isDisabled">
+                  <mat-option *ngFor="let facultyMember of facultyMembers" [value]="facultyMember">
+                    {{facultyMember.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('facultyMemberMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- course -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Course</mat-label>
+                <mat-select #courseSelect [formControlName]="'courseMenu'" required
+                            [disabled]="isDisabled">
+                  <mat-option *ngFor="let course of courses" [value]="course">
+                    {{course.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('courseMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- lectureType -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Lecture Type</mat-label>
+                <mat-select #lectureTypeSelect [formControlName]="'lectureTypeMenu'" required>
+                  <mat-option *ngFor="let lectureType of lectureTypes" [value]="lectureType">
+                    {{lectureType.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('lectureTypeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- building -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Building</mat-label>
+                <mat-select #buildingSelect [formControlName]="'buildingMenu'" required
+                            [disabled]="isDisabled">
+                  <mat-option *ngFor="let building of buildings" [value]="building">
+                    {{building.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('buildingMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- classroom -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Classroom</mat-label>
+                <mat-select #classroomSelect [formControlName]="'classroomMenu'" required
+                            [disabled]="isDisabled">
+                  <mat-option *ngFor="let classroom of classrooms" [value]="classroom">
+                    {{classroom.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('classroomMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- day -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Days</mat-label>
+                <mat-select #daySelect [formControlName]="'dayMenu'" required>
+                  <mat-option *ngFor="let day of days" [value]="day">
+                    {{day}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form2.get('dayMenu')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- startTime-->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>Start Time</mat-label>
+                <input type="time" formControlName="startTime" matInput name="startTime">
+                <mat-error
+                  *ngIf="form2.get('startTime')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- endTime -->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>EndTime</mat-label>
+                <input type="time" formControlName="endTime" matInput name="endTime">
+                <mat-error *ngIf="form2.get('endTime')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+<!--              <div class="col-12"></div>-->
+
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button class="btn btn-primary form-control" form="form" mat-raised-button
+                        type="button" (click)="addTimes()" [disabled]="form2.invalid">Save
+                </button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button mat-raised-button type="button" (click)="close()"
+                        class="btn btn-secondary form-control">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

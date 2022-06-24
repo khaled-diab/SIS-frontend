@@ -1,0 +1,38 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+    <form class="form-row form">
+      <div class="form-group col-6 search-box ">
+        <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
+               name="filterValue" placeholder="Search here" type="text">
+        <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button>
+      </div>
+      <div class="col-3 mt-1">
+        <mat-form-field appearance="outline">
+          <mat-label>Departments</mat-label>
+          <mat-select #departmentSelect>
+            <mat-option [value]="undefined">
+              Choose Department
+            </mat-option>
+            <mat-option *ngFor="let dept of departments" [value]="dept.id">
+              {{dept.nameEn}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-3 mt-1">
+      <mat-form-field appearance="outline">
+          <mat-label>Building</mat-label>
+          <mat-select disabled #buildingSelect [value]="0">
+            <mat-option [value]="undefined">
+              Choose Building
+            </mat-option>
+            <mat-option color="var(--main-color)" *ngFor="let building of buildings" [value]="building.id">
+              {{building.nameEn}}
+            </mat-option>
+          </mat-select>
+          <!--mat-error *ngIf="building.invalid ">Field Required</mat-error-->
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</mat-card>

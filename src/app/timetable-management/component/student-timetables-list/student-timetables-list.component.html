@@ -1,0 +1,61 @@
+<div class="p-3">
+  <app-student-timetables-filter></app-student-timetables-filter>
+
+  <div *ngIf="selection.selected" class="mat-elevation-z8 mt-3 full-width-table">
+    <mat-table [dataSource]="selection.selected" aria-label="Elements">
+
+      <!-- Number Column -->
+      <ng-container matColumnDef="No.">
+        <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
+      </ng-container>
+
+      <!-- from Column -->
+      <ng-container matColumnDef="startTime">
+        <mat-header-cell *matHeaderCellDef>Form</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.startTime}}</mat-cell>
+      </ng-container>
+
+      <!-- to Column -->
+      <ng-container matColumnDef="endTime">
+        <mat-header-cell *matHeaderCellDef>To</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.endTime}}</mat-cell>
+      </ng-container>
+
+      <!-- section Column -->
+      <ng-container matColumnDef="sectionId">
+        <mat-header-cell *matHeaderCellDef>Section</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.courseDTO.nameEn + ' - ' + row.sectionDTO.sectionNumber}}</mat-cell>
+      </ng-container>
+
+      <!-- facultyMember Column -->
+      <ng-container matColumnDef="facultyMemberId">
+        <mat-header-cell *matHeaderCellDef>Faculty Member</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.facultyMemberDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- lectureType Column -->
+      <ng-container matColumnDef="lectureTypeId">
+        <mat-header-cell *matHeaderCellDef>lecture Type</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.lectureTypeDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- building Column -->
+      <ng-container matColumnDef="buildingId">
+        <mat-header-cell *matHeaderCellDef>Building</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.buildingDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- classroom Column -->
+      <ng-container matColumnDef="classroomId">
+        <mat-header-cell *matHeaderCellDef>Classroom</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.classroomDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+  <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
+</div>

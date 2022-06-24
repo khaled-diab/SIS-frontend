@@ -1,0 +1,28 @@
+<div class="login-page">
+  <div class="login">
+    <div class="container">
+      <form #form="ngForm" class="example-form">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>National ID</mat-label>
+          <input #nationalID="ngModel" [(ngModel)]="registerModel.nationalityID" matInput name="nationalID" required>
+          <mat-error *ngIf="nationalID.invalid ">Field Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input #Email="ngModel" [(ngModel)]="registerModel.username" email matInput name="Email" required
+                 type="email">
+          <mat-error *ngIf="Email.errors?.required ">Field Required</mat-error>
+          <mat-error *ngIf="Email.errors?.email && !Email.errors?.required">Enter valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>password</mat-label>
+          <input #password="ngModel" [(ngModel)]="registerModel.password" matInput name="password" required
+                 type="password">
+          <mat-error *ngIf="password.invalid ">Field Required</mat-error>
+        </mat-form-field>
+        <button (click)="register()" [disabled]="form.invalid" class="btn btn-primary">Register</button>
+        <small class="form-text text-muted" id="emailHelp1"><a routerLink="/login">go to login!</a></small>
+      </form>
+    </div>
+  </div>
+</div>

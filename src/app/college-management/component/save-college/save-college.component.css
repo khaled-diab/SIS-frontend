@@ -1,0 +1,5 @@
+.mainButton {
+  background-color: var(--main-color);
+  color: white;
+  width: 75px;
+}

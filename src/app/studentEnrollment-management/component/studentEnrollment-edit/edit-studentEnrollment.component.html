@@ -1,0 +1,130 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pageTitle">
+          <h2>Edit Student Enrollment</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <!--  submission Form   -->
+        <div class="row">
+          <form (ngSubmit)="update()" [formGroup]="form" class="submission-form col-sm-12 col-md-8 form" id="form">
+            <div class="form-row form">
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input outline">
+                <mat-label>Student Name</mat-label>
+                <input matInput [formControlName]="'studentName'" readonly>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input outline">
+                <mat-label>Student University Id</mat-label>
+                <input matInput [formControlName]="'studentUniId'" readonly>
+              </mat-form-field>
+
+              <!-- academic year -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Year</mat-label>
+                <mat-select #academicYearSelect [formControlName]="'academicYearMenu'" required>
+                  <mat-option *ngFor="let year of academicYears" [value]="year.id">
+                    {{year.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('academicYearMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- academic term -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Term</mat-label>
+                <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required>
+                  <mat-option *ngFor="let Term of academicTerms" [value]="Term.id">
+                    {{Term.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('academicTermMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- college -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>College</mat-label>
+                <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
+                  <mat-option *ngFor="let col of colleges" [value]="col.id">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- department -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Department</mat-label>
+                <mat-select #departmentSelect [formControlName]="'departmentMenu'" required>
+                  <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                    {{dept.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- major -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Major</mat-label>
+                <mat-select #majorSelect [formControlName]="'majorMenu'">
+                  <mat-option *ngFor="let major of majors" [value]="major.id">
+                    {{major.nameEn}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- studyType -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Study Type</mat-label>
+                <mat-select #studyTypeSelect [formControlName]="'studyTypeMenu'" required>
+                  <mat-option *ngFor="let studyType of studyTypes" [value]="studyType.id">
+                    {{studyType.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('studyTypeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- course -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Course</mat-label>
+                <mat-select #courseSelect [formControlName]="'courseMenu'" required>
+                  <mat-option *ngFor="let course of courses" [value]="course.id">
+                    {{course.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('courseMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- section -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Section</mat-label>
+                <mat-select #sectionSelect [formControlName]="'sectionMenu'" required>
+                  <mat-option *ngFor="let section of sections" [value]="section.id">
+                    {{section.sectionNumber}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('sectionMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button class="btn btn-primary form-control" form="form" mat-raised-button
+                        type="submit" [disabled]="form.invalid">Save
+                </button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button mat-raised-button type="button" (click)="cancel()" class="btn btn-secondary form-control">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

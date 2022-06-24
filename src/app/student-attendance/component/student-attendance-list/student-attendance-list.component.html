@@ -1,0 +1,97 @@
+<div class="p-3">
+  <app-add-attendance></app-add-attendance>
+  <div class="d-flex justify-content-end mt-6">
+  <div *ngIf="!disableReport" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
+    <h3  >{{'Presents: '+numberOfPresents}}</h3>
+    <h3 >{{'Absents: '+numberOfAbsents}}</h3>
+    <h3 >{{'Excuses: '+numberOfExcuses}}</h3>
+  </div>
+  </div>
+  <div *ngIf="tableData"  class="mat-elevation-z8 mt-3 full-width-table">
+    <mat-table  [dataSource]="dataSource" aria-label="Elements" >
+<!--       Number Column-->
+      <ng-container matColumnDef="NO.">
+        <mat-header-cell *matHeaderCellDef >No.</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i=index">{{i+1}}</mat-cell>
+      </ng-container>
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="universityId">
+        <mat-header-cell *matHeaderCellDef >University Id
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.studentDTO.universityId}}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nameAr">
+        <mat-header-cell *matHeaderCellDef >Arabic Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.studentDTO.nameAr}}</mat-cell>
+      </ng-container>
+
+      <ng-container   matColumnDef="attendanceStatus">
+        <mat-header-cell *matHeaderCellDef  >Attendance
+        </mat-header-cell>
+        <mat-cell   *matCellDef="let row">
+<!--          <mat-select  #sectionMenu [(ngModel)]="row.attendanceStatus" >-->
+<!--            <mat-option  [value]="'Present'">-->
+<!--                  {{"Present"}}-->
+<!--            </mat-option>-->
+<!--            <mat-option  [value]="'Absent'">-->
+<!--              {{"Absent"}}-->
+<!--            </mat-option>-->
+<!--            <mat-option  [value]="'Excuse'">-->
+<!--              {{"Excuse"}}-->
+<!--            </mat-option>-->
+
+
+          <mat-radio-group  [(ngModel)]="row.attendanceStatus">
+          <mat-radio-button class="present"  [value]="'Present'"  >Present</mat-radio-button>
+            <mat-radio-button class="absent"  [value]="'Absent'" >Absent</mat-radio-button>
+            <mat-radio-button  [value]="'Excuse'">Excuse</mat-radio-button>
+          </mat-radio-group>
+<!--          </mat-select>-->
+        </mat-cell>
+      </ng-container>
+<!--      -->
+<!--      <ng-container matColumnDef="Absent">-->
+<!--        <mat-header-cell *matHeaderCellDef  >Absent-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row">-->
+<!--          <mat-radio-button style="margin-bottom: 12px;" [value]="'Absent'" (change)="radioSelected($event, row)"></mat-radio-button>-->
+
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
+<!--      <ng-container matColumnDef="Excuse">-->
+<!--        <mat-header-cell *matHeaderCellDef >Excuse-->
+<!--        </mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row">-->
+<!--          <mat-radio-button style="margin-bottom: 12px;" [value]="'Excuse'" (change)="radioSelected($event, row)"></mat-radio-button>-->
+
+<!--          </mat-cell>-->
+<!--      </ng-container>-->
+
+      <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator *ngIf="tableData"
+                   [length]="tableData.length"
+                   [pageSizeOptions]="[1,5,10, 25, 50]"
+                   [pageSize]="defaultPageSize"
+                   aria-label="Select page"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
+  <div class="col-12 text-center align-self-center" *ngIf="tableData" style="margin-top: 20px;">
+    <div class="  col-12  form-input  ">
+    <button  class="btn btn-primary form-control mainBtn "(click)="ok()"mat-raised-button>
+      Save Attendance
+    </button>
+  </div>
+  </div>
+  <mat-spinner *ngIf="!tableData && spin" class="text-center"></mat-spinner>
+
+
+</div>
+

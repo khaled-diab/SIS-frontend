@@ -1,0 +1,76 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pageTitle">
+          <h2>View Academic Term</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <hr>
+        <!--  submission Form   -->
+        <div class="row">
+          <form [formGroup]="form" class="submission-form col-sm-12 col-lg-8" id="form">
+            <div class="form-row">
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Code</mat-label>
+                <input formControlName="code" matInput name="code" required>
+                <mat-error *ngIf="form.controls['code']?.errors?.required"> Required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Name</mat-label>
+                <input formControlName="name" matInput name="name" required>
+                <mat-error *ngIf="form.controls['name']?.errors?.required"> Required</mat-error>
+
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>Start Date</mat-label>
+                <input id="start_date" formControlName="start_date" matInput required>
+                <mat-error *ngIf="form.controls['start_date']?.errors?.required"> Required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>End Date</mat-label>
+                <input id="end_date" formControlName="end_date" matInput required>
+                <mat-error *ngIf="form.controls['end_date']?.errors?.required"> Required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Year</mat-label>
+                <mat-select formControlName="academicYearMenu" id="academicYearMenu" required>
+                  <mat-option *ngFor="let col of academicYears" [value]="col.id">
+                    {{col.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('academicYearMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+
+              <div *ngIf="!readOnly" class="col-md-6 mr-auto col-sm-12 form-input">
+                <button (click)="add()" class="mainBtn btn btn-primary form-control" form="form" mat-raised-button>
+                  Update
+                </button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button (click)="edit()" *ngIf="readOnly" class="mainBtn btn btn-primary form-control" form="form"
+                        mat-raised-button>Edit
+                </button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button (click)="cancel()" class="mainBtn btn btn-primary form-control" form="form" mat-raised-button>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

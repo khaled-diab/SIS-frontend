@@ -1,0 +1,82 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="pageTitle">
+            <h2>Save Academic Program</h2>
+          </div>
+        </div>
+        <div class="col-12">
+
+          <!--  submission Form   -->
+          <div class="row">
+            <form  [formGroup]="form" class="submission-form col-sm-12 col-lg-8 form" id="form">
+              <div class="form-row">
+
+                <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                  <mat-label>Code</mat-label>
+                  <input formControlName="code" matInput required>
+                  <mat-error *ngIf="form.controls['code']?.errors?.required"> Required</mat-error>
+                  <mat-error *ngIf="form.get('code')?.errors?.serverError">{{errorMessage}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                  <mat-label>Arabic Name</mat-label>
+                  <input formControlName="name_ar" matInput  required>
+                  <mat-error *ngIf="form.controls['name_ar']?.errors?.required"> Required</mat-error>
+                  <mat-error *ngIf="form.controls['name_ar']?.errors?.pattern">Arabic Letters only</mat-error>
+                  <mat-error *ngIf="form.get('name_ar')?.errors?.serverError">{{errorMessage}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                  <mat-label>English Name</mat-label>
+                  <input id="name_en" formControlName="name_en" matInput required>
+                  <mat-error *ngIf="form.controls['name_en']?.errors?.required"> Required</mat-error>
+                  <mat-error *ngIf="form.controls['name_en']?.errors?.pattern"> English Letters only</mat-error>
+                  <mat-error *ngIf="form.get('name_en')?.errors?.serverError">{{errorMessage}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                  <mat-label>College</mat-label>
+
+                  <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
+                    <mat-option *ngFor="let col of colleges" [value]="col.id">
+                      {{col.nameEn}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                  <mat-label>Department</mat-label>
+                  <mat-select #departmentSelect formControlName="departmentMenu" #departmentMenu required>
+                    <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                      {{dept.nameEn}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+                </mat-form-field>
+
+                <div class="col-12"></div>
+
+                <div class="col-md-6 mr-auto col-sm-12 form-input">
+                  <button mat-raised-button type="submit" (click)="add()"
+                  form="form" [disabled]="form.invalid" class="btn btn-primary form-control">Save</button>
+                </div>
+
+                  <div class="col-md-6 mr-auto col-sm-12 form-input">
+                    <button mat-raised-button type="button" (click)="cancel()" class="btn btn-primary form-control">Cancel</button>
+                  </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

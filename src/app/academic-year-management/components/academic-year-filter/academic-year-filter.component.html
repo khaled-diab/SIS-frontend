@@ -1,0 +1,16 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+    <form class="form-row form">
+      <div class="form-group col-12 m-auto search-box ">
+        <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter($event)" class="form-control" id="inputField"
+               name="filterValue" placeholder="Search here" type="text">
+        <button (click)="applyFilter($event)" class="btn btn-primary search-btn">Search</button>
+        <!-- <input matInput placeholder="" (keyup)="applyFilter($event)" [(ngModel)]="searchValue" >
+    <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" > <mat-icon>close</mat-icon>
+    </button> -->
+      </div>
+      
+      
+    </form>
+  </div>
+</mat-card>

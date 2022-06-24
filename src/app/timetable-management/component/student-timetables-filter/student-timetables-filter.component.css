@@ -1,0 +1,21 @@
+mat-card {
+  width: 90%;
+  margin: auto;
+}
+
+.timetable mat-button-toggle-group{
+  margin: auto !important;
+}
+.timetable{
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+.mat-button-toggle{
+  width: calc(100% / 7);
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  text-align: center;
+  background: var(--main-color);
+}

@@ -1,0 +1,60 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+
+    <div class="col-12">
+      <div class="subTitle ">
+        <h4>Student Management</h4>
+        <hr>
+      </div>
+    </div>
+          <form class="form-row form">
+
+            <div class="form-group col-6 search-box ">
+              <mat-form-field appearance="outline">
+
+<!--            <input aria-describedby="emailHelp" class="form-control" name="search" id="exampleInputEmail1" placeholder="Search here"-->
+<!--                   matInput type="search" [(ngModel)]="studentFilterModel.filterValue" >-->
+              <mat-label>Search</mat-label>
+              <input #search (keyup)="applyFilter()"   class="searchInput " type="search" matInput name="search"  [(ngModel)]="studentFilterModel.filterValue">
+<!--            <button class="btn btn-primary search-btn" (click)="resetFilter()" >Reset</button>-->
+<!--              <button class="btn btn-primary search-btn "   type="button"  >Search</button>-->
+
+            </mat-form-field>
+            </div>
+
+            <div class="col-3 mt-1">
+
+            <mat-form-field appearance="outline">
+            <mat-label>Colleges</mat-label>
+            <mat-select #collegeMenu>
+              <mat-option [value]="undefined">
+                Choose College
+              </mat-option>
+              <mat-option *ngFor="let college of colleges" [value]="college.id">
+                {{college.nameEn}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+            </div>
+
+            <div class="col-3 mt-1">
+
+            <mat-form-field appearance="outline">
+            <mat-label>Departments</mat-label>
+            <mat-select disabled #departmentMenu>
+              <mat-option [value]="undefined">
+                Choose Department
+              </mat-option>
+              <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                {{dept.nameEn}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+            </div>
+
+        </form>
+    </div>
+
+</mat-card>

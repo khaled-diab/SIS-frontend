@@ -1,0 +1,301 @@
+/* Colors Variables */
+:root {
+  --main-color: #003147;
+  --secondary-color: #03A9F4;
+
+  --main-content-bg-color: #FFF;
+  --upperbar-bg-color: #F2F2F2;
+
+  --nav-bg-color: #003147;
+  --nav-hover-color: #03A9F4;
+
+  --label-txt-color: #C3C3C3;
+  --label-bg-color: #FFF;
+
+  --select-opt-bg-color: #F3F3F3;
+
+  --page-title: #003147;
+  --page-title: #0056F4;
+
+  --body-bg-color: #F2F2F2;
+
+  --table-bg-th-color: #003147;
+  --table-txt-color: #737373
+}
+
+
+/*=============================================*/
+/*Primary Styles*/
+@font-face {
+  /*src: url(./fonts/Poppins-Regular.ttf);*/
+  font-family: 'poppins';
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--body-bg-color);
+  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  width: 95%;
+  margin: auto;
+}
+
+
+/*============================================================================*/
+/* Wrapped Content */
+.main-content {
+  background: var(--main-content-bg-color);
+  padding: 50px 0 70px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.main-content .pageTitle h2 {
+  color: var(--main-color);
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  margin: 20px 0;
+  display: inline-block
+}
+
+.main-content .pageTitle h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  /*    width: 10%;*/
+  height: 5px;
+  margin-top: 20px;
+  background: var(--secondary-color);
+  animation: expand 5s 0.5s ease-in-out infinite;
+}
+
+@keyframes expand {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 20%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+
+.main-content .subTitle h4 {
+  font-size: 18px;
+  margin: 20px 0 5px;
+}
+
+
+/*================================================================*/
+/* submission Form */
+.main-content .submission-form {
+  position: relative;
+  margin: 30px 0;
+}
+
+.main-content .submission-form .form-control {
+  margin: 12px 10px;
+  /*padding: 10px;*/
+}
+
+.main-content .custom-select {
+  margin: 12px 10px;
+  padding-left: 10px;
+}
+
+.main-content .form-control:focus,
+.main-content .custom-select:focus {
+  box-shadow: none;
+}
+
+.main-content .form-input {
+  position: relative;
+}
+
+.main-content .form-input label {
+  position: absolute;
+  top: -4px;
+  left: 30px;
+  background: #FFF;
+  padding: 0 10px;
+  /*    border: 1px solid #EEE;*/
+  font-size: 14px;
+  color: #C3C3C3;
+  font-weight: lighter
+}
+
+.main-content .form-input .down-caret,
+.calender {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  transform: translate(10px, -10px); /* my update -10px  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: calc(1.5em + 0.75rem + 18px); /* my update   18px */
+  background: var(--main-color);
+  color: #FFF;
+  border: none;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.main-content .form-input mat-select,
+input[type="date"] {
+  cursor: pointer
+}
+
+.main-content .form-input mat-select > mat-option {
+  width: 100%;
+  background: var(--select-opt-bg-color);
+  color: #565656;
+  padding: 5px 10px
+}
+
+.main-content .form-input button[type="submit"], button[type="button"] {
+  width: auto;
+  display: block;
+  background: var(--main-color);
+  border: 1px solid var(--main-color);
+  padding: 1px 10px;
+}
+
+.main-content .form-input button[type="submit"]:hover, button[type="button"]:hover {
+  width: auto;
+  display: block;
+  background: transparent;
+  color: var(--main-color);
+}
+
+
+/*======================================================================*/
+/* Change Personal Image */
+
+.main-content .change-img ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 20px 0 30px 20px;
+}
+
+.main-content .change-img ul h5 {
+  font-size: 18px;
+  color: var(--main-color);
+
+}
+
+.main-content .change-img li {
+  list-style: none;
+  margin: 0 0 10px;
+  width: 100%;
+}
+
+.main-content .change-img li .add-file input {
+  display: none;
+}
+
+.main-content .change-img li .add-file label {
+  color: var(--main-color);
+  background: transparent;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.main-content .change-img li .add-file label:hover {
+  background: var(--main-color);
+  color: #FFF;
+}
+
+.main-content .change-img .imgBox {
+  width: 200px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 5px
+}
+
+.main-content .change-img .imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Ng material styles */
+
+::ng-deep.mat-input-element {
+  caret-color: var(--main-color);
+}
+
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: var(--main-color);
+
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-form-field-required-marker {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-required-marker {
+  color: var(--main-color);
+}
+
+
+::ng-deep .mat-select-arrow {
+  color: var(--main-color);
+
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-select-arrow-focused {
+  color: var(--main-color);
+
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-select-panel {
+  color: var(--main-color);
+
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: var(--main-color);
+  padding: 4px;
+
+}
+
+::ng-deep .mat-primary .mat-option {
+  color: var(--main-color);
+  padding: 10px;
+
+}

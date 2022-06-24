@@ -1,0 +1,211 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pageTitle">
+          <h2>Enroll Students</h2>
+        </div>
+      </div>
+      <div class="col-12">
+
+        <!--  submission Form   -->
+        <div class="row">
+          <form (ngSubmit)="add()" [formGroup]="form" class="submission-form col-sm-12 col-md-8 form" id="form">
+            <div class="form-row form">
+
+              <!-- academic year -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Year</mat-label>
+                <mat-select #academicYearSelect [formControlName]="'academicYearMenu'" required>
+                  <mat-option *ngFor="let year of academicYears" [value]="year">
+                    {{year.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('academicYearMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- academic term -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Academic Term</mat-label>
+                <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required [disabled]="isDisabled">
+                  <mat-option *ngFor="let Term of newAcademicTerms" [value]="Term">
+                    {{Term.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('academicTermMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- college -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>College</mat-label>
+                <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
+                  <mat-option *ngFor="let col of colleges" [value]="col">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- department -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Department</mat-label>
+                <mat-select #departmentSelect [formControlName]="'departmentMenu'" required [disabled]="isDisabled">
+                  <mat-option *ngFor="let dept of departments" [value]="dept">
+                    {{dept.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- major -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Major</mat-label>
+                <mat-select #majorSelect [formControlName]="'majorMenu'" [disabled]="isDisabled">
+                  <mat-option *ngFor="let major of newMajors" [value]="major">
+                    {{major.nameEn}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- study type -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Study Type</mat-label>
+                <mat-select #studyTypeSelect [formControlName]="'studyTypeMenu'" required>
+                  <mat-option *ngFor="let studyType of studyTypes" [value]="studyType">
+                    {{studyType.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('studyTypeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- course -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Course</mat-label>
+                <mat-select #courseSelect [formControlName]="'courseMenu'" required [disabled]="isDisabled">
+                  <mat-option *ngFor="let course of courses" [value]="course">
+                    {{course.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('courseMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- section -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>Section</mat-label>
+                <mat-select #sectionSelect [formControlName]="'sectionMenu'" required [disabled]="isDisabled">
+                  <mat-option *ngFor="let section of sections" [value]="section">
+                    {{section.sectionNumber}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('sectionMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <div class="col-12"></div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button class="btn btn-primary form-control" form="form" mat-raised-button
+                        type="submit" [disabled]="form.invalid">Save
+                </button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button mat-raised-button type="button" (click)="cancel()"
+                        class="btn btn-secondary form-control">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- search table data -->
+    <mat-form-field appearance="outline" class="col-md-4 col-sm-12 searchField">
+      <mat-label>Search</mat-label>
+      <input (keyup)="applyFilter()" class="searchInput" type="search" matInput name="search"
+             [(ngModel)]="studentFilterModel.filterValue">
+<!--      <button class="btn btn-primary search-btn " type="button" id="search (click)="applyFilter()"">Search</button>-->
+    </mat-form-field>
+
+    <div>
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
+        <mat-label>Level</mat-label>
+        <mat-select #levelSelect>
+          <mat-option [value]="undefined">
+            Choose Level
+          </mat-option>
+          <mat-option *ngFor="let level of levels" [value]="level">
+            {{level}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- table data -->
+    <div *ngIf="dataSource" class="mat-elevation-z8  full-width-table">
+      <mat-table (matSortChange)="sortEvent($event)" [dataSource]="tableData.data" aria-label="Elements" matSort>
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox #master (change)="master.checked? selectAll(): clearAll()"
+                          (change)="$event ? masterToggle() : clearAll()"
+                          [checked]="selection.hasValue() && isAllSelected() && !selection.isEmpty()">
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox #box (change)="box.checked? select(row): pop(row)"
+                          (click)="$event.stopPropagation()"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Number Column -->
+        <ng-container matColumnDef="No.">
+          <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+          <mat-cell *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
+        </ng-container>
+
+        <!-- studentUniversityId Column -->
+        <ng-container matColumnDef="university_id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>University Id
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.universityId}}</mat-cell>
+        </ng-container>
+
+        <!-- studentName Column -->
+        <ng-container matColumnDef="name_en">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.nameEn}}</mat-cell>
+        </ng-container>
+
+        <!-- studentLevel Column -->
+        <ng-container matColumnDef="Level">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Level
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.level}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator
+                     (page)="pageChangeEvent($event)"
+                     [length]="tableData.totalCount"
+                     [pageIndex]="pageIndex"
+                     [pageSizeOptions]="[5,10, 25, 50]"
+                     [pageSize]="defaultPgeSize"
+
+                     aria-label="Select page"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </div>
+    <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
+
+  </div>
+</div>
+

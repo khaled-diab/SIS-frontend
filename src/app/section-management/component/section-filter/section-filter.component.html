@@ -1,0 +1,106 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+    <div class="col-12">
+      <div class="subTitle ">
+        <h4>Section Management</h4>
+        <hr>
+      </div>
+    </div>
+    <form class="form-row form">
+
+      <mat-form-field appearance="outline" class="col-md-5 col-sm-12 searchField">
+        <mat-label>Search</mat-label>
+        <input (keyup)="applyFilter()" class="searchInput" type="search" matInput name="search"
+               [(ngModel)]="sectionRequestModel.searchValue">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>AcademicYears</mat-label>
+        <mat-select #academicYearSelect>
+          <mat-option [value]="undefined">
+            Choose Academic Year
+          </mat-option>
+          <mat-option *ngFor="let academicYear of academicYears" [value]="academicYear.id">
+            {{academicYear.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>AcademicTerms</mat-label>
+        <mat-select disabled #academicTermSelect>
+          <mat-option [value]="undefined">
+            Choose Academic Term
+          </mat-option>
+          <mat-option *ngFor="let academicTerm of newAcademicTerms" [value]="academicTerm.id">
+            {{academicTerm.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Colleges</mat-label>
+        <mat-select #collegeSelect>
+          <mat-option [value]="undefined">
+            Choose College
+          </mat-option>
+          <mat-option *ngFor="let college of colleges" [value]="college.id">
+            {{college.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Departments</mat-label>
+        <mat-select disabled #departmentSelect>
+          <mat-option [value]="undefined">
+            Choose Department
+          </mat-option>
+          <mat-option *ngFor="let dept of departments" [value]="dept.id">
+            {{dept.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Course</mat-label>
+        <mat-select disabled #courseSelect>
+          <mat-option [value]="undefined">
+            Choose Course
+          </mat-option>
+          <mat-option *ngFor="let course of newCourses" [value]="course.id">
+            {{course.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Major</mat-label>
+        <mat-select disabled #majorSelect>
+          <mat-option [value]="undefined">
+            Choose Major
+          </mat-option>
+          <mat-option *ngFor="let major of newMajors" [value]="major.id">
+            {{major.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Study Type</mat-label>
+        <mat-select #studyTypeSelect>
+          <mat-option [value]="undefined">
+            Choose Study Type
+          </mat-option>
+          <mat-option *ngFor="let studyType of studyTypes" [value]="studyType.id">
+            {{studyType.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div appearance="outline" class="col-md-3 col-sm-12">
+        <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

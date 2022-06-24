@@ -1,0 +1,39 @@
+/* Ng material styles */
+
+::ng-deep.mat-input-element {
+  caret-color: var(--main-color);
+}
+
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-form-field-required-marker {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-required-marker {
+  color: var(--main-color);
+}
+
+
+::ng-deep .mat-select-arrow {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-select:focus .mat-select-trigger .mat-select-arrow {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-select-panel {
+  color: var(--main-color);
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: var(--main-color);
+}

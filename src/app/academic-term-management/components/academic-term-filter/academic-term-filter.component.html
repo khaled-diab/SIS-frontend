@@ -1,0 +1,25 @@
+<mat-card class="mat-elevation-z8">
+    <div class="container">
+      <form class="form-row form">
+        <div class="form-group col-6 search-box ">
+          <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
+                 name="filterValue" placeholder="Search here" type="text">
+          <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button>
+        </div>
+        <div class="col-4 mt-1">
+          <mat-form-field appearance="outline">
+            <mat-label>Academic Years</mat-label>
+            <mat-select #academicYearSelect>
+              <mat-option [value]="undefined">
+                Choose Academic Years
+              </mat-option>
+              <mat-option *ngFor="let aca of academicYears" [value]="aca.id">
+                {{aca.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </form>
+    </div>
+  </mat-card>

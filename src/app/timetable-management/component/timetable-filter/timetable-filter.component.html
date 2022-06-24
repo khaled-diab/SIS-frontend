@@ -1,0 +1,100 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+    <div class="col-12">
+      <div class="subTitle ">
+        <h4>Timetable Management</h4>
+        <hr>
+      </div>
+    </div>
+    <form class="form-row form">
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>AcademicYears</mat-label>
+        <mat-select #academicYearSelect>
+          <mat-option [value]="undefined">
+            Choose Academic Year
+          </mat-option>
+          <mat-option *ngFor="let academicYear of academicYears" [value]="academicYear.id">
+            {{academicYear.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>AcademicTerms</mat-label>
+        <mat-select #academicTermSelect disabled>
+          <mat-option [value]="undefined">
+            Choose Academic Term
+          </mat-option>
+          <mat-option *ngFor="let academicTerm of newAcademicTerms" [value]="academicTerm.id">
+            {{academicTerm.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
+        <mat-label>Colleges</mat-label>
+        <mat-select #collegeSelect>
+          <mat-option [value]="undefined">
+            Choose College
+          </mat-option>
+          <mat-option *ngFor="let college of colleges" [value]="college.id">
+            {{college.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
+        <mat-label>Departments</mat-label>
+        <mat-select disabled #departmentSelect>
+          <mat-option [value]="undefined">
+            Choose Department
+          </mat-option>
+          <mat-option *ngFor="let dept of departments" [value]="dept.id">
+            {{dept.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
+        <mat-label>Courses</mat-label>
+        <mat-select disabled #courseSelect>
+          <mat-option [value]="undefined">
+            Choose Course
+          </mat-option>
+          <mat-option *ngFor="let course of courses" [value]="course.id">
+            {{course.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
+        <mat-label>Sections</mat-label>
+        <mat-select disabled #sectionSelect>
+          <mat-option [value]="undefined">
+            Choose Section
+          </mat-option>
+          <mat-option *ngFor="let section of sections" [value]="section.id">
+            {{section.sectionNumber}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
+        <mat-label>Days</mat-label>
+        <mat-select #daySelect>
+          <mat-option [value]="undefined">
+            Choose Day
+          </mat-option>
+          <mat-option *ngFor="let day of days" [value]="day">
+            {{day}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div appearance="outline" class="col-md-3 col-sm-12">
+        <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

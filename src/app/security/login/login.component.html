@@ -1,0 +1,21 @@
+<div class="login-page">
+  <div class="login">
+    <div class="container">
+      <form #form="ngForm" class="example-form">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input #Email="ngModel" [(ngModel)]="loginModel.username" matInput name="Email" required type="email">
+          <mat-error *ngIf="Email.invalid ">Field Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>password</mat-label>
+          <input #password="ngModel" [(ngModel)]="loginModel.password" matInput name="password" required
+                 type="password">
+          <mat-error *ngIf="password.invalid ">Field Required</mat-error>
+        </mat-form-field>
+        <button (click)="login()" [disabled]="form.invalid" class="btn btn-primary">login</button>
+        <small class="form-text text-muted" id="emailHelp1"><a routerLink="/register">Create a new account!</a></small>
+      </form>
+    </div>
+  </div>
+</div>

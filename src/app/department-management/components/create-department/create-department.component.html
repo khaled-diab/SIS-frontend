@@ -1,0 +1,62 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pageTitle">
+          <h2>Save Department</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <hr>
+        <!--  Submission Form   -->
+        <div class="row">
+          <form class="submission-form col-sm-12 col-lg-8" [formGroup]="form" id="form">
+            <div class="form-row">
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Code</mat-label>
+                <input formControlName="code" matInput name="code" required>
+                <mat-error *ngIf="form.controls['code']?.errors?.required"> Required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Arabic Name</mat-label>
+                <input formControlName="nameAr" matInput name="arabicName" required>
+                <mat-error *ngIf="form.controls['nameAr']?.errors?.required"> Required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>English Name</mat-label>
+                <input id="nameEn" formControlName="nameEn" matInput required >
+                <mat-error *ngIf="form.controls['nameEn']?.errors?.required"> Required</mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input" >
+                <mat-label >College</mat-label>
+                <mat-select  formControlName="collegeMenu" id="collegeMenu"  required >
+                  <mat-option *ngFor="let col of colleges" [value]="col.id">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+
+
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button (click)="add()" mat-raised-button form="form" [disabled]="form.invalid" class="mainBtn btn btn-primary form-control">Save</button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button (click)="cancel()" mat-raised-button form="form"  class="mainBtn btn btn-primary form-control">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

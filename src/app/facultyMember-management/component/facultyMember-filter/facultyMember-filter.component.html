@@ -1,0 +1,46 @@
+<mat-card class="mat-elevation-z8">
+  <div class="container">
+    <div class="col-12">
+      <div class="subTitle ">
+        <h4>Faculty Member Management</h4>
+        <hr>
+      </div>
+    </div>
+    <form class="form-row form">
+
+      <mat-form-field appearance="outline" class="col-md-5 col-sm-12 searchField">
+        <mat-label>Search</mat-label>
+        <input (keyup)="applyFilter()" class="searchInput" type="search" matInput name="search"
+               [(ngModel)]="facultyMemberFilterModel.searchValue">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Colleges</mat-label>
+        <mat-select #collegeSelect>
+          <mat-option [value]="undefined">
+            Choose College
+          </mat-option>
+          <mat-option *ngFor="let college of colleges" [value]="college.id">
+            {{college.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-3 col-sm-12  ">
+        <mat-label>Departments</mat-label>
+        <mat-select disabled #departmentSelect>
+          <mat-option [value]="undefined">
+            Choose Department
+          </mat-option>
+          <mat-option *ngFor="let dept of departments" [value]="dept.id">
+            {{dept.nameEn}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div appearance="outline" class="col-md-3 col-sm-12">
+        <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

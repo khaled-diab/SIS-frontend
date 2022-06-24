@@ -1,0 +1,156 @@
+mat-card {
+  width: 90%;
+  margin: auto;
+}
+
+mat-form-field {
+  /*width: 60%;*/
+}
+
+.subTitle h4 {
+  color: var(--main-color);
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  margin: 20px 0;
+  display: inline-block
+}
+.subTitle h4::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  /*    width: 10%;*/
+  height: 5px;
+  margin-top: 20px;
+  background: var(--secondary-color);
+  animation: expand 5s 0.5s ease-in-out infinite;
+}
+
+@keyframes expand {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 20%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+.subTitle hr{
+  margin-bottom: 10px !important;
+}
+
+.align {
+  display: flex;
+  align-content: space-around;
+}
+
+mat-form-field.input-field {
+  position: relative;
+}
+
+mat-form-field.input-field button {
+  position: absolute;;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+form.form {
+  width: 100%;
+  /*margin: auto;*/
+}
+
+.search-box {
+  position: relative;
+  width: 50%;
+  margin: auto;
+}
+
+.search-box .search-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+
+}
+
+.search-box input {
+  box-shadow: none;
+  outline: none;
+}
+
+.search-box input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: var(--main-color);
+}
+
+.search-box button:focus {
+  box-shadow: none;
+}
+
+mat-form-field {
+  display: inline;
+  width: 40%;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.search-box button {
+  background-color: var(--main-color);
+  border: none;
+}
+
+.search-box button:active {
+  background-color: var(--secondary-color);
+}
+
+.addBtn {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.form-input {
+  position: relative;
+}
+
+.form-input input {
+  height: 20px;
+}
+
+button[type="button"] {
+  position: absolute;
+  width: auto;
+  display: block;
+  background: var(--main-color);
+  border: 1px solid var(--main-color);
+  padding: 1px 10px;
+  right: 0.2px;
+  height: 50px;
+  margin-bottom: 10px !important;
+  top: -7.2px;
+}
+
+/*  button[type="button"]:hover  {*/
+/*    display: block;*/
+/*    !*background: transparent;*!*/
+/*    color: var(--main-color);*/
+/*}*/
+
+.searchField {
+  position: relative;
+  padding-right: 0;
+  padding-top: 0;
+}
+
+::ng-deep .searchField .mat-form-field-flex {
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+}

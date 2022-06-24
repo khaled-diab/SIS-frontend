@@ -1,0 +1,39 @@
+<div class="p-0">
+  <form #form="ngForm">
+    <div class="row d-flex justify-content-around">
+      <div class="col-3 mt-1">
+        <mat-form-field appearance="outline">
+          <mat-label>English Name</mat-label>
+          <input #englishName="ngModel" [(ngModel)]="collegeModel.nameEn" matInput name="englishName" required>
+          <mat-error *ngIf="englishName.invalid ">Field Required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3 m-1">
+        <mat-form-field appearance="outline">
+          <mat-label>Arabic Name</mat-label>
+          <input #arabicName="ngModel" [(ngModel)]="collegeModel.nameAr" matInput name="arabicName" required>
+          <mat-error *ngIf="arabicName.invalid ">Field Required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3 m-1">
+        <mat-form-field appearance="outline">
+          <mat-label>Code</mat-label>
+          <input #code="ngModel" [(ngModel)]="collegeModel.code" matInput name="code" required>
+          <mat-error *ngIf="code.invalid ">Field Required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end m-2">
+      <div class="col-1 m-2">
+        <button (click)="save()" [disabled]="form.invalid" class="mainButton" mat-raised-button>
+          Save
+        </button>
+      </div>
+      <div class="col-1 m-2">
+        <button (click)="cancel()" color="warn" mat-raised-button>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,94 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pageTitle">
+          <h2>Save Classroom</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <hr>
+        <!--  Submission Form   -->
+        <div class="row">
+          <form class="submission-form col-sm-12" [formGroup]="form" id="form">
+            <div class="form-row">
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Code</mat-label>
+                <input formControlName="code" matInput name="code" required>
+                <mat-error *ngIf="form.controls['code']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.get('code')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Arabic Name</mat-label>
+                <input formControlName="nameAr" matInput name="arabicName" required>
+                <mat-error *ngIf="form.controls['nameAr']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.controls['nameAr']?.errors?.pattern">Arabic Letters only</mat-error>
+                <mat-error *ngIf="form.get('nameAr')?.errors?.serverError">{{errorMessage}}</mat-error>
+
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>English Name</mat-label>
+                <input id="nameEn" formControlName="nameEn" matInput required>
+                <mat-error *ngIf="form.controls['nameEn']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.controls['nameEn']?.errors?.pattern"> English Letters only</mat-error>
+                <mat-error *ngIf="form.get('nameEn')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>Capacity</mat-label>
+                <input id="capacity" formControlName="capacity" matInput required>
+                <mat-error *ngIf="form.controls['capacity']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.controls['capacity']?.errors?.pattern"> Numerical Digits only</mat-error>
+                <mat-error *ngIf="form.get('capacity')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Building</mat-label>
+                <mat-select formControlName="buildingMenu" id="buildingMenu" required>
+                  <mat-option *ngFor="let col of buildings" [value]="col.id">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('buildingMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Department</mat-label>
+                <mat-select formControlName="departmentMenu" id="departmentMenu" required>
+                  <mat-option *ngFor="let col of departments" [value]="col.id">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <div>
+                <mat-label appearance="outline" class="col-md-2 col-sm-2  form-input">Status</mat-label>
+                <mat-checkbox color="primary" id="status" formControlName="status"></mat-checkbox>
+              </div>
+
+            </div>
+          </form>
+          <div class="d-flex">
+            <div class="col-md-6 mr-auto col-sm-12 form-input">
+              <button (click)="add()" mat-raised-button form="form" class="mainBtn btn btn-primary form-control">
+                Save
+              </button>
+            </div>
+            <div class="col-md-6 mr-auto col-sm-12 form-input">
+              <button (click)="cancel()" mat-raised-button form="form" class="mainBtn btn btn-primary form-control">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

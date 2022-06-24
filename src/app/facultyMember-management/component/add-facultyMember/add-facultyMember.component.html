@@ -1,0 +1,165 @@
+<!--       Wrapped Content   -->
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pageTitle">
+          <h2>Add Faculty Member</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="subTitle">
+          <h4>General Information </h4>
+        </div>
+        <hr>
+
+        <!--  submission Form   -->
+        <div class="row">
+          <form (ngSubmit)="add()" [formGroup]="form" class="submission-form col-sm-12 col-md-8 form" id="form">
+            <div class="form-row">
+
+              <!-- name -->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
+                <mat-label>Arabic Name</mat-label>
+                <input formControlName="nameAr" matInput name="arabicName" required>
+                <mat-error *ngIf="form.controls['nameAr']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.controls['nameAr']?.errors?.pattern">Arabic Letters only</mat-error>
+                <mat-error *ngIf="form.get('nameAr')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                <mat-label>English Name</mat-label>
+                <input id="nameEn" formControlName="nameEn" matInput required>
+                <mat-error *ngIf="form.controls['nameEn']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.controls['nameEn']?.errors?.pattern"> English Letters only</mat-error>
+                <mat-error *ngIf="form.get('nameEn')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- college -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>College</mat-label>
+                <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
+                  <mat-option *ngFor="let col of colleges" [value]="col">
+                    {{col.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- department -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Department</mat-label>
+                <mat-select #departmentSelect formControlName="departmentMenu" #departmentMenu required>
+                  <mat-option *ngFor="let dept of departments" [value]="dept">
+                    {{dept.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- degree -->
+              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                <mat-label>Degree</mat-label>
+                <mat-select [formControlName]="'degreeMenu'" required>
+                  <mat-option *ngFor="let degree of degrees" [value]="degree">
+                    {{degree.nameEn}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('degreeMenu')?.errors?.required">Required</mat-error>
+              </mat-form-field>
+
+              <!-- university mail -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label>University Mail</mat-label>
+                <input type="email" #universityMail formControlName="universityMail" matInput name="universityMail"
+                       required>
+                <mat-error *ngIf="form.controls['universityMail']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.get('universityMail')?.errors?.email">Invalid Email</mat-error>
+                <mat-error *ngIf="form.get('universityMail')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- nationality -->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
+                <mat-label> Nationality</mat-label>
+                <input #nationality formControlName="nationality" matInput name="nationality" required>
+                <mat-error *ngIf="form.controls['nationality']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.get('nationality')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- national id -->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
+                <mat-label>National Id</mat-label>
+                <input #nationalId formControlName="nationalId" matInput name="nationalId" required>
+                <mat-error *ngIf="form.controls['nationalId']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.controls['nationalId']?.errors?.pattern">Must be 14 digits</mat-error>
+                <mat-error *ngIf="form.get('nationalId')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- birthdate -->
+              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                <mat-label> Birth Date</mat-label>
+                <input type="date" #birthDate formControlName="birthDate" matInput name="birthDate" required>
+              </mat-form-field>
+
+              <!--   Additional Information  -->
+              <div class="col-12">
+                <div class="subTitle ">
+                  <h4>Additional Information</h4>
+                  <hr>
+                </div>
+              </div>
+
+              <!-- phone -->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
+                <mat-label> Mobile Number</mat-label>
+                <input formControlName="phone" matInput required>
+                <mat-error *ngIf="form.controls['phone']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.get('phone')?.errors?.pattern">Invalid Mobile Number</mat-error>
+                <mat-error *ngIf="form.get('phone')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <!-- alternative mail -->
+              <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
+                <mat-label>Alternative Mail</mat-label>
+                <input type="email" #alternativeMail formControlName="alternativeMail" matInput
+                       name="alternativeMail">
+                <mat-error *ngIf="form.get('alternativeMail')?.errors?.email">Invalid Email</mat-error>
+                <mat-error *ngIf="form.get('alternativeMail')?.errors?.serverError">{{errorMessage}}</mat-error>
+              </mat-form-field>
+
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button class="btn btn-primary form-control" form="form" mat-raised-button
+                        type="submit" [disabled]="form.invalid">Save
+                </button>
+              </div>
+              <div class="col-md-6 mr-auto col-sm-12 form-input">
+                <button mat-raised-button type="button" (click)="cancel()" class="btn btn-secondary form-control">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!--  Change Personal Image       -->
+          <div class="change-img col-sm-12 col-md-4">
+            <ul class="">
+              <li>
+                <h5>Personal Picture</h5>
+              </li>
+              <li class="imgBox">
+                <img [src]="this.url" alt=" ">
+              </li>
+              <li class="choose-img">
+                <div class="add-file">
+                  <input #photoInput (change)="onChange()" accept="image/*" id="imageFile" type="file">
+                  <label for="imageFile">Choose an Image</label>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+mat-card {
+  width: 90%;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 60%;
+}
+
+.align {
+  display: flex;
+  align-content: space-around;
+}
+
+mat-form-field.input-field {
+  position: relative;
+}
+mat-form-field.input-field button{
+  position: absolute;;
+  top: 0;
+  right: 0;
+  height:  100%;
+}
+
+/*form.form {*/
+/*  width: 50%;*/
+/*  margin: auto;*/
+/*}*/
+
+.search-box {
+  position: relative;
+  margin: auto;
+}
+
+.search-box .search-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+
+}
+
+.search-box input {
+  box-shadow: none;
+  height: 50px;
+  outline: none;
+}
+
+.search-box input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: var(--main-color);
+}
+
+.search-box button:focus {
+  box-shadow: none;
+}
+mat-form-field{
+  display: inline;
+  width: 40%;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+
+
+.search-box button {
+  background-color: var(--main-color);
+  border: none;
+}
+
+.search-box button:active {
+  background-color: var(--secondary-color);
+}
+
+.addBtn{
+  background-color: var(--main-color);
+  color: white;
+}

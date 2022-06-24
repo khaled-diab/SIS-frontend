@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-1">
+    <button
+      (click)="sideMenu.toggle()"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      type="button">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+  </div>
+  <div class="col-1">
+    <img alt="" class="logo" src="./assets/2048px-Angular_full_color_logo.png">
+  </div>
+  <div class="col-7">
+
+  </div>
+  <div class="col-1 text-center">
+    <button
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      type="button">
+      <mat-icon>notifications</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="profilePictureLink===undefined" class="col-1 text-center">
+    <img (click)="goToProfile()" alt="" class="profileImage" src="./assets/profile-picture.jpg">
+  </div>
+  <div *ngIf="profilePictureLink!==undefined" class="col-1 text-center">
+    <img (click)="goToProfile()" [src]="profilePictureLink" alt="" class="profileImage">
+  </div>
+  <div class="col-1 text-center">
+    <button
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      type="button">
+      <mat-icon (click)="logout()">logout</mat-icon>
+    </button>
+  </div>
+</div>

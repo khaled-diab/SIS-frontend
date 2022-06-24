@@ -1,0 +1,103 @@
+<div class="p-3">
+  <app-timetable-filter></app-timetable-filter>
+
+  <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
+    <mat-table (matSortChange)="sortEvent($event)" [dataSource]="tableData.data" aria-label="Elements" matSort>
+
+      <!-- Number Column -->
+      <ng-container matColumnDef="No.">
+        <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
+      </ng-container>
+
+      <!-- course Column -->
+      <ng-container matColumnDef="courseId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Course
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.courseDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- section Column -->
+      <ng-container matColumnDef="section">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Section
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.sectionDTO.sectionNumber}}</mat-cell>
+      </ng-container>
+
+      <!-- facultyMember Column -->
+      <ng-container matColumnDef="facultyMemberId">
+        <mat-header-cell *matHeaderCellDef>Faculty Member
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.facultyMemberDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- lectureType Column -->
+      <ng-container matColumnDef="lectureTypeId">
+        <mat-header-cell *matHeaderCellDef>lecture Type
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.lectureTypeDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- from Column -->
+      <ng-container matColumnDef="startTime">
+        <mat-header-cell *matHeaderCellDef>Form
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.startTime}}</mat-cell>
+      </ng-container>
+
+      <!-- to Column -->
+      <ng-container matColumnDef="endTime">
+        <mat-header-cell *matHeaderCellDef>To
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.endTime}}</mat-cell>
+      </ng-container>
+
+      <!-- building Column -->
+      <ng-container matColumnDef="buildingId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Building
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.buildingDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <!-- classroom Column -->
+      <ng-container matColumnDef="classroomId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Classroom
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.classroomDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+            <ng-container matColumnDef="Actions">
+              <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <div class="options">
+                  <button mat-icon-button>
+                    <mat-icon class="user-edit" (click)="updateTimetable(row)">edit</mat-icon>
+                  </button>
+                  <button (click)="deleteTimetable(row)" mat-icon-button>
+                    <mat-icon class="user-times">delete</mat-icon>
+                  </button>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+                   (page)="pageChangeEvent($event)"
+                   [length]="tableData.totalCount"
+                   [pageIndex]="pageIndex"
+                   [pageSizeOptions]="[5,10, 25, 50]"
+                   [pageSize]="defaultPgeSize"
+
+                   aria-label="Select page"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
+  <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Edit</button>
+  <button mat-menu-item>Delete</button>
+</mat-menu>
