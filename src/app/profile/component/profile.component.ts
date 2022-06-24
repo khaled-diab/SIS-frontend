@@ -44,16 +44,19 @@ export class ProfileComponent implements OnInit {
           return value;
         });
       }
+      this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
+      this.profileService.updateProfilePictureEvent.next(this.profilePictureLink);
       localStorage.removeItem(Constants.loggedInUser);
       localStorage.setItem(Constants.loggedInUser, JSON.stringify(this.loggedInUser));
-      this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
-      this.profileService.updateProfilePictureEvent.next(Constants.downloadFileURL + this.profilePicture?.directories);
     }, _ => {
       this.messageService.add({severity: 'error', summary: 'Error', detail: 'Upload Failed'});
     });
   }
 
   getProfileImageLink(): void {
+    if (this.profilePicture === undefined) {
+      return;
+    }
     this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
   }
 }
