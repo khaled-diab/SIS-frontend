@@ -40,6 +40,9 @@ export class NavBarComponent implements OnInit {
   }
 
   getProfileImageLink(): void {
+    if (this.profilePictureLink === undefined) {
+      return;
+    }
     this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
   }
 
