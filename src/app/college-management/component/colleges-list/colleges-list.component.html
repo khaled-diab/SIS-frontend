@@ -82,64 +82,67 @@
 <!--  <button mat-menu-item>Delete</button>-->
 <!--</mat-menu>-->
 <div class="p-3">
-  <p-confirmDialog [baseZIndex]="10000" [style]="{width: '50vw'}"></p-confirmDialog>
-  <p-toast position="bottom-center"></p-toast>
-  <app-college-filter></app-college-filter>
-  <div class="d-flex justify-content-end mt-3">
-    <div class="col-1">
-      <button (click)="addOrUpdateCollege(collegeModel)" class="align-content-center" mat-icon-button>
-        <mat-icon class="add" matTooltip="Add College" matTooltipPosition="above">add_circle</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div *ngIf="tableData" class="card">
-    <p-table (onLazyLoad)="loadData($event)" [customSort]="true" [lazy]="true" [loading]="loading"
-             [scrollable]="true" [totalRecords]="tableData.totalCount" [value]="tableData.data"
-             scrollDirection="horizontal">
-      <ng-template pTemplate="header">
-        <tr>
-          <th id="ID" pSortableColumn="id">ID
-            <p-sortIcon field="id"></p-sortIcon>
-          </th>
-          <th id="nameEn" pSortableColumn="nameEn">nameEn
-            <p-sortIcon field="nameEn"></p-sortIcon>
-          </th>
-          <th id="nameAr" pSortableColumn="nameAr">nameAr
-            <p-sortIcon field="nameAr"></p-sortIcon>
-          </th>
-          <th id="code" pSortableColumn="code">code
-            <p-sortIcon field="code"></p-sortIcon>
-          </th>
-          <th id="Actions">Actions</th>
-        </tr>
-      </ng-template>
-      <ng-template let-college pTemplate="body">
-        <tr>
-          <td>{{college.id}}</td>
-          <td>{{college.nameEn}}</td>
-          <td>{{college.nameAr}}</td>
-          <td>{{college.code}}</td>
-          <td>
-            <div class="row">
-              <div class="col-4">
-                <em (click)="viewCollege(college.id)" class="pi pi-eye" style="font-size: 2rem; color:green"></em>
-              </div>
-              <div class="col-4">
-	              <em (click)="deleteCollege(college.id)" class="pi pi-user-edit" style="font-size: 2rem"></em>
-              </div>
-	            <div class="col-4">
-		            <em (click)="deleteCollege(college.id)" class="pi pi-trash"
-		                style="font-size: 2rem ; color:red"></em>
-	            </div>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-	  <p-paginator (onPageChange)="paginate($event)" [rowsPerPageOptions]="[5,10,20,50]" [rows]="5"
-	               [totalRecords]="tableData.totalCount">
-	  </p-paginator>
-  </div>
-  <p-progressSpinner *ngIf="!tableData" class="text-center"></p-progressSpinner>
+   <p-confirmDialog [baseZIndex]="10000" [style]="{width: '50vw'}"></p-confirmDialog>
+   <p-toast position="bottom-center"></p-toast>
+   <app-college-filter></app-college-filter>
+   <div class="d-flex justify-content-end mt-3">
+      <div class="col-1">
+         <button (click)="addOrUpdateCollege(collegeModel)" class="align-content-center" mat-icon-button>
+            <mat-icon class="add" matTooltip="Add College" matTooltipPosition="above">add_circle</mat-icon>
+         </button>
+      </div>
+   </div>
+   <div *ngIf="tableData" class="card">
+      <p-table (onLazyLoad)="loadData($event)" [customSort]="true" [lazy]="true" [loading]="loading"
+               [scrollable]="true" [totalRecords]="tableData.totalCount" [value]="tableData.data"
+               scrollDirection="horizontal">
+         <ng-template pTemplate="header">
+            <tr>
+               <th id="ID" pSortableColumn="id">ID
+                  <p-sortIcon field="id"></p-sortIcon>
+               </th>
+               <th id="nameEn" pSortableColumn="nameEn">nameEn
+                  <p-sortIcon field="nameEn"></p-sortIcon>
+               </th>
+               <th id="nameAr" pSortableColumn="nameAr">nameAr
+                  <p-sortIcon field="nameAr"></p-sortIcon>
+               </th>
+               <th id="code" pSortableColumn="code">code
+                  <p-sortIcon field="code"></p-sortIcon>
+               </th>
+               <th id="Actions">Actions</th>
+            </tr>
+         </ng-template>
+         <ng-template let-college pTemplate="body">
+            <tr>
+               <td>{{college.id}}</td>
+               <td>{{college.nameEn}}</td>
+               <td>{{college.nameAr}}</td>
+               <td>{{college.code}}</td>
+               <td>
+                  <div class="row">
+                     <div class="col-4">
+                        <em (click)="viewCollege(college.id)" class="pi pi-eye"
+                            style="font-size: 2rem; color:green"></em>
+                     </div>
+                     <div class="col-4">
+                        <em (click)="addOrUpdateCollege(college)" class="pi pi-user-edit" style="font-size: 2rem"></em>
+                     </div>
+                     <div class="col-4">
+                        <em (click)="deleteCollege(college.id)" class="pi pi-trash"
+                            style="font-size: 2rem ; color:red"></em>
+                     </div>
+                  </div>
+               </td>
+            </tr>
+         </ng-template>
+      </p-table>
+      <p-paginator (onPageChange)="paginate($event)" [rowsPerPageOptions]="[5,10,20,50]" [rows]="5"
+                   [totalRecords]="tableData.totalCount">
+      </p-paginator>
+   </div>
+   <div class="center" *ngIf="!tableData">
+      <p-progressSpinner  class="text-center"></p-progressSpinner>
+   </div>
 </div>
 

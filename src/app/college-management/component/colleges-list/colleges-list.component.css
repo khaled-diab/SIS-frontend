@@ -1,22 +1,22 @@
 .full-width-table {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+   width: 90%;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 mat-cell {
-  display: flex !important;
-  justify-content: center !important;
+   display: flex !important;
+   justify-content: center !important;
 
 }
 
 mat-header-cell {
-  display: flex;
-  justify-content: center;
+   display: flex;
+   justify-content: center;
 }
 
 .mat-column-select {
-  overflow: initial;
+   overflow: initial;
 }
 
 /*::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {*/
@@ -32,20 +32,20 @@ mat-header-cell {
 
 mat-divider {
 
-  margin: 10px 5px 5px;
-  height: 5px;
+   margin: 10px 5px 5px;
+   height: 5px;
 }
 
 mat-spinner {
-  margin: 30px auto 0;
+   margin: 30px auto 0;
 }
 
 mat-header-row {
-  background-color: var(--main-color);
+   background-color: var(--main-color);
 }
 
 mat-header-cell {
-  color: white;
+   color: white;
 }
 
 /*mat-row:nth-child(even) {*/
@@ -53,11 +53,11 @@ mat-header-cell {
 /*}*/
 
 mat-row:hover {
-  background-color: lightgray;
+   background-color: lightgray;
 }
 
 mat-row {
-  transition: 0.3s;
+   transition: 0.3s;
 }
 
 /*mat-row mat-icon :hover {*/
@@ -65,40 +65,50 @@ mat-row {
 /*}*/
 
 span mat-icon:hover {
-  cursor: pointer;
+   cursor: pointer;
 }
 
 mat-cell .options {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
 }
 
 mat-cell .options mat-icon + mat-icon {
-  margin-left: 15px;
+   margin-left: 15px;
 }
 
 mat-cell .options mat-icon {
-  cursor: pointer;
+   cursor: pointer;
 }
 
 mat-cell .options mat-icon.eye {
-  color: #1E8B17;
+   color: #1E8B17;
 }
 
 mat-cell .options mat-icon.user-edit {
-  color: #393DB4;
+   color: #393DB4;
 }
 
 mat-cell .options mat-icon.user-times {
-  color: #F00B0B;
+   color: #F00B0B;
 }
 
 .add {
-  color: var(--main-color);
-  font-size: 35px;
+   color: var(--main-color);
+   font-size: 35px;
 }
 
-.p-progressSpinner {
-  margin: 30px auto 0;
+/*.p-progressSpinner {*/
+/*  margin: 30px auto 0;*/
+/*}*/
+.center {
+   display: flex;
+   justify-content: center;
+   margin-top: 100px;
+}
+
+:host ::ng-deep .acceptButton :hover{
+   background-color: lawngreen ;
+   border-color: lawngreen;
 }
