@@ -7,6 +7,7 @@ import {StudentRequestModel} from '../../shared/model/student-management/student
 import {Sort} from '@angular/material/sort';
 import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
+import {UserModel} from '../../shared/model/security/user-model';
 
 export class UpdatePreviewData {
   st: StudentModel;
@@ -51,7 +52,14 @@ export class StudentManagementService {
   }
 
   addStudent(student: StudentModel): Observable < MessageResponse > {
-    return this.httpClient.post<MessageResponse>(Constants.addStudentUrl, student);
+     const user = new UserModel();
+     user.email = student.universityMail;
+     user.username = student.nameEn;
+     user.type = 'STUDENT';
+     user.firstname; ' ';
+     user.lastname = ' ';
+     student.user = user;
+     return this.httpClient.post<MessageResponse>(Constants.addStudentUrl, student);
   }
 updateStudent(student: StudentModel): Observable < MessageResponse > {
 

@@ -53,6 +53,7 @@ import { DeleteAcademicTermComponent } from './components/delete-academic-term/d
     MatSortModule,
     MatDialogModule,
     ReactiveFormsModule,
+     MatDialogModule
   ],
   providers:[AcademicTermService],
   entryComponents:[CreateAcademicTermComponent]

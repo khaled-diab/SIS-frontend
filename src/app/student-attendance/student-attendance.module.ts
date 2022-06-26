@@ -21,6 +21,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AttendanceCodeComponent } from './component/attendance-code/attendance-code.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -50,6 +51,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatCheckboxModule,
     MatPaginatorModule,
     MatRadioModule,
+     MatDialogModule
 
   ]
 })

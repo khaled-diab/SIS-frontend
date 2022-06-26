@@ -104,6 +104,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
         this.departmentMenu.setDisabledState(true);
         this.departmentMenu.value = undefined;
       }
+      console.log(DepartmentService.departmentsList);
       this.departments = this.departmentService.getDepartmentsByCollege(this.collegeList.value.id);
 
       this.deptOption = false;

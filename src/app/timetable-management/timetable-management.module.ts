@@ -29,6 +29,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {StudentTimetablesListComponent} from './component/student-timetables-list/student-timetables-list.component';
 import {StudentTimetablesFilterComponent} from './component/student-timetables-filter/student-timetables-filter.component';
 import {EditTimetableComponent} from './component/timetable-edit/edit-timetable.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import {EditTimetableComponent} from './component/timetable-edit/edit-timetable.
     MatSortModule,
     ReactiveFormsModule,
     MatButtonToggleModule,
+     MatDialogModule
   ]
 })
 export class TimetableManagementModule {

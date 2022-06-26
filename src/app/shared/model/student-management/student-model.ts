@@ -23,5 +23,7 @@ export class StudentModel extends BaseModel {
   collegeDTO: CollegeModel;
   academicProgramDTO: AcademicProgramModel;
   user: UserModel;
+  // collegeID: number;
+  // departmentID: number;
 
 }

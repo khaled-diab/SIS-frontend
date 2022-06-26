@@ -24,6 +24,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/materia
 import { AcademicYearFilterComponent } from './components/academic-year-filter/academic-year-filter.component';
 import { AcademicYearPerviewComponent } from './components/academic-year-perview/academic-year-perview.component';
 import { DeleteAcademicYearComponent } from './components/delete-academic-year/delete-academic-year.component';
+import {BsModalService} from "ngx-bootstrap/modal";
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { DeleteAcademicYearComponent } from './components/delete-academic-year/d
 
   imports: [
     CommonModule,
-    AcademicYearManagementRoutingModule,      
+    AcademicYearManagementRoutingModule,
     MatCardModule,
     MatTableModule,
     MatTooltipModule,
@@ -55,8 +56,9 @@ import { DeleteAcademicYearComponent } from './components/delete-academic-year/d
     MatSortModule,
     MatDialogModule,
     ReactiveFormsModule,
+     MatDialogModule,
   ],
-  providers:[AcademicYearService,{ provide: MAT_DIALOG_DATA, useValue: {} },
+  providers:[AcademicYearService,BsModalService,{ provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} }],
   entryComponents:[CreateacademicyearComponent,AcademicYearPerviewComponent]
 })
