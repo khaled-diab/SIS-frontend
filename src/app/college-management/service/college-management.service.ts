@@ -38,6 +38,7 @@ export class CollegeManagementService {
   }
 
   public saveCollege(college: CollegeModel): Observable<MessageResponse> {
+     console.log(college);
     return this.httpClient.post<MessageResponse>(Constants.saveCollegeUrl, college);
   }
 

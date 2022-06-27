@@ -29,7 +29,9 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {StudentTimetablesListComponent} from './component/student-timetables-list/student-timetables-list.component';
 import {StudentTimetablesFilterComponent} from './component/student-timetables-filter/student-timetables-filter.component';
 import {EditTimetableComponent} from './component/timetable-edit/edit-timetable.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
+import {AcademicYearService} from "../academic-year-management/service/academic-year.service";
+import {BsModalService} from "ngx-bootstrap/modal";
 
 @NgModule({
   declarations: [
@@ -68,7 +70,10 @@ import {MatDialogModule} from "@angular/material/dialog";
     ReactiveFormsModule,
     MatButtonToggleModule,
      MatDialogModule
-  ]
+  ],
+   providers:[BsModalService]
+
+
 })
 export class TimetableManagementModule {
 }

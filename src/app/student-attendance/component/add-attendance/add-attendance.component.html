@@ -2,84 +2,84 @@
 <!--  <div class="container">-->
 <!--    <div class="row">-->
 <mat-card class="mat-elevation-z8">
-  <div class="container">
-    <div class="col-12">
-      <div class="subTitle ">
-        <h4>Attendance Registration</h4>
-        <hr>
-      </div>
-    </div>
-
-    <form  class="form-row form">
-      <div class="col-md-4 col-sm-12">
-      <mat-form-field appearance="outline"   >
-        <mat-label>Courses</mat-label>
-        <mat-select #coursesMenu  required>
-          <mat-option *ngFor="let section of sections" [value]="section">
-            {{section.courseDTO.nameEn+': '+section.sectionNumber}}
-          </mat-option>
-        </mat-select>
-        <mat-error>{{'required'}}</mat-error>
-
-      </mat-form-field>
+   <div class="container">
+      <div class="col-12">
+         <div class="subTitle ">
+            <h4>Attendance Registration</h4>
+            <hr>
+         </div>
       </div>
 
-      <div class="col-md-4 col-sm-12">
-        <mat-form-field appearance="outline" >
-          <mat-label>Time</mat-label>
-          <mat-select #timeMenu    required>
-            <mat-option *ngFor="let table of timetables" [value]="table">
-              {{table.day+":"+table.startTime.slice(0,5)+"-"+table.endTime.slice(0,5)}}
-            </mat-option>
-          </mat-select>
-          <mat-error>{{'required'}}</mat-error>
+      <form  class="form-row form">
+         <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="outline"   >
+               <mat-label>Courses</mat-label>
+               <mat-select #coursesMenu  required>
+                  <mat-option *ngFor="let section of sections" [value]="section">
+                     {{section.courseDTO.nameEn+': '+section.sectionNumber}}
+                  </mat-option>
+               </mat-select>
+               <mat-error>{{'required'}}</mat-error>
 
-        </mat-form-field>
-      </div>
+            </mat-form-field>
+         </div>
 
-      <div class="col-md-4 col-sm-12">
-      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input" required>
-        <mat-label>Lecture Date</mat-label>
-        <input #lectureDate   (change)="changeDate(lectureDate.value)"  matInput  required type="date">
-        <mat-error>{{'required'}}</mat-error>
+         <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="outline" >
+               <mat-label>Time</mat-label>
+               <mat-select #timeMenu    required>
+                  <mat-option *ngFor="let table of timetables" [value]="table">
+                     {{table.day+":"+table.startTime.slice(0,5)+"-"+table.endTime.slice(0,5)}}
+                  </mat-option>
+               </mat-select>
+               <mat-error>{{'required'}}</mat-error>
 
-      </mat-form-field>
-      </div>
+            </mat-form-field>
+         </div>
 
-      <div class="col-md-4 col-sm-12">
-      <mat-form-field appearance="outline">
-        <mat-label>Attendance Type</mat-label>
-        <mat-select #regTypeMenu   required>
-          <mat-option [value]="'Manual'">
-            Manual
-          </mat-option>
-          <mat-option [value]="'Automatic'">
-            Automatic
-          </mat-option>
-        </mat-select>
-        <mat-error >{{'required'}}</mat-error>
-      </mat-form-field>
-      </div>
+         <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input" required>
+               <mat-label>Lecture Date</mat-label>
+               <input #lectureDate   (change)="changeDate(lectureDate.value)"  matInput  required type="date">
+               <mat-error>{{'required'}}</mat-error>
 
-      <div class="col-md-4 col-sm-12">
-      <mat-form-field  appearance="outline" >
-        <mat-label>Registration Time</mat-label>
-        <input  #regTime type="number"    [(ngModel)]="countDown"  matInput [min]="minCountDown"  oninput="this.value =
+            </mat-form-field>
+         </div>
+
+         <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="outline">
+               <mat-label>Attendance Type</mat-label>
+               <mat-select #regTypeMenu   required>
+                  <mat-option [value]="'Manual'">
+                     Manual
+                  </mat-option>
+                  <mat-option [value]="'Automatic'">
+                     Automatic
+                  </mat-option>
+               </mat-select>
+               <mat-error >{{'required'}}</mat-error>
+            </mat-form-field>
+         </div>
+
+         <div class="col-md-4 col-sm-12">
+            <mat-form-field  appearance="outline" >
+               <mat-label>Registration Time</mat-label>
+               <input  #regTime type="number"    [(ngModel)]="countDown"  matInput [min]="minCountDown"  oninput="this.value =
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" (change)="attendanceTimeChange($event)"  [disabled]="timeDisabled">
-<!--        <mat-error *ngIf="+regTime.value<30">{{'Invalid Registration Time'}}</mat-error>-->
+               <!--        <mat-error *ngIf="+regTime.value<30">{{'Invalid Registration Time'}}</mat-error>-->
 
-      </mat-form-field>
-      </div>
-      <div class="col-12 text-center align-self-center">
-      <div class="  col-12  form-input  ">
-<!--        <p class="col-md-3">ss</p>-->
-        <button  [disabled]="!(isRegTypeChanged && islectureTimeChanged && isSectionsChanged && isLectureDateChanged && timeMenu.value )" class="col-md-2  col-sm-12 btn btn-primary form-control mainBtn "   mat-raised-button
-                 type="submit" (click)="save()">Register
-        </button>
-      </div>
-      </div>
-    </form>
-  </div>
+            </mat-form-field>
+         </div>
+         <div class="col-12 text-center align-self-center">
+            <div class="  col-12  form-input  ">
+               <!--        <p class="col-md-3">ss</p>-->
+               <button  [disabled]="!(isRegTypeChanged && islectureTimeChanged && isSectionsChanged && isLectureDateChanged && timeMenu.value )" class="col-md-2  col-sm-12 btn btn-primary form-control mainBtn "   mat-raised-button
+                        type="submit" (click)="save()">Register
+               </button>
+            </div>
+         </div>
+      </form>
+   </div>
 </mat-card>
 
 <!--</div>-->

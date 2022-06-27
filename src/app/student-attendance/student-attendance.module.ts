@@ -22,6 +22,7 @@ import { AttendanceCodeComponent } from './component/attendance-code/attendance-
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from "@angular/material/dialog";
+import {QRCodeModule} from "angular2-qrcode";
 
 
 
@@ -51,7 +52,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatCheckboxModule,
     MatPaginatorModule,
     MatRadioModule,
-     MatDialogModule
+     MatDialogModule,
+     QRCodeModule
 
   ]
 })

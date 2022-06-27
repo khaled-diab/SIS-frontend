@@ -4,32 +4,32 @@ import {CollegeManagementService} from '../../../college-management/service/coll
 import {StudentManagementService} from '../../service/student-management.service';
 
 @Component({
-  selector: 'app-delete-student-modal',
-  templateUrl: './delete-student-modal.component.html',
-  styleUrls: ['./delete-student-modal.component.css']
+   selector: 'app-delete-student-modal',
+   templateUrl: './delete-student-modal.component.html',
+   styleUrls: ['./delete-student-modal.component.css']
 })
 export class DeleteStudentModalComponent implements OnInit , OnDestroy, AfterViewInit {
-public id: number;
-  constructor(private bsModalRef: BsModalRef, private studentManagementService: StudentManagementService) {
-  }
-  ngOnInit(): void {
-  }
+   public id: number;
+   constructor(private bsModalRef: BsModalRef, private studentManagementService: StudentManagementService) {
+   }
+   ngOnInit(): void {
+   }
 
-  ngAfterViewInit(): void{
+   ngAfterViewInit(): void{
 
-  }
+   }
 
 
-  close(): void {
-    this.bsModalRef.hide();
-  }
+   close(): void {
+      this.bsModalRef.hide();
+   }
 
-  deleteStudent(): void {
-    this.studentManagementService.studentDeleteEvent.next(this.id);
-    this.bsModalRef.hide();
-  }
-  ngOnDestroy(): void {
-    // this.studentManagementService.studentDeleteSubscription.unsubscribe();
-  }
+   deleteStudent(): void {
+      this.studentManagementService.studentDeleteEvent.next(this.id);
+      this.bsModalRef.hide();
+   }
+   ngOnDestroy(): void {
+      // this.studentManagementService.studentDeleteSubscription.unsubscribe();
+   }
 }
 

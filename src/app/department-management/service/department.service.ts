@@ -22,11 +22,15 @@ export class DepartmentService {
   }
 
   getDepartmentsByCollege(collegeId: number): DepartmentModel[] {
+     console.log(collegeId);
     return DepartmentService.departmentsList.filter(value => {
       return (value.collegeDTO?.id === collegeId);
     });
   }
+   getDepartmentsByCollege2(collegeId: number): Observable<DepartmentModel[]> {
+      return this.httpClient.get<DepartmentModel[]>(Constants.getDepartmentsByCollege + collegeId);
 
+   }
   public getDepartments():
     Observable<DepartmentModel[]> {
     return this.httpClient.get<DepartmentModel[]>(Constants.getDepartments);

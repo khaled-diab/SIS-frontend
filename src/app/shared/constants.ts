@@ -76,7 +76,9 @@ export class Constants {
   // Department URLS
   public static readonly getDepartments = environment.baseURL + '/departments/all';
   public static readonly addDepartments = environment.baseURL + '/departments/add';
-  public static readonly deleteDepartments = environment.baseURL + '/departments/delete';
+   public static readonly getDepartmentsByCollege = environment.baseURL + '/departments/getDeptsByCollege/';
+
+   public static readonly deleteDepartments = environment.baseURL + '/departments/delete';
   // Academic Years URLS
   public static readonly getAcademicYears = environment.baseURL + '/academicYears/all';
   public static readonly addAcademicYears = environment.baseURL + '/academicYears/add';

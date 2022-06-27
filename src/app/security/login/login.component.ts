@@ -28,8 +28,10 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
+     console.log("hi");
     this.securityService.login(this.loginModel)
       .subscribe(value => {
+         console.log(value);
         this.handleSuccessfulLogin(value);
       }, _ => {
         this.handleFailedLogin();

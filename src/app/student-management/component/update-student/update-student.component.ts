@@ -12,190 +12,192 @@ import {take} from 'rxjs/operators';
 import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 import {MatSelect} from '@angular/material/select';
 import {DepartmentService} from '../../../department-management/service/department.service';
-import {AcademicProgramService} from '../../../academic-program/service/academic-program.service';
+import {AcademicProgramService} from "../../../academic-program/service/academic-program.service";
 
 @Component({
-  selector: 'app-update-student',
-  templateUrl: './update-student.component.html',
-  styleUrls: ['./update-student.component.css']
+   selector: 'app-update-student',
+   templateUrl: './update-student.component.html',
+   styleUrls: ['./update-student.component.css']
 })
 export class UpdateStudentComponent implements OnInit, AfterViewInit {
-  isDisabled = true;
-  student = new StudentModel();
-  colleges: CollegeModel[];
-  college = new CollegeModel();
-  departments: DepartmentModel[];
-  programs: AcademicProgramModel[];
-  department = new  DepartmentModel();
-  years: string[];
-  levels: string[];
-  errorr = false;
-  errorMessage: string;
-  @ViewChild('arabicName') arabicName: NgModel;
-  @ViewChild('photoInput') photoInput: ElementRef;
-  @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
-  @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
-  @ViewChild('programSelect', {static: true}) programSelect: MatSelect;
-  deptOption = false;
-  @ViewChild('img') img: ElementRef;
-  form: FormGroup;
-  photoFile: any;
-  url: string;
-  imgFlage = 0;
-  title = 'Update Student';
+   isDisabled = true;
+   student = new StudentModel();
+   colleges: CollegeModel[];
+   college = new CollegeModel();
+   departments: DepartmentModel[];
+   programs: AcademicProgramModel[];
+   department = new  DepartmentModel();
+   years: string[];
+   levels: string[];
+   errorr = false;
+   errorMessage: string;
+   @ViewChild('arabicName') arabicName: NgModel;
+   @ViewChild('photoInput') photoInput: ElementRef;
+   @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
+   @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
+   @ViewChild('programSelect', {static: true}) programSelect: MatSelect;
+   deptOption = false;
+   @ViewChild('img') img: ElementRef;
+   form: FormGroup;
+   photoFile: any;
+   url: string;
+   imgFlage = 0;
+   title = 'Update Student';
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: UpdatePreviewData, private studentManagementService: StudentManagementService,
-              private snackBar: MatSnackBar,
-              private collegeManagementService: CollegeManagementService,
-              private departmentService: DepartmentService,
-              private academicProgramService: AcademicProgramService){
-  }
+   constructor(@Inject(MAT_DIALOG_DATA) public data: UpdatePreviewData, private studentManagementService: StudentManagementService,
+               private snackBar: MatSnackBar,
+               private collegeManagementService: CollegeManagementService,
+               private departmentService: DepartmentService,
+               private academicProgramService: AcademicProgramService){
+   }
 
-  ngOnInit(): void {
-    if (this.data.sel === 1) {
-      this.isDisabled = false;
-    } else {
-      this.isDisabled = true;
-      this.title = 'Preview Student';
+   ngOnInit(): void {
+      if (this.data.sel === 1) {
+         this.isDisabled = false;
+      } else {
+         this.isDisabled = true;
+         this.title = 'Preview Student';
 
-    }
-
-    this.student = this.data.st;
-
-    this.url = Constants.StudentImgUrl + this.student.photo;
-
-    this.form = new FormGroup({
-        nameEn: new FormControl(this.student.nameEn, Validators.compose([Validators.required,
-          Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
-        nameAr: new FormControl(this.student.nameAr, Validators.compose([Validators.required,
-          Validators.pattern(Constants.ARABIC_CHARACTERS)])),
-        universityId: new FormControl(this.student.universityId, Validators.compose([Validators.required,
-          Validators.pattern(Constants.DIGITS_ONLY)])),
-        nationality: new FormControl(this.student.nationality, [Validators.required, Validators.pattern(Constants.ENGLISH_CHARACTERS)]),
-        nationalId: new FormControl(this.student.nationalId, Validators.compose([Validators.required,
-          Validators.pattern(Constants.DIGITS_ONLY_14)])),
-        phone: new FormControl(this.student.phone, Validators.compose([Validators.required,
-          Validators.pattern(Constants.DIGITS_ONLY_11)])),
-        birthDate: new FormControl(this.student.birthDate, Validators.required),
-        universityMail: new FormControl(this.student.universityMail, Validators.compose([Validators.required,
-          Validators.email])),
-        alternativeMail: new FormControl(this.student.alternativeMail, Validators.email),
-        parentPhone: new FormControl(this.student.parentPhone, Validators.pattern(Constants.DIGITS_ONLY_11)),
-        level: new FormControl(this.student.level),
-        year: new FormControl(this.student.year, Validators.required),
-        photo: new FormControl(this.student.photo),
-        collegeMenu: new FormControl(this.student.collegeDTO.id, Validators.required),
-        departmentMenu: new FormControl(this.student.departmentDTO.id, Validators.required),
-        programMenu: new FormControl(this.student.academicProgramDTO.id, Validators.required),
-      }
-    );
-
-
-    if (this.data.sel !== 1) {
-      this.form.disable();
-
-    }
-    this.levels = ['1', '2', '3', '4', '5', '6'];
-    this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
-
-    this.college = this.data.st.collegeDTO;
-    this.department = this.data.st.departmentDTO;
-    // if (this.department.id === 1){
-    //   this.programSelect.setDisabledState(true);
-    // }
-    console.log(this.department);
-    this.collegeManagementService.getAllColleges().subscribe(Response => {
-      this.colleges = Response;
-      this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-      this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.department.id);
-    });
-  }
-  ngAfterViewInit(): void {
-    this.collegeSelect.valueChange.subscribe(value => {
-      this.form.get('programMenu')?.setValue(null);
-      this.form.get('departmentMenu')?.setValue(null);
-      this.departmentSelect.setDisabledState(false);
-      this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
-      this.deptOption = false;
-
-    });
-    this.departmentSelect.openedChange.subscribe(value => {
-      this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.departmentSelect.value);
-      this.programSelect.setDisabledState(false);
-
-
-    });
-  }
-
-  update(): void {
-
-
-    if (this.form.valid) {
-    }
-    {
-      this.student.nameEn = this.form.get('nameEn')?.value.trim();
-      this.student.nameAr = this.form.get('nameAr')?.value.trim();
-      this.student.universityId = this.form.get('universityId')?.value;
-      this.student.nationality = this.form.get('nationality')?.value.trim();
-      this.student.nationalId = this.form.get('nationalId')?.value;
-      this.student.phone = this.form.get('phone')?.value;
-      this.student.birthDate = this.form.get('birthDate')?.value;
-      this.student.universityMail = this.form.get('universityMail')?.value;
-      this.student.alternativeMail = this.form.get('alternativeMail')?.value;
-      this.student.parentPhone = this.form.get('parentPhone')?.value;
-      this.student.level = this.form.get('level')?.value;
-      this.student.year = this.form.get('year')?.value;
-      this.student.photo = this.form.get('photo')?.value;
-      this.student.collegeDTO.id = this.form.get('collegeMenu')?.value;
-      this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
-      this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
-
-      this.student.id = this.data.st.id;
-
-      if (this.imgFlage === 1) {
-        this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
-        this.student.photo = this.form.get('photo')?.value;
-        this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe();
-        this.imgFlage = 0;
       }
 
-      this.studentManagementService.updateStudent(this.student).subscribe(() => {
-          this.snackBar.open('Student Updated Successfully', undefined, {duration: 3000, panelClass: 'successSnackBar'});
-          this.studentManagementService.studentCloseUpdateEvent.next();
-        }, error => {
-          const formControl = this.form.get(error.error.field);
-          this.errorMessage = error.error.message;
-          if (formControl) {
-            formControl.setErrors({
-              serverError: true
-            });
-          }
-          this.snackBar.open('Failed To Update Student', undefined, {duration: 3000});
-          this.errorr = true;
-        }
+      this.student = this.data.st;
+
+      this.url = Constants.StudentImgUrl + this.student.photo;
+
+      this.form = new FormGroup({
+            nameEn: new FormControl(this.student.nameEn, Validators.compose([Validators.required,
+               Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
+            nameAr: new FormControl(this.student.nameAr, Validators.compose([Validators.required,
+               Validators.pattern(Constants.ARABIC_CHARACTERS)])),
+            universityId: new FormControl(this.student.universityId, Validators.compose([Validators.required,
+               Validators.pattern(Constants.DIGITS_ONLY)])),
+            nationality: new FormControl(this.student.nationality, [Validators.required, Validators.pattern(Constants.ENGLISH_CHARACTERS)]),
+            nationalId: new FormControl(this.student.nationalId, Validators.compose([Validators.required,
+               Validators.pattern(Constants.DIGITS_ONLY_14)])),
+            phone: new FormControl(this.student.phone, Validators.compose([Validators.required,
+               Validators.pattern(Constants.DIGITS_ONLY_11)])),
+            birthDate: new FormControl(this.student.birthDate, Validators.required),
+            universityMail: new FormControl(this.student.universityMail, Validators.compose([Validators.required,
+               Validators.email])),
+            alternativeMail: new FormControl(this.student.alternativeMail, Validators.email),
+            parentPhone: new FormControl(this.student.parentPhone, Validators.pattern(Constants.DIGITS_ONLY_11)),
+            level: new FormControl(this.student.level),
+            year: new FormControl(this.student.year, Validators.required),
+            photo: new FormControl(this.student.photo),
+            collegeMenu: new FormControl(this.student.collegeDTO.id, Validators.required),
+            departmentMenu: new FormControl(this.student.departmentDTO.id, Validators.required),
+            programMenu: new FormControl(this.student.academicProgramDTO.id, Validators.required),
+         }
       );
-    }
-  }
 
-  edit(): void {
-    this.form.enable();
-    this.isDisabled = false;
-    this.data.sel = 1;
 
-  }
+      if (this.data.sel !== 1) {
+         this.form.disable();
 
-  cancel(): void {
-    this.studentManagementService.studentCloseUpdateEvent.next();
-  }
-
-  onChange(): void {
-    this.photoFile = this.photoInput.nativeElement.files[0];
-    this.studentManagementService.upload(this.photoFile, 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
-        this.url = Constants.StudentImgUrl + 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name;
       }
-    );
-    this.imgFlage = 1;
-  }
+      this.levels = ['1', '2', '3', '4', '5', '6'];
+      this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
+
+      this.college = this.data.st.collegeDTO;
+      this.department = this.data.st.departmentDTO;
+      // if (this.department.id === 1){
+      //   this.programSelect.setDisabledState(true);
+      // }
+      console.log(this.department);
+      this.collegeManagementService.getAllColleges().subscribe(Response => {
+         this.colleges = Response;
+         this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
+         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.department.id);
+      });
+   }
+   ngAfterViewInit(): void {
+      this.collegeSelect.valueChange.subscribe(value => {
+         this.form.get('programMenu')?.setValue(null);
+         this.form.get('departmentMenu')?.setValue(null);
+         this.departmentSelect.setDisabledState(false);
+         this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
+         this.deptOption = false;
+
+      });
+      this.departmentSelect.openedChange.subscribe(value => {
+         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.departmentSelect.value);
+         this.programSelect.setDisabledState(false);
+
+
+      });
+   }
+
+   update(): void {
+
+
+      if (this.form.valid) {
+      }
+      {
+         this.student.nameEn = this.form.get('nameEn')?.value.trim();
+         this.student.nameAr = this.form.get('nameAr')?.value.trim();
+         this.student.universityId = this.form.get('universityId')?.value;
+         this.student.nationality = this.form.get('nationality')?.value.trim();
+         this.student.nationalId = this.form.get('nationalId')?.value;
+         this.student.phone = this.form.get('phone')?.value;
+         this.student.birthDate = this.form.get('birthDate')?.value;
+         this.student.universityMail = this.form.get('universityMail')?.value;
+         this.student.alternativeMail = this.form.get('alternativeMail')?.value;
+         this.student.parentPhone = this.form.get('parentPhone')?.value;
+         this.student.level = this.form.get('level')?.value;
+         this.student.year = this.form.get('year')?.value;
+         this.student.photo = this.form.get('photo')?.value;
+         this.student.collegeDTO.id = this.form.get('collegeMenu')?.value;
+         this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
+         this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
+
+         this.student.id = this.data.st.id;
+
+         if (this.imgFlage === 1) {
+            this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
+            this.student.photo = this.form.get('photo')?.value;
+            this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe();
+            this.imgFlage = 0;
+         }
+
+         this.studentManagementService.updateStudent(this.student).subscribe(() => {
+               this.snackBar.open('Student Updated Successfully', undefined, {duration: 3000, panelClass: 'successSnackBar'});
+               this.studentManagementService.studentCloseUpdateEvent.next();
+            }, error => {
+               const formControl = this.form.get(error.error.field);
+               this.errorMessage = error.error.message;
+               console.log(error.error.field);
+            console.log(this.errorMessage);
+               if (formControl) {
+                  formControl.setErrors({
+                     serverError: true
+                  });
+               }
+               this.snackBar.open('Failed To Update Student', undefined, {duration: 3000});
+               this.errorr = true;
+            }
+         );
+      }
+   }
+
+   edit(): void {
+      this.form.enable();
+      this.isDisabled = false;
+      this.data.sel = 1;
+
+   }
+
+   cancel(): void {
+      this.studentManagementService.studentCloseUpdateEvent.next();
+   }
+
+   onChange(): void {
+      this.photoFile = this.photoInput.nativeElement.files[0];
+      this.studentManagementService.upload(this.photoFile, 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
+            this.url = Constants.StudentImgUrl + 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name;
+         }
+      );
+      this.imgFlage = 1;
+   }
 }
 
 
