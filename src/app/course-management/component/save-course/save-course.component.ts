@@ -88,15 +88,14 @@ export class SaveCourseComponent implements OnInit, AfterViewInit {
         this.form.get('midGrade')?.setValue(this.courseModel.midGrade);
         this.form.get('oralGrade')?.setValue(this.courseModel.oralGrade);
         this.form.get('practicalGrade')?.setValue(this.courseModel.practicalGrade);
-        this.form.get('collegeMenu')?.setValue(this.courseModel.collegeDTO.id);
-        this.form.get('departmentMenu')?.setValue(this.courseModel.departmentDTO.id);
-        console.log(this.courseModel.collegeDTO.id);
-        console.log(this.courseModel.departmentDTO.id);
+        this.form.get('collegeMenu')?.setValue(this.courseModel?.collegeDTO?.id);
+        this.form.get('departmentMenu')?.setValue(this.courseModel.departmentDTO?.id);
+        // console.log(this.courseModel.collegeDTO.id);
+        // console.log(this.courseModel.departmentDTO.id);
       }
     });
     this.collegeManagementService.getAllColleges().subscribe(Response => {
       this.colleges = Response;
-      this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
     });
   }
 

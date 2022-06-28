@@ -24,49 +24,55 @@ import {DeleteTimetableComponent} from './component/timetable-delete/delete-time
 import {EditSectionTimetableComponent} from './component/section-timetable-edit/edit-section-timetable.component';
 import {FacultyMemberTimetablesListComponent} from './component/facultyMember-timetables-list/facultyMember-timetables-list.component';
 // tslint:disable-next-line:max-line-length
-import {FacultyMemberTimetablesFilterComponent} from './component/facultyMember-timetables-filter/facultyMember-timetables-filter.component';
+import {
+   FacultyMemberTimetablesFilterComponent
+} from './component/facultyMember-timetables-filter/facultyMember-timetables-filter.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {StudentTimetablesListComponent} from './component/student-timetables-list/student-timetables-list.component';
 import {StudentTimetablesFilterComponent} from './component/student-timetables-filter/student-timetables-filter.component';
 import {EditTimetableComponent} from './component/timetable-edit/edit-timetable.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {BsModalService} from 'ngx-bootstrap/modal';
 
 @NgModule({
-  declarations: [
-    TimetableListComponent,
-    AddTimetableComponent,
-    EditSectionTimetableComponent,
-    TimetableFilterComponent,
-    DeleteTimetableComponent,
-    TimetableParentComponent,
-    FacultyMemberTimetablesListComponent,
-    FacultyMemberTimetablesFilterComponent,
-    StudentTimetablesListComponent,
-    StudentTimetablesFilterComponent,
-    EditTimetableComponent
-  ],
-  exports: [
-    TimetableListComponent
-  ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    TimetableManagementRoutingModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule,
-    ReactiveFormsModule,
-    MatButtonToggleModule,
-  ]
+   declarations: [
+      TimetableListComponent,
+      AddTimetableComponent,
+      EditSectionTimetableComponent,
+      TimetableFilterComponent,
+      DeleteTimetableComponent,
+      TimetableParentComponent,
+      FacultyMemberTimetablesListComponent,
+      FacultyMemberTimetablesFilterComponent,
+      StudentTimetablesListComponent,
+      StudentTimetablesFilterComponent,
+      EditTimetableComponent
+   ],
+   exports: [
+      TimetableListComponent
+   ],
+   imports: [
+      CommonModule,
+      MatCardModule,
+      MatTableModule,
+      MatTooltipModule,
+      MatIconModule,
+      MatPaginatorModule,
+      MatProgressSpinnerModule,
+      MatMenuModule,
+      MatButtonModule,
+      RouterModule,
+      TimetableManagementRoutingModule,
+      FormsModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      MatSortModule,
+      ReactiveFormsModule,
+      MatButtonToggleModule,
+      MatDialogModule,
+   ],
+   providers: [BsModalService]
 })
 export class TimetableManagementModule {
 }
