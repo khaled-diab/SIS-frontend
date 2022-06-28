@@ -89,8 +89,10 @@
             Save Attendance
          </button>
       </div>
+      <mat-spinner *ngIf="!tableData && spin" class="text-center"></mat-spinner>
    </div>
-   <mat-spinner *ngIf="!tableData && spin" class="text-center"></mat-spinner>
+<!--   <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>-->
+
 
 
 </div>
