@@ -22,40 +22,44 @@ import {StudentEnrollmentParentComponent} from './component/studentEnrollment-pa
 import {StudentEnrollmentFilterComponent} from './component/studentEnrollment-filter/studentEnrollment-filter.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {EditStudentEnrollmentComponent} from './component/studentEnrollment-edit/edit-studentEnrollment.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {BsModalService} from 'ngx-bootstrap/modal';
 
 
 @NgModule({
-  declarations: [
-    StudentEnrollmentsListComponent,
-    AddStudentEnrollmentComponent,
-    EditStudentEnrollmentComponent,
-    DeleteStudentEnrollmentComponent,
-    StudentEnrollmentFilterComponent,
-    StudentEnrollmentParentComponent
-  ],
-  exports: [
-    StudentEnrollmentsListComponent
-  ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    StudentEnrollmentManagementRoutingModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-  ]
+   declarations: [
+      StudentEnrollmentsListComponent,
+      AddStudentEnrollmentComponent,
+      EditStudentEnrollmentComponent,
+      DeleteStudentEnrollmentComponent,
+      StudentEnrollmentFilterComponent,
+      StudentEnrollmentParentComponent
+   ],
+   exports: [
+      StudentEnrollmentsListComponent
+   ],
+   imports: [
+      CommonModule,
+      MatCardModule,
+      MatTableModule,
+      MatTooltipModule,
+      MatIconModule,
+      MatPaginatorModule,
+      MatProgressSpinnerModule,
+      MatMenuModule,
+      MatButtonModule,
+      RouterModule,
+      StudentEnrollmentManagementRoutingModule,
+      FormsModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      MatSortModule,
+      ReactiveFormsModule,
+      MatCheckboxModule,
+      MatDialogModule,
+   ],
+   providers: [BsModalService]
 })
 export class StudentEnrollmentManagementModule {
 }
