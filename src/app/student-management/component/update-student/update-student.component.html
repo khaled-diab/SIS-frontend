@@ -103,7 +103,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label> Birth Date</mat-label>
-                        <input type="date" #birthDate   formControlName="birthDate" matInput name="birthDate" required >
+                        <input type="date" #birthDate placeholder="DOB(DD/MM/YYYY)"   formControlName="birthDate" matInput name="birthDate" required >
                         <mat-error *ngIf="form.controls['birthDate']?.errors?.required"> Required</mat-error>
 
                      </mat-form-field>

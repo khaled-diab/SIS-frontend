@@ -11,7 +11,7 @@ export class StudentModel extends BaseModel {
   nameEn: string;
   nationality: string;
   nationalId: string;
-  birthDate: Date;
+  birthDate: string;
   universityMail: string;
   alternativeMail: string;
   phone: string;

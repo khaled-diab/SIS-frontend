@@ -12,7 +12,7 @@ import {take} from 'rxjs/operators';
 import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 import {MatSelect} from '@angular/material/select';
 import {DepartmentService} from '../../../department-management/service/department.service';
-import {AcademicProgramService} from "../../../academic-program/service/academic-program.service";
+import {AcademicProgramService} from '../../../academic-program/service/academic-program.service';
 
 @Component({
    selector: 'app-update-student',
@@ -63,7 +63,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
       this.student = this.data.st;
 
       this.url = Constants.StudentImgUrl + this.student.photo;
-
+      //
       this.form = new FormGroup({
             nameEn: new FormControl(this.student.nameEn, Validators.compose([Validators.required,
                Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
@@ -166,7 +166,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
                const formControl = this.form.get(error.error.field);
                this.errorMessage = error.error.message;
                console.log(error.error.field);
-            console.log(this.errorMessage);
+               console.log(this.errorMessage);
                if (formControl) {
                   formControl.setErrors({
                      serverError: true

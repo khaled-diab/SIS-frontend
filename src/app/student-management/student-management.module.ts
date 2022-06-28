@@ -26,6 +26,7 @@ import {AddStudentComponent} from './component/add-student/add-student.component
 import {MatDialogModule} from '@angular/material/dialog';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 
 @NgModule({
