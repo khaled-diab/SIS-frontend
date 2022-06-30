@@ -15,57 +15,56 @@
                 id="form">
             <div class="form-row form">
 
-              <!-- academic year -->
-              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
-                <mat-label>Academic Year</mat-label>
-                <mat-select #academicYearSelect [formControlName]="'academicYearMenu'" required>
-                  <mat-option *ngFor="let year of academicYears" [value]="year">
-                    {{year.name}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form2.get('academicYearMenu')?.errors?.required">Required</mat-error>
-              </mat-form-field>
+<!--              &lt;!&ndash; academic year &ndash;&gt;-->
+<!--              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
+<!--                <mat-label>Academic Year</mat-label>-->
+<!--                <mat-select #academicYearSelect [formControlName]="'academicYearMenu'" required>-->
+<!--                  <mat-option *ngFor="let year of academicYears" [value]="year.id">-->
+<!--                    {{year.name}}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error *ngIf="form2.get('academicYearMenu')?.errors?.required">Required</mat-error>-->
+<!--              </mat-form-field>-->
 
-              <!-- academic term -->
-              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
-                <mat-label>Academic Term</mat-label>
-                <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required
-                            [disabled]="isDisabled">
-                  <mat-option *ngFor="let Term of academicTerms" [value]="Term">
-                    {{Term.name}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form2.get('academicTermMenu')?.errors?.required">Required</mat-error>
-              </mat-form-field>
+<!--              &lt;!&ndash; academic term &ndash;&gt;-->
+<!--              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
+<!--                <mat-label>Academic Term</mat-label>-->
+<!--                <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required-->
+<!--                            [disabled]="isDisabled">-->
+<!--                  <mat-option *ngFor="let Term of academicTerms" [value]="Term.id">-->
+<!--                    {{Term.name}}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error *ngIf="form2.get('academicTermMenu')?.errors?.required">Required</mat-error>-->
+<!--              </mat-form-field>-->
 
-              <!-- college -->
-              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
-                <mat-label>College</mat-label>
-                <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
-                  <mat-option *ngFor="let col of colleges" [value]="col">
-                    {{col.nameEn}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form2.get('collegeMenu')?.errors?.required">Required</mat-error>
-              </mat-form-field>
+<!--              &lt;!&ndash; college &ndash;&gt;-->
+<!--              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
+<!--                <mat-label>College</mat-label>-->
+<!--                <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>-->
+<!--                  <mat-option *ngFor="let col of colleges" [value]="col.id">-->
+<!--                    {{col.nameEn}}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error *ngIf="form2.get('collegeMenu')?.errors?.required">Required</mat-error>-->
+<!--              </mat-form-field>-->
 
-              <!-- department -->
-              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
-                <mat-label>Department</mat-label>
-                <mat-select #departmentSelect [formControlName]="'departmentMenu'" required
-                            [disabled]="isDisabled">
-                  <mat-option *ngFor="let dept of departments" [value]="dept">
-                    {{dept.nameEn}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form2.get('departmentMenu')?.errors?.required">Required</mat-error>
-              </mat-form-field>
+<!--              &lt;!&ndash; department &ndash;&gt;-->
+<!--              <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
+<!--                <mat-label>Department</mat-label>-->
+<!--                <mat-select #departmentSelect [formControlName]="'departmentMenu'" required-->
+<!--                            [disabled]="isDisabled">-->
+<!--                  <mat-option *ngFor="let dept of departments" [value]="dept.id">-->
+<!--                    {{dept.nameEn}}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error *ngIf="form2.get('departmentMenu')?.errors?.required">Required</mat-error>-->
+<!--              </mat-form-field>-->
 
               <!-- faculty Member -->
               <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                 <mat-label>Faculty Member</mat-label>
-                <mat-select #facultyMemberSelect [formControlName]="'facultyMemberMenu'" required
-                            [disabled]="isDisabled">
+                <mat-select #facultyMemberSelect [formControlName]="'facultyMemberMenu'" required>
                   <mat-option *ngFor="let facultyMember of facultyMembers" [value]="facultyMember">
                     {{facultyMember.nameEn}}
                   </mat-option>
@@ -73,17 +72,17 @@
                 <mat-error *ngIf="form2.get('facultyMemberMenu')?.errors?.required">Required</mat-error>
               </mat-form-field>
 
-              <!-- course -->
-              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
-                <mat-label>Course</mat-label>
-                <mat-select #courseSelect [formControlName]="'courseMenu'" required
-                            [disabled]="isDisabled">
-                  <mat-option *ngFor="let course of courses" [value]="course">
-                    {{course.nameEn}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form2.get('courseMenu')?.errors?.required">Required</mat-error>
-              </mat-form-field>
+<!--              &lt;!&ndash; course &ndash;&gt;-->
+<!--              <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">-->
+<!--                <mat-label>Course</mat-label>-->
+<!--                <mat-select #courseSelect [formControlName]="'courseMenu'" required-->
+<!--                            [disabled]="isDisabled">-->
+<!--                  <mat-option *ngFor="let course of courses" [value]="course.id">-->
+<!--                    {{course.nameEn}}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error *ngIf="form2.get('courseMenu')?.errors?.required">Required</mat-error>-->
+<!--              </mat-form-field>-->
 
               <!-- lectureType -->
               <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
@@ -99,8 +98,7 @@
               <!-- building -->
               <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                 <mat-label>Building</mat-label>
-                <mat-select #buildingSelect [formControlName]="'buildingMenu'" required
-                            [disabled]="isDisabled">
+                <mat-select #buildingSelect [formControlName]="'buildingMenu'" required>
                   <mat-option *ngFor="let building of buildings" [value]="building">
                     {{building.nameEn}}
                   </mat-option>
@@ -111,8 +109,7 @@
               <!-- classroom -->
               <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                 <mat-label>Classroom</mat-label>
-                <mat-select #classroomSelect [formControlName]="'classroomMenu'" required
-                            [disabled]="isDisabled">
+                <mat-select #classroomSelect [formControlName]="'classroomMenu'" required>
                   <mat-option *ngFor="let classroom of classrooms" [value]="classroom">
                     {{classroom.nameEn}}
                   </mat-option>
@@ -147,6 +144,10 @@
               </mat-form-field>
 
 <!--              <div class="col-12"></div>-->
+               <div class="col-12">
+                  <div class="subTitle">
+                  </div>
+               </div>
 
               <div class="col-md-6 mr-auto col-sm-12 form-input">
                 <button class="btn btn-primary form-control" form="form" mat-raised-button

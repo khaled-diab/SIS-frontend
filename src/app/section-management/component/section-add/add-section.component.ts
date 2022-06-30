@@ -176,58 +176,58 @@ export class AddSectionComponent implements OnInit {
 
   }
 
-  addTimetable(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '70%';
-    dialogConfig.height = '700px';
-    this.dialog.open(AddTimetableComponent, dialogConfig);
-    this.timetableService.timetableAddEvent.pipe(take(1)).subscribe(value => {
-        this.selection.select(value);
-        console.log(this.selection.selected);
-        this.dataSource.data = this.selection.selected;
-        console.log(this.dataSource.data);
-        this.dialog.closeAll();
-      }
-    );
-    this.timetableService.timetableCloseUpdateEvent.pipe(take(1)).subscribe(value => {
-        this.dialog.closeAll();
-      }
-    );
-  }
-
-  editTimetable(row: TimetableModel): void {
-    this.selection.deselect(row);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '70%';
-    dialogConfig.height = '700px';
-    dialogConfig.data = row;
-    this.dialog.open(EditSectionTimetableComponent, dialogConfig);
-    this.timetableService.timetableUpdateEvent.pipe(take(1)).subscribe(value => {
-        this.selection.select(value);
-        console.log(this.selection.selected);
-        this.dataSource.data = this.selection.selected;
-        console.log(this.dataSource.data);
-        this.dialog.closeAll();
-      }
-    );
-  }
-
-  deleteTimetable(row: TimetableModel): void {
-    this.modalService.show(DeleteTimetableComponent, {
-      backdrop: 'static',
-      ignoreBackdropClick: true,
-      keyboard: false
-    });
-    this.timetableService.timetableDeleteEvent.pipe(take(1)).subscribe(_ => {
-      this.selection.deselect(row);
-      console.log(this.selection.selected);
-      this.dataSource.data = this.selection.selected;
-    });
-  }
+  // addTimetable(): void {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = '70%';
+  //   dialogConfig.height = '700px';
+  //   this.dialog.open(AddTimetableComponent, dialogConfig);
+  //   this.timetableService.timetableAddEvent.pipe(take(1)).subscribe(value => {
+  //       this.selection.select(value);
+  //       console.log(this.selection.selected);
+  //       this.dataSource.data = this.selection.selected;
+  //       console.log(this.dataSource.data);
+  //       this.dialog.closeAll();
+  //     }
+  //   );
+  //   this.timetableService.timetableCloseUpdateEvent.pipe(take(1)).subscribe(value => {
+  //       this.dialog.closeAll();
+  //     }
+  //   );
+  // }
+  //
+  // editTimetable(row: TimetableModel): void {
+  //   this.selection.deselect(row);
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = '70%';
+  //   dialogConfig.height = '700px';
+  //   dialogConfig.data = row;
+  //   this.dialog.open(EditSectionTimetableComponent, dialogConfig);
+  //   this.timetableService.timetableUpdateEvent.pipe(take(1)).subscribe(value => {
+  //       this.selection.select(value);
+  //       console.log(this.selection.selected);
+  //       this.dataSource.data = this.selection.selected;
+  //       console.log(this.dataSource.data);
+  //       this.dialog.closeAll();
+  //     }
+  //   );
+  // }
+  //
+  // deleteTimetable(row: TimetableModel): void {
+  //   this.modalService.show(DeleteTimetableComponent, {
+  //     backdrop: 'static',
+  //     ignoreBackdropClick: true,
+  //     keyboard: false
+  //   });
+  //   this.timetableService.timetableDeleteEvent.pipe(take(1)).subscribe(_ => {
+  //     this.selection.deselect(row);
+  //     console.log(this.selection.selected);
+  //     this.dataSource.data = this.selection.selected;
+  //   });
+  // }
 
 
   add(): void {
@@ -247,34 +247,34 @@ export class AddSectionComponent implements OnInit {
 
     this.sectionManagementService.save(this.section).subscribe((Response) => {
 
-        for (const timetable of this.selection.selected) {
-          timetable.sectionDTO = Response; // Response = sectionDTO
-          timetable.academicYearDTO = Response.academicYearDTO;
-          timetable.academicTermDTO = Response.academicTermDTO;
-          timetable.collegeDTO = Response.collegeDTO;
-          timetable.departmentDTO = Response.departmentDTO;
-          timetable.courseDTO = Response.courseDTO;
-        }
-
-        this.timetableService.saveTimetables(this.selection.selected).subscribe((Response2) => {
-            this.snackBar.open('Timetables Added Successfully', undefined, {
-              duration: 2000,
-              panelClass: 'successSnackBar'
-            });
-            console.log(this.selection.selected);
-            this.timetableService.timetableCloseUpdateEvent.next();
-          }, error => {
-            console.log(this.selection.selected);
-            const formControl = this.form.get(error.error.field);
-            this.errorMessage = error.error.message;
-            if (formControl) {
-              formControl.setErrors({
-                serverError: true
-              });
-            }
-            this.snackBar.open('Failed To Add Timetables', undefined, {duration: 2000});
-          }
-        );
+        // for (const timetable of this.selection.selected) {
+        //   timetable.sectionDTO = Response; // Response = sectionDTO
+        //   timetable.academicYearDTO = Response.academicYearDTO;
+        //   timetable.academicTermDTO = Response.academicTermDTO;
+        //   timetable.collegeDTO = Response.collegeDTO;
+        //   timetable.departmentDTO = Response.departmentDTO;
+        //   timetable.courseDTO = Response.courseDTO;
+        // }
+        //
+        // this.timetableService.saveTimetables(this.selection.selected).subscribe((Response2) => {
+        //     this.snackBar.open('Timetables Added Successfully', undefined, {
+        //       duration: 2000,
+        //       panelClass: 'successSnackBar'
+        //     });
+        //     console.log(this.selection.selected);
+        //     this.timetableService.timetableCloseUpdateEvent.next();
+        //   }, error => {
+        //     console.log(this.selection.selected);
+        //     const formControl = this.form.get(error.error.field);
+        //     this.errorMessage = error.error.message;
+        //     if (formControl) {
+        //       formControl.setErrors({
+        //         serverError: true
+        //       });
+        //     }
+        //     this.snackBar.open('Failed To Add Timetables', undefined, {duration: 2000});
+        //   }
+        // );
 
         this.snackBar.open('Section Added Successfully', undefined, {
           duration: 2000,

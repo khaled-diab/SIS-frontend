@@ -108,17 +108,17 @@ export class PreviewCourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.form.get('collegeMenu')?.valueChanges.subscribe(value => {
-      this.courseModel.collegeDTO = new CollegeModel();
-      this.courseModel.collegeDTO.id = value;
-      console.log('value= ', value);
-    });
-    this.form.get('departmentMenu')?.valueChanges.subscribe(value => {
-      this.courseModel.departmentDTO = new DepartmentModel();
-      this.courseModel.departmentDTO.id = value;
-      console.log('value= ', value);
-      this.courseManagementService.courseSaveEvent.next();
-    });
+    // this.form.get('collegeMenu')?.valueChanges.subscribe(value => {
+    //   this.courseModel.collegeDTO = new CollegeModel();
+    //   this.courseModel.collegeDTO.id = value;
+    //   console.log('value= ', value);
+    // });
+    // this.form.get('departmentMenu')?.valueChanges.subscribe(value => {
+    //   this.courseModel.departmentDTO = new DepartmentModel();
+    //   this.courseModel.departmentDTO.id = value;
+    //   console.log('value= ', value);
+    //   this.courseManagementService.courseSaveEvent.next();
+    // });
     this.collegeSelect.valueChange.subscribe(() => {
       if (this.collegeSelect.value !== undefined) {
         this.departmentSelect.setDisabledState(false);
