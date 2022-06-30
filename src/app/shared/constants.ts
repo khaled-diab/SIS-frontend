@@ -113,7 +113,8 @@ export class Constants {
    public static readonly authHeader = 'Authorization';
    public static readonly loggedInUser = 'loggedInUser';
    public static readonly screens = 'screens';
-   public static readonly registerUrl = environment.baseURL + '/security/register-student';
+   public static readonly registerStudentUrl = environment.baseURL + '/security/register-student';
+   public static readonly registerStaffUrl = environment.baseURL + '/security/register-faculty-member';
    public static readonly ROLE_ADMIN = 'ADMIN';
    public static readonly ROLE_FACULTY_MEMBER = 'FACULTY_MEMBER';
    public static readonly ROLE_STUDENT = 'STUDENT';
@@ -123,6 +124,8 @@ export class Constants {
    public static readonly uploadProfilePicture = environment.baseURL + '/security/upload-profile-picture';
    public static readonly FORM_DATA_VALUE = 'multipart/form-data';
    public static readonly APP_JSON = 'application/json';
+   public static readonly STUDENT_TYPE = 'STUDENT';
+   public static readonly STAFF_TYPE = 'STAFF';
 
 
 }
