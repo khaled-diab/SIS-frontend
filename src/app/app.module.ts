@@ -30,6 +30,7 @@ import {ToastModule} from 'primeng/toast';
 import {ButtonModule} from 'primeng/button';
 import {MessageService} from 'primeng/api';
 import {ImageModule} from 'primeng/image';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -44,28 +45,29 @@ import {ImageModule} from 'primeng/image';
     UploadUsersComponent,
     ProfileComponent
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatSnackBarModule,
-    FormsModule,
-    FileUploadModule,
-    ToastModule,
-    ButtonModule,
-    ImageModule,
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatExpansionModule,
+        MatInputModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatSnackBarModule,
+        FormsModule,
+        FileUploadModule,
+        ToastModule,
+        ButtonModule,
+        ImageModule,
+        MatSelectModule,
+    ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService],
   bootstrap: [AppComponent],
 })

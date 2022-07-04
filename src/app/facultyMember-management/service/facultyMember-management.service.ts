@@ -9,6 +9,7 @@ import {MessageResponse} from '../../shared/model/message-response';
 import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-management/facultyMember-request-model';
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
+import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,13 @@ export class FacultyMemberManagementService {
     (Constants.searchFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
   }
 
+   public filterFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
+      Observable<PageRequest<FacultyMemberTableRecordsModel>> {
+      console.log(pageNumber, pageSize);
+      return this.httpClient.post<PageRequest<FacultyMemberTableRecordsModel>>
+      (Constants.filterFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
+   }
+
   constructFacultyMemberRequestObject(sort: Sort, facultyMemberRequestModel: FacultyMemberRequestModel): FacultyMemberRequestModel {
     if (sort.direction === 'asc') {
       facultyMemberRequestModel.sortDirection = Constants.ASC;
@@ -60,6 +68,10 @@ export class FacultyMemberManagementService {
 
   deleteFacultyMember(id: number): Observable<MessageResponse> {
     return this.httpClient.delete<MessageResponse>(Constants.deleteFacultyMemberUrl + id);
+  }
+
+  facultyMemberById(id: number): Observable<MessageResponse> {
+     return this.httpClient.get<MessageResponse>(Constants.facultyMemberByIdUrl + id);
   }
 
   upload(selectedFile: File, name: string): Observable<string[]> {

@@ -10,18 +10,22 @@ import {MessageResponse} from '../../shared/model/message-response';
 import {AdminModel} from '../../shared/model/security/admin-model';
 
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
 })
 export class SecurityService {
 
-  constructor(private httpClient: HttpClient) {
-  }
+   constructor(private httpClient: HttpClient) {
+   }
 
-  public login(loginModel: LoginModel): Observable<FacultyMemberModel | StudentModel | AdminModel> {
-    return this.httpClient.post<FacultyMemberModel | StudentModel>(Constants.loginUrl, loginModel);
-  }
+   public login(loginModel: LoginModel): Observable<FacultyMemberModel | StudentModel | AdminModel> {
+      return this.httpClient.post<FacultyMemberModel | StudentModel>(Constants.loginUrl, loginModel);
+   }
 
-  public register(registerModel: RegisterModel): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(Constants.registerUrl, registerModel);
-  }
+   public register(registerModel: RegisterModel, userType: string): Observable<MessageResponse> {
+      if (userType === Constants.STUDENT_TYPE) {
+         return this.httpClient.post<MessageResponse>(Constants.registerStudentUrl, registerModel);
+      }else {
+         return this.httpClient.post<MessageResponse>(Constants.registerStaffUrl, registerModel);
+      }
+   }
 }

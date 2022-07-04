@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PageEvent} from '@angular/material/paginator';
 import {CollegeManagementService} from '../../service/college-management.service';
 import {Subscription} from 'rxjs';
 import {CollegeRequestModel} from '../../../shared/model/college-management/college-request-model';
@@ -22,7 +22,6 @@ import {Constants} from '../../../shared/constants';
 })
 export class CollegesListComponent implements OnInit, OnDestroy {
 
-   @ViewChild('paginator') paginator: MatPaginator;
    tableData: PageRequest<CollegeModel>;
    collegeRequestModel: CollegeRequestModel = new CollegeRequestModel();
    displayedColumns = ['id', 'nameEn', 'nameAr', 'code', 'Actions'];
@@ -33,7 +32,6 @@ export class CollegesListComponent implements OnInit, OnDestroy {
    collegeModel = new CollegeModel();
    loading = true;
    firstTime = true;
-
 
    constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
                private collegeManagementService: CollegeManagementService,
@@ -56,14 +54,25 @@ export class CollegesListComponent implements OnInit, OnDestroy {
          });
    }
 
-   addOrUpdateCollege(college: CollegeModel): void {
+   addCollege(): void {
+      if (this.isSmallScreen) {
+         this.router.navigateByUrl('/colleges-management/create-college', {state: new CollegeModel()}).then(_ => console.log());
+      } else {
+         const initialState = {
+            collegeModel: new CollegeModel()
+         };
+         this.modalService.show(SaveCollegeComponent, {initialState, class: 'modal-lg'});
+      }
+   }
+
+   updateCollege(college: CollegeModel): void {
       if (this.isSmallScreen) {
          this.router.navigateByUrl('/colleges-management/create-college', {state: college}).then(_ => console.log());
       } else {
          const initialState = {
             collegeModel: college
          };
-         this.modalService.show(SaveCollegeComponent, {initialState});
+         this.modalService.show(SaveCollegeComponent, {initialState, class: 'modal-lg'});
       }
    }
 
@@ -96,7 +105,12 @@ export class CollegesListComponent implements OnInit, OnDestroy {
    saveCollege(): Subscription {
       return this.collegeManagementService.collegeSaveEvent.subscribe(value => {
          this.collegeManagementService.saveCollege(value).subscribe(data => {
+            this.paginate(null);
             console.log(data);
+            this.messageService.add({severity: 'success', summary: 'Success', detail: data.message});
+         }, error => {
+            console.log(error);
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Operation Failed'});
          });
       });
    }
@@ -129,12 +143,19 @@ export class CollegesListComponent implements OnInit, OnDestroy {
 
    paginate(page: any): void {
       this.loading = true;
-      this.pageIndex = page.page;
-      this.pageSize = page.rows;
-      this.collegeManagementService.getCollegePage(this.pageIndex, this.pageSize, this.collegeRequestModel).subscribe(value => {
-         this.loading = false;
-         this.tableData = value;
-      });
+      if (page === null) {
+         this.collegeManagementService.getCollegePage(this.pageIndex, this.pageSize, this.collegeRequestModel).subscribe(value => {
+            this.loading = false;
+            this.tableData = value;
+         });
+      } else {
+         this.pageIndex = page.page;
+         this.pageSize = page.rows;
+         this.collegeManagementService.getCollegePage(this.pageIndex, this.pageSize, this.collegeRequestModel).subscribe(value => {
+            this.loading = false;
+            this.tableData = value;
+         });
+      }
    }
 
    ngOnDestroy(): void {
@@ -154,6 +175,7 @@ export class CollegesListComponent implements OnInit, OnDestroy {
    }
 
    private initialDataSubscription(): Subscription {
+      this.collegeRequestModel = new CollegeRequestModel();
       this.loading = true;
       return this.collegeManagementService
          .getCollegePage(0, this.pageSize, this.collegeRequestModel)

@@ -87,13 +87,13 @@
    <app-college-filter></app-college-filter>
    <div class="d-flex justify-content-end mt-3">
       <div class="col-1">
-         <button (click)="addOrUpdateCollege(collegeModel)" class="align-content-center" mat-icon-button>
+         <button (click)="addCollege()" class="align-content-center" mat-icon-button>
             <mat-icon class="add" matTooltip="Add College" matTooltipPosition="above">add_circle</mat-icon>
          </button>
       </div>
    </div>
    <div *ngIf="tableData" class="card">
-      <p-table (onLazyLoad)="loadData($event)" [customSort]="true" [lazy]="true" [loading]="loading"
+      <p-table #dt (onLazyLoad)="loadData($event)" [customSort]="true" [lazy]="true" [loading]="loading"
                [scrollable]="true" [totalRecords]="tableData.totalCount" [value]="tableData.data"
                scrollDirection="horizontal">
          <ng-template pTemplate="header">
@@ -126,7 +126,7 @@
                             style="font-size: 2rem; color:green"></em>
                      </div>
                      <div class="col-4">
-                        <em (click)="addOrUpdateCollege(college)" class="pi pi-user-edit" style="font-size: 2rem"></em>
+                        <em (click)="updateCollege(college)" class="pi pi-user-edit" style="font-size: 2rem"></em>
                      </div>
                      <div class="col-4">
                         <em (click)="deleteCollege(college.id)" class="pi pi-trash"
@@ -137,12 +137,12 @@
             </tr>
          </ng-template>
       </p-table>
-      <p-paginator (onPageChange)="paginate($event)" [rowsPerPageOptions]="[5,10,20,50]" [rows]="5"
-                   [totalRecords]="tableData.totalCount">
+      <p-paginator #paginator (onPageChange)="paginate($event)" [rowsPerPageOptions]="[5,10,20,50]" [rows]="5"
+                   [totalRecords]="tableData.totalCount" [currentPageReportTemplate]="'{currentPage},{totalPages},{rows},{first},{last}'">
       </p-paginator>
    </div>
    <div class="center" *ngIf="!tableData">
-      <p-progressSpinner  class="text-center"></p-progressSpinner>
+      <p-progressSpinner class="text-center"></p-progressSpinner>
    </div>
 </div>
 

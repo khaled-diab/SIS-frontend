@@ -1,4 +1,5 @@
 export class MessageResponse {
-  message: string;
-  field: string;
+   message: string;
+   field: string;
+   status: number;
 }
