@@ -29,6 +29,7 @@ export class Constants {
   public static readonly allFacultyMembersUrl = environment.baseURL + '/facultyMembers/all';
   public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
   /* Student Url */
+   public static readonly getStudentUrl = environment.baseURL + '/students/';
   public static readonly deleteStudentUrl = environment.baseURL + '/students/deleteStudent/';
   public static readonly addStudentUrl = environment.baseURL + '/students/addStudent/';
   public static readonly updateStudentUrl = environment.baseURL + '/students/updateStudent/';
@@ -36,6 +37,7 @@ export class Constants {
   public static readonly uploadStudentImgUrl = environment.baseURL + '/students/upload/';
   public static readonly StudentImgUrl = environment.baseURL + '/students/download/';
   public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
+   public static readonly filterStudentRecordUrl = environment.baseURL + '/students/searchRecords/';
 
   // Section URLs
   public static readonly getSections = environment.baseURL + '/sections/all';

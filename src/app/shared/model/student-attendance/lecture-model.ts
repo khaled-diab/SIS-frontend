@@ -19,6 +19,6 @@ export class LectureModel extends BaseModel {
   academicTermDTO: AcademicTermModel;
   academicYearDTO: AcademicYear;
   sectionDTO: SectionModel;
-  rate:number;
+  rate: number;
 
 }

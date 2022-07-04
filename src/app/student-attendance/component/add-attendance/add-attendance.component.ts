@@ -12,8 +12,7 @@ import {AttendanceCodeComponent} from '../attendance-code/attendance-code.compon
 import {Subscription} from 'rxjs';
 import {AttendanceCounter} from '../../../shared/model/student-attendance/attendanceCounter';
 import {MatInput} from '@angular/material/input';
-import {Constants} from '../../../shared/constants';
-import {TimetableManagementService} from "../../../timetable-management/service/timetable-management.service";
+
 
 @Component({
    selector: 'app-add-attendance',
@@ -23,7 +22,7 @@ import {TimetableManagementService} from "../../../timetable-management/service/
 
 export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy{
 
-   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog,private timetableManagementService:TimetableManagementService) {
+   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog) {
 
    }
 
@@ -52,9 +51,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
 
    ngOnInit(): void {
-      this.timetableManagementService.getTimetablesPage(0,1).subscribe(value => {
-         console.log(value.data);
-      })
       this.fc.id = 1;
       this.lecture.facultyMemberDTO = this.fc;
       this.studentAttendanceService.getFacultyMemberSections(1).subscribe(value => {
