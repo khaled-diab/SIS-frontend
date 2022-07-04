@@ -39,7 +39,7 @@ export class FacultyMemberTimetablesListComponent implements OnInit, OnDestroy {
     return this.timetableManagementService.timetableFilterEvent
       .subscribe(value => {
         this.timetableRequestModel = value;
-        this.timetableManagementService.filterTimetables
+        this.timetableManagementService.searchTimetables
         (this.pageIndex, this.defaultPgeSize, this.timetableRequestModel)
           .subscribe(filteredData => {
             this.tableData = filteredData;
@@ -51,7 +51,7 @@ export class FacultyMemberTimetablesListComponent implements OnInit, OnDestroy {
     this.timetableRequestModel.filterFacultyMember = 1;
     this.timetableRequestModel.filterDay = 'Saturday';
     return this.timetableManagementService
-      .filterTimetables(this.pageIndex, this.defaultPgeSize, this.timetableRequestModel).subscribe(value => {
+      .searchTimetables(this.pageIndex, this.defaultPgeSize, this.timetableRequestModel).subscribe(value => {
         this.tableData = value;
       });
   }

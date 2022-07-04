@@ -23,8 +23,10 @@ export class Constants {
    // Faculty Member Url
    public static readonly facultyMemberPageUrl = environment.baseURL + '/facultyMembers/datapage';
    public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
+   public static readonly filterFacultyMemberUrl = environment.baseURL + '/facultyMembers/filter/';
    public static readonly saveFacultyMemberUrl = environment.baseURL + '/facultyMembers/saveFacultyMember';
    public static readonly deleteFacultyMemberUrl = environment.baseURL + '/facultyMembers/delete/';
+   public static readonly facultyMemberByIdUrl = environment.baseURL + '/facultyMembers/';
    public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
    public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
    public static readonly allFacultyMembersUrl = environment.baseURL + '/facultyMembers/all';
@@ -42,16 +44,20 @@ export class Constants {
    public static readonly getSections = environment.baseURL + '/sections/all';
    public static readonly sectionPageUrl = environment.baseURL + '/sections/datapage';
    public static readonly searchSectionUrl = environment.baseURL + '/sections/search/';
+   public static readonly filterSectionUrl = environment.baseURL + '/sections/filter/';
    public static readonly saveSectionUrl = environment.baseURL + '/sections/save';
    public static readonly updateSectionUrl = environment.baseURL + '/sections/update';
    public static readonly deleteSectionUrl = environment.baseURL + '/sections/delete/';
+   public static readonly SectionByIdUrl = environment.baseURL + '/sections/';
    public static readonly allSectionsUrl = environment.baseURL + '/sections/all/';
    // Timetable URLs
    public static readonly timetablePageUrl = environment.baseURL + '/timetables/datapage';
+   public static readonly searchTimetableUrl = environment.baseURL + '/timetables/search/';
    public static readonly filterTimetableUrl = environment.baseURL + '/timetables/filter/';
    public static readonly saveTimetableUrl = environment.baseURL + '/timetables/saveAll';
    public static readonly updateTimetableUrl = environment.baseURL + '/timetables/update';
    public static readonly deleteTimetableUrl = environment.baseURL + '/timetables/delete/';
+   public static readonly timetableByIdUrl = environment.baseURL + '/timetables/';
    public static readonly allLectureTypesUrl = environment.baseURL + '/lectureTypes/all';
    public static readonly studentTimetablesUrl = environment.baseURL + '/timetables/getStudentTimetables/';
    // StudentEnrollment URLs
