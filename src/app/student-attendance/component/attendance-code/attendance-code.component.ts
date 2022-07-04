@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {StudentAttendanceService} from '../../service/student-attendance.service';
 import {AttendanceCounter} from '../../../shared/model/student-attendance/attendanceCounter';
@@ -9,6 +9,7 @@ import {AttendanceCounter} from '../../../shared/model/student-attendance/attend
    styleUrls: ['./attendance-code.component.css']
 })
 export class AttendanceCodeComponent implements OnInit {
+
 
    attendanceCode: string;
    counter: number;
