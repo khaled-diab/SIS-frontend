@@ -151,7 +151,7 @@ export class EditSectionComponent implements OnInit {
       });
 
       this.timetableRequestModel.filterSection = this.section.id;
-      this.timetableService.filterTimetables(0, 100, this.timetableRequestModel).subscribe(value => {
+      this.timetableService.searchTimetables(0, 100, this.timetableRequestModel).subscribe(value => {
          console.log(value.data);
          for (const timetable of value.data) {
             this.times.push(timetable);

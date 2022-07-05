@@ -7,6 +7,7 @@ import {Sort} from '@angular/material/sort';
 import {MessageResponse} from '../../shared/model/message-response';
 import {SectionModel} from '../../shared/model/section-management/section-model';
 import {SectionRequestModel} from '../../shared/model/section-management/section-request-model';
+import {SectionTableRecordsModel} from '../../shared/model/section-management/sectionTableRecords-model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,15 @@ export class SectionManagementService {
     return this.httpClient.post<PageRequest<SectionModel>>
     (Constants.searchSectionUrl + (pageNumber + 1) + '/' + pageSize, sectionRequestModel);
   }
+
+   public filterSections(
+      pageNumber: number, pageSize: number, sectionRequestModel: SectionRequestModel):
+      Observable<PageRequest<SectionTableRecordsModel>> {
+      console.log(pageNumber, pageSize);
+      console.log(sectionRequestModel);
+      return this.httpClient.post<PageRequest<SectionTableRecordsModel>>
+      (Constants.filterSectionUrl + (pageNumber + 1) + '/' + pageSize, sectionRequestModel);
+   }
 
   constructSectionRequestObject(
     sort: Sort,
@@ -57,6 +67,10 @@ export class SectionManagementService {
   deleteSection(id: number): Observable<MessageResponse> {
     return this.httpClient.delete<MessageResponse>(Constants.deleteSectionUrl + id);
   }
+
+   getSectionById(id: number): Observable<MessageResponse> {
+      return this.httpClient.get<MessageResponse>(Constants.SectionByIdUrl + id);
+   }
 
   allSections(): Observable<SectionModel[]>{
     return this.httpClient.get<SectionModel[]>(Constants.allSectionsUrl);

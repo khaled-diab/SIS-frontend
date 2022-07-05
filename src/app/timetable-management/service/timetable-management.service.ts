@@ -9,65 +9,77 @@ import {MessageResponse} from '../../shared/model/message-response';
 import {TimetableRequestModel} from '../../shared/model/timetable-management/timetable-request-model';
 import {TimetableModel} from '../../shared/model/timetable-management/timetable-model';
 import {LectureTypeModel} from '../../shared/model/lectureType-model';
+import {TimetableTableRecordsModel} from '../../shared/model/timetable-management/timetableTableRecords-model';
 
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
 })
 export class TimetableManagementService {
 
-  timetableAddEvent: Subject<TimetableModel> = new Subject<TimetableModel>();
-  timetableUpdateEvent: Subject<TimetableModel> = new Subject<TimetableModel>();
-  timetableFilterEvent: Subject<TimetableRequestModel> = new Subject<TimetableRequestModel>();
-  timetableDeleteEvent: Subject<any> = new Subject<any>();
-  timetableCloseUpdateEvent: Subject<any> = new Subject<any>();
+   timetableAddEvent: Subject<TimetableModel> = new Subject<TimetableModel>();
+   timetableUpdateEvent: Subject<TimetableModel> = new Subject<TimetableModel>();
+   timetableFilterEvent: Subject<TimetableRequestModel> = new Subject<TimetableRequestModel>();
+   timetableDeleteEvent: Subject<any> = new Subject<any>();
+   timetableCloseUpdateEvent: Subject<any> = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) {
-  }
+   constructor(private httpClient: HttpClient) {
+   }
 
-  getTimetablesPage(pageNumber: number, pageSize: number): Observable<PageRequest<TimetableModel>> {
-    const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
-    console.log(pageQuery);
-    return this.httpClient.post<PageRequest<TimetableModel>>(Constants.timetablePageUrl, pageQuery);
-  }
+   getTimetablesPage(pageNumber: number, pageSize: number): Observable<PageRequest<TimetableModel>> {
+      const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
+      console.log(pageQuery);
+      return this.httpClient.post<PageRequest<TimetableModel>>(Constants.timetablePageUrl, pageQuery);
+   }
 
-  public filterTimetables(pageNumber: number, pageSize: number, timetableRequestModel: TimetableRequestModel):
-    Observable<PageRequest<TimetableModel>> {
-    console.log(pageNumber, pageSize);
-    return this.httpClient.post<PageRequest<TimetableModel>>
-    (Constants.filterTimetableUrl + (pageNumber + 1) + '/' + pageSize, timetableRequestModel);
-  }
+   public searchTimetables(pageNumber: number, pageSize: number, timetableRequestModel: TimetableRequestModel):
+      Observable<PageRequest<TimetableModel>> {
+      console.log(pageNumber, pageSize);
+      return this.httpClient.post<PageRequest<TimetableModel>>
+      (Constants.searchTimetableUrl + (pageNumber + 1) + '/' + pageSize, timetableRequestModel);
+   }
 
-  constructTimetableRequestObject(sort: Sort, timetableRequestModel: TimetableRequestModel): TimetableRequestModel {
-    if (sort.direction === 'asc') {
-      timetableRequestModel.sortDirection = Constants.ASC;
-    } else if (sort.direction === 'desc') {
-      timetableRequestModel.sortDirection = Constants.DESC;
-    } else {
-      timetableRequestModel.sortDirection = null;
-    }
-    timetableRequestModel.sortBy = sort.active;
-    return timetableRequestModel;
-  }
+   public filterTimetables(pageNumber: number, pageSize: number, timetableRequestModel: TimetableRequestModel):
+      Observable<PageRequest<TimetableTableRecordsModel>> {
+      console.log(pageNumber, pageSize);
+      return this.httpClient.post<PageRequest<TimetableTableRecordsModel>>
+      (Constants.filterTimetableUrl + (pageNumber + 1) + '/' + pageSize, timetableRequestModel);
+   }
 
-  saveTimetables(timetables: TimetableModel[]): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(Constants.saveTimetableUrl, timetables);
-  }
+   constructTimetableRequestObject(sort: Sort, timetableRequestModel: TimetableRequestModel): TimetableRequestModel {
+      if (sort.direction === 'asc') {
+         timetableRequestModel.sortDirection = Constants.ASC;
+      } else if (sort.direction === 'desc') {
+         timetableRequestModel.sortDirection = Constants.DESC;
+      } else {
+         timetableRequestModel.sortDirection = null;
+      }
+      timetableRequestModel.sortBy = sort.active;
+      return timetableRequestModel;
+   }
 
-  updateTimetable(timetable: TimetableModel): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(Constants.updateTimetableUrl, timetable);
-  }
+   saveTimetables(timetables: TimetableModel[]): Observable<MessageResponse> {
+      return this.httpClient.post<MessageResponse>(Constants.saveTimetableUrl, timetables);
+   }
 
-  deleteTimetable(id: number): Observable<MessageResponse> {
-    return this.httpClient.delete<MessageResponse>(Constants.deleteTimetableUrl + id);
-  }
+   updateTimetable(timetable: TimetableModel): Observable<MessageResponse> {
+      return this.httpClient.post<MessageResponse>(Constants.updateTimetableUrl, timetable);
+   }
 
-  public getAllLectureTypes():
-    Observable<LectureTypeModel[]> {
-    return this.httpClient.get <LectureTypeModel[]>(Constants.allLectureTypesUrl);
-  }
+   deleteTimetable(id: number): Observable<MessageResponse> {
+      return this.httpClient.delete<MessageResponse>(Constants.deleteTimetableUrl + id);
+   }
 
-  public getStudentTimetables(studentId: number): Observable<TimetableModel[]> {
-    return this.httpClient.get <TimetableModel[]>(Constants.studentTimetablesUrl + studentId);
-  }
+   getTimetableById(id: number): Observable<MessageResponse> {
+      return this.httpClient.get<MessageResponse>(Constants.timetableByIdUrl + id);
+   }
+
+   public getAllLectureTypes():
+      Observable<LectureTypeModel[]> {
+      return this.httpClient.get <LectureTypeModel[]>(Constants.allLectureTypesUrl);
+   }
+
+   public getStudentTimetables(studentId: number): Observable<TimetableModel[]> {
+      return this.httpClient.get <TimetableModel[]>(Constants.studentTimetablesUrl + studentId);
+   }
 
 }

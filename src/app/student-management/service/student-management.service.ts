@@ -8,6 +8,7 @@ import {Sort} from '@angular/material/sort';
 import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
 import {UserModel} from '../../shared/model/security/user-model';
+import {StudentRecordModel} from "../../shared/model/student-management/student-record-model";
 
 export class UpdatePreviewData {
   st: StudentModel;
@@ -38,7 +39,16 @@ export class StudentManagementService {
     });
 
   }
+   searchRecords( page: number, limit: number, filter: StudentRequestModel): Observable<PageRequest<StudentRecordModel>>{
 
+      page++;
+      return this.httpClient.post<PageRequest<StudentRecordModel>>(Constants.filterStudentRecordUrl , filter, {
+         params: new HttpParams()
+            .set('page', page)
+            .set('limit', limit)
+      });
+
+   }
   constructStudentRequestObject(sort: Sort, studentRequestModel: StudentRequestModel): StudentRequestModel {
     if (sort.direction === 'asc') {
       studentRequestModel.sortDirection = Constants.ASC;
@@ -70,7 +80,9 @@ updateStudent(student: StudentModel): Observable < MessageResponse > {
   deleteStudent(id: number): Observable<MessageResponse> {
     return this.httpClient.delete<MessageResponse>(Constants.deleteStudentUrl + id);
   }
-
+   getStudent(id: number): Observable<StudentModel> {
+      return this.httpClient.get<StudentModel>(Constants.getStudentUrl + id);
+   }
   upload(selectedFile: File, name: string): Observable<string[]> {
     const uploadImageData = new FormData();
     uploadImageData.append('files', selectedFile, name);
