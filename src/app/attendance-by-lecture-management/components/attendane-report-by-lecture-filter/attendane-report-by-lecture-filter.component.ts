@@ -51,7 +51,12 @@ export class AttendaneReportByLectureFilterComponent implements OnInit {
               {
                 console.log(Response);
               })
-          }
+              // this.lectureReportService.getsection(this.sectionSelect.value).subscribe(Response=>{
+               
+              //   console.log(Response.exercisesLectures);
+              // });
+            
+          }  
           this.attendanceFilterReport.filterSection=value;
           this.lectureReportService.attendanceReportByLectureFilterEvent.next(this.attendanceReportRequest)
         })

@@ -37,8 +37,12 @@ public getAllsections():
 Observable<SectionModel[]> {
 return this.http.get <SectionModel[]>(Constants.getSections);
 }
-public getStudentAttendanceReport(lectureId : number):Observable<AttendanceReportByLectureManagementModel[]>{
-  return this.http.get <AttendanceReportByLectureManagementModel[]>(`${Constants.studentAttendanceReport}/${lectureId}`);
+public getsection(id:number):Observable<SectionModel>{
+  return this.http.get <SectionModel>(`${Constants.getSection}/${id}`);
+
+}
+public getStudentAttendanceReport(lectureId : number):Observable<AttendanceDetailsModel[]>{
+  return this.http.get <AttendanceDetailsModel[]>(`${Constants.studentAttendanceReport}/${lectureId}`);
 }
 editattendanceStatues(attendance :AttendanceDetailsModel) {
    return this.http.put(`${Constants.attendanceDetails}`,attendance);
