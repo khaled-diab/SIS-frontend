@@ -24,35 +24,35 @@ import { AttendaneReportByLectureService } from '../../service/attendane-report-
 export class AttendaneDetailsByLectureComponent implements OnInit {
   dataSource: MatTableDataSource<AttendanceDetailsModel>;
   tableData: AttendanceDetailsModel[];
-  attendancceReportRequest :AttendanceReportRequestModel=new AttendanceReportRequestModel();
-  displayedColumns = ['universityId', 'nameAr','attendanceStatus', 'Actions'];
-  universityId: number[]=[];
-  nameAr: string[]=[];
-  attendanceStatus: string[]=[];
-  dataPur:any[] = [];
+  attendancceReportRequest: AttendanceReportRequestModel = new AttendanceReportRequestModel();
+  displayedColumns = ['universityId', 'nameAr', 'attendanceStatus', 'Actions'];
+  universityId: number[] = [];
+  nameAr: string[] = [];
+  attendanceStatus: string[] = [];
+  dataPur: any[] = [];
   pageIndex = 1;
   defaultPageSize = 10;
-  lectureId=0;
-  coursename='';
-  date:string;
-  from:Time;
-  to:Time;
+  lectureId = 0;
+  coursename = '';
+  date: string;
+  from: Time;
+  to: Time;
 //  colors = [{ attendanceStatus: "absent", color: "red" }, { attendanceStatus: "present", color: "green" }]
-  isSmallScreen : boolean;
+  isSmallScreen: boolean;
   subscriptionsList: Subscription[] = [];
   attendanceReportByLecture = new AttendanceReportByLectureManagementModel();
-  attendanceReport : AttendanceReportByLectureManagementModel[];
-  attendaceReportModdel=new AttendanceDetailsModel();
-  subscription:Subscription;
-  attendanceDetails:AttendanceDetailsModel;
+  attendanceReport: AttendanceReportByLectureManagementModel[];
+  attendaceReportModdel = new AttendanceDetailsModel();
+  subscription: Subscription;
+  attendanceDetails: AttendanceDetailsModel;
   data: AttendanceReportByLectureManagementModel;
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
     if (this.dataSource) {
       this.dataSource.paginator = value;
     }
-  } 
-  
+  }
+
   // @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
   @ViewChild(MatSort, {static: false})
@@ -61,56 +61,56 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
       this.dataSource.sort = value;
     }
   }
-  constructor(private lectureReportService : AttendaneReportByLectureService,
-    private snackBar: MatSnackBar,
-    private router: Router,
-    public dialog: MatDialog,
-    private changeDetectorRef:ChangeDetectorRef,
-    private breakpointObserver: BreakpointObserver,
+  constructor(private lectureReportService: AttendaneReportByLectureService,
+              private snackBar: MatSnackBar,
+              private router: Router,
+              public dialog: MatDialog,
+              private changeDetectorRef: ChangeDetectorRef,
+              private breakpointObserver: BreakpointObserver,
     ) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>();
     this.Subscription();
-    
+
 }
 
-private Subscription():Subscription[]{
+private Subscription(): Subscription[]{
   // this.subscriptionsList.push(this.filterEventSubscription());
   this.subscriptionsList.push(this.initialDataSubscription());
   return this.subscriptionsList;
 }
-private filterEventSubscription():Subscription{
+private filterEventSubscription(): Subscription{
   return this.lectureReportService.attendanceDetailsByLectureFilterEvent.subscribe(
-    value=>{this.attendancceReportRequest=value;
-      this.lectureId=value;
-      console.log(this.attendancceReportRequest.lectureId);
-  this.lectureReportService.getStudentAttendanceReport(this.attendancceReportRequest.lectureId)
-  .subscribe(Report=>
+    value => {this.attendancceReportRequest = value;
+              this.lectureId = value;
+              console.log(this.attendancceReportRequest.lectureId);
+              this.lectureReportService.getStudentAttendanceReport(this.attendancceReportRequest.lectureId)
+  .subscribe(Report =>
     {
-      this.dataPur=Report;
-      for(let i=0;i<this.dataPur.length;i++){
+      this.dataPur = Report;
+      for (let i = 0; i < this.dataPur.length; i++){
         this.universityId.push(this.dataPur[i].attendanceDetailsDTOs.universityId);
         this.nameAr.push(this.dataPur[i].attendanceDetailsDTOs.nameAr);
         this.attendanceStatus.push(this.dataPur[i].attendanceDetailsDTOs.attendanceStatus);
         console.log(this.dataPur);
       }
-    }) 
+    });
   }
   );
 }
 
-private initialDataSubscription():Subscription { 
+private initialDataSubscription(): Subscription {
   return this.lectureReportService.getStudentAttendanceReport(1).subscribe(Report => {
-    this.dataPur=Report;
-    for(let i=0;i<this.dataPur.length;i++){
+    this.dataPur = Report;
+    for (let i = 0; i < this.dataPur.length; i++){
       this.universityId[i] = this.dataPur[i].attendanceDetailsDTOs.universityId;
-      this.nameAr[i]=this.dataPur[i].attendanceDetailsDTOs.nameAr;
-      this.attendanceStatus[i]=this.dataPur[i].attendanceDetailsDTOs.attendanceStatus;
+      this.nameAr[i] = this.dataPur[i].attendanceDetailsDTOs.nameAr;
+      this.attendanceStatus[i] = this.dataPur[i].attendanceDetailsDTOs.attendanceStatus;
     }
   });
 }
-edit(details : AttendanceDetailsModel){
+edit(details: AttendanceDetailsModel){
   if (this.isSmallScreen) {
     this.router.navigateByUrl('/attendancereportsbylecture-management/edit-status', {state: details}).then(_ => console.log());
   } else {
@@ -120,7 +120,7 @@ edit(details : AttendanceDetailsModel){
       if (e !== 'Cancel') {
         this.snackBar.open('Attendance Statues Edited Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
         console.log('here');
-         this.filterEventSubscription();
+        this.filterEventSubscription();
       }
       },
      error => {
