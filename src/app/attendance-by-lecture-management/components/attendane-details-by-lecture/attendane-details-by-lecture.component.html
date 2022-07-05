@@ -15,7 +15,7 @@
           
   </div>
       <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-        <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
+        <mat-table [dataSource]="dataPur" aria-label="Elements" matSort>
   
     
           <ng-container matColumnDef="universityId">
@@ -74,7 +74,6 @@
                        aria-label="Select page">
         </mat-paginator>
       </div>
-      <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
     </div>
     
     <mat-menu #menu="matMenu">

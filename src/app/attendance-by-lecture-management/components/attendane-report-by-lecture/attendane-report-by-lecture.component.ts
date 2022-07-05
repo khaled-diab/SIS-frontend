@@ -25,9 +25,9 @@ export class AttendaneReportByLectureComponent implements OnInit {
   displayedColumns = ['lectureDate', 'lectureStartTime','lectureEndTime','attendancenumber'
   ,'absentNumber','rate','Actions'];
   LectureNumber=0;
-  attendanceRate=0;
   totalLectures=0;
   totalRate=0;
+  attendanceRate :number; 
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -65,8 +65,7 @@ export class AttendaneReportByLectureComponent implements OnInit {
   }
   private subscriptions(): Subscription[] {
     this.subscriptionsList.push(this.filterEventSubscription());
-    // this.subscriptionsList.push(this.initialDataSubscription());
-    return this.subscriptionsList;
+   return this.subscriptionsList;
   }
   private filterEventSubscription(): Subscription {
     return this.lectureReportService.attendanceReportByLectureFilterEvent
@@ -85,16 +84,26 @@ export class AttendaneReportByLectureComponent implements OnInit {
          
             }});
           this.lectureReportService.getlectureReport(this.attendanceReportRequest.filterSection)
-          .subscribe(Response=>{
-            for (let i = 0; i < Response.length; i++) {
-          this.totalRate= Response[i].rate;
-          this.attendanceRate=this.totalRate/this.LectureNumber;
-          this.totalLectures=this.attendanceReportByLecture.sectionDTO.exercisesLectures+
-          this.attendanceReportByLecture.sectionDTO.practicalLectures
-          +this.attendanceReportByLecture.sectionDTO.theoreticalLectures;           
+          .subscribe(value=>{
+            for (let i = 0; i < value.length; i++) {
+          this.totalRate += value[i].rate;
+          console.log("total Rate"+this.totalRate);  
+
             }
           });
-          
+          this.lectureReportService.getsection(this.attendanceReportRequest.filterSection)
+          .subscribe(Response=>{
+     
+            this.totalLectures=Response.exercisesLectures+Response.theoreticalLectures
+            +Response.practicalLectures;
+          console.log(this.totalLectures);
+          console.log(Response.exercisesLectures);
+          this.attendanceRate = Math.floor((this.totalRate/this.totalLectures));
+          console.log(this.totalRate);
+          console.log(this.attendanceRate);
+
+          });
+         
         });
     });
   }

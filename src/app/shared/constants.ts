@@ -39,6 +39,7 @@ export class Constants {
 
   // Section URLs
   public static readonly getSections = environment.baseURL + '/sections/all';
+  public static readonly getSection = environment.baseURL + '/sections';
   public static readonly sectionPageUrl = environment.baseURL + '/sections/datapage';
   public static readonly searchSectionUrl = environment.baseURL + '/sections/search/';
   public static readonly saveSectionUrl = environment.baseURL + '/sections/save';
