@@ -6,16 +6,13 @@ import { StudentModel } from "../student-management/student-model";
 
 export class AttendanceReportByLectureManagementModel {
 
-    lectureDTO  : LectureModel;
-    sectionDTO :SectionModel;
-    studentDTO : StudentModel;
-    courseDTO : CourseModel;
-    attendanceDate: Date;
-    attendanceStatus:string;
+    id:number;
+    lectureDay : string;
+    lectureDate: Date;
     lectureStartTime: Time;
-    attendancenumber:number;
-    absentNumber:number;
-    excuse:number;
+    presentStudent:number;
+    absentStudent:number;
     lectureEndTime: Time;
+    rate:number;
 
 }

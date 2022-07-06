@@ -15,11 +15,11 @@
           <mat-cell *matCellDef="let row; let i=index">{{i+1}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="code">
+        <!-- <ng-container matColumnDef="code">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Code
           </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
-        </ng-container>
+        </ng-container> -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Name
           </mat-header-cell>
@@ -39,12 +39,12 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.end_date}}</mat-cell>
         </ng-container>
-        <!-- Name Column -->
-
-        <!-- Capacity -->
-
-
-        <!-- Department -->
+        
+        <ng-container matColumnDef="academic_year">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Academic Year
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.academicYearDTO.name}}</mat-cell>
+        </ng-container>
 
 
         <ng-container matColumnDef="Actions">

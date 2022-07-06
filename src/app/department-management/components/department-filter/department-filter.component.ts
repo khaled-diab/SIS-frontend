@@ -13,7 +13,7 @@ import { DepartmentService } from '../../service/department.service';
 export class DepartmentFilterComponent implements OnInit {
   departmentRequestModel: DepartmentRequestModel = new DepartmentRequestModel();
   searchValue = '';
-  filterCollege: number;
+  filterCollege: null;
   colleges: CollegeModel[];
   @ViewChild('collegeSelect', {static: true})  collegeSelect: MatSelect;
   constructor(private department: DepartmentService,
@@ -30,6 +30,8 @@ export class DepartmentFilterComponent implements OnInit {
   }
 
   resetFilter(): void {
+    this.collegeSelect.value = undefined;
+    this.searchValue = '';
     this.department.departmentFilterEvent.next(['', null]);
   }
 

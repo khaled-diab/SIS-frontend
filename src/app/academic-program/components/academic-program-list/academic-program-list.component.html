@@ -36,6 +36,18 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.name_en}}</mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="department">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Department
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.departmentDTO.nameEn}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="college">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>College
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.collegeDTO.nameEn}}</mat-cell>
+      </ng-container>
    
 
       <ng-container matColumnDef="Actions">

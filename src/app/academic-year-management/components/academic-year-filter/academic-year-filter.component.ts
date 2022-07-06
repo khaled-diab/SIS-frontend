@@ -20,5 +20,9 @@ export class AcademicYearFilterComponent implements OnInit {
     this.service.academicYearFilterEvent.next([this.searchValue]);
 
   }
+  resetFilter(){
+  this.searchValue = ' ';
+  this.service.academicYearFilterEvent.next(['']);
+  }
 
 }

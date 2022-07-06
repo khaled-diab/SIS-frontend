@@ -1,1 +1,16 @@
-<p>attendane-report-by-student-filter works!</p>
+<mat-card class="mat-elevation-z8">
+    <div class="container">
+      <form class="form-row form">
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field appearance="outline"   >
+            <mat-label>Courses</mat-label>
+            <mat-select #sectionSelect  required>
+              <mat-option *ngFor="let section of sections" [value]="section.id">
+                {{section.courseDTO.nameEn+': Section '+section.sectionNumber}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+      </form>
+    </div>
+  </mat-card>

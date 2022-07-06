@@ -201,14 +201,15 @@
             </span>
           </a>
         </li>
-        <!-- <li [routerLinkActive]="['active']"
+        <li  [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
              [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
            <a>
              <span>
                Attendance Report By Student
              </span>
            </a>
-         </li>-->
+         </li>
 
       </ul>
     </mat-expansion-panel>

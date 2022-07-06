@@ -96,11 +96,8 @@ export class AttendaneReportByLectureComponent implements OnInit {
      
             this.totalLectures=Response.exercisesLectures+Response.theoreticalLectures
             +Response.practicalLectures;
-          console.log(this.totalLectures);
-          console.log(Response.exercisesLectures);
-          this.attendanceRate = Math.floor((this.totalRate/this.totalLectures));
-          console.log(this.totalRate);
-          console.log(this.attendanceRate);
+         
+          this.attendanceRate = Math.floor((this.totalRate/this.totalLectures)*100);
 
           });
          

@@ -22,7 +22,7 @@ import { AttendaneReportByLectureService } from '../../service/attendane-report-
   styleUrls: ['./attendane-details-by-lecture.component.css']
 })
 export class AttendaneDetailsByLectureComponent implements OnInit {
-  dataSource: MatTableDataSource<AttendanceDetailsModel>;
+  dataSource: MatTableDataSource<any>;
   tableData: AttendanceDetailsModel[];
   attendancceReportRequest :AttendanceReportRequestModel=new AttendanceReportRequestModel();
   displayedColumns = ['universityId', 'nameAr','attendanceStatus', 'Actions'];
@@ -70,45 +70,45 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>();
-    this.Subscription();
+    // this.dataSource = new MatTableDataSource<any>();
+    // this.Subscription();
     
+}
+ngAfterViewInit(): void {
+  this.dataSource = new MatTableDataSource<any>();
+  this.Subscription();
 }
 
 private Subscription():Subscription[]{
-  // this.subscriptionsList.push(this.filterEventSubscription());
-  this.subscriptionsList.push(this.initialDataSubscription());
+  // this.subscriptionsList.push(this.initialDataSubscription());
+  this.subscriptionsList.push(this.filterEventSubscription());
   return this.subscriptionsList;
 }
-private filterEventSubscription():Subscription{
+private filterEventSubscription(): Subscription{
   return this.lectureReportService.attendanceDetailsByLectureFilterEvent.subscribe(
     value=>{this.attendancceReportRequest=value;
-      this.lectureId=value;
+      this.lectureId=this.attendancceReportRequest.lectureId;
       console.log(this.attendancceReportRequest.lectureId);
-  this.lectureReportService.getStudentAttendanceReport(this.attendancceReportRequest.lectureId)
-  .subscribe(Report=>
-    {
-      this.dataPur=Report;
-      for(let i=0;i<this.dataPur.length;i++){
-        this.universityId.push(this.dataPur[i].attendanceDetailsDTOs.universityId);
-        this.nameAr.push(this.dataPur[i].attendanceDetailsDTOs.nameAr);
-        this.attendanceStatus.push(this.dataPur[i].attendanceDetailsDTOs.attendanceStatus);
-        console.log(this.dataPur);
-      }
-    }) 
-  }
-  );
+      return this.lectureReportService.getStudentAttendanceReport
+      (this.attendancceReportRequest.lectureId).subscribe(Report=>{
+         this.tableData=Report.attendanceDetailsDTOs;
+          this.dataSource.data=this.tableData;
+          console.log(this.tableData)
+     } ) }
+   );
 }
 
-private initialDataSubscription():Subscription { 
-  return this.lectureReportService.getStudentAttendanceReport(1).subscribe(Report => {
-    this.dataPur=Report;
-    for(let i=0;i<this.dataPur.length;i++){
-      this.universityId[i] = this.dataPur[i].attendanceDetailsDTOs.universityId;
-      this.nameAr[i]=this.dataPur[i].attendanceDetailsDTOs.nameAr;
-      this.attendanceStatus[i]=this.dataPur[i].attendanceDetailsDTOs.attendanceStatus;
-    }
-  });
+private initialDataSubscription() : Subscription{
+  return this.lectureReportService.getStudentAttendanceReport(this.attendancceReportRequest.lectureId).subscribe(Report=>
+    {
+      console.log(this.attendancceReportRequest.lectureId);
+        this.tableData=Report.attendanceDetailsDTOs;
+        this.dataSource.data=this.tableData;
+        console.log(this.tableData)   
+      
+     
+     
+    })
 }
 edit(details : AttendanceDetailsModel){
   if (this.isSmallScreen) {
