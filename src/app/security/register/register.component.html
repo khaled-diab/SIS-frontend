@@ -1,9 +1,16 @@
 <p-toast position="bottom-center"></p-toast>
 <div class="login-page">
-   <div class="login">
+   <div class="logo-box">
       <div class="container">
-         <form #form="ngForm" class="example-form">
-            <mat-form-field appearance="outline" class="example-full-width">
+         <div class="logo-img">
+            <img src="./assets/logo.svg" alt=""/>
+         </div>
+      </div>
+   </div>
+   <div class="login-form">
+      <div class="container">
+         <form #form="ngForm" class="form-row">
+            <mat-form-field appearance="outline" class="example-full-width col-md-12">
                <mat-label>Select User Type</mat-label>
                <mat-select #type="ngModel" [(ngModel)]="userType" name="type" required>
                   <mat-option value="STAFF">Staff Member</mat-option>
@@ -11,39 +18,49 @@
                </mat-select>
                <mat-error *ngIf="type.invalid ">Field Required</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline" class="example-full-width col-md-12">
                <mat-label>National ID</mat-label>
                <input #nationalID="ngModel" [(ngModel)]="registerModel.nationalityID" matInput name="nationalID"
                       required>
                <mat-error *ngIf="nationalID.invalid ">Field Required</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline" class="example-full-width col-md-12">
+               <mat-label>English Name</mat-label>
+               <input #englishName="ngModel" [(ngModel)]="registerModel.englishName" matInput name="englishName" required>
+               <mat-error *ngIf="englishName.invalid ">Field Required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width col-md-12">
+               <mat-label>Birth Date</mat-label>
+               <input #birthDate="ngModel" [(ngModel)]="registerModel.birthDate" matInput [matDatepicker]="dp3" disabled required>
+               <mat-hint>MM/DD/YYYY</mat-hint>
+               <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+               <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+               <mat-error *ngIf="birthDate.invalid ">Field Required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width col-md-12">
                <mat-label>Email</mat-label>
                <input #Email="ngModel" [(ngModel)]="registerModel.email" email matInput name="Email" required
                       type="email">
                <mat-error *ngIf="Email.errors?.required ">Field Required</mat-error>
                <mat-error *ngIf="Email.errors?.email && !Email.errors?.required">Enter valid email</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline" class="example-full-width col-md-12">
                <mat-label>password</mat-label>
                <input #password="ngModel" [(ngModel)]="registerModel.password" matInput name="password" required
-                      type="password">
-               <mat-error *ngIf="password.invalid ">Field Required</mat-error>
+                      type="password"/>
+               <mat-error *ngIf="password.invalid">Field Required</mat-error>
             </mat-form-field>
-            <div class="d-flex justify-content-end">
-               <div class="col-3 align-content-center">
-                  <small class="form-text text-muted align-content-center" id="emailHelp1"><a routerLink="/login">go to
-                     login!</a></small>
-               </div>
-               <div class="col-2 align-content-center">
-                  <button (click)="register()" [disabled]="form.invalid" class="mainButton" mat-raised-button>
-                     Register
-                  </button>
-               </div>
-            </div>
+            <button (click)="register()" [disabled]="form.invalid" class="btn btn-primary">
+               Register
+            </button>
+            <small class="form-text text-muted" id="emailHelp1">
+               Don't have an account?<a routerLink="/login"> Sign up</a>
+            </small>
          </form>
       </div>
    </div>
 </div>
+
+
 
 

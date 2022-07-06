@@ -14,12 +14,11 @@ export class ProfileService {
   constructor(private http: HttpClient) {
   }
 
-  public uploadProfilePicture(event: any, email: string, id: string): Observable<MessageResponse> {
+  public uploadProfilePicture(event: any, email: string): Observable<MessageResponse> {
     const file: File = event.files.pop();
     const formData = new FormData();
     formData.append('file', file, file.name.replaceAll('-', ''));
     formData.append('email', email);
-    formData.append('userID', id);
     return this.http.post<MessageResponse>(Constants.uploadProfilePicture, formData);
   }
 }

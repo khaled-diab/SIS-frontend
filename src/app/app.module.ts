@@ -31,45 +31,49 @@ import {ButtonModule} from 'primeng/button';
 import {MessageService} from 'primeng/api';
 import {ImageModule} from 'primeng/image';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    NotFoundComponent,
-    NavMenuComponent,
-    SideMenuComponent,
-    NavBarComponent,
-    LoginComponent,
-    RegisterComponent,
-    UploadUsersComponent,
-    ProfileComponent
-  ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatExpansionModule,
-        MatInputModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        MatSnackBarModule,
-        FormsModule,
-        FileUploadModule,
-        ToastModule,
-        ButtonModule,
-        ImageModule,
-        MatSelectModule,
-    ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService],
-  bootstrap: [AppComponent],
+   declarations: [
+      AppComponent,
+      NavComponent,
+      NotFoundComponent,
+      NavMenuComponent,
+      SideMenuComponent,
+      NavBarComponent,
+      LoginComponent,
+      RegisterComponent,
+      UploadUsersComponent,
+      ProfileComponent
+   ],
+   imports: [
+      AppRoutingModule,
+      BrowserModule,
+      BrowserAnimationsModule,
+      LayoutModule,
+      MatToolbarModule,
+      MatButtonModule,
+      MatSidenavModule,
+      MatIconModule,
+      MatListModule,
+      MatExpansionModule,
+      MatInputModule,
+      MatFormFieldModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      MatSnackBarModule,
+      FormsModule,
+      FileUploadModule,
+      ToastModule,
+      ButtonModule,
+      ImageModule,
+      MatSelectModule,
+      MatDatepickerModule,
+      MatNativeDateModule
+   ],
+   providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+   bootstrap: [AppComponent],
 })
 export class AppModule {
 }

@@ -1,67 +1,79 @@
-/**{*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  box-sizing: border-box;*/
-/*}*/
-/*body{*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  background: #EEE;*/
-/*}*/
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+body{
+   margin: 0;
+   padding: 0;
+}
 
-.login-page .login {
+.login-page {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+}
+.login-page .logo-box{
+   margin: 5em auto;
+}
+.login-page .logo-box img{
+   width: 150px;
+}
+
+.login-form {
    padding: 1.75em;
-   width: 40%;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   background: #FFF;
-   border-radius: 5px;
-   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+   width: 45%;
+   background: #EEE;
+   border-radius: 10px;
+   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 3px 3px 30px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 500px) and (max-width: 799px){
+   .login-form {
+      width: 65%;
+   }
+}
+@media (min-width: 200px) and (max-width: 499px){
+   .login-form {
+      width: 80%;
+   }
 }
 
-.login-page .login label {
-   margin-bottom: 2px
+.mat-form-field-wrapper{
+   background-color: #FFF;
+
+}
+.login-page .login-form label {
+   margin-bottom: 3px
 }
 
-/*.login-page .login input{*/
-/*  border: none;*/
-/*  border-bottom: 1px solid #003147;*/
-/*  outline: none;*/
-/*  box-shadow: none;*/
-/*}*/
-
-.login-page .login .btn {
+.login-page .login-form .btn {
    width: 100%;
+   height: 50px;
    background: #003147;
    color: #FFF;
+   font-weight: bold;
+   letter-spacing: 1px;
+   cursor: pointer;
+   border-radius: 7px;
+   border: 1px solid #003147;
 }
 
-.login-page .login .btn:hover {
-   background: #FFF;
-   border: 1px solid #003147;
-   transition: all 0.2s;
+.login-page .login-form .btn:hover {
+   background: transparent;
+   border: 2px solid #003147;
+   transition: all 0.5s;
    color: #003147
 }
+.login-form small {
+   margin: 10px 0 10px 5px;
+   font-size: 16px;
+   color: #232323;
 
-.login-page .login p {
-   margin-top: 20px;
 }
-
-.login-page .login p a {
+.login-form small a{
+   font-weight: bold;
    color: #003147;
-   font-size: 14px;
+   text-decoration: none;
 }
 
-
-.example-form {
-   min-width: 150px;
-   max-width: 500px;
-   width: 100%;
-}
-
-.example-full-width {
-   width: 100%;
-   margin: 20px;
-}

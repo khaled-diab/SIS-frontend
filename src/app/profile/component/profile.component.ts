@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadPhoto(event: any): void {
-    this.profileService.uploadProfilePicture(event, this.loggedInUser.user.email, this.loggedInUser.user.id.toString()).subscribe(response => {
+    this.profileService.uploadProfilePicture(event, this.loggedInUser.user.email).subscribe(response => {
       const profilePicture = new UserFile(response.message, null, Constants.FILE_TYPE_PROFILE_PICTURE, null);
       if (this.loggedInUser.user.userFileList.length === 0) {
         this.loggedInUser.user.userFileList.push(profilePicture);
