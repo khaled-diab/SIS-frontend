@@ -20,9 +20,7 @@ export class AttendaneReportByLectureService {
   sectionINFO : SectionModel=new SectionModel();
   static sectionList: SectionModel[];
   constructor(private http:HttpClient) { }
-// readonly studentAttendanceReport = 'http://localhost:8080/api/attendanceDetails/getAttendancesByLectureId';
-// readonly lecturesReport='http://localhost:8080/api/lectures/getFacultyMemberLecturesToReport';
-// readonly attendanceDetails='http://localhost:8080/api/attendanceDetails/update';
+
 attendaceReportModdel:AttendanceDetailsModel=new AttendanceDetailsModel();
 studentAttendance : AttendanceReportByLectureManagementModel=new AttendanceReportByLectureManagementModel()
 public getAllCourses():
@@ -41,8 +39,8 @@ public getsection(id:number):Observable<SectionModel>{
   return this.http.get <SectionModel>(`${Constants.getSection}/${id}`);
 
 }
-public getStudentAttendanceReport(lectureId : number):Observable<AttendanceDetailsModel[]>{
-  return this.http.get <AttendanceDetailsModel[]>(`${Constants.studentAttendanceReport}/${lectureId}`);
+public getStudentAttendanceReport(lectureId : number):Observable<any>{
+  return this.http.get <any>(`${Constants.studentAttendanceReport}/${lectureId}`);
 }
 editattendanceStatues(attendance :AttendanceDetailsModel) {
    return this.http.put(`${Constants.attendanceDetails}`,attendance);

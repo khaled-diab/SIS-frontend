@@ -15,20 +15,20 @@
           
   </div>
       <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-        <mat-table [dataSource]="dataPur" aria-label="Elements" matSort>
+        <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
   
     
           <ng-container matColumnDef="universityId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>University Id
            
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.studentDTO.universityId}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.universityId}}</mat-cell>
           </ng-container>
     
           <ng-container matColumnDef="nameAr">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.studentDTO.nameAr}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
           </ng-container>
     
           <ng-container matColumnDef="attendanceStatus">
@@ -38,15 +38,7 @@
             [ngClass]="{'make-green': row.attendanceStatus=='present','make-red': row.attendanceStatus=='absent' }" >{{row.attendanceStatus}}</mat-cell>
           </ng-container>
          
-          <!-- <ng-container matColumnDef="attendanceStatus">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Status
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <mat-form-field>
-              <input mat-Input [value]="row.attendanceStatus" [(ngModel)]="row.attendanceStatus" >
-            </mat-form-field>
-            </mat-cell>
-          </ng-container> -->
+         
     
      
     

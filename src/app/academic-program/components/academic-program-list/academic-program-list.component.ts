@@ -24,7 +24,7 @@ import { DeleteAcademicProgramComponent } from '../delete-academic-program/delet
 export class AcademicProgramListComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   tableData: AcademicProgramModel[];
-  displayedColumns = ['No.', 'code', 'name_ar', 'name_en', 'Actions'];
+  displayedColumns = ['No.', 'code', 'name_ar', 'name_en','department','college', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -144,6 +144,15 @@ export class AcademicProgramListComponent implements OnInit {
             }else{
               this.filterValue = undefined;
             }
+            if (list[2]!== undefined) {
+              this.filterValue = list[2];
+              this.dataSource.data = this.dataSource.data.filter(value1 => {
+                return (value1.departmentDTO.id === list[2]);
+              });
+            }
+            else{
+              this.filterValue = undefined;
+            }
           });
         }
       });
@@ -156,6 +165,7 @@ export class AcademicProgramListComponent implements OnInit {
         this.tableData = value;
         this.dataSource.data = this.tableData;
         AcademicProgramService.academicProgramList = this.tableData;
+        console.log(this.tableData);
 
       });
   }
