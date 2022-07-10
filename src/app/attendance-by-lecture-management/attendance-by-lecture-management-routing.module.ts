@@ -28,7 +28,7 @@ const routes: Routes = [ {
     }
   },
   {
-    path: 'attendane-details-by-lecture',
+    path: 'attendane-details-by-lecture/:lectureId',
     component: AttendaneDetailsByLectureComponent,
     canActivate: [SecurityGuard],
     data: {
@@ -43,7 +43,7 @@ const routes: Routes = [ {
       name: 'edit-statues'
     }
   }
- 
+
 ]
 }];
 
