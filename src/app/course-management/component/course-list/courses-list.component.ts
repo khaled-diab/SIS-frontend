@@ -25,7 +25,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   @ViewChild('paginator') paginator: MatPaginator;
   tableData: PageRequest<CourseModel>;
   courseRequestModel: CourseRequestModel = new CourseRequestModel();
-  displayedColumns = ['No.', 'code', 'nameAr', 'nameEn', 'finalGrade', 'college', 'department', 'Actions'];
+  displayedColumns = ['No.', 'code', 'nameAr', 'nameEn', 'department', 'college', 'Actions'];
   pageIndex = 1;
   defaultPgeSize = 10;
   subscriptionList: Subscription[] = [];
