@@ -1,6 +1,13 @@
+<p-toast position="bottom-center"></p-toast>
 <div class="p-3">
    <app-student-filter></app-student-filter>
    <div class="d-flex justify-content-end mt-3">
+      <div class="col-1">
+         <input type="file" style="display: none" (change)="uploadBulkStudents($event)" #file accept=".xlsx, .xls">
+         <button (click)="file.click()" class="align-content-center" mat-icon-button>
+            <mat-icon class="add" matTooltip="upload Bulk Students" matTooltipPosition="above">upload_file</mat-icon>
+         </button>
+      </div>
       <div class="col-1">
          <button (click)="addStudent()" class="align-content-center" mat-icon-button>
             <mat-icon class="add" matTooltip="Add Student" matTooltipPosition="above">add_circle</mat-icon>
@@ -8,11 +15,11 @@
       </div>
    </div>
    <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-      <mat-table  (matSortChange)="sortEvent($event)" [dataSource]="tableData.data" aria-label="Elements" matSort>
+      <mat-table (matSortChange)="sortEvent($event)" [dataSource]="tableData.data" aria-label="Elements" matSort>
          <!-- Number Column -->
-         <ng-container matColumnDef="NO."  >
-            <mat-header-cell *matHeaderCellDef  >No.</mat-header-cell>
-            <mat-cell [attr.colspan]="3"*matCellDef="let row; let i=index">{{i+1}}</mat-cell>
+         <ng-container matColumnDef="NO.">
+            <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+            <mat-cell [attr.colspan]="3" *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
          </ng-container>
 
          <!-- Id Column -->
@@ -62,14 +69,14 @@
             <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
             <mat-cell *matCellDef="let row">
                <div class="options">
-                  <button (click)="updateOrPreviewStudent(row,2)"  mat-icon-button>
+                  <button (click)="updateOrPreviewStudent(row,2)" mat-icon-button>
                      <mat-icon class="eye">visibility</mat-icon>
                   </button>
                   <button mat-icon-button>
                      <mat-icon class="user-edit" (click)="updateOrPreviewStudent(row,1)">edit</mat-icon>
                   </button>
-                  <button  (click)="deleteStudent(row)" mat-icon-button>
-                     <mat-icon  class="user-times">delete</mat-icon>
+                  <button (click)="deleteStudent(row)" mat-icon-button>
+                     <mat-icon class="user-times">delete</mat-icon>
                   </button>
                </div>
             </mat-cell>

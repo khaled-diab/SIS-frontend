@@ -15,14 +15,14 @@ import {Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {StudentRecordModel} from '../../../shared/model/student-management/student-record-model';
+import {MessageService} from 'primeng/api';
 
 @Component({
    selector: 'app-students-list',
    templateUrl: './students-list.component.html',
    styleUrls: ['./students-list.component.css']
 })
-export class StudentsListComponent implements OnInit , OnDestroy{
-
+export class StudentsListComponent implements OnInit, OnDestroy {
 
 
    @ViewChild('paginator') paginator: MatPaginator;
@@ -30,7 +30,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
    tableData: PageRequest<StudentRecordModel>;
    x: number;
    studentRequestModel: StudentRequestModel = new StudentRequestModel();
-   displayedColumns = ['NO.', 'universityId', 'nameAr',  'collegeId', 'departmentId', 'year', 'Actions'];
+   displayedColumns = ['NO.', 'universityId', 'nameAr', 'collegeId', 'departmentId', 'year', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    department: string;
@@ -42,19 +42,19 @@ export class StudentsListComponent implements OnInit , OnDestroy{
                private dialog: MatDialog,
                private modalService: BsModalService,
                private snackBar: MatSnackBar,
-               private route: Router, ){}
-
-
-
-   addStudent(): void{
-      this.route.navigate(['/students-management', 'student-add']);
+               private route: Router, private messageService: MessageService) {
    }
 
+
+   addStudent(): void {
+      this.route.navigate(['/students-management', 'student-add']);
+   }
 
 
    ngOnInit(): void {
       this.subs = this.subscriptions();
    }
+
    pageChangeEvent(event: PageEvent): void {
       this.studentManagementService.searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
          .subscribe(value => {
@@ -77,7 +77,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
          .subscribe(value => {
             this.studentRequestModel = value;
             this.paginator.pageIndex = 0;
-            this.studentManagementService.searchRecords( this.paginator.pageIndex , this.paginator.pageSize, this.studentRequestModel)
+            this.studentManagementService.searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
                .subscribe(filteredData => {
                   this.tableData = filteredData;
                });
@@ -89,7 +89,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
       const filter = new StudentRequestModel();
 
       return this.studentManagementService
-         .searchRecords( 0, this.defaultPgeSize, filter).subscribe(value => {
+         .searchRecords(0, this.defaultPgeSize, filter).subscribe(value => {
 
             this.tableData = value;
             console.log(value);
@@ -99,7 +99,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
    sortEvent($event: Sort): void {
       this.studentRequestModel = this.studentManagementService.constructStudentRequestObject($event, this.studentRequestModel);
       this.paginator.pageIndex = 0;
-      this.studentManagementService.searchRecords( this.paginator.pageIndex , this.paginator.pageSize, this.studentRequestModel).subscribe(value => {
+      this.studentManagementService.searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel).subscribe(value => {
          this.tableData = value;
       });
    }
@@ -111,6 +111,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
             this.tableData = value;
          });
    }
+
    private handleSuccessfulDeletion(): void {
 
       this.refreshStudents();
@@ -127,10 +128,12 @@ export class StudentsListComponent implements OnInit , OnDestroy{
    private handleFailedDeletion(): void {
       this.snackBar.open('Student Deletion Failed', undefined, {duration: 2000});
    }
+
    deleteStudent(row: StudentModel): void {
-      this.modalRefDelete = this.modalService.show( DeleteStudentModalComponent, { backdrop: 'static', ignoreBackdropClick: true, keyboard: false});
+      this.modalRefDelete = this.modalService.show(DeleteStudentModalComponent, {backdrop: 'static', ignoreBackdropClick: true, keyboard: false});
       this.modalRefDelete.content.id = row.id;
    }
+
    private deleteStudentEventSubscription(): Subscription {
       return this.studentManagementService.studentDeleteEvent.subscribe(id => {
          this.studentManagementService.deleteStudent(id).subscribe(value => {
@@ -140,19 +143,20 @@ export class StudentsListComponent implements OnInit , OnDestroy{
          });
       });
    }
+
    updateOrPreviewStudent(row: StudentRecordModel, selection: number): void {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '60%';
       dialogConfig.height = '800px';
-      const data = new  UpdatePreviewData();
+      const data = new UpdatePreviewData();
       this.studentManagementService.getStudent(row.id).subscribe(value => {
          data.st = value;
          data.sel = selection;
          dialogConfig.data = data;
          this.dialog.open(UpdateStudentComponent, dialogConfig);
-         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(value => {
+         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(_ => {
                this.dialog.closeAll();
                this.refreshStudents();
             }
@@ -163,6 +167,14 @@ export class StudentsListComponent implements OnInit , OnDestroy{
 
    ngOnDestroy(): void {
       this.subs.forEach(sub => sub.unsubscribe());
+   }
+
+   uploadBulkStudents($event: any): void {
+      this.studentManagementService.uploadBulkStudents($event).subscribe(value => {
+         this.messageService.add({severity: 'success', summary: 'Success', detail: value.message});
+      }, _ => {
+         this.messageService.add({severity: 'error', summary: 'Error', detail: 'File could not be uploaded try again later'});
+      });
    }
 }
 

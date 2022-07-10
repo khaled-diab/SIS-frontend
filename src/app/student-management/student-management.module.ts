@@ -27,6 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {FileUploadModule} from 'primeng/fileupload';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -43,28 +45,30 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
     StudentsListComponent
 
   ],
-  imports: [
-    ModalModule.forRoot(),
-    MatSnackBarModule,
-    CommonModule,
-    MatCardModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    StudentManagementRoutingModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule,
-    ReactiveFormsModule,
-    MatDialogModule
-  ]
+   imports: [
+      ModalModule.forRoot(),
+      MatSnackBarModule,
+      CommonModule,
+      MatCardModule,
+      MatTableModule,
+      MatTooltipModule,
+      MatIconModule,
+      MatPaginatorModule,
+      MatProgressSpinnerModule,
+      MatMenuModule,
+      MatButtonModule,
+      RouterModule,
+      StudentManagementRoutingModule,
+      FormsModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      MatSortModule,
+      ReactiveFormsModule,
+      MatDialogModule,
+      FileUploadModule,
+      ToastModule
+   ]
 })
 export class StudentManagementModule {
 }

@@ -134,10 +134,10 @@ export class Constants {
    public static readonly downloadFileURL = environment.driveURL + 'download/';
    public static readonly uploadFileURL = environment.driveURL + 'upload/';
    public static readonly uploadProfilePicture = environment.baseURL + '/security/upload-profile-picture';
+   public static readonly UPLOAD_BULK_STUDENTS = environment.baseURL + '/security/register-bulk-students';
    public static readonly FORM_DATA_VALUE = 'multipart/form-data';
    public static readonly APP_JSON = 'application/json';
    public static readonly STUDENT_TYPE = 'STUDENT';
    public static readonly STAFF_TYPE = 'STAFF';
-
-
+   public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/upload';
 }
