@@ -141,6 +141,8 @@ export class StudentsListComponent implements OnInit , OnDestroy{
       });
    }
    updateOrPreviewStudent(row: StudentRecordModel, selection: number): void {
+
+
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -152,6 +154,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
          data.sel = selection;
          dialogConfig.data = data;
          this.dialog.open(UpdateStudentComponent, dialogConfig);
+
          this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(value => {
                this.dialog.closeAll();
                this.refreshStudents();

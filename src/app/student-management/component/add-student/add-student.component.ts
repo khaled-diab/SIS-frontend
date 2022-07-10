@@ -13,7 +13,7 @@ import {CollegeManagementService} from '../../../college-management/service/coll
 import {MatSelect} from '@angular/material/select';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {HttpClient} from '@angular/common/http';
-import {AcademicProgramService} from "../../../academic-program/service/academic-program.service";
+import {AcademicProgramService} from '../../../academic-program/service/academic-program.service';
 
 @Component({
    selector: 'app-add-student',
@@ -79,11 +79,11 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
             alternativeMail: new FormControl(undefined, Validators.email),
             parentPhone: new FormControl(undefined, Validators.pattern(Constants.DIGITS_ONLY_11)),
             level: new FormControl(undefined ),
-            year: new FormControl(undefined, Validators.required),
+            // year: new FormControl(undefined, Validators.required),
             photo: new FormControl(undefined ),
             collegeMenu: new FormControl(undefined, Validators.required),
-            departmentMenu: new FormControl(undefined, Validators.required),
-            programMenu: new FormControl(undefined, Validators.required),
+            departmentMenu: new FormControl(undefined),
+            programMenu: new FormControl(undefined),
 
          }
       );
@@ -117,7 +117,6 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    }
    add(): void {
       if (this.form.invalid){
-
       }
       if (this.form.valid) {
          this.student.nameEn = this.form.get('nameEn')?.value.trim();
@@ -132,9 +131,9 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.student.parentPhone = this.form.get('parentPhone')?.value;
          this.student.level = this.form.get('level')?.value;
          this.student.year = this.form.get('year')?.value;
-         this.student.departmentDTO = new DepartmentModel();
-         this.student.collegeDTO = new CollegeModel();
-         this.student.academicProgramDTO = new AcademicProgramModel();
+         // this.student.departmentDTO = new DepartmentModel();
+         // this.student.collegeDTO = new CollegeModel();
+         // this.student.academicProgramDTO = new AcademicProgramModel();
          this.student.collegeDTO = this.form.get('collegeMenu')?.value;
          this.student.departmentDTO = this.form.get('departmentMenu')?.value;
          this.student.academicProgramDTO = this.form.get('programMenu')?.value;
@@ -158,7 +157,9 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          }
          // );
 
+
          this.studentManagementService.addStudent(this.student).subscribe((Response) => {
+
                this.snackBar.open('Student Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
                this.route.navigate(['/students-management', 'student-list']);
             }, error => {

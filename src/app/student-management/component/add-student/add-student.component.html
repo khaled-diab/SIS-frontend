@@ -60,26 +60,51 @@
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Department</mat-label>
 
-                        <mat-select #departmentMenu formControlName="departmentMenu" required>
-                           <mat-option *ngIf="deptOption" [value]="1">
-                              None
-                           </mat-option>
+                        <mat-select #departmentMenu formControlName="departmentMenu" >
+<!--                           <mat-option *ngIf="deptOption" [value]="1">-->
+<!--                              None-->
+<!--                           </mat-option>-->
+                           <mat-option [value]="null">Choose Department</mat-option>
                            <mat-option *ngFor="let dept of departments" [value]="dept">
                               {{dept.nameEn}}
                            </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
 
                      </mat-form-field>
-                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
-                        <mat-label>Year</mat-label>
-                        <mat-select formControlName="year" required>
-                           <mat-option *ngFor="let year of years" [value]="year">
-                              {{year}}
+
+                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                        <mat-label>Academic Program</mat-label>
+                        <mat-select #programMenu formControlName="programMenu" >
+<!--                           <mat-option *ngIf="deptOption" [value]="1">-->
+<!--                              None-->
+<!--                           </mat-option>-->
+                           <mat-option [value]="-1">Choose Program</mat-option>
+                           <mat-option *ngFor="let program of programs" [value]="program">
+                              {{program.name_en}}
                            </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="form.get('year')?.errors?.required">Required</mat-error>
+
                      </mat-form-field>
+                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                        <mat-label>Level</mat-label>
+                        <mat-select #levelMenu formControlName="level" required>
+                           <mat-option *ngFor="let level of levels" [value]="level">
+                              {{level}}
+                           </mat-option>
+                        </mat-select>
+                        <input hidden>
+                        <mat-error *ngIf="form.get('level')?.errors?.required">Required</mat-error>
+
+                     </mat-form-field>
+<!--                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
+<!--                        <mat-label>Year</mat-label>-->
+<!--                        <mat-select formControlName="year" required>-->
+<!--                           <mat-option *ngFor="let year of years" [value]="year">-->
+<!--                              {{year}}-->
+<!--                           </mat-option>-->
+<!--                        </mat-select>-->
+<!--                        <mat-error *ngIf="form.get('year')?.errors?.required">Required</mat-error>-->
+<!--                     </mat-form-field>-->
 
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
@@ -89,6 +114,7 @@
                         <mat-error *ngIf="form.get('nationality')?.errors?.pattern">Invalid Nationality</mat-error>
                         <mat-error *ngIf="form.get('nationality')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
+
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label>National Id</mat-label>
                         <input #nationalId formControlName="nationalId" matInput name="nationalId" required>
@@ -97,12 +123,7 @@
                         <mat-error *ngIf="form.get('nationalId')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
-                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
-                        <mat-label> Birth Date</mat-label>
-                        <input #birthDate formControlName="birthDate" matInput name="birthDate" required type="date">
-                        <mat-error *ngIf="form.controls['birthDate']?.errors?.required"> Required</mat-error>
 
-                     </mat-form-field>
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>University Mail</mat-label>
                         <input #universityMail formControlName="universityMail" matInput name="universityMail" required
@@ -119,6 +140,12 @@
                            <hr>
                         </div>
                      </div>
+                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                        <mat-label> Birth Date</mat-label>
+                        <input #birthDate formControlName="birthDate" matInput name="birthDate" required type="date">
+                        <mat-error *ngIf="form.controls['birthDate']?.errors?.required"> Required</mat-error>
+
+                     </mat-form-field>
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label> Mobile Number</mat-label>
                         <input formControlName="phone" matInput required>
@@ -144,37 +171,11 @@
 
                      </mat-form-field>
 
-                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
-                        <mat-label>Academic Program</mat-label>
-                        <mat-select #programMenu formControlName="programMenu" required>
-                           <mat-option *ngIf="deptOption" [value]="1">
-                              None
-                           </mat-option>
-                           <mat-option *ngFor="let program of programs" [value]="program">
-                              {{program.name_en}}
-                           </mat-option>
-                        </mat-select>
-                        <input hidden>
-                        <mat-error *ngIf="form.get('programMenu')?.errors?.required">Required</mat-error>
-
-                     </mat-form-field>
-
-                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
-                        <mat-label>Level</mat-label>
-                        <mat-select #levelMenu formControlName="level" required>
-                           <mat-option *ngFor="let level of levels" [value]="level">
-                              {{level}}
-                           </mat-option>
-                        </mat-select>
-                        <input hidden>
-                        <mat-error *ngIf="form.get('level')?.errors?.required">Required</mat-error>
-
-                     </mat-form-field>
                      <div class="col-md-12 mr-auto col-sm-12 form-input">
 
 
                         <button  class="btn btn-primary form-control" form="form" mat-raised-button
-                                 type="submit">Save
+                                 type="submit"[disabled]="form.invalid" [ngClass]="{'disabled-btn':form.invalid}"  >Save
                         </button>
                      </div>
 

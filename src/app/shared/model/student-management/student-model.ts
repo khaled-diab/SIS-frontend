@@ -19,9 +19,9 @@ export class StudentModel extends BaseModel {
   level: string;
   year: string;
   photo: string;
-  departmentDTO: DepartmentModel;
+  departmentDTO: DepartmentModel ;
   collegeDTO: CollegeModel;
-  academicProgramDTO: AcademicProgramModel;
+  academicProgramDTO: AcademicProgramModel ;
   user: UserModel;
   // collegeID: number;
   // departmentID: number;

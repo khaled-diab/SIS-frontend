@@ -58,7 +58,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
       });
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
-            console.log(this.lecture);
+
             this.dialog.closeAll();
             this.lecture.attendanceStatus = false;
             this.studentAttendanceService.getAttendancesEvent.next(this.lecture);
@@ -112,6 +112,8 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
       if (this.lecture.attendanceType !== 'Manual'){
          this.lecture.attendanceStatus = true;
+      }else{
+         this.lecture.attendanceCode=0;
       }
       this.studentAttendanceService.addLecture(this.lecture).subscribe(value => {
          const today = formatDate(value.lectureDate, 'yyyy-MM-dd', 'en-US');
@@ -119,6 +121,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
          this.lecture = value;
          if (this.lecture.attendanceType === 'Manual'){
+            this.lecture.attendanceCode=0;
             this.studentAttendanceService.saveLectureEvent.next(this.lecture);
          }else{
             // console.log('auto');
