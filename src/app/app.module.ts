@@ -33,6 +33,12 @@ import {ImageModule} from 'primeng/image';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import { AdminComponent } from './profile/component/admin/admin.component';
+import { StaffComponent } from './profile/component/staff/staff.component';
+import { StudentComponent } from './profile/component/student/student.component';
+import {DataViewModule} from 'primeng/dataview';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatGridListModule, MatGridTile} from '@angular/material/grid-list';
 
 @NgModule({
    declarations: [
@@ -45,7 +51,10 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
       LoginComponent,
       RegisterComponent,
       UploadUsersComponent,
-      ProfileComponent
+      ProfileComponent,
+      AdminComponent,
+      StaffComponent,
+      StudentComponent
    ],
    imports: [
       AppRoutingModule,
@@ -70,7 +79,9 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
       ImageModule,
       MatSelectModule,
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      DataViewModule,
+      MatTooltipModule
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
    bootstrap: [AppComponent],

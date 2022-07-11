@@ -139,5 +139,6 @@ export class Constants {
    public static readonly APP_JSON = 'application/json';
    public static readonly STUDENT_TYPE = 'STUDENT';
    public static readonly STAFF_TYPE = 'STAFF';
+   public static readonly ADMIN_TYPE = 'ADMIN';
    public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/upload';
 }

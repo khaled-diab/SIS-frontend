@@ -22,6 +22,7 @@
     "@angular/router": "~13.0.0",
     "angular2-qrcode": "^2.0.3",
     "bootstrap": "^4.6.1",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "install": "^0.13.0",
     "jquery": "^3.6.0",

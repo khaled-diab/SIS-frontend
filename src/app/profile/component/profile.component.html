@@ -1,14 +1,17 @@
-<div class="p-3">
-  <div class="row">
-    <div class="col-6">
-      <p-fileUpload #fubauto (uploadHandler)="uploadPhoto($event)" [auto]="true" [customUpload]="true"
-                    accept="image/*" chooseLabel="upload Photo" mode="basic" name="demo[]"></p-fileUpload>
-    </div>
-    <div class="col-6">
-      <div class="content-section implementation">
-          <p-image [preview]="true" [src]="profilePictureLink" alt="Image" height="250" width="250"></p-image>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="p-3">-->
+<!--   <div class="row">-->
+<!--      <div class="col-6">-->
+<!--         <p-fileUpload #fubauto (uploadHandler)="uploadPhoto($event)" [auto]="true" [customUpload]="true"-->
+<!--                       accept="image/*" chooseLabel="upload Photo" mode="basic" name="demo[]"></p-fileUpload>-->
+<!--      </div>-->
+<!--      <div class="col-6">-->
+<!--         <div class="content-section implementation">-->
+<!--            <p-image [preview]="true" [src]="profilePictureLink" alt="Image" height="250" width="250"></p-image>-->
+<!--         </div>-->
+<!--      </div>-->
+<!--   </div>-->
+<!--</div>-->
+<app-admin *ngIf="loggedInUser.user.type===typeAdmin"></app-admin>
+<app-student *ngIf="loggedInUser.user.type===typeStudent"></app-student>
+<app-staff *ngIf="loggedInUser.user.type===typeStaff"></app-staff>
 
