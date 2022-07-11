@@ -1,23 +1,24 @@
-<div class="p-3">
+<!-- <div class="p-3">
   <div class="d-flex justify-content-end mt-3">
     <div class="p-3">
-    <mat-label *ngIf="tableData" >{{'Course Name'+coursename}}</mat-label>
+    <mat-label *ngIf="isLoading$ | async" >{{'Course Name'+coursename}}</mat-label>
     </div>
     <div class="p-3">
-      <mat-label *ngIf="tableData" >{{'Date'+date}}</mat-label>
+      <mat-label *ngIf="isLoading$ | async" >{{'Date'+date}}</mat-label>
       </div>
       <div class="p-3">
-        <mat-label *ngIf="tableData" >{{'From'+from}}</mat-label>
+        <mat-label *ngIf="isLoading$ | async" >{{'From'+from}}</mat-label>
         </div>
         <div class="p-3">
           <mat-label *ngIf="tableData" >{{'To'+to}}</mat-label>
-          </div>
+          </div> -->
           
-  </div>
-      <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-        <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
-  
-    
+  <!-- </div> -->
+  <!-- <mat-spinner *ngIf="isLoading$ | async"></mat-spinner> -->
+  <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table"> 
+      <ng-container>  
+          <table mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
+            
           <ng-container matColumnDef="universityId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>University Id
            
@@ -55,7 +56,6 @@
     
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
     
         <mat-paginator
                        [pageIndex]="pageIndex - 1"
@@ -65,7 +65,8 @@
                        showFirstLastButtons
                        aria-label="Select page">
         </mat-paginator>
-      </div>
+          </table>
+          </ng-container>
     </div>
     
     <mat-menu #menu="matMenu">

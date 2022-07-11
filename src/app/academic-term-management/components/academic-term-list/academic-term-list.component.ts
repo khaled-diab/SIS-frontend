@@ -60,7 +60,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
 
   addOrUpdateAcademicTerm(academicTerm: AcademicTermModel): void {
     if (this.isSmallScreen) {
-      this.router.navigateByUrl('/academics-term-management/create-academic-term', {state: academicTerm}).then(_ => console.log());
+      this.router.navigateByUrl('/academicterms-management/create-academic-term', {state: academicTerm}).then(_ => console.log());
     } else {
       this.dialog.open(CreateAcademicTermComponent, {data: academicTerm});
       this.service.closeSaveEvent.subscribe(e => {

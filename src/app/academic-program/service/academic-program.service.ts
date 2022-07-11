@@ -15,7 +15,7 @@ export class AcademicProgramService {
   static academicProgramList: AcademicProgramModel[];
   academicProgramFilterEvent: Subject<any> = new Subject<any>();
   academicProgramSaveEvent: Subject<AcademicProgramModel> = new Subject<AcademicProgramModel>();
-  academicProgramSaveCloseEvent: Subject<any> = new Subject<any>();
+  academicProgramSaveCloseEvent: Subject<any> = new Subject();
   academicProgramDeleteEvent: Subject<any> = new Subject<any>();
 
   constructor(private httpClient: HttpClient) {

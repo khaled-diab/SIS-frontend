@@ -94,7 +94,8 @@ export class Constants {
   public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/update';
   // Attendane Details By Student
   public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
-
+  public static readonly studentReportDetails = 
+  environment.baseURL + '/attendanceDetails/getAttendancesBySectionIdAndStudentId';
   // Sort
   public static readonly ASC = 'ASC';
   public static readonly DESC = 'DESC';

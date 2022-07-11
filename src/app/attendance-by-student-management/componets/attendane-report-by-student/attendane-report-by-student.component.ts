@@ -22,10 +22,6 @@ export class AttendaneReportByStudentComponent implements OnInit {
   tableData: AttendanceReportByStudentManagementModel[];
   attendanceStudentReportRequest :AttendanceStudentReportRequestModel=new AttendanceStudentReportRequestModel();
   displayedColumns = ['nameOfStudent', 'absentLecture','statues', 'Actions'];
-  LectureNumber=0;
-  totalLectures=0;
-  totalRate=0;
-  attendanceRate :number; 
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -34,6 +30,8 @@ export class AttendaneReportByStudentComponent implements OnInit {
   subscription: Subscription;
   searchValue: string;
   filterValue: null;
+  sectionId:string|null;
+  student: AttendanceReportByStudentManagementModel;
   
 
   @ViewChild(MatPaginator, {static: false})
@@ -70,6 +68,8 @@ export class AttendaneReportByStudentComponent implements OnInit {
     return this.studentReportService.attendanceReportByStudentFilterEvent
     .subscribe(value => {
       this.attendanceStudentReportRequest = value;
+      this.sectionId=String(this.attendanceStudentReportRequest.filterSection) ;
+
       this.studentReportService
         .getStudentReport(this.attendanceStudentReportRequest.filterSection)
         .subscribe(filteredData => {
@@ -81,14 +81,13 @@ export class AttendaneReportByStudentComponent implements OnInit {
     });
   }
   
-//   details(lecture : LectureModel):void
-//   {
-// this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-details-by-lecture')
-// this.attendanceReportRequest.lectureId=lecture.id;
-// console.log(lecture.id);
-// this.lectureReportService.attendanceDetailsByLectureFilterEvent.next(this.attendanceReportRequest)
-//   }
-details():void{
+  details(student : AttendanceReportByStudentManagementModel):void
+  {
+this.router.navigateByUrl(`/attendancereportsbystudent-management/attendane-details-by-student/${this.sectionId}/${student.idOfStudent}`)
+console.log(this.sectionId)
+// this.router.navigateByUrl(`/attendancereportsbystudent-management/attendane-details-by-student/
+// ${1}/${1}`)
 
-}
+  }
+
 }

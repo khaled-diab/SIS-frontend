@@ -39,7 +39,7 @@ public getsection(id:number):Observable<SectionModel>{
   return this.http.get <SectionModel>(`${Constants.getSection}/${id}`);
 
 }
-public getStudentAttendanceReport(lectureId : number):Observable<any>{
+public getStudentAttendanceReport(lectureId : string | null):Observable<any>{
   return this.http.get <any>(`${Constants.studentAttendanceReport}/${lectureId}`);
 }
 editattendanceStatues(attendance :AttendanceDetailsModel) {
