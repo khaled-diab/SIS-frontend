@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Constants} from '../../shared/constants';
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {StudentModel} from '../../shared/model/student-management/student-model';
@@ -14,6 +14,8 @@ import {AdminModel} from '../../shared/model/security/admin-model';
 })
 export class SecurityService {
 
+   public loginEvent: Subject<any> = new Subject<any>();
+
    constructor(private httpClient: HttpClient) {
    }
 
@@ -24,7 +26,7 @@ export class SecurityService {
    public register(registerModel: RegisterModel, userType: string): Observable<MessageResponse> {
       if (userType === Constants.STUDENT_TYPE) {
          return this.httpClient.post<MessageResponse>(Constants.registerStudentUrl, registerModel);
-      }else {
+      } else {
          return this.httpClient.post<MessageResponse>(Constants.registerStaffUrl, registerModel);
       }
    }
