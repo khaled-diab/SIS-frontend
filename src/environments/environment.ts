@@ -5,7 +5,8 @@
 export const environment = {
    production: true,
    baseURL: 'http://localhost:8080/api',
-   driveURL: 'http://localhost:5000/api/'
+   driveURL: 'http://localhost:5000/api/',
+   socketUrl: 'http://localhost:8080/sis-websocket'
 };
 
 /*

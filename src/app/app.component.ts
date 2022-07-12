@@ -4,6 +4,7 @@ import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import {Constants} from './shared/constants';
 import {AdminModel} from './shared/model/security/admin-model';
+import {environment} from '../environments/environment';
 
 @Component({
    selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
    loggedInUser: AdminModel;
    private connecting = false;
    private topicQueue: any[] = [];
-   socket = new SockJS('http://localhost:8080/sis-websocket');
+   socket = new SockJS(environment.socketUrl);
    stompClient = Stomp.over(this.socket);
 
    constructor(private securityService: SecurityService) {
