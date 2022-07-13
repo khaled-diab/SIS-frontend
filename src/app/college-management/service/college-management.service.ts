@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Constants} from '../../shared/constants';
-import {CollegeRequestModel} from '../../shared/model/college-management/college-request-model';
+import {GeneralSearchRequest} from '../../shared/model/general-search-request';
 import {PageRequest} from '../../shared/model/page-request';
 import {CollegeModel} from '../../shared/model/college-management/college-model';
 import {Sort} from '@angular/material/sort';
@@ -14,13 +14,13 @@ import {environment} from '../../../environments/environment';
 })
 export class CollegeManagementService {
 
-   collegeFilterEvent: Subject<CollegeRequestModel> = new Subject<CollegeRequestModel>();
+   collegeFilterEvent: Subject<GeneralSearchRequest> = new Subject<GeneralSearchRequest>();
    collegeSaveEvent: Subject<CollegeModel> = new Subject<CollegeModel>();
 
    constructor(private httpClient: HttpClient) {
    }
 
-   public getCollegePage(pageNumber: number, pageSize: number, collegeFilterModel: CollegeRequestModel):
+   public getCollegePage(pageNumber: number, pageSize: number, collegeFilterModel: GeneralSearchRequest):
       Observable<PageRequest<CollegeModel>> {
       return this.httpClient.post<PageRequest<CollegeModel>>(Constants.collegePageUrl + pageNumber + '/' + pageSize, collegeFilterModel);
    }
@@ -41,7 +41,7 @@ export class CollegeManagementService {
       return this.httpClient.get<MessageResponse>(`${Constants.checkCollegeCode}/${code}`);
    }
 
-   constructCollegeRequestObject(sort: Sort, collegeRequestModel: CollegeRequestModel): CollegeRequestModel {
+   constructCollegeRequestObject(sort: Sort, collegeRequestModel: GeneralSearchRequest): GeneralSearchRequest {
       if (sort.direction === 'asc') {
          collegeRequestModel.sortDirection = Constants.ASC;
       } else if (sort.direction === 'desc') {

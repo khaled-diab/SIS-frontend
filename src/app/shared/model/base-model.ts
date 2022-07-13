@@ -1,3 +1,3 @@
 export class BaseModel {
-  id = 0;
+   id: number;
 }

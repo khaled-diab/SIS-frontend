@@ -23,7 +23,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SecurityInterceptor} from './security/service/security.interceptor';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RegisterComponent} from './security/register/register.component';
-import {UploadUsersComponent} from './upload-users/upload-users.component';
 import {ProfileComponent} from './profile/component/profile.component';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ToastModule} from 'primeng/toast';
@@ -33,12 +32,15 @@ import {ImageModule} from 'primeng/image';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
-import { AdminComponent } from './profile/component/admin/admin.component';
-import { StaffComponent } from './profile/component/staff/staff.component';
-import { StudentComponent } from './profile/component/student/student.component';
+import {StaffComponent} from './profile/component/staff/staff.component';
+import {StudentComponent} from './profile/component/student/student.component';
 import {DataViewModule} from 'primeng/dataview';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatGridListModule, MatGridTile} from '@angular/material/grid-list';
+import { ImportedUsersComponent } from './imported-users/imported-users.component';
+import {MatCardModule} from '@angular/material/card';
+import {TableModule} from 'primeng/table';
+import {PaginatorModule} from 'primeng/paginator';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
    declarations: [
@@ -50,11 +52,10 @@ import {MatGridListModule, MatGridTile} from '@angular/material/grid-list';
       NavBarComponent,
       LoginComponent,
       RegisterComponent,
-      UploadUsersComponent,
       ProfileComponent,
-      AdminComponent,
       StaffComponent,
-      StudentComponent
+      StudentComponent,
+      ImportedUsersComponent
    ],
    imports: [
       AppRoutingModule,
@@ -81,7 +82,11 @@ import {MatGridListModule, MatGridTile} from '@angular/material/grid-list';
       MatDatepickerModule,
       MatNativeDateModule,
       DataViewModule,
-      MatTooltipModule
+      MatTooltipModule,
+      MatCardModule,
+      TableModule,
+      PaginatorModule,
+      ProgressSpinnerModule
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
    bootstrap: [AppComponent],

@@ -131,6 +131,8 @@ export class Constants {
    public static readonly ROLE_FACULTY_MEMBER = 'FACULTY_MEMBER';
    public static readonly ROLE_STUDENT = 'STUDENT';
    public static readonly FILE_TYPE_PROFILE_PICTURE = 'PROFILE_PICTURE';
+   public static readonly FILE_TYPE_STUDENT_UPLOAD = 'STUDENT_UPLOAD';
+   public static readonly FILE_TYPE_STAFF_UPLOAD = 'STAFF_UPLOAD';
    public static readonly downloadFileURL = environment.driveURL + 'download/';
    public static readonly uploadFileURL = environment.driveURL + 'upload/';
    public static readonly uploadProfilePicture = environment.baseURL + '/security/upload-profile-picture';
@@ -141,4 +143,5 @@ export class Constants {
    public static readonly STAFF_TYPE = 'STAFF';
    public static readonly ADMIN_TYPE = 'ADMIN';
    public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/uploadedUsers';
+   public static readonly usersFilesPageUrl = environment.baseURL + '/security/findAll/';
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CollegeRequestModel} from '../../../shared/model/college-management/college-request-model';
+import {GeneralSearchRequest} from '../../../shared/model/general-search-request';
 import {CollegeManagementService} from '../../service/college-management.service';
 
 @Component({
@@ -8,7 +8,7 @@ import {CollegeManagementService} from '../../service/college-management.service
   styleUrls: ['./college-filter.component.css']
 })
 export class CollegeFilterComponent implements OnInit {
-  collegeRequestModel: CollegeRequestModel = new CollegeRequestModel();
+  collegeRequestModel: GeneralSearchRequest = new GeneralSearchRequest();
 
   constructor(private collegeManagementService: CollegeManagementService) {
   }
@@ -21,7 +21,7 @@ export class CollegeFilterComponent implements OnInit {
   }
 
   resetFilter(): void {
-    this.collegeRequestModel = new CollegeRequestModel();
+    this.collegeRequestModel = new GeneralSearchRequest();
     this.collegeManagementService.collegeFilterEvent.next(this.collegeRequestModel);
   }
 }

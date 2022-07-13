@@ -1,0 +1,56 @@
+<div class="p-3">
+   <mat-card class="mat-elevation-z8">
+      <div class="container">
+         <form class="form-row form">
+            <div class="form-group col-12 m-auto search-box ">
+               <input [(ngModel)]="userFilesRequestModel.filterValue" class="form-control" id="exampleInputEmail1"
+                      name="filterValue" placeholder="Search" type="text">
+               <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button>
+            </div>
+         </form>
+      </div>
+   </mat-card>
+</div>
+
+<div class="p-3">
+   <div *ngIf="tableData" class="card">
+      <p-table #dt (onLazyLoad)="loadData($event)" [customSort]="true" [lazy]="true" [loading]="loading"
+               [scrollable]="true" [totalRecords]="tableData.totalCount" [value]="tableData.data"
+               scrollDirection="horizontal">
+         <ng-template pTemplate="header">
+            <tr>
+               <th id="fileName" pSortableColumn="fileName" class="center-data">File Name
+                  <p-sortIcon field="fileName"></p-sortIcon>
+               </th>
+               <th id="uploadDate" pSortableColumn="uploadDate" class="center-data">Upload Date
+                  <p-sortIcon field="uploadDate"></p-sortIcon>
+               </th>
+               <th id="type" pSortableColumn="type" class="center-data">File Type
+                  <p-sortIcon field="type"></p-sortIcon>
+               </th>
+               <th id="Download Errors" class="center-data">Download Errors</th>
+            </tr>
+         </ng-template>
+         <ng-template let-userFile pTemplate="body">
+            <tr>
+               <td>{{userFile.fileName}}</td>
+               <td class="center-data">{{userFile.uploadDate  | date: 'dd/MM/yyyy'}}</td>
+               <td class="center-data">{{userFile.type}}</td>
+               <td class="center-data">
+                  <button (click)="downloadFile(userFile)" class="align-content-center" style="" mat-icon-button>
+                     <mat-icon class="download" matTooltip="Download" matTooltipPosition="above"> file_download
+                     </mat-icon>
+                  </button>
+               </td>
+            </tr>
+         </ng-template>
+      </p-table>
+      <p-paginator #paginator (onPageChange)="paginate($event)" [rowsPerPageOptions]="[5,10,20,50]" [rows]="5"
+                   [totalRecords]="tableData.totalCount"
+                   [currentPageReportTemplate]="'{currentPage},{totalPages},{rows},{first},{last}'">
+      </p-paginator>
+   </div>
+   <div class="center" *ngIf="!tableData">
+      <p-progressSpinner class="text-center"></p-progressSpinner>
+   </div>
+</div>

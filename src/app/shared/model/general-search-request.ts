@@ -1,6 +1,6 @@
-import {Constants} from '../../constants';
+import {Constants} from '../constants';
 
-export class CollegeRequestModel {
+export class GeneralSearchRequest {
   filterValue: string;
   sortDirection: string | null = Constants.ASC;
   sortBy = 'id';

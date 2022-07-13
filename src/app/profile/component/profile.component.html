@@ -11,7 +11,6 @@
 <!--      </div>-->
 <!--   </div>-->
 <!--</div>-->
-<app-admin *ngIf="loggedInUser.user.type===typeAdmin"></app-admin>
 <app-student *ngIf="loggedInUser.user.type===typeStudent"></app-student>
 <app-staff *ngIf="loggedInUser.user.type===typeStaff"></app-staff>
 

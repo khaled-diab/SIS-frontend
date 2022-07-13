@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {CollegeManagementService} from '../../service/college-management.service';
 import {Subscription} from 'rxjs';
-import {CollegeRequestModel} from '../../../shared/model/college-management/college-request-model';
+import {GeneralSearchRequest} from '../../../shared/model/general-search-request';
 import {PageRequest} from '../../../shared/model/page-request';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {BsModalService} from 'ngx-bootstrap/modal';
@@ -23,7 +23,7 @@ import {Constants} from '../../../shared/constants';
 export class CollegesListComponent implements OnInit, OnDestroy {
 
    tableData: PageRequest<CollegeModel>;
-   collegeRequestModel: CollegeRequestModel = new CollegeRequestModel();
+   collegeRequestModel: GeneralSearchRequest = new GeneralSearchRequest();
    displayedColumns = ['id', 'nameEn', 'nameAr', 'code', 'Actions'];
    pageIndex = 0;
    pageSize = 5;
@@ -175,7 +175,7 @@ export class CollegesListComponent implements OnInit, OnDestroy {
    }
 
    private initialDataSubscription(): Subscription {
-      this.collegeRequestModel = new CollegeRequestModel();
+      this.collegeRequestModel = new GeneralSearchRequest();
       this.loading = true;
       return this.collegeManagementService
          .getCollegePage(0, this.pageSize, this.collegeRequestModel)
