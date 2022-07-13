@@ -8,7 +8,8 @@ import {Sort} from '@angular/material/sort';
 import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
 import {UserModel} from '../../shared/model/security/user-model';
-import {StudentRecordModel} from "../../shared/model/student-management/student-record-model";
+import {StudentRecordModel} from '../../shared/model/student-management/student-record-model';
+import {RoleModel} from '../../shared/model/security/role-model';
 
 export class UpdatePreviewData {
   st: StudentModel;
@@ -66,8 +67,10 @@ export class StudentManagementService {
      user.email = student.universityMail;
      user.username = student.nameEn;
      user.type = 'STUDENT';
-     user.firstname; ' ';
+     user.firstname = ' ';
      user.lastname = ' ';
+     user.role = new RoleModel();
+     user.role.id = 1;
      student.user = user;
      return this.httpClient.post<MessageResponse>(Constants.addStudentUrl, student);
   }

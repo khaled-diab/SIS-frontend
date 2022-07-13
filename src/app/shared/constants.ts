@@ -142,5 +142,6 @@ export class Constants {
    public static readonly STUDENT_TYPE = 'STUDENT';
    public static readonly STAFF_TYPE = 'STAFF';
 
+   public  static  readonly  LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
 }
