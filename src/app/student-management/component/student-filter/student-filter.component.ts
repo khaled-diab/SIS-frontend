@@ -66,6 +66,11 @@ export class StudentFilterComponent implements OnInit, AfterViewInit {
    }
 
    resetFilter(): void {
+      this.collegeMenu.value = undefined;
+      this.departmentMenu.value = undefined;
+      this.levelSelect.value = undefined;
+      this.departmentMenu.setDisabledState(true);
+
       this.studentFilterModel = new StudentRequestModel();
       this.studentManagementService.studentFilterEvent.next(this.studentFilterModel);
    }

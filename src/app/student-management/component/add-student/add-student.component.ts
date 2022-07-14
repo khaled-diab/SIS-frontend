@@ -179,8 +179,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    }
 
    cancel(): void {
-      this.studentManagementService.studentCloseAddEvent.next();
-
+      this.route.navigate(['/students-management', 'student-list']);
    }
 
    onChange(): void {
@@ -192,6 +191,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       );
       this.imgFlage = 1;
    }
+
 }
 
 

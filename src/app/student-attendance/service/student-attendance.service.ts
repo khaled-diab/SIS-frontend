@@ -8,6 +8,7 @@ import {Constants} from '../../shared/constants';
 import {LectureModel} from '../../shared/model/student-attendance/lecture-model';
 import {SectionModel} from '../../shared/model/section-model';
 import {AttendanceDetailsModel} from '../../shared/model/student-attendance/attendanceDetails-model';
+import {RoleModel} from "../../shared/model/security/role-model";
 
 
 @Injectable({
@@ -28,6 +29,7 @@ export class StudentAttendanceService {
     return this.httpClient.get<TimetableModel[]>(Constants.getSectionTimeTablesUrl + sectionId );
   }
   addLecture(lecture: LectureModel): Observable < LectureModel > {
+     lecture.facultyMemberDTO.user.role=new RoleModel();
     return this.httpClient.post<LectureModel>(Constants.addLectureUrl, lecture);
   }
   addManualAttendance(attendanceDetailsModels: AttendanceDetailsModel[]): Observable < AttendanceDetailsModel[] > {
@@ -35,6 +37,8 @@ export class StudentAttendanceService {
   }
 
   disableLecture(lecture: LectureModel): Observable<MessageResponse>{
+     lecture.facultyMemberDTO.user.role=new RoleModel();
+     console.log(lecture);
     return this.httpClient.post<MessageResponse>(Constants.disableLectureUrl + lecture.id, lecture);
   }
 

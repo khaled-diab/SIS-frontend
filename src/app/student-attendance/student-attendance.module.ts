@@ -22,7 +22,8 @@ import {AttendanceCodeComponent} from './component/attendance-code/attendance-co
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
-// import {QRCodeModule} from 'angularx-qrcode';
+import {QRCodeModule} from 'angular2-qrcode';
+
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import {MatDialogModule} from '@angular/material/dialog';
       MatPaginatorModule,
       MatRadioModule,
       MatDialogModule,
-      // QRCodeModule
+      QRCodeModule
    ]
 })
 export class StudentAttendanceModule {

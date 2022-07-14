@@ -31,6 +31,7 @@ export class Constants {
    public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
    public static readonly allFacultyMembersUrl = environment.baseURL + '/facultyMembers/all';
    public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
+   public static readonly facultyMemberByUserIdUrl = environment.baseURL + '/facultyMembers/facultyMemberByUserId/';
 
    /* Student Url */
    public static readonly deleteStudentUrl = environment.baseURL + '/students/deleteStudent/';

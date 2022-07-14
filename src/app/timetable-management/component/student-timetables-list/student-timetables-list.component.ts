@@ -38,7 +38,7 @@ export class StudentTimetablesListComponent implements OnInit, OnDestroy {
 
    private initialDataSubscription(): Subscription {
       // @ts-ignore
-      this.loggedIn = JSON.parse(sessionStorage.getItem(Constants.loggedInUser));
+      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       console.log(this.loggedIn.user);
       return this.timetableManagementService
          .getStudentTimetables(this.loggedIn.user.id).subscribe(value => {

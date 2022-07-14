@@ -12,6 +12,7 @@ import {StudentModel} from '../../shared/model/student-management/student-model'
 import {StudentArray} from '../../shared/model/studentEnrollment-management/student-array';
 import {StudentEnrollmentRequestModel} from '../../shared/model/studentEnrollment-management/student-enrollment-request-model';
 import {StudentEnrollmentModel} from '../../shared/model/studentEnrollment-management/student-enrollment-model';
+import {RoleModel} from "../../shared/model/security/role-model";
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,9 @@ export class StudentEnrollmentManagementService {
     studentArray.studentEnrollmentDTO = studentEnrollmentModel;
     studentArray.studentDTOS = students;
     console.log(studentEnrollmentModel);
+    students.forEach(value => {
+       value.user.role = new RoleModel();
+    });
     return this.httpClient.post<MessageResponse>(Constants.saveStudentEnrollmentUrl, studentArray);
   }
 
