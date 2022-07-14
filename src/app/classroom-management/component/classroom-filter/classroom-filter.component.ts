@@ -16,8 +16,10 @@ import {CollegeManagementService} from '../../../college-management/service/coll
 export class ClassroomFilterComponent implements OnInit, AfterViewInit {
    classroomRequestModel: ClassroomRequestModel = new ClassroomRequestModel();
    searchValue: string;
-   filterCollege: null;
-   filterBuilding?: null;
+   filterCollege: undefined;
+   filterBuilding?: undefined;
+   collegeSelectValue: undefined;
+   buildingSelectValue: undefined;
    buildings: BuildingModel[];
    departments: DepartmentModel[];
    colleges: CollegeModel[];
@@ -31,8 +33,7 @@ export class ClassroomFilterComponent implements OnInit, AfterViewInit {
 
    ngOnInit(): void {
       this.searchValue = '';
-      // @ts-ignore
-
+      this.buildingSelectValue = this.collegeSelectValue = undefined;
       this.collegeService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
       });
@@ -48,9 +49,12 @@ export class ClassroomFilterComponent implements OnInit, AfterViewInit {
 
    resetFilter(): void {
       // this.classroomRequestModel = new ClassroomRequestModel(1, 10);
-      this.searchValue = ' ';
-      this.filterBuilding = this.filterCollege = null;
-      this.classroomManagementService.classroomFilterEvent.next(['', null, null]);
+      this.searchValue = '';
+      this.filterBuilding = this.filterCollege = undefined;
+      this.collegeSelectValue = this.buildingSelectValue = undefined;
+      this.buildingSelect.setDisabledState(true);
+      this.buildingSelect.value = undefined;
+      this.classroomManagementService.classroomFilterEvent.next(['', undefined, undefined]);
    }
 
    ngAfterViewInit(): void {
@@ -62,12 +66,15 @@ export class ClassroomFilterComponent implements OnInit, AfterViewInit {
             this.buildingSelect.setDisabledState(true);
             this.buildingSelect.value = undefined;
             this.filterBuilding = undefined;
+            this.buildingSelectValue = undefined;
          }
          this.filterCollege = value;
+         this.collegeSelectValue = value;
          this.classroomManagementService.classroomFilterEvent.next([this.searchValue, value, this.filterBuilding]);
       });
       this.buildingSelect.valueChange.subscribe(value => {
          this.filterBuilding = value;
+         this.buildingSelectValue = value;
          this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterCollege, value]);
       });
    }
