@@ -52,6 +52,5 @@ ngOnInit(): void {
       this.classroomService.getClassrooms().subscribe(value => {
       ClassroomManagementService.classroomsList = value;
     });
-      console.log(DepartmentService.departmentsList);
   }
 }

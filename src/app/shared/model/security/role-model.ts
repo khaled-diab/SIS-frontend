@@ -1,7 +1,6 @@
 import {RoleScreenModel} from './role-screen-model';
-import {BaseModel} from "../base-model";
 
-export class RoleModel extends BaseModel{
+export class RoleModel {
   roleName: string;
   description: string;
   roleScreens: RoleScreenModel[];

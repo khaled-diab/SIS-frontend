@@ -29,7 +29,7 @@ export class StudentsListComponent implements OnInit , OnDestroy {
    tableData: PageRequest<StudentRecordModel>;
    x: number;
    studentRequestModel: StudentRequestModel = new StudentRequestModel();
-   displayedColumns = ['NO.', 'universityId', 'nameAr', 'collegeId', 'departmentId', 'level', 'Actions'];
+   displayedColumns = ['NO.', 'universityId', 'nameAr',  'departmentId','collegeId', 'level', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    department: string;

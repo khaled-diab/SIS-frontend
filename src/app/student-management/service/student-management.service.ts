@@ -63,21 +63,11 @@ export class StudentManagementService {
   }
 
   addStudent(student: StudentModel): Observable < MessageResponse > {
-     const user = new UserModel();
-     user.email = student.universityMail;
-     user.username = student.nameEn;
-     user.type = 'STUDENT';
-     user.firstname = ' ';
-     user.lastname = ' ';
-     user.role = new RoleModel();
-     user.role.id = 1;
-     student.user = user;
      return this.httpClient.post<MessageResponse>(Constants.addStudentUrl, student);
   }
 updateStudent(student: StudentModel): Observable < MessageResponse > {
-
-  return this.httpClient.post<MessageResponse>(Constants.updateStudentUrl, student);
-
+     student.user.role = new RoleModel();
+     return this.httpClient.post<MessageResponse>(Constants.updateStudentUrl, student);
   }
 
   deleteStudent(id: number): Observable<MessageResponse> {
