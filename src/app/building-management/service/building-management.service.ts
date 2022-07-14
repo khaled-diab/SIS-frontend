@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Constants} from '../../shared/constants';
-import {BuildingRequestModel} from '../../shared/model/building-management/building-request-model';
 import {BuildingModel} from '../../shared/model/building-management/building-model';
 import {MessageResponse} from '../../shared/model/message-response';
 import {environment} from '../../../environments/environment';
@@ -40,10 +39,6 @@ export class BuildingManagementService {
 
   public saveBuilding(building: BuildingModel): Observable<MessageResponse> {
     return this.httpClient.post<MessageResponse>(Constants.saveBuildingUrl, building);
-  }
-
-  constructBuildingRequestObject(buildingRequestModel: BuildingRequestModel): BuildingRequestModel {
-    return buildingRequestModel;
   }
 
   getBuildingsByCollege(collegeId: number): BuildingModel[] {

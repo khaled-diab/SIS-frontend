@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {BuildingRequestModel} from '../../../shared/model/building-management/building-request-model';
 import {BuildingManagementService} from '../../service/building-management.service';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {MatSelect} from '@angular/material/select';
@@ -10,7 +9,6 @@ import {MatSelect} from '@angular/material/select';
    styleUrls: ['./building-filter.component.css']
 })
 export class BuildingFilterComponent implements OnInit, AfterViewInit {
-   buildingRequestModel: BuildingRequestModel = new BuildingRequestModel();
    collegeSelectValue: undefined;
    colleges: CollegeModel[];
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;

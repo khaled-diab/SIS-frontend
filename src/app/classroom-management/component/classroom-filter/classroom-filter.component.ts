@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ClassroomRequestModel} from '../../../shared/model/classroom-management/classroom-request-model';
 import {ClassroomManagementService} from '../../service/classroom-management.service';
 import {BuildingModel} from '../../../shared/model/building-management/building-model';
 import {BuildingManagementService} from '../../../building-management/service/building-management.service';
@@ -14,7 +13,6 @@ import {CollegeManagementService} from '../../../college-management/service/coll
    styleUrls: ['./classroom-filter.component.css']
 })
 export class ClassroomFilterComponent implements OnInit, AfterViewInit {
-   classroomRequestModel: ClassroomRequestModel = new ClassroomRequestModel();
    searchValue: string;
    filterCollege: undefined;
    filterBuilding?: undefined;
