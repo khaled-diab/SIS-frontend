@@ -72,7 +72,7 @@
                 <mat-label>Major</mat-label>
                 <mat-select #majorSelect [formControlName]="'majorMenu'">
                   <mat-option *ngFor="let major of majors" [value]="major.id">
-                    {{major.nameEn}}
+                    {{major?.nameEn}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

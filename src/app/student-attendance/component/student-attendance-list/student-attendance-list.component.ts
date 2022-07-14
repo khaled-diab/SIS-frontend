@@ -78,9 +78,9 @@ export class StudentAttendanceListComponent implements OnInit , OnDestroy{
       );
    }
    sortArray( a: AttendanceDetailsModel, b: AttendanceDetailsModel): number{
-      if (a.studentDTO.nameAr > b.studentDTO.nameAr){
+      if (a.nameAr > b.nameAr){
          return 1;
-      }else if (b.studentDTO.nameAr > a.studentDTO.nameAr){
+      }else if (b.nameAr > a.nameAr){
          return -1;
       }
       return 0;

@@ -36,26 +36,27 @@
          <!--        </mat-header-cell>-->
          <!--        <mat-cell *matCellDef="let row">{{row.nameEn}}</mat-cell>-->
          <!--      </ng-container>-->
-         <ng-container matColumnDef="collegeId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>College
-
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.collegeDTO.nameEn}}</mat-cell>
-         </ng-container>
          <ng-container matColumnDef="departmentId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Department
 
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.departmentDTO.nameEn}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.departmentName}}</mat-cell>
          </ng-container>
+         <ng-container matColumnDef="collegeId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>College
+
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.collegeName}}</mat-cell>
+         </ng-container>
+
 
          <!-- Name Column -->
 
-         <ng-container matColumnDef="year">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Year
+         <ng-container matColumnDef="level">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Level
 
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.level}}</mat-cell>
          </ng-container>
 
          <ng-container matColumnDef="Actions">

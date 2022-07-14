@@ -24,7 +24,7 @@ import {take} from 'rxjs/operators';
 export class DepartmentListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: DepartmentModel[];
-  displayedColumns = ['id', 'code', 'nameAr', 'nameEn', 'Actions'];
+  displayedColumns = ['No.', 'code', 'nameAr', 'nameEn','college', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {StudentAttendanceService} from '../../service/student-attendance.service';
 import {AttendanceCounter} from '../../../shared/model/student-attendance/attendanceCounter';
@@ -8,7 +8,8 @@ import {AttendanceCounter} from '../../../shared/model/student-attendance/attend
    templateUrl: './attendance-code.component.html',
    styleUrls: ['./attendance-code.component.css']
 })
-export class AttendanceCodeComponent implements OnInit {
+export class AttendanceCodeComponent implements OnInit  {
+
 
    attendanceCode: string;
    counter: number;
@@ -38,10 +39,15 @@ export class AttendanceCodeComponent implements OnInit {
 
       this.startTimer();
    }
-
    cancel(): void{
       clearInterval(this.interval);
       this.studentAttendanceService.cancelAttendanceCodeDialogEvent.next();
+   }
+
+   @HostListener('window:beforeunload', [ '$event' ])
+   beforeUnloadHandler(event: any): void {
+      this.studentAttendanceService.cancelAttendanceCodeDialogEvent.next();
+
    }
 
 }

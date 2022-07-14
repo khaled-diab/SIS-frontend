@@ -11,6 +11,7 @@ import {Constants} from '../../../shared/constants';
 import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {MatSelect} from '@angular/material/select';
+import {Navigation, Router} from '@angular/router';
 
 @Component({
    selector: 'app-course-save',
@@ -20,24 +21,33 @@ import {MatSelect} from '@angular/material/select';
 export class SaveCourseComponent implements OnInit, AfterViewInit {
 
    courseModel: CourseModel;
+   course = new CourseModel();
    form: FormGroup;
    errorMessage: string;
    college = new CollegeModel();
    colleges: CollegeModel[];
    departments: DepartmentModel[];
+   nav: Navigation | null;
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
    @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
 
    constructor(private breakpointObserver: BreakpointObserver,
-               @Inject(MAT_DIALOG_DATA) public data: CourseModel,
+               // @Inject(MAT_DIALOG_DATA) public data: CourseModel,
                private courseManagementService: CourseManagementService,
                private snackBar: MatSnackBar,
                private collegeManagementService: CollegeManagementService,
-               private departmentService: DepartmentService) {
+               private departmentService: DepartmentService,
+               private route: Router) {
+      this.nav = this.route.getCurrentNavigation();
+      if (this.nav?.extras && this.nav.extras.state && this.nav.extras.state.data) {
+         this.course = this.nav.extras.state.data;
+         console.log(this.course);
+      }
    }
 
+
    ngOnInit(): void {
-      this.college = this.data.collegeDTO;
+      this.college = this.course.collegeDTO;
       this.form = new FormGroup({
             code: new FormControl(undefined, Validators.required),
             nameAr: new FormControl(undefined, Validators.compose([Validators.required,
@@ -74,7 +84,8 @@ export class SaveCourseComponent implements OnInit, AfterViewInit {
             console.log('value matches');
             this.fetchDataFromRouter(history.state);
          } else {
-            this.courseModel = {...this.data};
+            this.courseModel = {...this.course};
+            console.log(this.courseModel.nameEn);
             this.form.get('code')?.setValue(this.courseModel.code);
             this.form.get('nameAr')?.setValue(this.courseModel.nameAr);
             this.form.get('nameEn')?.setValue(this.courseModel.nameEn);

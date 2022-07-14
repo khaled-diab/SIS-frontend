@@ -22,13 +22,13 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>University Id
 
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.studentDTO.universityId}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.universityId}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="nameAr">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.studentDTO.nameAr}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="attendanceStatus">
@@ -38,15 +38,7 @@
             [ngClass]="{'make-green': row.attendanceStatus=='present','make-red': row.attendanceStatus=='absent' }" >{{row.attendanceStatus}}</mat-cell>
           </ng-container>
 
-          <!-- <ng-container matColumnDef="attendanceStatus">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Status
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <mat-form-field>
-              <input mat-Input [value]="row.attendanceStatus" [(ngModel)]="row.attendanceStatus" >
-            </mat-form-field>
-            </mat-cell>
-          </ng-container> -->
+
 
 
 
@@ -74,7 +66,6 @@
                        aria-label="Select page">
         </mat-paginator>
       </div>
-      <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
     </div>
 
     <mat-menu #menu="matMenu">
@@ -83,4 +74,7 @@
       <button mat-menu-item>Delete</button>
     </mat-menu>
 
+    <button (click)="flag=!flag" >btn</button>
+<p *ngIf="flag">{{'ssssssssssss'}}</p>
      <!-- <app-attendane-report-by-lecture-filter></app-attendane-report-by-lecture-filter> -->
+

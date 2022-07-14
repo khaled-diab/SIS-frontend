@@ -1,217 +1,226 @@
 <div class="logo">
-  <img alt="" src="./assets/lightbulb.svg">
-  <span>Edu Skills</span>
+   <img alt="" src="./assets/lightbulb.svg">
+   <span>Edu Skills</span>
 </div>
 <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
-  <mat-expansion-panel
-    #systemExpansion
-    (afterExpand)="closeOtherExpansions(systemExpansion)"
-    [expanded]="false"
-    class="mat-expansion-panel-body">
-    <mat-expansion-panel-header>
-      System Management
-    </mat-expansion-panel-header>
-    <ul>
+   <mat-expansion-panel
+      #systemExpansion
+      (afterExpand)="closeOtherExpansions(systemExpansion)"
+      [expanded]="false"
+      class="mat-expansion-panel-body">
+      <mat-expansion-panel-header>
+         System Management
+      </mat-expansion-panel-header>
+      <ul>
 
 
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/academicyears-management','academic-year-list']">
-        <a>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/academicyears-management','academic-year-list']">
+            <a>
 
           <span>
             Academic Years
           </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/academicterms-management','academic-term-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/academicterms-management','academic-term-list']">
+            <a>
 
           <span>
             Academic Terms
           </span>
-        </a>
-      </li>
-      <li [routerLinkActiveOptions]="{exact: true}"
-          [routerLinkActive]="['active']"
-          [routerLink]="['/colleges-management','college-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/colleges-management','college-list']">
+            <a>
           <span>
             Colleges
           </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/departments-management','department-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/departments-management','department-list']">
+            <a>
           <span>
             Departments
           </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/academicprograms-management','academic-program-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/academicprograms-management','academic-program-list']">
+            <a>
 
           <span>
             Academic Programs
           </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/courses-management','course-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/courses-management','course-list']">
+            <a>
 
           <span>
             Courses
           </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/buildings-management','building-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/buildings-management','building-list']">
+            <a>
 
           <span>
             Buildings
           </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/classrooms-management','classroom-list']">
-        <a>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/classrooms-management','classroom-list']">
+            <a>
 
           <span>
             Classrooms
           </span>
-        </a>
-      </li>
-    </ul>
-  </mat-expansion-panel>
+            </a>
+         </li>
+      </ul>
+   </mat-expansion-panel>
 </mat-accordion>
 
 <mat-accordion>
-  <mat-expansion-panel
-    #userExpansion
-    (afterExpand)="closeOtherExpansions(userExpansion)"
-    [expanded]="false"
-    class="mat-expansion-panel-body">
-    <mat-expansion-panel-header>
-      User Management
-    </mat-expansion-panel-header>
-    <ul>
-      <li [routerLinkActiveOptions]="{exact: true}"
-          [routerLinkActive]="['active']"
-          [routerLink]="['/facultyMembers-management','facultyMember-list']">
-        <a>
-          <span>
-            Faculty Members
-          </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/students-management','student-list']">
-        <a>
-          <span>
-            Students
-          </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/student-attendance','student-attendance-list']">
-        <a>
-          <span>
-            Attendance Registration
-          </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/timetables-management','facultyMember-timetables-list']">
-        <a>
-          <span>
-            Faculty Member Timetables
-          </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/timetables-management','student-timetables-list']">
-        <a>
-          <span>
-            Student Timetables
-          </span>
-        </a>
-      </li>
-
-    </ul>
-  </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion>
-  <mat-expansion-panel
-    #academicDataExpansion
-    (afterExpand)="closeOtherExpansions(academicDataExpansion)"
-    [expanded]="false"
-    class="mat-expansion-panel-body">
-    <mat-expansion-panel-header>
-      Academic Data Management
-    </mat-expansion-panel-header>
-    <ul>
-      <li [routerLinkActiveOptions]="{exact: true}"
-          [routerLinkActive]="['active']"
-          [routerLink]="['/sections-management','section-list']">
-        <a>
-          <span>
-            Sections
-          </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/timetables-management','timetable-list']">
-        <a>
-          <span>
-            Timetables
-          </span>
-        </a>
-      </li>
-      <li [routerLinkActive]="['active']"
-          [routerLink]="['/studentEnrollments-management','studentEnrollment-list']">
-        <a>
-          <span>
-            Student Enrollments
-          </span>
-        </a>
-      </li>
-    </ul>
-  </mat-expansion-panel>
-  <mat-accordion>
-    <mat-expansion-panel
-      #attendanceReportExpansion
-      (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
+   <mat-expansion-panel
+      #userExpansion
+      (afterExpand)="closeOtherExpansions(userExpansion)"
       [expanded]="false"
       class="mat-expansion-panel-body">
       <mat-expansion-panel-header>
-        Attendance Reports
+         User Management
       </mat-expansion-panel-header>
       <ul>
-        <li [routerLinkActiveOptions]="{exact: true}"
-            [routerLinkActive]="['active']"
-            [routerLink]="['/attendancereportsbylecture-management','attendane-report-by-lecture']">
-          <a>
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'" [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/facultyMembers-management','facultyMember-list']">
+
+            <a>
+          <span>
+            Faculty Members
+          </span>
+            </a>
+         </li>
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'"
+             [routerLinkActive]="['active']" [routerLink]="['/students-management','student-list']">
+            <a>
+          <span>
+            Students
+          </span>
+            </a>
+         </li>
+
+         <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/timetables-management','facultyMember-timetables-list']">
+            <a>
+          <span>
+            Faculty Member Timetables
+          </span>
+            </a>
+         </li>
+
+
+         <li *ngIf="loggedInUser.user.role.roleName==='STUDENT'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/timetables-management','student-timetables-list']">
+            <a>
+          <span>
+            Student Timetables
+          </span>
+            </a>
+         </li>
+
+         <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/student-attendance','student-attendance-list']">
+            <a>
+          <span>
+            Attendance Registration
+          </span>
+            </a>
+         </li>
+
+      </ul>
+   </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
+   <mat-expansion-panel
+      #academicDataExpansion
+      (afterExpand)="closeOtherExpansions(academicDataExpansion)"
+      [expanded]="false"
+      class="mat-expansion-panel-body">
+      <mat-expansion-panel-header>
+         Academic Data Management
+      </mat-expansion-panel-header>
+      <ul>
+         <li [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/sections-management','section-list']">
+            <a>
+          <span>
+            Sections
+          </span>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/timetables-management','timetable-list']">
+            <a>
+          <span>
+            Timetables
+          </span>
+            </a>
+         </li>
+         <li [routerLinkActive]="['active']"
+             [routerLink]="['/studentEnrollments-management','studentEnrollment-list']">
+            <a>
+          <span>
+            Student Enrollments
+          </span>
+            </a>
+         </li>
+      </ul>
+   </mat-expansion-panel>
+   <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
+      <mat-expansion-panel
+         #attendanceReportExpansion
+         (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
+         [expanded]="false"
+         class="mat-expansion-panel-body">
+         <mat-expansion-panel-header>
+            Attendance Reports
+         </mat-expansion-panel-header>
+         <ul>
+            <li [routerLinkActiveOptions]="{exact: true}"
+                [routerLinkActive]="['active']"
+                [routerLink]="['/attendancereportsbylecture-management','attendane-report-by-lecture']">
+               <a>
             <span>
               Attendance Report By Lecture
             </span>
-          </a>
-        </li>
-        <!-- <li [routerLinkActive]="['active']"
-             [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
-           <a>
+               </a>
+            </li>
+            <li [routerLinkActiveOptions]="{exact: true}"
+                [routerLinkActive]="['active']"
+                [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
+               <a>
              <span>
                Attendance Report By Student
              </span>
-           </a>
-         </li>-->
+               </a>
+            </li>
 
-      </ul>
-    </mat-expansion-panel>
+         </ul>
+      </mat-expansion-panel>
 
-  </mat-accordion>
+   </mat-accordion>
 </mat-accordion>

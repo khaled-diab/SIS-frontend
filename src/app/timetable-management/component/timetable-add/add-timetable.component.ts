@@ -101,11 +101,6 @@ export class AddTimetableComponent implements OnInit {
       this.timetable = this.data;
       console.log(this.timetable);
       this.form2 = new FormGroup({
-            // academicYearMenu: new FormControl(this.timetable.academicYearDTO?.id, Validators.required),
-            // academicTermMenu: new FormControl(this.timetable.academicTermDTO?.id, Validators.required),
-            // collegeMenu: new FormControl(this.timetable.collegeDTO?.id, Validators.required),
-            // departmentMenu: new FormControl(this.timetable.departmentDTO?.id, Validators.required),
-            // courseMenu: new FormControl(this.timetable.courseDTO?.id, Validators.required),
             facultyMemberMenu: new FormControl(undefined, Validators.required),
             lectureTypeMenu: new FormControl(undefined, Validators.required),
             buildingMenu: new FormControl(undefined, Validators.required),
@@ -121,17 +116,13 @@ export class AddTimetableComponent implements OnInit {
       this.college = this.data.collegeDTO;
       this.department = this.data.departmentDTO;
       this.course = this.data.courseDTO;
-      // this.academicYearService.getAcademicYears().subscribe(Response => {
-      //    this.academicYears = Response;
-      //    this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
-      // });
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
          this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
          this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
          this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.facultyMembers = this.facultyMemberService.getFacultyMembersByDepartment(this.department.id);
+         this.facultyMembers = this.facultyMemberService.getFacultyMembersByCollege(this.college.id);
          this.courses = this.courseService.getCoursesByDepartment(this.department.id);
       });
 
@@ -164,11 +155,6 @@ export class AddTimetableComponent implements OnInit {
 
    addTimes(): void {
       if (this.form2.valid) {
-         // this.timetable.academicYearDTO = this.form2.get('academicYearMenu')?.value;
-         // this.timetable.academicTermDTO = this.form2.get('academicTermMenu')?.value;
-         // this.timetable.collegeDTO = this.form2.get('collegeMenu')?.value;
-         // this.timetable.departmentDTO = this.form2.get('departmentMenu')?.value;
-         // this.timetable.courseDTO = this.form2.get('courseMenu')?.value;
          this.timetable.facultyMemberDTO = this.form2.get('facultyMemberMenu')?.value;
          this.timetable.lectureTypeDTO = this.form2.get('lectureTypeMenu')?.value;
          this.timetable.buildingDTO = this.form2.get('buildingMenu')?.value;
@@ -178,7 +164,10 @@ export class AddTimetableComponent implements OnInit {
          this.timetable.endTime = this.form2.get('endTime')?.value;
          console.log(this.timetable);
       }
-
+      // if (this.form2.get('startTime')?.value > this.form2.get('endTime')?.value) {
+      //    this.snackBar.open('End Time must be greater than Start Time!', undefined, {duration: 3500});
+      //    return;
+      // }
       this.timetableManagementService.timetableAddEvent.next(this.timetable);
    }
 

@@ -14,22 +14,22 @@ import {UpdateStudentComponent} from '../update-student/update-student.component
 import {Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
+import {StudentRecordModel} from '../../../shared/model/student-management/student-record-model';
 
 @Component({
    selector: 'app-students-list',
    templateUrl: './students-list.component.html',
    styleUrls: ['./students-list.component.css']
 })
-export class StudentsListComponent implements OnInit , OnDestroy{
-
+export class StudentsListComponent implements OnInit , OnDestroy {
 
 
    @ViewChild('paginator') paginator: MatPaginator;
 
-   tableData: PageRequest<StudentModel>;
+   tableData: PageRequest<StudentRecordModel>;
    x: number;
    studentRequestModel: StudentRequestModel = new StudentRequestModel();
-   displayedColumns = ['NO.', 'universityId', 'nameAr',  'collegeId', 'departmentId', 'year', 'Actions'];
+   displayedColumns = ['NO.', 'universityId', 'nameAr',  'departmentId','collegeId', 'level', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    department: string;
@@ -41,21 +41,22 @@ export class StudentsListComponent implements OnInit , OnDestroy{
                private dialog: MatDialog,
                private modalService: BsModalService,
                private snackBar: MatSnackBar,
-               private route: Router, ){}
+               private route: Router) {
+   }
 
 
-
-   addStudent(): void{
+   addStudent(): void {
       this.route.navigate(['/students-management', 'student-add']);
    }
 
 
-
    ngOnInit(): void {
+
       this.subs = this.subscriptions();
    }
+
    pageChangeEvent(event: PageEvent): void {
-      this.studentManagementService.searchStudents(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
+      this.studentManagementService.searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
          .subscribe(value => {
             this.tableData = value;
 
@@ -76,7 +77,7 @@ export class StudentsListComponent implements OnInit , OnDestroy{
          .subscribe(value => {
             this.studentRequestModel = value;
             this.paginator.pageIndex = 0;
-            this.studentManagementService.searchStudents( this.paginator.pageIndex , this.paginator.pageSize, this.studentRequestModel)
+            this.studentManagementService.searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
                .subscribe(filteredData => {
                   this.tableData = filteredData;
                });
@@ -88,27 +89,29 @@ export class StudentsListComponent implements OnInit , OnDestroy{
       const filter = new StudentRequestModel();
 
       return this.studentManagementService
-         .searchStudents( 0, this.defaultPgeSize, filter).subscribe(value => {
+         .searchRecords(0, this.defaultPgeSize, filter).subscribe(value => {
 
             this.tableData = value;
+            console.log(value);
          });
    }
 
    sortEvent($event: Sort): void {
       this.studentRequestModel = this.studentManagementService.constructStudentRequestObject($event, this.studentRequestModel);
       this.paginator.pageIndex = 0;
-      this.studentManagementService.searchStudents( this.paginator.pageIndex , this.paginator.pageSize, this.studentRequestModel).subscribe(value => {
+      this.studentManagementService.searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel).subscribe(value => {
          this.tableData = value;
       });
    }
 
    private refreshStudents(): void {
       this.studentManagementService
-         .searchStudents(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
+         .searchRecords(this.paginator.pageIndex, this.paginator.pageSize, this.studentRequestModel)
          .subscribe(value => {
             this.tableData = value;
          });
    }
+
    private handleSuccessfulDeletion(): void {
 
       this.refreshStudents();
@@ -125,10 +128,16 @@ export class StudentsListComponent implements OnInit , OnDestroy{
    private handleFailedDeletion(): void {
       this.snackBar.open('Student Deletion Failed', undefined, {duration: 2000});
    }
+
    deleteStudent(row: StudentModel): void {
-      this.modalRefDelete = this.modalService.show( DeleteStudentModalComponent, { backdrop: 'static', ignoreBackdropClick: true, keyboard: false});
+      this.modalRefDelete = this.modalService.show(DeleteStudentModalComponent, {
+         backdrop: 'static',
+         ignoreBackdropClick: true,
+         keyboard: false
+      });
       this.modalRefDelete.content.id = row.id;
    }
+
    private deleteStudentEventSubscription(): Subscription {
       return this.studentManagementService.studentDeleteEvent.subscribe(id => {
          this.studentManagementService.deleteStudent(id).subscribe(value => {
@@ -138,22 +147,29 @@ export class StudentsListComponent implements OnInit , OnDestroy{
          });
       });
    }
-   updateOrPreviewStudent(row: StudentModel, selection: number): void {
+
+   updateOrPreviewStudent(row: StudentRecordModel, selection: number): void {
+      //
+      //
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '60%';
       dialogConfig.height = '800px';
-      const data = new  UpdatePreviewData();
-      data.st = row;
-      data.sel = selection;
-      dialogConfig.data = data;
-      this.dialog.open(UpdateStudentComponent, dialogConfig);
-      this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(value => {
-            this.dialog.closeAll();
-            this.refreshStudents();
-         }
-      );
+      const data = new UpdatePreviewData();
+      this.studentManagementService.getStudent(row.id).subscribe(value => {
+         data.st = value;
+         data.sel = selection;
+         dialogConfig.data = data;
+         this.dialog.open(UpdateStudentComponent, dialogConfig);
+
+         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(value => {
+               this.dialog.closeAll();
+               this.refreshStudents();
+            }
+         );
+      });
+
    }
 
    ngOnDestroy(): void {

@@ -7,5 +7,4 @@ export class StudentRequestModel {
   collegeId: number;
   departmentId: number | null;
   level: string;
-
 }

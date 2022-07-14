@@ -14,22 +14,20 @@ import { StudentModel } from 'src/app/shared/model/student-management/student-mo
   providedIn: 'root'
 })
 export class AttendaneReportByLectureService {
+  constructor(private http: HttpClient) { }
+  static sectionList: SectionModel[];
   attendanceReportByLectureFilterEvent: Subject<any> = new Subject<any>();
   attendanceDetailsByLectureFilterEvent: Subject<any> = new Subject<any>();
   closeSaveEvent: Subject<any> = new Subject();
-  sectionINFO : SectionModel=new SectionModel();
-  static sectionList: SectionModel[];
-  constructor(private http:HttpClient) { }
-// readonly studentAttendanceReport = 'http://localhost:8080/api/attendanceDetails/getAttendancesByLectureId';
-// readonly lecturesReport='http://localhost:8080/api/lectures/getFacultyMemberLecturesToReport';
-// readonly attendanceDetails='http://localhost:8080/api/attendanceDetails/update';
-attendaceReportModdel:AttendanceDetailsModel=new AttendanceDetailsModel();
-studentAttendance : AttendanceReportByLectureManagementModel=new AttendanceReportByLectureManagementModel()
+  sectionINFO: SectionModel = new SectionModel();
+
+attendaceReportModdel: AttendanceDetailsModel = new AttendanceDetailsModel();
+studentAttendance: AttendanceReportByLectureManagementModel = new AttendanceReportByLectureManagementModel();
 public getAllCourses():
 Observable<CourseModel[]> {
 return this.http.get <CourseModel[]>(Constants.getCourses);
 }
-public getlectureReport(sectionId :number):Observable<LectureModel[]>{
+public getlectureReport(sectionId: number): Observable<LectureModel[]>{
   console.log(sectionId);
   return this.http.get <LectureModel[]>(`${Constants.lecturesReport}/${sectionId}`);
 }
@@ -37,11 +35,16 @@ public getAllsections():
 Observable<SectionModel[]> {
 return this.http.get <SectionModel[]>(Constants.getSections);
 }
-public getStudentAttendanceReport(lectureId : number):Observable<AttendanceReportByLectureManagementModel[]>{
-  return this.http.get <AttendanceReportByLectureManagementModel[]>(`${Constants.studentAttendanceReport}/${lectureId}`);
+public getsection(id: number): Observable<SectionModel>{
+  return this.http.get <SectionModel>(`${Constants.getSection}/${id}`);
+
 }
-editattendanceStatues(attendance :AttendanceDetailsModel) {
-   return this.http.put(`${Constants.attendanceDetails}`,attendance);
+public getStudentAttendanceReport(lectureId: string | null): Observable<any>{
+   console.log(lectureId);
+  return this.http.get <any>(`${Constants.studentAttendanceReport}/${lectureId}`);
+}
+editattendanceStatues(attendance: AttendanceDetailsModel) {
+   return this.http.put(`${Constants.attendanceDetails}`, attendance);
 }
 
 }
