@@ -190,7 +190,7 @@
          </li>
       </ul>
    </mat-expansion-panel>
-   <mat-accordion>
+   <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
       <mat-expansion-panel
          #attendanceReportExpansion
          (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
