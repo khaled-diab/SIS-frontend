@@ -10,7 +10,6 @@ import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-manage
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
 import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
-import {UserModel} from '../../shared/model/security/user-model';
 import {RoleModel} from '../../shared/model/security/role-model';
 
 @Injectable({
@@ -104,5 +103,12 @@ export class FacultyMemberManagementService {
 
    getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
       return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
+   }
+
+   public uploadBulkStudents(event: any): Observable<MessageResponse> {
+      const file: File = event.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file, file.name.replaceAll('-', ''));
+      return this.httpClient.post<MessageResponse>(Constants.UPLOAD_BULK_STAFF, formData);
    }
 }

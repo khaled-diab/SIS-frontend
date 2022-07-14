@@ -141,6 +141,7 @@ export class Constants {
    public static readonly uploadFileURL = environment.driveURL + 'upload/';
    public static readonly uploadProfilePicture = environment.baseURL + '/security/upload-profile-picture';
    public static readonly UPLOAD_BULK_STUDENTS = environment.baseURL + '/security/register-bulk-students';
+   public static readonly UPLOAD_BULK_STAFF = environment.baseURL + '/security/register-bulk-faculty-member';
    public static readonly FORM_DATA_VALUE = 'multipart/form-data';
    public static readonly APP_JSON = 'application/json';
    public static readonly STUDENT_TYPE = 'STUDENT';

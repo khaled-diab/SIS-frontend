@@ -1,7 +1,13 @@
+<p-toast position="bottom-center"></p-toast>
 <div class="p-3">
    <app-facultyMember-filter></app-facultyMember-filter>
-
    <div class="d-flex justify-content-end mt-3">
+      <div class="col-1">
+         <input type="file" style="display: none" (change)="uploadBulkStaff($event)" #file accept=".xlsx, .xls">
+         <button (click)="file.click()" class="align-content-center" mat-icon-button>
+            <mat-icon class="add" matTooltip="upload Bulk Staff" matTooltipPosition="above">upload_file</mat-icon>
+         </button>
+      </div>
       <div class="col-1">
          <button (click)="addFacultyMember()" class="align-content-center" mat-icon-button>
             <mat-icon class="add" matTooltip="Add Faculty Member" matTooltipPosition="above">add_circle</mat-icon>

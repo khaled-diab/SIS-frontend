@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
    }
 
    private handleFailedRegister(message: string): void {
-      this.messageService.add({severity: 'error', summary: 'Error', detail: message});
+      this.messageService.add({severity: 'error', summary: 'Error', detail: message, life: 5000});
    }
 }
 

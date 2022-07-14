@@ -7,4 +7,5 @@ export class RegisterModel {
    nationalityID: string;
    birthDate: Date;
    englishName: string;
+   phoneNumber: string;
 }

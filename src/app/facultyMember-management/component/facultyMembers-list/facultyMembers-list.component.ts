@@ -15,6 +15,7 @@ import {FacultyMemberRequestModel} from '../../../shared/model/facultyMember-man
 import {take} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {FacultyMemberTableRecordsModel} from '../../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
+import {MessageService} from 'primeng/api';
 
 @Component({
    selector: 'app-facultyMembers-list',
@@ -37,7 +38,7 @@ export class FacultyMembersListComponent implements OnInit, OnDestroy {
                private dialog: MatDialog,
                private modalService: BsModalService,
                private snackBar: MatSnackBar,
-               private route: Router) {
+               private route: Router, private messageService: MessageService) {
    }
 
    ngOnInit(): void {
@@ -162,6 +163,14 @@ export class FacultyMembersListComponent implements OnInit, OnDestroy {
                this.refreshFacultyMembers();
             }
          );
+      });
+   }
+
+   uploadBulkStaff($event: any): void {
+      this.facultyMemberManagementService.uploadBulkStudents($event).subscribe(value => {
+         this.messageService.add({severity: 'success', summary: 'Success', detail: value.message, life: 4000});
+      }, _ => {
+         this.messageService.add({severity: 'error', summary: 'Error', detail: 'File could not be uploaded try again later', life: 4000});
       });
    }
 
