@@ -27,7 +27,7 @@ export class FacultyMembersListComponent implements OnInit, OnDestroy {
    @ViewChild('paginator') paginator: MatPaginator;
    tableData: PageRequest<FacultyMemberTableRecordsModel>;
    facultyMemberRequestModel: FacultyMemberRequestModel = new FacultyMemberRequestModel();
-   displayedColumns = ['No.', 'nameAr', 'nameEn', 'degreeId', 'collegeId', 'departmentId', 'universityMail', 'Actions'];
+   displayedColumns = ['No.', 'nameAr', 'degreeId', 'universityMail', 'departmentId', 'collegeId', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    department: string;

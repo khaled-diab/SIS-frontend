@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EditStatuesComponent } from 'src/app/attendance-by-lecture-management/components/edit-statues/edit-statues.component';
@@ -22,7 +22,7 @@ import { AttendaneReportByLectureService } from '../../service/attendane-report-
   styleUrls: ['./attendane-details-by-lecture.component.css']
 })
 export class AttendaneDetailsByLectureComponent implements OnInit {
-  dataSource: MatTableDataSource<AttendanceDetailsModel>;
+  dataSource: MatTableDataSource<any>;
   tableData: AttendanceDetailsModel[];
   attendancceReportRequest: AttendanceReportRequestModel = new AttendanceReportRequestModel();
   displayedColumns = ['universityId', 'nameAr', 'attendanceStatus', 'Actions'];
@@ -32,11 +32,12 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
   dataPur: any[] = [];
   pageIndex = 1;
   defaultPageSize = 10;
-  lectureId = 0;
+  lectureId: string | null;
   coursename = '';
   date: string;
   from: Time;
   to: Time;
+  flag = false;
 //  colors = [{ attendanceStatus: "absent", color: "red" }, { attendanceStatus: "present", color: "green" }]
   isSmallScreen: boolean;
   subscriptionsList: Subscription[] = [];
@@ -67,49 +68,60 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
               public dialog: MatDialog,
               private changeDetectorRef: ChangeDetectorRef,
               private breakpointObserver: BreakpointObserver,
+              private activatedRoute: ActivatedRoute,
     ) { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>();
-    this.Subscription();
+     // this.activatedRoute.paramMap.subscribe(() => {
+     // });
 
+
+     this.dataSource = new MatTableDataSource<any>();
+     this.Subscription();
+
+}
+ngAfterViewInit(): void {
+  // this.dataSource = new MatTableDataSource<any>();
+  // this.Subscription();
 }
 
 private Subscription(): Subscription[]{
-  // this.subscriptionsList.push(this.filterEventSubscription());
-  this.subscriptionsList.push(this.initialDataSubscription());
+  // this.subscriptionsList.push(this.initialDataSubscription());
+  this.subscriptionsList.push(this.filterEventSubscription());
   return this.subscriptionsList;
 }
 private filterEventSubscription(): Subscription{
-  return this.lectureReportService.attendanceDetailsByLectureFilterEvent.subscribe(
-    value => {this.attendancceReportRequest = value;
-              this.lectureId = value;
-              console.log(this.attendancceReportRequest.lectureId);
-              this.lectureReportService.getStudentAttendanceReport(this.attendancceReportRequest.lectureId)
-  .subscribe(Report =>
-    {
-      this.dataPur = Report;
-      for (let i = 0; i < this.dataPur.length; i++){
-        this.universityId.push(this.dataPur[i].attendanceDetailsDTOs.universityId);
-        this.nameAr.push(this.dataPur[i].attendanceDetailsDTOs.nameAr);
-        this.attendanceStatus.push(this.dataPur[i].attendanceDetailsDTOs.attendanceStatus);
-        console.log(this.dataPur);
-      }
-    });
-  }
-  );
+
+  // return this.lectureReportService.attendanceDetailsByLectureFilterEvent.subscribe(
+  //   value => {
+  //      this.attendancceReportRequest = value;
+  //           this.lectureId = this.attendancceReportRequest.lectureId;
+  //           console.log(this.attendancceReportRequest.lectureId);
+            return this.lectureReportService.getStudentAttendanceReport
+      (this.activatedRoute.snapshot.paramMap.get('lectureId')).subscribe(Report => {
+         console.log('here');
+         console.log(Report);
+         this.tableData = Report.attendanceDetailsDTOs;
+         this.dataSource.data = this.tableData;
+         console.log(this.tableData);
+     } );
+   // );
 }
 
-private initialDataSubscription(): Subscription {
-  return this.lectureReportService.getStudentAttendanceReport(1).subscribe(Report => {
-    this.dataPur = Report;
-    for (let i = 0; i < this.dataPur.length; i++){
-      this.universityId[i] = this.dataPur[i].attendanceDetailsDTOs.universityId;
-      this.nameAr[i] = this.dataPur[i].attendanceDetailsDTOs.nameAr;
-      this.attendanceStatus[i] = this.dataPur[i].attendanceDetailsDTOs.attendanceStatus;
-    }
-  });
-}
+// private initialDataSubscription(): Subscription{
+//
+//   return this.lectureReportService.getStudentAttendanceReport(31).subscribe(Report =>
+//     {
+//        console.log('here');
+//        console.log(Report.attendanceDetailsDTOs);
+//        this.tableData = Report.attendanceDetailsDTOs;
+//        this.dataSource.data = this.tableData;
+//        console.log(this.tableData);
+//
+//
+//
+//     });
+// }
 edit(details: AttendanceDetailsModel){
   if (this.isSmallScreen) {
     this.router.navigateByUrl('/attendancereportsbylecture-management/edit-status', {state: details}).then(_ => console.log());

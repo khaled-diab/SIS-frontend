@@ -13,6 +13,7 @@ export class SectionModel extends BaseModel {
   theoreticalLectures: number;
   practicalLectures: number;
   exercisesLectures: number;
+  capacity: number;
   numberOfStudents: number;
   majorDTO: MajorModel;
   studyTypeDTO: StudyTypeModel;

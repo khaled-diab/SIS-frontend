@@ -9,7 +9,7 @@
       </div>
       <form class="form-row form">
 
-         <div class="form-group col-6 search-box ">
+         <div class="form-group col-3 search-box ">
             <mat-form-field appearance="outline">
 
                <!--            <input aria-describedby="emailHelp" class="form-control" name="search" id="exampleInputEmail1" placeholder="Search here"-->
@@ -53,7 +53,24 @@
 
             </mat-form-field>
          </div>
+         <div class="col-3 mt-1">
 
+            <mat-form-field appearance="outline">
+               <mat-label>Levels</mat-label>
+               <mat-select  #levelSelect>
+                  <mat-option [value]="undefined">
+                     Choose Level
+                  </mat-option>
+                  <mat-option *ngFor="let level of levels" [value]="level">
+                     {{level}}
+                  </mat-option>
+               </mat-select>
+
+            </mat-form-field>
+         </div>
+         <div appearance="outline" class="col-md-3 col-sm-12">
+            <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+         </div>
       </form>
    </div>
 

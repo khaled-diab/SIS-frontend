@@ -37,6 +37,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     DeleteCourseDialogComponent,
     PreviewCourseComponent
   ],
+   exports: [
+      CoursesListComponent
+   ],
   imports: [
     ModalModule.forRoot(),
     CommonModule,

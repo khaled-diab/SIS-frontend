@@ -12,9 +12,12 @@
          System Management
       </mat-expansion-panel-header>
       <ul>
+
+
          <li [routerLinkActive]="['active']"
              [routerLink]="['/academicyears-management','academic-year-list']">
             <a>
+
           <span>
             Academic Years
           </span>
@@ -23,6 +26,7 @@
          <li [routerLinkActive]="['active']"
              [routerLink]="['/academicterms-management','academic-term-list']">
             <a>
+
           <span>
             Academic Terms
           </span>
@@ -48,6 +52,7 @@
          <li [routerLinkActive]="['active']"
              [routerLink]="['/academicprograms-management','academic-program-list']">
             <a>
+
           <span>
             Academic Programs
           </span>
@@ -56,6 +61,7 @@
          <li [routerLinkActive]="['active']"
              [routerLink]="['/courses-management','course-list']">
             <a>
+
           <span>
             Courses
           </span>
@@ -64,6 +70,7 @@
          <li [routerLinkActive]="['active']"
              [routerLink]="['/buildings-management','building-list']">
             <a>
+
           <span>
             Buildings
           </span>
@@ -72,16 +79,9 @@
          <li [routerLinkActive]="['active']"
              [routerLink]="['/classrooms-management','classroom-list']">
             <a>
+
           <span>
             Classrooms
-          </span>
-            </a>
-         </li>
-         <li [routerLinkActive]="['active']"
-             [routerLink]="['/imported-users']">
-            <a>
-          <span>
-           Imported Users
           </span>
             </a>
          </li>
@@ -99,32 +99,27 @@
          User Management
       </mat-expansion-panel-header>
       <ul>
-         <li [routerLinkActiveOptions]="{exact: true}"
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'" [routerLinkActiveOptions]="{exact: true}"
              [routerLinkActive]="['active']"
              [routerLink]="['/facultyMembers-management','facultyMember-list']">
+
             <a>
           <span>
             Faculty Members
           </span>
             </a>
          </li>
-         <li [routerLinkActive]="['active']"
-             [routerLink]="['/students-management','student-list']">
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'"
+             [routerLinkActive]="['active']" [routerLink]="['/students-management','student-list']">
             <a>
           <span>
             Students
           </span>
             </a>
          </li>
-         <li [routerLinkActive]="['active']"
-             [routerLink]="['/student-attendance','student-attendance-list']">
-            <a>
-          <span>
-            Attendance Registration
-          </span>
-            </a>
-         </li>
-         <li [routerLinkActive]="['active']"
+
+         <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
+             [routerLinkActive]="['active']"
              [routerLink]="['/timetables-management','facultyMember-timetables-list']">
             <a>
           <span>
@@ -132,7 +127,10 @@
           </span>
             </a>
          </li>
-         <li [routerLinkActive]="['active']"
+
+
+         <li *ngIf="loggedInUser.user.role.roleName==='STUDENT'"
+             [routerLinkActive]="['active']"
              [routerLink]="['/timetables-management','student-timetables-list']">
             <a>
           <span>
@@ -141,11 +139,21 @@
             </a>
          </li>
 
+         <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/student-attendance','student-attendance-list']">
+            <a>
+          <span>
+            Attendance Registration
+          </span>
+            </a>
+         </li>
+
       </ul>
    </mat-expansion-panel>
 </mat-accordion>
 
-<mat-accordion>
+<mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
    <mat-expansion-panel
       #academicDataExpansion
       (afterExpand)="closeOtherExpansions(academicDataExpansion)"
@@ -182,7 +190,7 @@
          </li>
       </ul>
    </mat-expansion-panel>
-   <mat-accordion>
+   <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
       <mat-expansion-panel
          #attendanceReportExpansion
          (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
@@ -201,14 +209,15 @@
             </span>
                </a>
             </li>
-            <!-- <li [routerLinkActive]="['active']"
-                 [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
+            <li [routerLinkActiveOptions]="{exact: true}"
+                [routerLinkActive]="['active']"
+                [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
                <a>
-                 <span>
-                   Attendance Report By Student
-                 </span>
+             <span>
+               Attendance Report By Student
+             </span>
                </a>
-             </li>-->
+            </li>
 
          </ul>
       </mat-expansion-panel>

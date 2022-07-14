@@ -12,6 +12,8 @@ import {AttendanceCodeComponent} from '../attendance-code/attendance-code.compon
 import {Subscription} from 'rxjs';
 import {AttendanceCounter} from '../../../shared/model/student-attendance/attendanceCounter';
 import {MatInput} from '@angular/material/input';
+import {Constants} from '../../../shared/constants';
+import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ import {MatInput} from '@angular/material/input';
 
 export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy{
 
-   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog) {
+   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog, private facultyMemberManagementService: FacultyMemberManagementService) {
 
    }
 
@@ -37,7 +39,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    isRegTypeChanged = false;
    isSectionsChanged = false;
    lecture = new LectureModel();
-   fc = new FacultyMemberModel();
+   // fc = new FacultyMemberModel();
    minCountDown = 30;
    countDown: string;
    counter: number;
@@ -46,19 +48,28 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    @ViewChild('regTypeMenu') regTypeMenu: MatSelect;
    @ViewChild('regTime') regTime: MatInput;
    @ViewChild('lectureDate') lectureDate: MatInput;
-
+   loggedIn: any;
+   facultyMember=new FacultyMemberModel();
    cancelAttendanceCodeEventSubscription: Subscription;
 
 
    ngOnInit(): void {
-      this.fc.id = 1;
-      this.lecture.facultyMemberDTO = this.fc;
-      this.studentAttendanceService.getFacultyMemberSections(1).subscribe(value => {
-         this.sections = value;
+      // @ts-ignore
+      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      console.log(this.loggedIn.user);
+      this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
+         this.facultyMember = value;
+         this.lecture.facultyMemberDTO = this.facultyMember;
+         this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
+            console.log(value);
+            this.sections = value;
+         });
       });
+      // this.fc.id = 1;
+
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
-            console.log(this.lecture);
+
             this.dialog.closeAll();
             this.lecture.attendanceStatus = false;
             this.studentAttendanceService.getAttendancesEvent.next(this.lecture);
@@ -72,7 +83,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
       this.regTime.value  = this.minCountDown.toString(this.minCountDown);
       this.counter = this.minCountDown;
-      this.lecture.facultyMemberDTO = this.fc;
+      this.lecture.facultyMemberDTO = this.facultyMember;
       this.coursesMenu.valueChange.subscribe(value => {
          this.lecture.id = 0;
          this.isSectionsChanged = true;
@@ -112,6 +123,8 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
       if (this.lecture.attendanceType !== 'Manual'){
          this.lecture.attendanceStatus = true;
+      }else{
+         this.lecture.attendanceCode = 0;
       }
       this.studentAttendanceService.addLecture(this.lecture).subscribe(value => {
          const today = formatDate(value.lectureDate, 'yyyy-MM-dd', 'en-US');
@@ -119,6 +132,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
          this.lecture = value;
          if (this.lecture.attendanceType === 'Manual'){
+            this.lecture.attendanceCode = 0;
             this.studentAttendanceService.saveLectureEvent.next(this.lecture);
          }else{
             // console.log('auto');

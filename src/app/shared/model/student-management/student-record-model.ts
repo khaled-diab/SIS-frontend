@@ -7,7 +7,8 @@ export class StudentRecordModel extends BaseModel {
   universityId: number;
   nameAr: string;
   nameEn: string;
-  year: string;
+  level: string;
+  // year: string;
   departmentName: string;
   collegeName: string;
 

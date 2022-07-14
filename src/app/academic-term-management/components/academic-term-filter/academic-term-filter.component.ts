@@ -12,7 +12,7 @@ import { AcademicTermService } from '../../service/academic-term.service';
 export class AcademicTermFilterComponent implements OnInit {
   academicTermRequestModel: AcademicTermRequestModel = new AcademicTermRequestModel();
   searchValue='';
-  filterAcademicYear: number;
+  filterAcademicYear: null;
   academicYears: AcademicYear[];
  
   @ViewChild('academicYearSelect', {static: true})  academicYearSelect: MatSelect;
@@ -30,6 +30,8 @@ export class AcademicTermFilterComponent implements OnInit {
   }
 
   resetFilter(): void {
+    this.academicYearSelect.value = undefined;
+    this.searchValue = '';
     this.academicTerm.academicTermFilterEvent.next(['', null]);
   }
 

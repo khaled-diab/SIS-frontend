@@ -22,7 +22,7 @@ import {MessageService} from 'primeng/api';
    templateUrl: './students-list.component.html',
    styleUrls: ['./students-list.component.css']
 })
-export class StudentsListComponent implements OnInit, OnDestroy {
+export class StudentsListComponent implements OnInit , OnDestroy {
 
 
    @ViewChild('paginator') paginator: MatPaginator;
@@ -30,7 +30,7 @@ export class StudentsListComponent implements OnInit, OnDestroy {
    tableData: PageRequest<StudentRecordModel>;
    x: number;
    studentRequestModel: StudentRequestModel = new StudentRequestModel();
-   displayedColumns = ['NO.', 'universityId', 'nameAr', 'collegeId', 'departmentId', 'year', 'Actions'];
+   displayedColumns = ['NO.', 'universityId', 'nameAr',  'departmentId','collegeId', 'level', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    department: string;
@@ -52,6 +52,7 @@ export class StudentsListComponent implements OnInit, OnDestroy {
 
 
    ngOnInit(): void {
+
       this.subs = this.subscriptions();
    }
 
@@ -130,7 +131,11 @@ export class StudentsListComponent implements OnInit, OnDestroy {
    }
 
    deleteStudent(row: StudentModel): void {
-      this.modalRefDelete = this.modalService.show(DeleteStudentModalComponent, {backdrop: 'static', ignoreBackdropClick: true, keyboard: false});
+      this.modalRefDelete = this.modalService.show(DeleteStudentModalComponent, {
+         backdrop: 'static',
+         ignoreBackdropClick: true,
+         keyboard: false
+      });
       this.modalRefDelete.content.id = row.id;
    }
 
@@ -145,6 +150,8 @@ export class StudentsListComponent implements OnInit, OnDestroy {
    }
 
    updateOrPreviewStudent(row: StudentRecordModel, selection: number): void {
+      //
+      //
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -156,7 +163,8 @@ export class StudentsListComponent implements OnInit, OnDestroy {
          data.sel = selection;
          dialogConfig.data = data;
          this.dialog.open(UpdateStudentComponent, dialogConfig);
-         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(_ => {
+
+         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(value => {
                this.dialog.closeAll();
                this.refreshStudents();
             }

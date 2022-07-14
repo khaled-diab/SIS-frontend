@@ -31,6 +31,7 @@ export class Constants {
    public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
    public static readonly allFacultyMembersUrl = environment.baseURL + '/facultyMembers/all';
    public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
+   public static readonly facultyMemberByUserIdUrl = environment.baseURL + '/facultyMembers/facultyMemberByUserId/';
 
    /* Student Url */
    public static readonly deleteStudentUrl = environment.baseURL + '/students/deleteStudent/';
@@ -104,6 +105,9 @@ export class Constants {
    public static readonly studentAttendanceReport = environment.baseURL + '/attendanceDetails/getAttendancesByLectureId';
    public static readonly lecturesReport = environment.baseURL + '/lectures/getFacultyMemberLecturesToReport';
    public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/update';
+   // Attendane Details By Student
+   public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
+
    // Sort
    public static readonly ASC = 'ASC';
    public static readonly DESC = 'DESC';
@@ -144,4 +148,7 @@ export class Constants {
    public static readonly ADMIN_TYPE = 'ADMIN';
    public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/uploadedUsers';
    public static readonly usersFilesPageUrl = environment.baseURL + '/security/findAll/';
+
+   public  static  readonly  LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+
 }

@@ -96,11 +96,8 @@ export class AttendaneReportByLectureComponent implements OnInit {
 
             this.totalLectures = Response.exercisesLectures + Response.theoreticalLectures
             + Response.practicalLectures;
-            console.log(this.totalLectures);
-            console.log(Response.exercisesLectures);
-            this.attendanceRate = Math.floor((this.totalRate / this.totalLectures));
-            console.log(this.totalRate);
-            console.log(this.attendanceRate);
+
+            this.attendanceRate = Math.floor((this.totalRate / this.totalLectures) * 100);
 
           });
 
@@ -110,10 +107,10 @@ export class AttendaneReportByLectureComponent implements OnInit {
 
   details(lecture: LectureModel): void
   {
-this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-details-by-lecture');
-this.attendanceReportRequest.lectureId = lecture.id;
-console.log(lecture.id);
-this.lectureReportService.attendanceDetailsByLectureFilterEvent.next(this.attendanceReportRequest);
+this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-details-by-lecture/'+lecture.id);
+// this.attendanceReportRequest.lectureId = lecture.id;
+
+// this.lectureReportService.attendanceDetailsByLectureFilterEvent.next(this.attendanceReportRequest);
   }
 
 

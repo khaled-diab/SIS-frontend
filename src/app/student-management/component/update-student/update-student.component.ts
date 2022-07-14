@@ -13,6 +13,7 @@ import {CollegeManagementService} from '../../../college-management/service/coll
 import {MatSelect} from '@angular/material/select';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {AcademicProgramService} from '../../../academic-program/service/academic-program.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
    selector: 'app-update-student',
@@ -28,7 +29,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
    programs: AcademicProgramModel[];
    department = new  DepartmentModel();
    years: string[];
-   levels: string[];
+   levels = Constants.LEVELS;
    errorr = false;
    errorMessage: string;
    @ViewChild('arabicName') arabicName: NgModel;
@@ -43,6 +44,8 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
    url: string;
    imgFlage = 0;
    title = 'Update Student';
+   defProg = -1;
+   defDept = -1;
 
    constructor(@Inject(MAT_DIALOG_DATA) public data: UpdatePreviewData, private studentManagementService: StudentManagementService,
                private snackBar: MatSnackBar,
@@ -52,7 +55,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
    }
 
    ngOnInit(): void {
-      if (this.data.sel === 1) {
+            if (this.data.sel === 1) {
          this.isDisabled = false;
       } else {
          this.isDisabled = true;
@@ -60,11 +63,12 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
 
       }
 
-      this.student = this.data.st;
+            this.student = this.data.st;
+            console.log(this.student.user);
 
-      this.url = Constants.StudentImgUrl + this.student.photo;
+            this.url = Constants.StudentImgUrl + this.student.photo;
       //
-      this.form = new FormGroup({
+            this.form = new FormGroup({
             nameEn: new FormControl(this.student.nameEn, Validators.compose([Validators.required,
                Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
             nameAr: new FormControl(this.student.nameAr, Validators.compose([Validators.required,
@@ -82,32 +86,29 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
             alternativeMail: new FormControl(this.student.alternativeMail, Validators.email),
             parentPhone: new FormControl(this.student.parentPhone, Validators.pattern(Constants.DIGITS_ONLY_11)),
             level: new FormControl(this.student.level),
-            year: new FormControl(this.student.year, Validators.required),
+            // year: new FormControl(this.student.year, Validators.required),
             photo: new FormControl(this.student.photo),
             collegeMenu: new FormControl(this.student.collegeDTO.id, Validators.required),
-            departmentMenu: new FormControl(this.student.departmentDTO.id, Validators.required),
-            programMenu: new FormControl(this.student.academicProgramDTO.id, Validators.required),
+            departmentMenu: new FormControl(this.student.departmentDTO?.id),
+            programMenu: new FormControl(this.student.academicProgramDTO?.id),
          }
       );
 
-
-      if (this.data.sel !== 1) {
+            if (this.data.sel !== 1) {
          this.form.disable();
 
       }
-      this.levels = ['1', '2', '3', '4', '5', '6'];
-      this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
 
-      this.college = this.data.st.collegeDTO;
-      this.department = this.data.st.departmentDTO;
+            this.college = this.data.st.collegeDTO;
+            this.department = this.data.st.departmentDTO;
       // if (this.department.id === 1){
       //   this.programSelect.setDisabledState(true);
       // }
-      console.log(this.department);
-      this.collegeManagementService.getAllColleges().subscribe(Response => {
+            console.log(this.department);
+            this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
          this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.department.id);
+         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.department?.id);
       });
    }
    ngAfterViewInit(): void {
@@ -144,13 +145,22 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          this.student.alternativeMail = this.form.get('alternativeMail')?.value;
          this.student.parentPhone = this.form.get('parentPhone')?.value;
          this.student.level = this.form.get('level')?.value;
-         this.student.year = this.form.get('year')?.value;
+         // this.student.year = this.form.get('year')?.value;
          this.student.photo = this.form.get('photo')?.value;
          this.student.collegeDTO.id = this.form.get('collegeMenu')?.value;
-         this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
-         this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
-
+         this.student.departmentDTO = new DepartmentModel();
+         this.student.academicProgramDTO = new AcademicProgramModel();
+         this.student.departmentDTO.id = -1;
+         this.student.academicProgramDTO.id = -1;
+         console.log(this.form.get('programMenu')?.value);
+         if (this.form.get('departmentMenu')?.value != -1 && this.form.get('departmentMenu')?.value != null){
+            this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
+         }
+         if (this.form.get('programMenu')?.value != -1 && this.form.get('programMenu')?.value != null){
+            this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
+         }
          this.student.id = this.data.st.id;
+         console.log(this.student);
 
          if (this.imgFlage === 1) {
             this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);

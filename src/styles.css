@@ -58,3 +58,12 @@ normal-form {
   background-color: var(--secondary-color);
 }
 
+.disabled-btn{
+   color: white!important;
+
+}
+.disabled-btn:hover{
+   color: white!important;
+   background-color: var(--main-color) !important;
+   cursor:not-allowed!important;
+}
