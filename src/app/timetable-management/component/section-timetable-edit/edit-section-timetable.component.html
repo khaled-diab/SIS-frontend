@@ -72,7 +72,7 @@
                 <mat-label>Building</mat-label>
                 <mat-select #buildingSelect [formControlName]="'buildingMenu'" required>
                   <mat-option *ngFor="let building of buildings" [value]="building.id">
-                    {{building.nameEn}}
+                    {{building.name}}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('buildingMenu')?.errors?.required">Required</mat-error>
@@ -83,7 +83,7 @@
                 <mat-label>Classroom</mat-label>
                 <mat-select #classroomSelect [formControlName]="'classroomMenu'" required>
                   <mat-option *ngFor="let classroom of classrooms" [value]="classroom.id">
-                    {{classroom.nameEn}}
+                    {{classroom.name}}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('classroomMenu')?.errors?.required">Required</mat-error>

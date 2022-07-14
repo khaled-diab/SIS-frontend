@@ -6,6 +6,8 @@ import {BuildingManagementService} from '../../../building-management/service/bu
 import {MatSelect} from '@angular/material/select';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {DepartmentService} from '../../../department-management/service/department.service';
+import {CollegeModel} from '../../../shared/model/college-management/college-model';
+import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 
 @Component({
   selector: 'app-classroom-filter',
@@ -15,24 +17,25 @@ import {DepartmentService} from '../../../department-management/service/departme
 export class ClassroomFilterComponent implements OnInit, AfterViewInit {
   classroomRequestModel: ClassroomRequestModel = new ClassroomRequestModel();
   searchValue: string;
-  filterDepartment: null;
+  filterCollege: null;
   filterBuilding?: null;
   buildings: BuildingModel[];
   departments: DepartmentModel[];
+  colleges: CollegeModel[];
   @ViewChild('buildingSelect', {static: true})  buildingSelect: MatSelect;
-  @ViewChild('departmentSelect', {static: true})  departmentSelect: MatSelect;
+  @ViewChild('collegeSelect', {static: true})  collegeSelect: MatSelect;
 
   constructor(private classroomManagementService: ClassroomManagementService,
               private buildingManagementService: BuildingManagementService,
-              private departmentService: DepartmentService) {
+              private collegeService: CollegeManagementService) {
   }
 
   ngOnInit(): void {
     this.searchValue = '';
     // @ts-ignore
 
-    this.departmentService.getDepartments().subscribe(Response => {
-      this.departments = Response;
+    this.collegeService.getAllColleges().subscribe(Response => {
+      this.colleges = Response;
     });
     this.buildingManagementService.getBuildings().subscribe(Response => {
       this.buildings = Response;
@@ -41,31 +44,31 @@ export class ClassroomFilterComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(): void {
-    this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterDepartment, this.filterBuilding]);
+    this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterCollege, this.filterBuilding]);
   }
 
   resetFilter(): void {
     // this.classroomRequestModel = new ClassroomRequestModel(1, 10);
     this.searchValue = ' ';
-    this.filterBuilding = this.filterDepartment = null;
+    this.filterBuilding = this.filterCollege = null;
     this.classroomManagementService.classroomFilterEvent.next(['', null, null]);
   }
 
   ngAfterViewInit(): void {
-    this.departmentSelect.valueChange.subscribe(value => {
-      if (this.departmentSelect.value !== undefined){
+    this.collegeSelect.valueChange.subscribe(value => {
+      if (this.collegeSelect.value !== undefined){
         this.buildingSelect.setDisabledState(false);
       }else{
         this.buildingSelect.setDisabledState(true);
         this.buildingSelect.value = undefined;
         this.filterBuilding = undefined;
       }
-      this.filterDepartment = value;
+      this.filterCollege = value;
       this.classroomManagementService.classroomFilterEvent.next([this.searchValue, value, this.filterBuilding]);
     });
     this.buildingSelect.valueChange.subscribe(value => {
       this.filterBuilding = value;
-      this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterDepartment, value]);
+      this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterCollege, value]);
     });
   }
 }

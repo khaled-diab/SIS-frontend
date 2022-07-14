@@ -25,7 +25,7 @@ export class BuildingsListComponent implements OnInit, OnDestroy {
 
   dataSource: MatTableDataSource<any>;
   tableData: BuildingModel[];
-  displayedColumns = ['no', 'code', 'nameAr', 'nameEn', 'college', 'status', 'Actions'];
+  displayedColumns = ['no', 'code', 'name', 'department', 'college', 'status', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];

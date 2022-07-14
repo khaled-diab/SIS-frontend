@@ -8,6 +8,7 @@ import {CollegeModel} from '../../../shared/model/college-management/college-mod
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 
 @Component({
   selector: 'app-create-building',
@@ -17,9 +18,11 @@ import {Router} from '@angular/router';
 export class SaveBuildingComponent implements OnInit, AfterViewInit {
   buildingModel: BuildingModel;
   colleges: CollegeModel[];
+  departments: DepartmentModel[];
   form: FormGroup;
   errorMessage: string;
   @ViewChild('collegeMenu', {static: true}) collegeSelect: MatSelect;
+  @ViewChild('departmentMenu', {static: true}) departmentSelect: MatSelect;
   collegeSelectValue: number;
 
   constructor(private breakpointObserver: BreakpointObserver,
@@ -31,13 +34,18 @@ export class SaveBuildingComponent implements OnInit, AfterViewInit {
 
   add(): void {
     if (this.form.valid) {
-      this.buildingModel.nameEn = this.form.get('nameEn')?.value;
-      this.buildingModel.nameAr = this.form.get('nameAr')?.value;
+      this.buildingModel.name = this.form.get('name')?.value;
       this.buildingModel.code = this.form.get('code')?.value;
       this.buildingModel.status = this.form.get('status')?.value ? 1 : 0;
       console.log(this.buildingModel.code);
       this.buildingModel.collegeDTO = new CollegeModel();
       this.buildingModel.collegeDTO.id = this.form.get('collegeMenu')?.value;
+      this.buildingModel.departmentDTO = new DepartmentModel();
+      if (this.form.get('departmentMenu') != null) {
+         this.buildingModel.collegeDTO.id = this.form.get('departmentMenu')?.value;
+      }else{
+         this.buildingModel.collegeDTO.id = 0;
+      }
     }
     this.buildingManagementService.saveBuilding(this.buildingModel).subscribe((Response) => {
         this.snackBar.open('Building Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
@@ -58,10 +66,8 @@ export class SaveBuildingComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-        nameEn: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern('^[a-zA-Z \\d]+$')])),
-        nameAr: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern('^[\\u0621-\\u064A \\d]+$')])),
+        name: new FormControl(undefined, Validators.required),
+        departmentMenu: new FormControl(undefined),
         collegeMenu: new FormControl(undefined, Validators.required),
         code: new FormControl(undefined, Validators.required),
         status: new FormControl(undefined, Validators.required),
@@ -71,13 +77,16 @@ export class SaveBuildingComponent implements OnInit, AfterViewInit {
       this.colleges = Response;
       console.log(Response);
     });
+    this.buildingManagementService.getDepartments().subscribe(Response => {
+       this.departments = Response;
+       console.log(Response);
+    });
     this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
       if (value.matches) {
         this.fetchDataFromRouter(history.state);
       } else {
         this.buildingModel = {...this.data};
-        this.form.get('nameEn')?.setValue(this.buildingModel.nameEn);
-        this.form.get('nameAr')?.setValue(this.buildingModel.nameAr);
+        this.form.get('name')?.setValue(this.buildingModel.name);
         this.form.get('code')?.setValue(this.buildingModel.code);
         this.form.get('status')?.setValue(this.buildingModel.status);
         if (this.buildingModel.collegeDTO === undefined) {
@@ -88,6 +97,10 @@ export class SaveBuildingComponent implements OnInit, AfterViewInit {
           console.log('collegeMenu: ', this.form.get('collegeMenu')?.value);
         }
         this.form.get('collegeMenu')?.setValue(this.buildingModel.collegeDTO.id);
+        if (this.buildingModel.departmentDTO === undefined) {
+          this.buildingModel.departmentDTO = new DepartmentModel();
+        }
+        if (this.buildingModel.departmentDTO != null) { this.form.get('departmentMenu')?.setValue(this.buildingModel.departmentDTO.id); }
       }
     });
     console.log('building model', this.buildingModel);
@@ -115,6 +128,12 @@ export class SaveBuildingComponent implements OnInit, AfterViewInit {
     this.form.get('collegeMenu')?.valueChanges.subscribe(value => {
       this.buildingModel.collegeDTO = new CollegeModel();
       this.buildingModel.collegeDTO.id = value;
+      console.log('value= ', value);
+      this.buildingManagementService.buildingSaveEvent.next();
+    });
+    this.form.get('departmentMenu')?.valueChanges.subscribe(value => {
+      this.buildingModel.departmentDTO = new DepartmentModel();
+      this.buildingModel.departmentDTO.id = value;
       console.log('value= ', value);
       this.buildingManagementService.buildingSaveEvent.next();
     });

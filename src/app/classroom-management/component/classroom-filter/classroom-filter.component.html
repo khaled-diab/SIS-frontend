@@ -14,13 +14,13 @@
          </div>
          <div class="col-3 mt-1">
             <mat-form-field appearance="outline">
-               <mat-label>Departments</mat-label>
-               <mat-select #departmentSelect>
+               <mat-label>College</mat-label>
+               <mat-select #collegeSelect>
                   <mat-option [value]="undefined">
-                     Choose Department
+                     Choose College
                   </mat-option>
-                  <mat-option *ngFor="let dept of departments" [value]="dept.id">
-                     {{dept.nameEn}}
+                  <mat-option *ngFor="let row of colleges" [value]="row.id">
+                     {{row.nameEn}}
                   </mat-option>
                </mat-select>
             </mat-form-field>
@@ -33,7 +33,7 @@
                      Choose Building
                   </mat-option>
                   <mat-option color="var(--main-color)" *ngFor="let building of buildings" [value]="building.id">
-                     {{building.nameEn}}
+                     {{building.name}}
                   </mat-option>
                </mat-select>
                <!--mat-error *ngIf="building.invalid ">Field Required</mat-error-->

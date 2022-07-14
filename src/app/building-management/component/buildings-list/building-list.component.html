@@ -28,19 +28,11 @@
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="nameAr">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
       </ng-container>
-
-
-      <ng-container matColumnDef="nameEn">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>English Name
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.nameEn}}</mat-cell>
-      </ng-container>
-      <!-- Name Column -->
 
       <!-- Status -->
       <ng-container matColumnDef="status">
@@ -48,6 +40,13 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.status}}</mat-cell>
       </ng-container>
+
+       <!-- Department -->
+       <ng-container matColumnDef="department">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Department
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{(row.departmentDTO == null? "" : row.departmentDTO.nameEn)}}</mat-cell>
+       </ng-container>
 
       <!-- College -->
       <ng-container matColumnDef="college">
