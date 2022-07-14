@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CourseParentComponent} from './component/course-parent/course-parent.component';
 import {CoursesListComponent} from './component/course-list/courses-list.component';
 import {SecurityGuard} from '../security/service/security.guard';
+import {SaveCourseComponent} from './component/save-course/save-course.component';
 
 
 const appRoutes: Routes = [
@@ -26,7 +27,15 @@ const appRoutes: Routes = [
         data: {
           name: 'course-list'
         }
-      }
+      },
+       {
+          path: 'create-course',
+          component: SaveCourseComponent,
+          canActivate: [SecurityGuard],
+          data: {
+             name: 'create-course'
+          }
+       },
     ]
   },
 ];

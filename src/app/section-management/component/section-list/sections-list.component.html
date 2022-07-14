@@ -32,32 +32,18 @@
             <mat-cell *matCellDef="let row">{{row.sectionNumber}}</mat-cell>
          </ng-container>
 
-         <!-- theoreticalLectures Column -->
-         <ng-container matColumnDef="theoreticalLectures">
-            <mat-header-cell *matHeaderCellDef>Theoretical Lectures No.
+         <!-- Capacity Column -->
+         <ng-container matColumnDef="capacity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Capacity
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.theoreticalLectures}}</mat-cell>
-         </ng-container>
-
-         <!-- exercisesLectures Column -->
-         <ng-container matColumnDef="exercisesLectures">
-            <mat-header-cell *matHeaderCellDef>Exercises Lectures No.
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.exercisesLectures}}</mat-cell>
-         </ng-container>
-
-         <!-- practicalLectures Column -->
-         <ng-container matColumnDef="practicalLectures">
-            <mat-header-cell *matHeaderCellDef>Practical Lectures No.
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.practicalLectures}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.capacity}}</mat-cell>
          </ng-container>
 
          <!-- major Column -->
          <ng-container matColumnDef="majorId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Major
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.majorName}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row?.majorName}}</mat-cell>
          </ng-container>
 
          <!-- studyTypeId Column -->
@@ -71,6 +57,20 @@
          <ng-container matColumnDef="studentsNo">
             <mat-header-cell *matHeaderCellDef>Student's No.</mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.numberOfStudents}}</mat-cell>
+         </ng-container>
+
+         <!-- department Column -->
+         <ng-container matColumnDef="departmentId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Department
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.departmentName}}</mat-cell>
+         </ng-container>
+
+         <!-- college Column -->
+         <ng-container matColumnDef="collegeId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>College
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.collegeName}}</mat-cell>
          </ng-container>
 
          <ng-container matColumnDef="Actions">

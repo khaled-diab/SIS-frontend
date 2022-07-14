@@ -10,32 +10,34 @@ import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-manage
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
 import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
+import {UserModel} from '../../shared/model/security/user-model';
+import {RoleModel} from '../../shared/model/security/role-model';
 
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
 })
 export class FacultyMemberManagementService {
 
-  static facultyMembersList: FacultyMemberModel[];
-  facultyMemberFilterEvent: Subject<FacultyMemberRequestModel> = new Subject<FacultyMemberRequestModel>();
-  facultyMemberDeleteEvent: Subject<any> = new Subject<any>();
-  facultyMemberCloseUpdateEvent: Subject<any> = new Subject<any>();
+   static facultyMembersList: FacultyMemberModel[];
+   facultyMemberFilterEvent: Subject<FacultyMemberRequestModel> = new Subject<FacultyMemberRequestModel>();
+   facultyMemberDeleteEvent: Subject<any> = new Subject<any>();
+   facultyMemberCloseUpdateEvent: Subject<any> = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) {
-  }
+   constructor(private httpClient: HttpClient) {
+   }
 
-  getFacultyMembersPage(pageNumber: number, pageSize: number): Observable<PageRequest<FacultyMemberModel>> {
-    const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
-    console.log(pageQuery);
-    return this.httpClient.post<PageRequest<FacultyMemberModel>>(Constants.facultyMemberPageUrl, pageQuery);
-  }
+   getFacultyMembersPage(pageNumber: number, pageSize: number): Observable<PageRequest<FacultyMemberModel>> {
+      const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
+      console.log(pageQuery);
+      return this.httpClient.post<PageRequest<FacultyMemberModel>>(Constants.facultyMemberPageUrl, pageQuery);
+   }
 
-  public searchFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
-    Observable<PageRequest<FacultyMemberModel>> {
-    console.log(pageNumber, pageSize);
-    return this.httpClient.post<PageRequest<FacultyMemberModel>>
-    (Constants.searchFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
-  }
+   public searchFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
+      Observable<PageRequest<FacultyMemberModel>> {
+      console.log(pageNumber, pageSize);
+      return this.httpClient.post<PageRequest<FacultyMemberModel>>
+      (Constants.searchFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
+   }
 
    public filterFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
       Observable<PageRequest<FacultyMemberTableRecordsModel>> {
@@ -44,55 +46,63 @@ export class FacultyMemberManagementService {
       (Constants.filterFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
    }
 
-  constructFacultyMemberRequestObject(sort: Sort, facultyMemberRequestModel: FacultyMemberRequestModel): FacultyMemberRequestModel {
-    if (sort.direction === 'asc') {
-      facultyMemberRequestModel.sortDirection = Constants.ASC;
-    } else if (sort.direction === 'desc') {
-      facultyMemberRequestModel.sortDirection = Constants.DESC;
-    } else {
-      facultyMemberRequestModel.sortDirection = null;
-    }
-    facultyMemberRequestModel.sortBy = sort.active;
-    return facultyMemberRequestModel;
-  }
+   constructFacultyMemberRequestObject(sort: Sort, facultyMemberRequestModel: FacultyMemberRequestModel): FacultyMemberRequestModel {
+      if (sort.direction === 'asc') {
+         facultyMemberRequestModel.sortDirection = Constants.ASC;
+      } else if (sort.direction === 'desc') {
+         facultyMemberRequestModel.sortDirection = Constants.DESC;
+      } else {
+         facultyMemberRequestModel.sortDirection = null;
+      }
+      facultyMemberRequestModel.sortBy = sort.active;
+      return facultyMemberRequestModel;
+   }
 
-  addFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
+   addFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
+      return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
+   }
 
-  }
+   updateFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
+      facultyMember.user.role = new RoleModel();
+      return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
+   }
 
-  updateFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
+   deleteFacultyMember(id: number): Observable<MessageResponse> {
+      return this.httpClient.delete<MessageResponse>(Constants.deleteFacultyMemberUrl + id);
+   }
 
-  }
+   facultyMemberById(id: number): Observable<MessageResponse> {
+      return this.httpClient.get<MessageResponse>(Constants.facultyMemberByIdUrl + id);
+   }
 
-  deleteFacultyMember(id: number): Observable<MessageResponse> {
-    return this.httpClient.delete<MessageResponse>(Constants.deleteFacultyMemberUrl + id);
-  }
+   upload(selectedFile: File, name: string): Observable<string[]> {
+      const uploadImageData = new FormData();
+      uploadImageData.append('files', selectedFile, name);
+      return this.httpClient.post<string[]>(Constants.uploadFacultyMemberImgUrl, uploadImageData, {});
+   }
 
-  facultyMemberById(id: number): Observable<MessageResponse> {
-     return this.httpClient.get<MessageResponse>(Constants.facultyMemberByIdUrl + id);
-  }
+   public getAllDegrees():
+      Observable<DegreeModel[]> {
+      return this.httpClient.get <DegreeModel[]>(Constants.FacultyMemberDegrees);
+   }
 
-  upload(selectedFile: File, name: string): Observable<string[]> {
-    const uploadImageData = new FormData();
-    uploadImageData.append('files', selectedFile, name);
-    return this.httpClient.post<string[]>(Constants.uploadFacultyMemberImgUrl, uploadImageData, {});
-  }
+   allFacultyMembers(): Observable<FacultyMemberModel[]> {
+      return this.httpClient.get <FacultyMemberModel[]>(Constants.allFacultyMembersUrl);
+   }
 
-  public getAllDegrees():
-    Observable<DegreeModel[]> {
-    return this.httpClient.get <DegreeModel[]>(Constants.FacultyMemberDegrees);
-  }
+   getFacultyMembersByDepartment(departmentId: number): FacultyMemberModel[] {
+      return FacultyMemberManagementService.facultyMembersList.filter(value => {
+         return (value.departmentDTO?.id === departmentId);
+      });
+   }
 
-  allFacultyMembers(): Observable<FacultyMemberModel[]>{
-    return this.httpClient.get <FacultyMemberModel[]>(Constants.allFacultyMembersUrl);
-  }
+   getFacultyMembersByCollege(collegeId: number): FacultyMemberModel[] {
+      return FacultyMemberManagementService.facultyMembersList.filter(value => {
+         return (value.collegeDTO?.id === collegeId);
+      });
+   }
 
-  getFacultyMembersByDepartment(departmentId: number): FacultyMemberModel[] {
-    return FacultyMemberManagementService.facultyMembersList.filter(value => {
-      return (value.departmentDTO?.id === departmentId);
-    });
-  }
-
+   getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
+      return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
+   }
 }
