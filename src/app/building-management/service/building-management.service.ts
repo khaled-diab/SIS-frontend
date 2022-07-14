@@ -31,7 +31,7 @@ export class BuildingManagementService {
   }
   public getColleges():
     Observable<CollegeModel[]> {
-    return this.httpClient.get<CollegeModel[]>(environment.baseURL + '/api/colleges/all/');
+    return this.httpClient.get<CollegeModel[]>(environment.baseURL + '/colleges/all/');
   }
 
   public deleteBuilding(id: number): Observable<MessageResponse> {
@@ -54,7 +54,7 @@ export class BuildingManagementService {
 
    getDepartments():
       Observable<DepartmentModel[]> {
-      return this.httpClient.get<DepartmentModel[]>(environment.baseURL + '/api/departments/all/');
+      return this.httpClient.get<DepartmentModel[]>(environment.baseURL + '/departments/all/');
    }
 }
 
