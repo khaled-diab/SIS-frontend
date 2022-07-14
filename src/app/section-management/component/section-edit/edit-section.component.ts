@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {AcademicYear} from '../../../shared/model/academicYear-Management/academic-year';
@@ -9,7 +9,7 @@ import {CourseModel} from '../../../shared/model/course-management/course-model'
 import {MatSelect} from '@angular/material/select';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Navigation, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {AcademicYearService} from '../../../academic-year-management/service/academic-year.service';
@@ -39,7 +39,7 @@ import {AddTimetableComponent} from '../../../timetable-management/component/tim
    templateUrl: './edit-section.component.html',
    styleUrls: ['./edit-section.component.css']
 })
-export class EditSectionComponent implements OnInit {
+export class EditSectionComponent implements OnInit, OnDestroy {
 
    section = new SectionModel();
    colleges: CollegeModel[];
@@ -62,13 +62,13 @@ export class EditSectionComponent implements OnInit {
    theoreticalLectures: number;
    exercisesLectures: number;
    practicalLectures: number;
+   capacity: number;
    times: TimetableModel [] = [];
    deletedTimes: number [] = [];
    timetableRequestModel: TimetableRequestModel = new TimetableRequestModel();
    selection = new SelectionModel<TimetableModel>(true, []);
    errorMessage: string;
    form: FormGroup;
-   nav: Navigation | null;
 
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
    @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
@@ -90,12 +90,6 @@ export class EditSectionComponent implements OnInit {
                private studentEnrollmentManagementService: StudentEnrollmentManagementService,
                private courseService: CourseManagementService,
                private timetableService: TimetableManagementService) {
-
-      this.nav = this.route.getCurrentNavigation();
-      if (this.nav?.extras && this.nav.extras.state && this.nav.extras.state.section) {
-         this.section = this.nav.extras.state.section;
-         console.log(this.section);
-      }
    }
 
    displayedColumns = ['No.', 'facultyMemberId', 'lectureTypeId', 'day',
@@ -104,20 +98,23 @@ export class EditSectionComponent implements OnInit {
 
    ngOnInit(): void {
       this.dataSource = new MatTableDataSource<TimetableModel>();
+      // @ts-ignore
+      this.section = JSON.parse(sessionStorage.getItem('sectionData'));
       console.log(this.section);
       this.form = new FormGroup({
             academicYearMenu: new FormControl(this.section.academicYearDTO.id, Validators.required),
             academicTermMenu: new FormControl(this.section.academicTermDTO.id, Validators.required),
             collegeMenu: new FormControl(this.section.collegeDTO.id, Validators.required),
             departmentMenu: new FormControl(this.section.departmentDTO.id, Validators.required),
-            majorMenu: new FormControl(this.section.majorDTO.id),
+            majorMenu: new FormControl(this.section.majorDTO),
             studyTypeMenu: new FormControl(this.section.studyTypeDTO.id, Validators.required),
             courseMenu: new FormControl(this.section.courseDTO.id, Validators.required),
             sectionNumber: new FormControl(this.section.sectionNumber, Validators.compose([Validators.required,
                Validators.pattern(Constants.ENGLISH_CHARACTERS_AND_DIGITS_AND_DASH)])),
             theoreticalLectures: new FormControl(this.section.theoreticalLectures, Validators.pattern(Constants.DIGITS_ONLY)),
             exercisesLectures: new FormControl(this.section.exercisesLectures, Validators.pattern(Constants.DIGITS_ONLY)),
-            practicalLectures: new FormControl(this.section.practicalLectures, Validators.pattern(Constants.DIGITS_ONLY))
+            practicalLectures: new FormControl(this.section.practicalLectures, Validators.pattern(Constants.DIGITS_ONLY)),
+            capacity: new FormControl(this.section.capacity, Validators.compose([Validators.required, Validators.pattern(Constants.DIGITS_ONLY)]))
          }
       );
 
@@ -132,6 +129,7 @@ export class EditSectionComponent implements OnInit {
       this.theoreticalLectures = this.section.theoreticalLectures;
       this.exercisesLectures = this.section.exercisesLectures;
       this.practicalLectures = this.section.practicalLectures;
+      this.capacity = this.section.capacity;
 
 
       this.academicYearService.getAcademicYears().subscribe(Response => {
@@ -269,13 +267,14 @@ export class EditSectionComponent implements OnInit {
          this.section.academicTermDTO.id = this.form.get('academicTermMenu')?.value;
          this.section.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.section.departmentDTO.id = this.form.get('departmentMenu')?.value;
-         this.section.majorDTO.id = this.form.get('majorMenu')?.value;
+         this.section.majorDTO = this.form.get('majorMenu')?.value;
          this.section.studyTypeDTO.id = this.form.get('studyTypeMenu')?.value;
          this.section.courseDTO.id = this.form.get('courseMenu')?.value;
          this.section.sectionNumber = this.form.get('sectionNumber')?.value;
          this.section.theoreticalLectures = this.form.get('theoreticalLectures')?.value;
          this.section.practicalLectures = this.form.get('practicalLectures')?.value;
          this.section.exercisesLectures = this.form.get('exercisesLectures')?.value;
+         this.section.capacity = this.form.get('capacity')?.value;
          console.log(this.section);
       }
 
@@ -339,6 +338,10 @@ export class EditSectionComponent implements OnInit {
 
    cancel(): void {
       this.route.navigate(['/sections-management', 'section-list']);
+   }
+
+   ngOnDestroy(): void {
+      sessionStorage.removeItem('sectionData');
    }
 
 }

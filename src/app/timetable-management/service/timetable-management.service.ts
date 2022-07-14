@@ -78,8 +78,8 @@ export class TimetableManagementService {
       return this.httpClient.get <LectureTypeModel[]>(Constants.allLectureTypesUrl);
    }
 
-   public getStudentTimetables(studentId: number): Observable<TimetableModel[]> {
-      return this.httpClient.get <TimetableModel[]>(Constants.studentTimetablesUrl + studentId);
+   public getStudentTimetables(userId: number): Observable<TimetableModel[]> {
+      return this.httpClient.get <TimetableModel[]>(Constants.studentTimetablesUrl + userId);
    }
 
 }

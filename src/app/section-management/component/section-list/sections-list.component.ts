@@ -24,8 +24,8 @@ export class SectionsListComponent implements OnInit, OnDestroy {
    @ViewChild('paginator') paginator: MatPaginator;
    tableData: PageRequest<SectionTableRecordsModel>;
    sectionRequestModel: SectionRequestModel = new SectionRequestModel();
-   displayedColumns = ['No.', 'courseId', 'sectionNumber', 'theoreticalLectures',
-      'exercisesLectures', 'practicalLectures', 'majorId', 'studyTypeId', 'studentsNo', 'Actions'];
+   displayedColumns = ['No.', 'courseId', 'sectionNumber', 'majorId', 'studyTypeId', 'capacity', 'studentsNo',
+      'departmentId', 'collegeId', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    subscriptionList: Subscription[] = [];
@@ -93,7 +93,8 @@ export class SectionsListComponent implements OnInit, OnDestroy {
 
    editSection(row: SectionTableRecordsModel): void {
       this.sectionManagementService.getSectionById(row.id).subscribe(value => {
-         this.route.navigate(['/sections-management', 'section-edit'], {state: {section: value}});
+         sessionStorage.setItem('sectionData', JSON.stringify(value));
+         this.route.navigate(['/sections-management', 'section-edit']);
       });
    }
 

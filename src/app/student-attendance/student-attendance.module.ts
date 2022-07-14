@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AddAttendanceComponent } from './component/add-attendance/add-attendance.component';
-import { StudentAttendanceListComponent } from './component/student-attendance-list/student-attendance-list.component';
-import { StudentAttendanceParentComponent } from './component/student-attendance-parent/student-attendance-parent.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AddAttendanceComponent} from './component/add-attendance/add-attendance.component';
+import {StudentAttendanceListComponent} from './component/student-attendance-list/student-attendance-list.component';
+import {StudentAttendanceParentComponent} from './component/student-attendance-parent/student-attendance-parent.component';
 import {StudentAttendanceRoutingModule} from './student-attendance-routing.module';
 import {RouterModule} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -18,43 +18,42 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { AttendanceCodeComponent } from './component/attendance-code/attendance-code.component';
+import {AttendanceCodeComponent} from './component/attendance-code/attendance-code.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatDialogModule} from "@angular/material/dialog";
-import {QRCodeModule} from "angular2-qrcode";
-
+import {MatDialogModule} from '@angular/material/dialog';
+// import {QRCodeModule} from 'angularx-qrcode';
 
 
 @NgModule({
-  declarations: [
-    AddAttendanceComponent,
-    StudentAttendanceListComponent,
-    StudentAttendanceParentComponent,
-    AttendanceCodeComponent
-  ],
-  imports: [
-    CommonModule,
-    StudentAttendanceRoutingModule,
-    RouterModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTableModule,
-    MatInputModule,
-    MatSortModule,
-    MatTooltipModule,
-    MatButtonModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatPaginatorModule,
-    MatRadioModule,
-     MatDialogModule,
-     QRCodeModule
-
-  ]
+   declarations: [
+      AddAttendanceComponent,
+      StudentAttendanceListComponent,
+      StudentAttendanceParentComponent,
+      AttendanceCodeComponent
+   ],
+   imports: [
+      CommonModule,
+      StudentAttendanceRoutingModule,
+      RouterModule,
+      MatFormFieldModule,
+      MatSelectModule,
+      MatCardModule,
+      MatProgressSpinnerModule,
+      MatMenuModule,
+      MatIconModule,
+      MatTableModule,
+      MatInputModule,
+      MatSortModule,
+      MatTooltipModule,
+      MatButtonModule,
+      FormsModule,
+      MatCheckboxModule,
+      MatPaginatorModule,
+      MatRadioModule,
+      MatDialogModule,
+      // QRCodeModule
+   ]
 })
-export class StudentAttendanceModule { }
+export class StudentAttendanceModule {
+}

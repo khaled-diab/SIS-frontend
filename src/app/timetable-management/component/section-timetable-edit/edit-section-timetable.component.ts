@@ -17,7 +17,6 @@ import {AcademicTermService} from '../../../academic-term-management/service/aca
 import {CourseManagementService} from '../../../course-management/service/course-management.service';
 import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
-import {FacultyMemberRequestModel} from '../../../shared/model/facultyMember-management/facultyMember-request-model';
 import {LectureTypeModel} from '../../../shared/model/lectureType-model';
 import {BuildingModel} from '../../../shared/model/building-management/building-model';
 import {ClassroomModel} from '../../../shared/model/classroom-management/classroom-model';
@@ -44,7 +43,6 @@ export class EditSectionTimetableComponent implements OnInit {
    academicTerm = new AcademicTermModel();
    facultyMember = new FacultyMemberModel();
    facultyMembers: FacultyMemberModel[];
-   facultyMemberRequestModel = new FacultyMemberRequestModel();
    courses: CourseModel[];
    course = new CourseModel();
    courseModelRequestModel = new CourseRequestModel();
@@ -91,11 +89,6 @@ export class EditSectionTimetableComponent implements OnInit {
       this.timetable = this.data;
       console.log(this.timetable);
       this.form = new FormGroup({
-            // academicYearMenu: new FormControl(this.data.academicYearDTO.name),
-            // academicTermMenu: new FormControl(this.data.academicTermDTO.name),
-            // collegeMenu: new FormControl(this.data.collegeDTO.nameEn),
-            // departmentMenu: new FormControl(this.data.departmentDTO.nameEn),
-            // courseMenu: new FormControl(this.data.courseDTO.nameEn),
             facultyMemberMenu: new FormControl(this.data.facultyMemberDTO.id, Validators.required),
             lectureTypeMenu: new FormControl(this.data.lectureTypeDTO.id, Validators.required),
             buildingMenu: new FormControl(this.data.buildingDTO.id, Validators.required),
@@ -130,7 +123,7 @@ export class EditSectionTimetableComponent implements OnInit {
          this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
          this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
          this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.facultyMembers = this.facultyMemberService.getFacultyMembersByDepartment(this.department.id);
+         this.facultyMembers = this.facultyMemberService.getFacultyMembersByCollege(this.college.id);
          this.courses = this.courseService.getCoursesByDepartment(this.department.id);
       });
 
@@ -170,6 +163,10 @@ export class EditSectionTimetableComponent implements OnInit {
          this.timetable.startTime = this.form.get('startTime')?.value;
          this.timetable.endTime = this.form.get('endTime')?.value;
          console.log(this.timetable);
+      }
+      if (this.form.get('startTime')?.value > this.form.get('endTime')?.value) {
+         this.snackBar.open('End Time must be greater than Start Time!', undefined, {duration: 3500});
+         return;
       }
       this.timetableManagementService.timetableUpdateEvent.next(this.timetable);
    }
