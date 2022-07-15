@@ -59,7 +59,7 @@
 
         <mat-paginator
                        [pageIndex]="pageIndex - 1"
-                       [pageSizeOptions]="[1, 3, 5, 10, 25, 35, 50]"
+                       [pageSizeOptions]="[5, 10, 25, 35, 50]"
                        [pageSize]="defaultPageSize"
                        [length]=tableData.length
                        showFirstLastButtons
@@ -73,6 +73,8 @@
       <button mat-menu-item>Edit</button>
       <button mat-menu-item>Delete</button>
     </mat-menu>
+
     <button (click)="flag=!flag" >btn</button>
 <p *ngIf="flag">{{'ssssssssssss'}}</p>
      <!-- <app-attendane-report-by-lecture-filter></app-attendane-report-by-lecture-filter> -->
+

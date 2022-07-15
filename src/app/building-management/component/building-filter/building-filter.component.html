@@ -1,25 +1,33 @@
 <mat-card class="mat-elevation-z8">
-  <div class="container">
-    <form class="form-row form">
-      <div class="form-group col-6 search-box ">
-        <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
-               name="filterValue" placeholder="Search here" type="text">
-        <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button>
+   <div class="container">
+      <div class="col-12">
+         <div class="subTitle ">
+            <h4>Building Management</h4>
+            <hr>
+         </div>
       </div>
-      <div class="col-4 mt-1">
-        <mat-form-field appearance="outline">
-          <mat-label>College</mat-label>
-          <mat-select #collegeSelect [value]="0">
-            <mat-option [value]="undefined">
-              Choose College
-            </mat-option>
-            <mat-option color="var(--main-color)" *ngFor="let college of colleges" [value]="college.id">
-              {{college.nameEn}}
-            </mat-option>
-          </mat-select>
-          <!--mat-error *ngIf="college.invalid ">Field Required</mat-error-->
-        </mat-form-field>
-      </div>
-    </form>
-  </div>
+      <form class="form-row form">
+         <div class="form-group col-6 search-box ">
+            <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
+                   name="filterValue" placeholder="Search here" type="text">
+         </div>
+         <div class="col-4 mt-1">
+            <mat-form-field appearance="outline">
+               <mat-label>College</mat-label>
+               <mat-select #collegeSelect [value]="collegeSelectValue">
+                  <mat-option [value]="undefined">
+                     Choose College
+                  </mat-option>
+                  <mat-option color="var(--main-color)" *ngFor="let college of colleges" [value]="college.id">
+                     {{college.nameEn}}
+                  </mat-option>
+               </mat-select>
+               <!--mat-error *ngIf="college.invalid ">Field Required</mat-error-->
+            </mat-form-field>
+         </div>
+         <div class="form-group ">
+            <button (click)="resetFilter()" class="btn btn-primary reset-btn">Reset</button>
+         </div>
+      </form>
+   </div>
 </mat-card>

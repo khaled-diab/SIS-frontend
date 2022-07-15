@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Constants} from '../../shared/constants';
-import {BuildingRequestModel} from '../../shared/model/building-management/building-request-model';
 import {BuildingModel} from '../../shared/model/building-management/building-model';
 import {MessageResponse} from '../../shared/model/message-response';
 import {environment} from '../../../environments/environment';
+import {CollegeModel} from '../../shared/model/college-management/college-model';
+import {DepartmentModel} from '../../shared/model/department-management/department-model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class BuildingManagementService {
     return this.httpClient.get<BuildingModel[]>(Constants.buildingPageUrl);
   }
   public getColleges():
-    Observable<BuildingModel[]> {
-    return this.httpClient.get<BuildingModel[]>(environment.baseURL + '/api/colleges/all/');
+    Observable<CollegeModel[]> {
+    return this.httpClient.get<CollegeModel[]>(environment.baseURL + '/colleges/all/');
   }
 
   public deleteBuilding(id: number): Observable<MessageResponse> {
@@ -40,15 +41,15 @@ export class BuildingManagementService {
     return this.httpClient.post<MessageResponse>(Constants.saveBuildingUrl, building);
   }
 
-  constructBuildingRequestObject(buildingRequestModel: BuildingRequestModel): BuildingRequestModel {
-    return buildingRequestModel;
-  }
-
   getBuildingsByCollege(collegeId: number): BuildingModel[] {
     return BuildingManagementService.buildingsList.filter(value => {
       return (value.collegeDTO?.id === collegeId);
     });
   }
 
+   getDepartments():
+      Observable<DepartmentModel[]> {
+      return this.httpClient.get<DepartmentModel[]>(environment.baseURL + '/departments/all/');
+   }
 }
 

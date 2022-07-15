@@ -1,13 +1,11 @@
-import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
-import {Data, Router} from '@angular/router';
-import {Constants} from 'src/app/shared/constants';
+import {Router} from '@angular/router';
 import {AcademicYear} from 'src/app/shared/model/academicYear-Management/academic-year';
 import {AcademicYearService} from '../../service/academic-year.service';
 import {CreateacademicyearComponent} from '../create-academic-year/create-academic-year.component';
@@ -78,7 +76,7 @@ export class AcademicYearListComponent implements OnInit, OnDestroy {
             this.service.getAcademicYears().subscribe(data => {
               this.tableData = data;
               this.dataSource.data = this.tableData;
-              AcademicYearService.yearsList = this.tableData;
+               AcademicYearService.yearsList = this.tableData;
             });
           }
         },
@@ -155,7 +153,6 @@ export class AcademicYearListComponent implements OnInit, OnDestroy {
         this.tableData = value;
         this.dataSource.data = this.tableData;
          AcademicYearService.yearsList = this.tableData;
-
       });
     this.snackBar.open('Academic Year Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
   }

@@ -1,5 +1,11 @@
 <mat-card class="mat-elevation-z8">
   <div class="container">
+     <div class="col-12">
+        <div class="subTitle ">
+           <h4>Academic Year Management</h4>
+           <hr>
+        </div>
+     </div>
     <form class="form-row form">
       <div class="form-group col-12 m-auto search-box ">
         <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter($event)" class="form-control" id="inputField"
@@ -9,7 +15,7 @@
     <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" > <mat-icon>close</mat-icon>
     </button> -->
       </div>
-      
+
       <div appearance="outline" class="col-md-3 col-sm-12">
         <button (click)="resetFilter()" class="btn btn-info">Reset</button>
       </div>
