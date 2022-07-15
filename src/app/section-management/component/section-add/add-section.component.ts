@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
@@ -19,8 +19,9 @@ import {CourseManagementService} from '../../../course-management/service/course
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionManagementService} from '../../service/sectionManagement.service';
 import {Constants} from '../../../shared/constants';
-import {StudentEnrollmentManagementService} from '../../../studentEnrollment-management/service/studentEnrollment-management.service';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
+import {
+   StudentEnrollmentManagementService
+} from '../../../studentEnrollment-management/service/studentEnrollment-management.service';
 import {MatDialog} from '@angular/material/dialog';
 import {BsModalService} from 'ngx-bootstrap/modal';
 
@@ -37,11 +38,8 @@ export class AddSectionComponent implements OnInit {
    departments: DepartmentModel[];
    academicYears: AcademicYear[];
    academicTerms: AcademicTermModel[];
-   newAcademicTerms: AcademicTermModel[] = [];
    courses: CourseModel[];
-   courseModelRequestModel = new CourseRequestModel();
    majors: MajorModel[];
-   newMajors: MajorModel[] = [];
    studyTypes: StudyTypeModel[];
    errorMessage: string;
    form: FormGroup;
@@ -90,9 +88,7 @@ export class AddSectionComponent implements OnInit {
          }
       );
 
-      this.academicYearService.getAcademicYears().subscribe(Response => {
-         this.academicYears = Response;
-      });
+      this.academicYears = AcademicYearService.yearsList;
 
       this.academicTermService.getAcademicTerms().subscribe(Response => {
          this.academicTerms = Response;
@@ -100,12 +96,6 @@ export class AddSectionComponent implements OnInit {
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
-      });
-
-      this.departmentService.getDepartments();
-
-      this.majorService.getAllMajors().subscribe(Response => {
-         this.majors = Response;
       });
 
       this.studyTypeService.getAllStudyTypes().subscribe(Response => {
@@ -117,13 +107,8 @@ export class AddSectionComponent implements OnInit {
    ngAfterViewInit(): void {
       this.academicYearSelect.valueChange.subscribe(value => {
          if (this.academicYearSelect.value !== undefined) {
-            this.newAcademicTerms = [];
             this.academicTermSelect.setDisabledState(!this.isDisabled);
-            for (const academicTerm of this.academicTerms) {
-               if (academicTerm.academicYearDTO.id === this.academicYearSelect.value.id) {
-                  this.newAcademicTerms.push(academicTerm);
-               }
-            }
+            this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value.id);
          } else {
             this.academicTermSelect.setDisabledState(this.isDisabled);
          }
@@ -141,19 +126,13 @@ export class AddSectionComponent implements OnInit {
       this.departmentSelect.valueChange.subscribe(value => {
          if (this.departmentSelect.value !== undefined) {
             this.courseSelect.setDisabledState(!this.isDisabled);
-            this.courseModelRequestModel.filterCollege = this.collegeSelect.value.id;
-            this.courseModelRequestModel.filterDepartment = this.departmentSelect.value.id;
-            this.courseService.getCoursePage(1, 500, this.courseModelRequestModel).subscribe(Response => {
-               this.courses = Response.data;
-            });
-
-            this.newMajors = [];
             this.majorSelect.setDisabledState(!this.isDisabled);
-            for (const major of this.majors) {
-               if (major.departmentDTO.id === this.departmentSelect.value.id) {
-                  this.newMajors.push(major);
-               }
-            }
+            this.courseService.getCoursesByDepartment(this.departmentSelect.value.id).subscribe(value1 => {
+               this.courses = value1;
+            });
+            this.majorService.getMajorsByDepartment(this.departmentSelect.value.id).subscribe(value1 => {
+               this.majors = value1;
+            });
          } else {
             this.courseSelect.setDisabledState(this.isDisabled);
             this.majorSelect.setDisabledState(this.isDisabled);

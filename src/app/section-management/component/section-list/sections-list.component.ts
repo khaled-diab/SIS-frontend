@@ -24,7 +24,7 @@ export class SectionsListComponent implements OnInit, OnDestroy {
    @ViewChild('paginator') paginator: MatPaginator;
    tableData: PageRequest<SectionTableRecordsModel>;
    sectionRequestModel: SectionRequestModel = new SectionRequestModel();
-   displayedColumns = ['No.', 'courseId', 'sectionNumber', 'majorId', 'studyTypeId', 'capacity', 'studentsNo',
+   displayedColumns = ['No.', 'courseId', 'sectionNumber', 'studyTypeId', 'capacity', 'studentsNo', 'majorId',
       'departmentId', 'collegeId', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;

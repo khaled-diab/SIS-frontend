@@ -30,7 +30,7 @@
                         <mat-label>Academic Term</mat-label>
                         <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required
                                     [disabled]="isDisabled">
-                           <mat-option *ngFor="let Term of newAcademicTerms" [value]="Term">
+                           <mat-option *ngFor="let Term of academicTerms" [value]="Term">
                               {{Term.name}}
                            </mat-option>
                         </mat-select>
@@ -64,7 +64,7 @@
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Major</mat-label>
                         <mat-select #majorSelect [formControlName]="'majorMenu'" [disabled]="isDisabled">
-                           <mat-option *ngFor="let major of newMajors" [value]="major">
+                           <mat-option *ngFor="let major of majors" [value]="major">
                               {{major?.nameEn}}
                            </mat-option>
                         </mat-select>

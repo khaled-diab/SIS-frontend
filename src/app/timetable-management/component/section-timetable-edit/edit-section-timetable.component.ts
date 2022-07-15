@@ -10,7 +10,6 @@ import {DepartmentService} from '../../../department-management/service/departme
 import {AcademicYear} from '../../../shared/model/academicYear-Management/academic-year';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {Router} from '@angular/router';
 import {AcademicYearService} from '../../../academic-year-management/service/academic-year.service';
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
@@ -21,9 +20,12 @@ import {LectureTypeModel} from '../../../shared/model/lectureType-model';
 import {BuildingModel} from '../../../shared/model/building-management/building-model';
 import {ClassroomModel} from '../../../shared/model/classroom-management/classroom-model';
 import {TimetableManagementService} from '../../service/timetable-management.service';
-import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {
+   FacultyMemberManagementService
+} from '../../../facultyMember-management/service/facultyMember-management.service';
 import {BuildingManagementService} from '../../../building-management/service/building-management.service';
 import {ClassroomManagementService} from '../../../classroom-management/service/classroom-management.service';
+import {Constants} from '../../../shared/constants';
 
 @Component({
    selector: 'app-section-timetable-edit',
@@ -45,7 +47,6 @@ export class EditSectionTimetableComponent implements OnInit {
    facultyMembers: FacultyMemberModel[];
    courses: CourseModel[];
    course = new CourseModel();
-   courseModelRequestModel = new CourseRequestModel();
    lectureType = new LectureTypeModel();
    lectureTypes: LectureTypeModel[];
    building = new BuildingModel();
@@ -53,7 +54,7 @@ export class EditSectionTimetableComponent implements OnInit {
    classroom = new ClassroomModel();
    classrooms: ClassroomModel[];
    day: string;
-   days: string[];
+   days: string[] = Constants.Days;
    startTime: string;
    endTime: string;
    errorMessage: string;
@@ -113,37 +114,28 @@ export class EditSectionTimetableComponent implements OnInit {
       this.startTime = this.data.startTime;
       this.endTime = this.data.endTime;
 
-      this.academicYearService.getAcademicYears().subscribe(Response => {
-         this.academicYears = Response;
-         this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
-      });
+      this.academicYears = AcademicYearService.yearsList;
+      this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
-         this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
-         this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
-         this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.facultyMembers = this.facultyMemberService.getFacultyMembersByCollege(this.college.id);
-         this.courses = this.courseService.getCoursesByDepartment(this.department.id);
       });
-
+      this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
+      this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
+      this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
+      this.facultyMemberService.getFacultyMembersByCollege(this.college.id).subscribe(value => {
+         this.facultyMembers = value;
+      });
+      this.courseService.getCoursesByDepartment(this.department.id).subscribe(value => {
+         this.courses = value;
+      });
       this.lectureTypeService.getAllLectureTypes().subscribe(Response => {
          this.lectureTypes = Response;
       });
-
-      this.days = [
-         'Saturday',
-         'Sunday',
-         'Monday',
-         'Tuesday',
-         'Wednesday',
-         'Thursday',
-         'Friday'
-      ];
    }
 
    ngAfterViewInit(): void {
-      this.buildingSelect.valueChange.subscribe(value => {
+      this.buildingSelect.valueChange.subscribe(_ => {
          if (this.buildingSelect.value !== undefined) {
             this.classroomSelect.setDisabledState(false);
             this.classrooms = this.classroomService.getClassroomsByBuilding(this.buildingSelect.value);

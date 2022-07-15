@@ -10,26 +10,26 @@ import {SectionRequestModel} from '../../shared/model/section-management/section
 import {SectionTableRecordsModel} from '../../shared/model/section-management/sectionTableRecords-model';
 
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
 })
 export class SectionManagementService {
 
-  static sectionsList: SectionModel[];
-  sectionFilterEvent: Subject<SectionRequestModel> = new Subject<SectionRequestModel>();
-  sectionDeleteEvent: Subject<any> = new Subject<any>();
-  sectionCloseUpdateEvent: Subject<any> = new Subject<any>();
+   static sectionsList: SectionModel[];
+   sectionFilterEvent: Subject<SectionRequestModel> = new Subject<SectionRequestModel>();
+   sectionDeleteEvent: Subject<any> = new Subject<any>();
+   sectionCloseUpdateEvent: Subject<any> = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) {
-  }
+   constructor(private httpClient: HttpClient) {
+   }
 
-  public searchSections(
-    pageNumber: number, pageSize: number, sectionRequestModel: SectionRequestModel):
-    Observable<PageRequest<SectionModel>> {
-    console.log(pageNumber, pageSize);
-    console.log(sectionRequestModel);
-    return this.httpClient.post<PageRequest<SectionModel>>
-    (Constants.searchSectionUrl + (pageNumber + 1) + '/' + pageSize, sectionRequestModel);
-  }
+   public searchSections(
+      pageNumber: number, pageSize: number, sectionRequestModel: SectionRequestModel):
+      Observable<PageRequest<SectionModel>> {
+      console.log(pageNumber, pageSize);
+      console.log(sectionRequestModel);
+      return this.httpClient.post<PageRequest<SectionModel>>
+      (Constants.searchSectionUrl + (pageNumber + 1) + '/' + pageSize, sectionRequestModel);
+   }
 
    public filterSections(
       pageNumber: number, pageSize: number, sectionRequestModel: SectionRequestModel):
@@ -40,46 +40,40 @@ export class SectionManagementService {
       (Constants.filterSectionUrl + (pageNumber + 1) + '/' + pageSize, sectionRequestModel);
    }
 
-  constructSectionRequestObject(
-    sort: Sort,
-    sectionRequestModel: SectionRequestModel): SectionRequestModel {
-    if (sort.direction === 'asc') {
-      sectionRequestModel.sortDirection = Constants.ASC;
-    } else if (sort.direction === 'desc') {
-      sectionRequestModel.sortDirection = Constants.DESC;
-    } else {
-      sectionRequestModel.sortDirection = null;
-    }
-    sectionRequestModel.sortBy = sort.active;
-    return sectionRequestModel;
-  }
+   constructSectionRequestObject(
+      sort: Sort,
+      sectionRequestModel: SectionRequestModel): SectionRequestModel {
+      if (sort.direction === 'asc') {
+         sectionRequestModel.sortDirection = Constants.ASC;
+      } else if (sort.direction === 'desc') {
+         sectionRequestModel.sortDirection = Constants.DESC;
+      } else {
+         sectionRequestModel.sortDirection = null;
+      }
+      sectionRequestModel.sortBy = sort.active;
+      return sectionRequestModel;
+   }
 
-  save(sectionModel: SectionModel): Observable<SectionModel> {
-    console.log(sectionModel);
-    return this.httpClient.post<SectionModel>(Constants.saveSectionUrl, sectionModel);
-  }
+   save(sectionModel: SectionModel): Observable<SectionModel> {
+      console.log(sectionModel);
+      return this.httpClient.post<SectionModel>(Constants.saveSectionUrl, sectionModel);
+   }
 
-  update(sectionModel: SectionModel): Observable<SectionModel> {
-    console.log(sectionModel);
-    return this.httpClient.post<SectionModel>(Constants.updateSectionUrl, sectionModel);
-  }
+   update(sectionModel: SectionModel): Observable<SectionModel> {
+      console.log(sectionModel);
+      return this.httpClient.post<SectionModel>(Constants.updateSectionUrl, sectionModel);
+   }
 
-  deleteSection(id: number): Observable<MessageResponse> {
-    return this.httpClient.delete<MessageResponse>(Constants.deleteSectionUrl + id);
-  }
+   deleteSection(id: number): Observable<MessageResponse> {
+      return this.httpClient.delete<MessageResponse>(Constants.deleteSectionUrl + id);
+   }
 
    getSectionById(id: number): Observable<MessageResponse> {
       return this.httpClient.get<MessageResponse>(Constants.SectionByIdUrl + id);
    }
 
-  allSections(): Observable<SectionModel[]>{
-    return this.httpClient.get<SectionModel[]>(Constants.allSectionsUrl);
-  }
-
-  getSectionsByCourse(courseId: number): SectionModel[] {
-    return SectionManagementService.sectionsList.filter(value => {
-      return (value.courseDTO?.id === courseId);
-    });
-  }
+   getSectionsByCourse(courseId: number): Observable<SectionModel[]> {
+      return this.httpClient.get<SectionModel[]>(Constants.sectionsByCourseIdUrl + courseId);
+   }
 }
 

@@ -9,7 +9,9 @@ import {MessageResponse} from '../../shared/model/message-response';
 import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-management/facultyMember-request-model';
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
-import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
+import {
+   FacultyMemberTableRecordsModel
+} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
 import {UserModel} from '../../shared/model/security/user-model';
 import {RoleModel} from '../../shared/model/security/role-model';
 
@@ -24,12 +26,6 @@ export class FacultyMemberManagementService {
    facultyMemberCloseUpdateEvent: Subject<any> = new Subject<any>();
 
    constructor(private httpClient: HttpClient) {
-   }
-
-   getFacultyMembersPage(pageNumber: number, pageSize: number): Observable<PageRequest<FacultyMemberModel>> {
-      const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
-      console.log(pageQuery);
-      return this.httpClient.post<PageRequest<FacultyMemberModel>>(Constants.facultyMemberPageUrl, pageQuery);
    }
 
    public searchFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
@@ -86,20 +82,8 @@ export class FacultyMemberManagementService {
       return this.httpClient.get <DegreeModel[]>(Constants.FacultyMemberDegrees);
    }
 
-   allFacultyMembers(): Observable<FacultyMemberModel[]> {
-      return this.httpClient.get <FacultyMemberModel[]>(Constants.allFacultyMembersUrl);
-   }
-
-   getFacultyMembersByDepartment(departmentId: number): FacultyMemberModel[] {
-      return FacultyMemberManagementService.facultyMembersList.filter(value => {
-         return (value.departmentDTO?.id === departmentId);
-      });
-   }
-
-   getFacultyMembersByCollege(collegeId: number): FacultyMemberModel[] {
-      return FacultyMemberManagementService.facultyMembersList.filter(value => {
-         return (value.collegeDTO?.id === collegeId);
-      });
+   getFacultyMembersByCollege(collegeId: number): Observable<FacultyMemberModel[]> {
+      return this.httpClient.get<FacultyMemberModel[]>(Constants.facultyMembersByCollegeIdUrl + collegeId);
    }
 
    getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {

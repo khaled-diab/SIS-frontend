@@ -18,7 +18,9 @@ import {CourseManagementService} from '../../../course-management/service/course
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionManagementService} from '../../service/sectionManagement.service';
 import {Constants} from '../../../shared/constants';
-import {StudentEnrollmentManagementService} from '../../../studentEnrollment-management/service/studentEnrollment-management.service';
+import {
+   StudentEnrollmentManagementService
+} from '../../../studentEnrollment-management/service/studentEnrollment-management.service';
 import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
@@ -26,7 +28,9 @@ import {
    EditSectionTimetableComponent
 } from '../../../timetable-management/component/section-timetable-edit/edit-section-timetable.component';
 import {take} from 'rxjs/operators';
-import {DeleteTimetableComponent} from '../../../timetable-management/component/timetable-delete/delete-timetable.component';
+import {
+   DeleteTimetableComponent
+} from '../../../timetable-management/component/timetable-delete/delete-timetable.component';
 import {TimetableManagementService} from '../../../timetable-management/service/timetable-management.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {MatTableDataSource} from '@angular/material/table';
@@ -50,10 +54,8 @@ export class EditSectionComponent implements OnInit, OnDestroy {
    academicYear = new AcademicYear();
    academicTerms: AcademicTermModel[];
    academicTerm = new AcademicTermModel();
-   newAcademicTerms: AcademicTermModel[] = [];
    courses: CourseModel[];
    course = new CourseModel();
-   courseModelRequestModel = new CourseRequestModel();
    major = new MajorModel();
    majors: MajorModel[];
    studyType = new StudyTypeModel();
@@ -132,16 +134,18 @@ export class EditSectionComponent implements OnInit, OnDestroy {
       this.capacity = this.section.capacity;
 
 
-      this.academicYearService.getAcademicYears().subscribe(Response => {
-         this.academicYears = Response;
-         this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
-      });
+      this.academicYears = AcademicYearService.yearsList;
+      this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
-         this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.majors = this.studentEnrollmentManagementService.getMajorsByDepartment(this.department.id);
-         this.courses = this.courseService.getCoursesByDepartment(this.department.id);
+      });
+      this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
+      this.studentEnrollmentManagementService.getMajorsByDepartment(this.department.id).subscribe(value => {
+         this.majors = value;
+      });
+      this.courseService.getCoursesByDepartment(this.department.id).subscribe(value => {
+         this.courses = value;
       });
 
       this.studentEnrollmentManagementService.getAllStudyTypes().subscribe(Response => {
@@ -186,10 +190,14 @@ export class EditSectionComponent implements OnInit, OnDestroy {
          this.form.get('courseMenu')?.setValue(null);
          if (this.departmentSelect.value !== undefined) {
             this.courseSelect.setDisabledState(false);
-            this.courses = this.courseService.getCoursesByDepartment(this.departmentSelect.value);
+            this.courseService.getCoursesByDepartment(this.departmentSelect.value).subscribe(value1 => {
+               this.courses = value1;
+            });
 
             this.majorSelect.setDisabledState(false);
-            this.majors = this.studentEnrollmentManagementService.getMajorsByDepartment(this.departmentSelect.value);
+            this.studentEnrollmentManagementService.getMajorsByDepartment(this.departmentSelect.value).subscribe(value1 => {
+               this.majors = value;
+            });
          } else {
             this.courseSelect.setDisabledState(true);
             this.majorSelect.setDisabledState(true);

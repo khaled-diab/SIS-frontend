@@ -55,14 +55,8 @@ export class CourseManagementService {
     return this.httpClient.delete<MessageResponse>(Constants.deleteCourseUrl + id);
   }
 
-  allCourses(): Observable<CourseModel[]>{
-    return this.httpClient.get<CourseModel[]>(Constants.allCoursesUrl);
-  }
-
-  getCoursesByDepartment(departmentId: number): CourseModel[] {
-    return CourseManagementService.coursesList.filter(value => {
-      return (value.departmentDTO?.id === departmentId);
-    });
+  getCoursesByDepartment(departmentId: number): Observable<CourseModel[]> {
+     return this.httpClient.get<CourseModel[]>(Constants.coursesByDepartmentIdUrl + departmentId);
   }
 
 }
