@@ -4,12 +4,13 @@ import {Observable, Subject} from 'rxjs';
 import {AcademicTermModel} from 'src/app/shared/model/academicTerm-management/academic-term-model';
 import {AcademicTermRequestModel} from 'src/app/shared/model/academicTerm-management/academic-term-request-model';
 import {Constants} from '../../shared/constants';
+import {AcademicYear} from "../../shared/model/academicYear-Management/academic-year";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AcademicTermService {
-  static academicTermsList: AcademicTermModel[];
+  // static academicTermsList: AcademicTermModel[];
   academicTermFilterEvent: Subject<any> = new Subject<any>();
   academicTermDeleteEvent: Subject<any> = new Subject<any>();
   academicTermSaveEvent: Subject<AcademicTermModel> = new Subject<AcademicTermModel>();
@@ -43,4 +44,13 @@ export class AcademicTermService {
       return (value.academicYearDTO?.id === yearId);
     });
   }
+
+   public static get academicTermsList(): AcademicTermModel[]{
+      // @ts-ignore
+      return JSON.parse(localStorage.getItem(Constants.TERMS_LIST));
+   }
+   public static set academicTermsList(academicTermModels: AcademicTermModel[]){
+      // @ts-ignore
+      localStorage.setItem(Constants.TERMS_LIST, JSON.stringify(academicTermModels));
+   }
 }

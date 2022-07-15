@@ -6,9 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
-import {BsModalService} from 'ngx-bootstrap/modal';
 import {Subscription} from 'rxjs';
-import {CreateacademicyearComponent} from 'src/app/academic-year-management/components/create-academic-year/create-academic-year.component';
 import {DepartmentModel} from 'src/app/shared/model/department-management/department-model';
 import {DepartmentService} from '../../service/department.service';
 import {CreateDepartmentComponent} from '../create-department/create-department.component';
@@ -24,7 +22,7 @@ import {take} from 'rxjs/operators';
 export class DepartmentListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: DepartmentModel[];
-  displayedColumns = ['No.', 'code', 'nameAr', 'nameEn','college', 'Actions'];
+  displayedColumns = ['No.', 'code', 'nameAr', 'nameEn', 'college', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];

@@ -78,6 +78,7 @@ export class AcademicYearListComponent implements OnInit, OnDestroy {
             this.service.getAcademicYears().subscribe(data => {
               this.tableData = data;
               this.dataSource.data = this.tableData;
+              AcademicYearService.yearsList = this.tableData;
             });
           }
         },
@@ -153,6 +154,8 @@ export class AcademicYearListComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.tableData = value;
         this.dataSource.data = this.tableData;
+         AcademicYearService.yearsList = this.tableData;
+
       });
     this.snackBar.open('Academic Year Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
   }

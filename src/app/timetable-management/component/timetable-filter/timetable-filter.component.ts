@@ -16,6 +16,9 @@ import {SectionModel} from '../../../shared/model/section-management/section-mod
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {CourseManagementService} from '../../../course-management/service/course-management.service';
 import {SectionManagementService} from '../../../section-management/service/sectionManagement.service';
+import {StudentEnrollmentManagementService} from '../../../studentEnrollment-management/service/studentEnrollment-management.service';
+import {BuildingManagementService} from '../../../building-management/service/building-management.service';
+import {ClassroomManagementService} from '../../../classroom-management/service/classroom-management.service';
 
 @Component({
   selector: 'app-timetable-filter',
@@ -54,17 +57,19 @@ export class TimetableFilterComponent implements OnInit, AfterViewInit {
   days: string[];
 
   ngOnInit(): void {
-    this.academicYearService.getAcademicYears().subscribe(Response => {
-      this.academicYears = Response;
+    // this.academicYearService.getAcademicYears().subscribe(Response => {
+      this.academicYears = AcademicYearService.yearsList;
+    // });
+    // this.academicTermService.getAcademicTerms().subscribe(Response => {
+      this.academicTerms = AcademicTermService.academicTermsList;
+    // });
+      this.collegeManagementService.getAllColleges().subscribe(Response => {
+            this.colleges = Response;
     });
-    this.academicTermService.getAcademicTerms().subscribe(Response => {
-      this.academicTerms = Response;
-    });
-    this.collegeManagementService.getAllColleges().subscribe(Response => {
-      this.colleges = Response;
-    });
-    this.departmentService.getDepartments();
-    this.days = [
+      // this.timetableManagementService.getUtillData();
+
+     // this.departmentService.getDepartments();
+      this.days = [
       'Saturday',
       'Sunday',
       'Monday',
@@ -168,4 +173,5 @@ export class TimetableFilterComponent implements OnInit, AfterViewInit {
     this.timetableRequestModel = new TimetableRequestModel();
     this.timetableManagementService.timetableFilterEvent.next(this.timetableRequestModel);
   }
+
 }

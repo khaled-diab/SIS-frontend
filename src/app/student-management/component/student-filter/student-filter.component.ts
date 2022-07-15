@@ -29,9 +29,9 @@ export class StudentFilterComponent implements OnInit, AfterViewInit {
 
    ngOnInit(): void {
 
-      this.collegeManagementService.getAllColleges().subscribe(Response => {
-         this.colleges = Response;
-      });
+    this.collegeManagementService.getAllColleges().subscribe(value => {
+       this.colleges = value;
+    });
    }
 
    ngAfterViewInit(): void {

@@ -10,6 +10,11 @@ import {TimetableRequestModel} from '../../shared/model/timetable-management/tim
 import {TimetableModel} from '../../shared/model/timetable-management/timetable-model';
 import {LectureTypeModel} from '../../shared/model/lectureType-model';
 import {TimetableTableRecordsModel} from '../../shared/model/timetable-management/timetableTableRecords-model';
+import {StudentEnrollmentManagementService} from "../../studentEnrollment-management/service/studentEnrollment-management.service";
+import {CourseManagementService} from "../../course-management/service/course-management.service";
+import {ClassroomManagementService} from "../../classroom-management/service/classroom-management.service";
+import {BuildingManagementService} from "../../building-management/service/building-management.service";
+import {SectionManagementService} from "../../section-management/service/sectionManagement.service";
 
 @Injectable({
    providedIn: 'root'
@@ -22,7 +27,9 @@ export class TimetableManagementService {
    timetableDeleteEvent: Subject<any> = new Subject<any>();
    timetableCloseUpdateEvent: Subject<any> = new Subject<any>();
 
-   constructor(private httpClient: HttpClient) {
+   constructor(private httpClient: HttpClient, private studentEnrollmentManagementService: StudentEnrollmentManagementService,
+               private courseService: CourseManagementService,
+               private  classroomService: ClassroomManagementService, private  buildingService: BuildingManagementService, private  sectionService: SectionManagementService) {
    }
 
    getTimetablesPage(pageNumber: number, pageSize: number): Observable<PageRequest<TimetableModel>> {
@@ -81,5 +88,22 @@ export class TimetableManagementService {
    public getStudentTimetables(userId: number): Observable<TimetableModel[]> {
       return this.httpClient.get <TimetableModel[]>(Constants.studentTimetablesUrl + userId);
    }
-
+   // public  getUtillData(){
+   //    this.studentEnrollmentManagementService.getAllMajors().subscribe(value => {
+   //       StudentEnrollmentManagementService.majorsList = value;
+   //    });
+   //    this.courseService.allCourses().subscribe(value => {
+   //       CourseManagementService.coursesList = value;
+   //    });
+   //
+   //    this.sectionService.allSections().subscribe(value => {
+   //       SectionManagementService.sectionsList = value;
+   //    });
+   //    this.buildingService.getBuildings().subscribe(value => {
+   //       BuildingManagementService.buildingsList = value;
+   //    });
+   //    this.classroomService.getClassrooms().subscribe(value => {
+   //       ClassroomManagementService.classroomsList = value;
+   //    });
+   // }
 }

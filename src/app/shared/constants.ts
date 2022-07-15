@@ -150,5 +150,10 @@ export class Constants {
    public static readonly usersFilesPageUrl = environment.baseURL + '/security/findAll/';
 
    public  static  readonly  LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   public  static  readonly  COLLEGES_LIST = 'colleges';
+   public  static  readonly  DEPARTMENTS_LIST = 'departments';
+   public  static  readonly  TERMS_LIST = 'terms';
+   public  static  readonly  YEARS_LIST = 'years';
+
 
 }

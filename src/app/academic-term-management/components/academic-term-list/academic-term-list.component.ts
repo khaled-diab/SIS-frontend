@@ -23,7 +23,7 @@ import {take} from 'rxjs/operators';
 export class AcademicTermListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: AcademicTermModel[];
-  displayedColumns = ['NO.', 'name', 'start_date', 'end_date','academic_year', 'Actions'];
+  displayedColumns = ['NO.', 'name', 'start_date', 'end_date', 'academic_year', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -71,6 +71,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
           this.service.getAcademicTerms().subscribe(data => {
             this.tableData = data;
             this.dataSource.data = this.tableData;
+            AcademicTermService.academicTermsList = this.tableData;
           });
         }
       }, error => {
@@ -145,6 +146,8 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.tableData = value;
         this.dataSource.data = this.tableData;
+        AcademicTermService.academicTermsList = this.tableData;
+
       });
     this.snackBar.open('Academic Term Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
   }

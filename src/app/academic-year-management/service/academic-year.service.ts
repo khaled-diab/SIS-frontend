@@ -4,6 +4,7 @@ import {Observable, Subject} from 'rxjs';
 import {AcademicYear} from 'src/app/shared/model/academicYear-Management/academic-year';
 import {MessageResponse} from 'src/app/shared/model/message-response';
 import {Constants} from '../../shared/constants';
+import {DepartmentModel} from "../../shared/model/department-management/department-model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,12 @@ export class AcademicYearService {
     Observable<AcademicYear[]> {
     return this.http.get<AcademicYear[]>(Constants.getAcademicYears);
   }
-
+   public static get yearsList(): AcademicYear[]{
+      // @ts-ignore
+      return JSON.parse(localStorage.getItem(Constants.YEARS_LIST));
+   }
+   public static set yearsList(academicYears: AcademicYear[]){
+      // @ts-ignore
+      localStorage.setItem(Constants.YEARS_LIST, JSON.stringify(academicYears));
+   }
 }
