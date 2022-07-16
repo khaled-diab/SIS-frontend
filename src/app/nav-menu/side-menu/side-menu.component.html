@@ -186,7 +186,7 @@
          </li>
       </ul>
    </mat-expansion-panel>
-   <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
+   <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN' || loggedInUser.user.role.roleName==='FACULTY_MEMBER'" >
       <mat-expansion-panel
          #attendanceReportExpansion
          (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
@@ -201,7 +201,7 @@
                 [routerLink]="['/attendancereportsbylecture-management','attendane-report-by-lecture']">
                <a>
             <span>
-              Attendance Report By Lecture
+              Attendance By Lecture
             </span>
                </a>
             </li>
@@ -210,7 +210,7 @@
                 [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
                <a>
              <span>
-               Attendance Report By Student
+               Attendance By Student
              </span>
                </a>
             </li>
