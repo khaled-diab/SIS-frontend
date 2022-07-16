@@ -39,12 +39,12 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
 
    ngOnInit(): void {
       // @ts-ignore
-      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      console.log(this.loggedIn.user.id);
-      this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
-         this.facultyMember = value;
-         this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
-         this.timetableManagementService
+      this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      // console.log(this.loggedIn.user.id);
+      // this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
+      //    this.facultyMember = value;
+      this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
+      this.timetableManagementService
             .filterTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
             this.timetables = value1.data;
             this.timetables.forEach(value2 => {
@@ -56,7 +56,7 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
                return (this.map.get(a) < this.map.get(b)) ? -1 : 1;
             });
          });
-      });
+      // });
    }
 
    select(daySelect: string): void {

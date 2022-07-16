@@ -29,6 +29,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
                private facultyMemberManagementService: FacultyMemberManagementService) {
 
    }
+
    colleges: number[];
    selectedCourse: CourseModel;
    timetables: TimetableModel[];
@@ -55,15 +56,13 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
    ngOnInit(): void {
       // @ts-ignore
-      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
-         this.facultyMember = value;
-         console.log(value);
+      this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      // this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
          this.lecture.facultyMemberDTO = this.facultyMember;
          this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
             this.sections = value;
          });
-      });
+      // });
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
 

@@ -59,7 +59,7 @@ export class FacultyMemberManagementService {
    }
 
    updateFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
-      facultyMember.user.role = new RoleModel();
+      // facultyMember.user.role = new RoleModel();
       return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
    }
 
