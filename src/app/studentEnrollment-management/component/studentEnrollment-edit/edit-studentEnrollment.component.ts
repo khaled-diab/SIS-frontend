@@ -46,7 +46,6 @@ export class EditStudentEnrollmentComponent implements OnInit {
    studyType = new StudyTypeModel();
    courses: CourseModel[];
    course = new CourseModel();
-   courseModelRequestModel = new CourseRequestModel();
    sections: SectionModel[];
    section = new SectionModel();
    sectionRequestModel = new SectionRequestModel();
@@ -111,7 +110,7 @@ export class EditStudentEnrollmentComponent implements OnInit {
       this.form.get('collegeMenu')?.setValue(this.studentEnrollment.collegeDTO.id);
       this.form.get('departmentMenu')?.setValue(this.studentEnrollment.departmentDTO.id);
       this.form.get('courseMenu')?.setValue(this.studentEnrollment.courseDTO.id);
-      this.form.get('majorMenu')?.setValue(this.studentEnrollment.majorDTO.id);
+      this.form.get('majorMenu')?.setValue(this.studentEnrollment.majorDTO);
       this.form.get('studyTypeMenu')?.setValue(this.studentEnrollment.studyTypeDTO.id);
       this.form.get('sectionMenu')?.setValue(this.studentEnrollment.sectionDTO.id);
 
@@ -199,7 +198,7 @@ export class EditStudentEnrollmentComponent implements OnInit {
          this.studentEnrollment.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.studentEnrollment.departmentDTO.id = this.form.get('departmentMenu')?.value;
          this.studentEnrollment.courseDTO.id = this.form.get('courseMenu')?.value;
-         this.studentEnrollment.majorDTO.id = this.form.get('majorMenu')?.value;
+         this.studentEnrollment.majorDTO = this.form.get('majorMenu')?.value;
          this.studentEnrollment.studyTypeDTO.id = this.form.get('studyTypeMenu')?.value;
          this.studentEnrollment.sectionDTO.id = this.form.get('sectionMenu')?.value;
          this.studentEnrollment.id = this.data.id;

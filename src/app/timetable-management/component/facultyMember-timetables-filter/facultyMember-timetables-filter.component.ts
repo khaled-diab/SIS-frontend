@@ -59,12 +59,12 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
    }
 
    select(daySelect: string): void {
-      console.log(daySelect);
+      // console.log(daySelect);
       const times: TimetableModel[] = this.timetables.filter(timetable => {
          return timetable.day === daySelect;
       });
       this.timetableManagementService.timetableFilterByDayEvent.next(times);
-      console.log(times);
+      // console.log(times);
    }
 
 }

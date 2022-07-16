@@ -36,7 +36,7 @@ export class FacultyMemberTimetablesListComponent implements OnInit, OnDestroy {
       return this.timetableManagementService.timetableFilterByDayEvent
          .subscribe(value => {
             this.tableData = value;
-            console.log(value);
+            // console.log(value);
          });
    }
 

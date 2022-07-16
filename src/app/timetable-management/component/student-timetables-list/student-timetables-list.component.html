@@ -1,8 +1,8 @@
 <div class="p-3">
    <app-student-timetables-filter></app-student-timetables-filter>
 
-   <div *ngIf="selection.selected" class="mat-elevation-z8 mt-3 full-width-table">
-      <mat-table [dataSource]="selection.selected" aria-label="Elements">
+   <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
+      <mat-table [dataSource]="tableData" aria-label="Elements">
 
          <!-- Number Column -->
          <ng-container matColumnDef="No.">
@@ -57,5 +57,5 @@
       </mat-table>
 
    </div>
-   <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
+   <!--   <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>-->
 </div>

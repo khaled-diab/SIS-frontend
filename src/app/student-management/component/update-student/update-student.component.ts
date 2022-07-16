@@ -27,7 +27,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
    college = new CollegeModel();
    departments: DepartmentModel[];
    programs: AcademicProgramModel[];
-   department = new  DepartmentModel();
+   department = new DepartmentModel();
    years: string[];
    levels = Constants.LEVELS;
    errorr = false;
@@ -51,11 +51,11 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
                private snackBar: MatSnackBar,
                private collegeManagementService: CollegeManagementService,
                private departmentService: DepartmentService,
-               private academicProgramService: AcademicProgramService){
+               private academicProgramService: AcademicProgramService) {
    }
 
    ngOnInit(): void {
-            if (this.data.sel === 1) {
+      if (this.data.sel === 1) {
          this.isDisabled = false;
       } else {
          this.isDisabled = true;
@@ -63,12 +63,12 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
 
       }
 
-            this.student = this.data.st;
-            console.log(this.student.user);
+      this.student = this.data.st;
+      console.log(this.student.user);
 
-            this.url = Constants.StudentImgUrl + this.student.photo;
+      this.url = Constants.StudentImgUrl + this.student.photo;
       //
-            this.form = new FormGroup({
+      this.form = new FormGroup({
             nameEn: new FormControl(this.student.nameEn, Validators.compose([Validators.required,
                Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
             nameAr: new FormControl(this.student.nameAr, Validators.compose([Validators.required,
@@ -94,23 +94,26 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          }
       );
 
-            if (this.data.sel !== 1) {
+      if (this.data.sel !== 1) {
          this.form.disable();
 
       }
 
-            this.college = this.data.st.collegeDTO;
-            this.department = this.data.st.departmentDTO;
+      this.college = this.data.st.collegeDTO;
+      this.department = this.data.st.departmentDTO;
       // if (this.department.id === 1){
       //   this.programSelect.setDisabledState(true);
       // }
-            console.log(this.department);
-            this.collegeManagementService.getAllColleges().subscribe(Response => {
+      console.log(this.department);
+      this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
          this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.department?.id);
+         this.academicProgramService.getAcademicProgramsByCollege(this.college?.id).subscribe(value => {
+            this.programs = value;
+         });
       });
    }
+
    ngAfterViewInit(): void {
       this.collegeSelect.valueChange.subscribe(value => {
          this.form.get('programMenu')?.setValue(null);
@@ -121,7 +124,9 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
 
       });
       this.departmentSelect.openedChange.subscribe(value => {
-         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.departmentSelect.value);
+         this.academicProgramService.getAcademicProgramsByCollege(this.collegeSelect.value).subscribe(value1 => {
+            this.programs = value1;
+         });
          this.programSelect.setDisabledState(false);
 
 
@@ -153,10 +158,10 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          this.student.departmentDTO.id = -1;
          this.student.academicProgramDTO.id = -1;
          console.log(this.form.get('programMenu')?.value);
-         if (this.form.get('departmentMenu')?.value != -1 && this.form.get('departmentMenu')?.value != null){
+         if (this.form.get('departmentMenu')?.value != -1 && this.form.get('departmentMenu')?.value != null) {
             this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
          }
-         if (this.form.get('programMenu')?.value != -1 && this.form.get('programMenu')?.value != null){
+         if (this.form.get('programMenu')?.value != -1 && this.form.get('programMenu')?.value != null) {
             this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
          }
          this.student.id = this.data.st.id;
@@ -170,7 +175,10 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          }
 
          this.studentManagementService.updateStudent(this.student).subscribe(() => {
-               this.snackBar.open('Student Updated Successfully', undefined, {duration: 3000, panelClass: 'successSnackBar'});
+               this.snackBar.open('Student Updated Successfully', undefined, {
+                  duration: 3000,
+                  panelClass: 'successSnackBar'
+               });
                this.studentManagementService.studentCloseUpdateEvent.next();
             }, error => {
                const formControl = this.form.get(error.error.field);

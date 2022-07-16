@@ -159,10 +159,10 @@ export class AddTimetableComponent implements OnInit {
          this.timetable.endTime = this.form2.get('endTime')?.value;
          console.log(this.timetable);
       }
-      // if (this.form2.get('startTime')?.value > this.form2.get('endTime')?.value) {
-      //    this.snackBar.open('End Time must be greater than Start Time!', undefined, {duration: 3500});
-      //    return;
-      // }
+      if (this.form2.get('startTime')?.value > this.form2.get('endTime')?.value) {
+         this.snackBar.open('End Time must be greater than Start Time!', undefined, {duration: 3500});
+         return;
+      }
       this.timetableManagementService.timetableAddEvent.next(this.timetable);
    }
 

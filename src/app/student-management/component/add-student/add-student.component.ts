@@ -46,13 +46,16 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    url: string;
    imgFlage = 0;
    private httpClient: HttpClient;
+
    constructor(private studentManagementService: StudentManagementService,
                private snackBar: MatSnackBar,
                private route: Router,
                private collegeManagementService: CollegeManagementService,
                private departmentService: DepartmentService,
                private academicProgramService: AcademicProgramService,
-               http: HttpClient){this.httpClient = http; }
+               http: HttpClient) {
+      this.httpClient = http;
+   }
 
 
    ngOnInit(): void {
@@ -78,9 +81,9 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
                Validators.email])),
             alternativeMail: new FormControl(undefined, Validators.email),
             parentPhone: new FormControl(undefined, Validators.pattern(Constants.DIGITS_ONLY_11)),
-            level: new FormControl(undefined ),
+            level: new FormControl(undefined),
             // year: new FormControl(undefined, Validators.required),
-            photo: new FormControl(undefined ),
+            photo: new FormControl(undefined),
             collegeMenu: new FormControl(undefined, Validators.required),
             departmentMenu: new FormControl(undefined),
             programMenu: new FormControl(undefined),
@@ -94,6 +97,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.colleges = Response;
       });
    }
+
    ngAfterViewInit(): void {
 
       this.collegeList.valueChange.subscribe(value => {
@@ -111,11 +115,14 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       this.departmentMenu.valueChange.subscribe(value => {
 
          this.programMenu.setDisabledState(false);
-         this.programs = this.academicProgramService.getAcademicProgramsByDepartment(this.departmentMenu.value.id);
+         this.academicProgramService.getAcademicProgramsByCollege(this.collegeList.value.id).subscribe(value1 => {
+            this.programs = value1;
+         });
       });
    }
+
    add(): void {
-      if (this.form.invalid){
+      if (this.form.invalid) {
       }
       if (this.form.valid) {
          this.student.nameEn = this.form.get('nameEn')?.value.trim();
@@ -151,7 +158,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
                }
             );
             this.imgFlage = 0;
-         }else{
+         } else {
             this.student.photo = Constants.defaultStudentImgUrl;
          }
          // );
@@ -159,7 +166,10 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
          this.studentManagementService.addStudent(this.student).subscribe((Response) => {
 
-               this.snackBar.open('Student Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
+               this.snackBar.open('Student Added Successfully', undefined, {
+                  duration: 2000,
+                  panelClass: 'successSnackBar'
+               });
                this.route.navigate(['/students-management', 'student-list']);
             }, error => {
                const formControl = this.form.get(error.error.field);
