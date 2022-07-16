@@ -33,10 +33,8 @@ export class ClassroomManagementService {
       return this.httpClient.post<MessageResponse>(Constants.saveClassroomUrl, classroom);
    }
 
-   getClassroomsByBuilding(buildingId: number): ClassroomModel[] {
-      return ClassroomManagementService.classroomsList.filter(value => {
-         return (value.buildingDTO?.id === buildingId);
-      });
+   getClassroomsByBuilding(buildingId: number): Observable<ClassroomModel[]> {
+      return this.httpClient.get<ClassroomModel[]>(Constants.classroomsByBuildingIdUrl + buildingId);
    }
 
 }

@@ -21,6 +21,7 @@ export class TimetableManagementService {
    timetableFilterEvent: Subject<TimetableRequestModel> = new Subject<TimetableRequestModel>();
    timetableDeleteEvent: Subject<any> = new Subject<any>();
    timetableCloseUpdateEvent: Subject<any> = new Subject<any>();
+   timetableFilterByDayEvent: Subject<any> = new Subject<any>();
 
    constructor(private httpClient: HttpClient) {
    }

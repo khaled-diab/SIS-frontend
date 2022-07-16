@@ -5,7 +5,6 @@ import {TimetableModel} from '../../../shared/model/timetable-management/timetab
 import {TimetableRequestModel} from '../../../shared/model/timetable-management/timetable-request-model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {Constants} from '../../../shared/constants';
-import {UserModel} from '../../../shared/model/security/user-model';
 
 @Component({
    selector: 'app-student-timetables-list',
@@ -16,7 +15,6 @@ export class StudentTimetablesListComponent implements OnInit, OnDestroy {
 
    tableData: TimetableModel[] = [];
    selection = new SelectionModel<TimetableModel>(true, []);
-   timetableRequestModel: TimetableRequestModel = new TimetableRequestModel();
    displayedColumns = ['No.', 'startTime', 'endTime', 'sectionId', 'facultyMemberId', 'lectureTypeId',
       'buildingId', 'classroomId'];
    subscriptionList: Subscription[] = [];

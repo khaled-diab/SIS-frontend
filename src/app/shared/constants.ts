@@ -10,10 +10,12 @@ export class Constants {
    public static readonly buildingPageUrl = environment.baseURL + '/building/all/';
    public static readonly deleteBuildingUrl = environment.baseURL + '/building/delete/';
    public static readonly saveBuildingUrl = environment.baseURL + '/building/addOrUpdate';
+   public static readonly buildingsByCollegeIdUrl = environment.baseURL + '/building/buildingsByCollegeId/';
    // Classroom Url
    public static readonly classroomPageUrl = environment.baseURL + '/classroom/all/';
    public static readonly deleteClassroomUrl = environment.baseURL + '/classroom/delete/';
    public static readonly saveClassroomUrl = environment.baseURL + '/classroom/addOrUpdate';
+   public static readonly classroomsByBuildingIdUrl = environment.baseURL + '/classroom/classroomsByBuildingId/';
    // Course Url
    public static readonly getCourses = environment.baseURL + '/courses/all';
    public static readonly coursePageUrl = environment.baseURL + '/courses/search/';

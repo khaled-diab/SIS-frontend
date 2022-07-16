@@ -99,7 +99,7 @@
                            <mat-option [ngClass]="{'disabled_option':section.numberOfStudents==section.capacity}"
                                        *ngFor="let section of sections" [value]="section"
                                        [disabled]="section.numberOfStudents==section.capacity">
-                              {{section.sectionNumber + ' / ' + 'busy: ' + section.numberOfStudents + ' of ' + section.capacity}}
+                              {{section.sectionNumber + ' / ' + 'available: ' + (section.capacity - section.numberOfStudents)}}
                            </mat-option>
                         </mat-select>
                         <mat-error *ngIf="form.get('sectionMenu')?.errors?.required">Required</mat-error>

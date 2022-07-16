@@ -3,7 +3,10 @@ import {TimetableManagementService} from '../../service/timetable-management.ser
 import {TimetableRequestModel} from '../../../shared/model/timetable-management/timetable-request-model';
 import {Constants} from '../../../shared/constants';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
-import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {
+   FacultyMemberManagementService
+} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 
 @Component({
    selector: 'app-facultyMember-timetables-filter',
@@ -14,6 +17,19 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
 
    loggedIn: any;
    facultyMember = new FacultyMemberModel();
+   timetables: TimetableModel[] = [];
+   set = new Set<string>();
+   map = new Map<string, number>([
+      ['Saturday', 1],
+      ['Sunday', 2],
+      ['Monday', 3],
+      ['Tuesday', 4],
+      ['Wednesday', 5],
+      ['Thursday', 6],
+      ['Friday', 7]
+   ]);
+   days: any;
+
    constructor(private timetableManagementService: TimetableManagementService,
                private facultyMemberManagementService: FacultyMemberManagementService) {
    }
@@ -21,19 +37,34 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
    timetableRequestModel: TimetableRequestModel = new TimetableRequestModel();
 
    ngOnInit(): void {
-   }
-
-   select(day: string): any {
-      console.log(day);
-      this.timetableRequestModel.filterDay = day;
       // @ts-ignore
       this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       console.log(this.loggedIn.user.id);
       this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
          this.facultyMember = value;
+         this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
+         this.timetableManagementService
+            .searchTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
+            this.timetables = value1.data;
+            this.timetables.forEach(value2 => {
+               this.set.add(value2.day);
+            });
+            this.days = Array.from(this.set.values());
+            this.days = this.days.sort((a: string, b: string) => {
+               // @ts-ignore
+               return (this.map.get(a) < this.map.get(b)) ? -1 : 1;
+            });
+         });
       });
-      this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
-      this.timetableManagementService.timetableFilterEvent.next(this.timetableRequestModel);
+   }
+
+   select(daySelect: string): void {
+      console.log(daySelect);
+      const times: TimetableModel[] = this.timetables.filter(timetable => {
+         return timetable.day === daySelect;
+      });
+      this.timetableManagementService.timetableFilterByDayEvent.next(times);
+      console.log(times);
    }
 
 }

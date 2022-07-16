@@ -30,7 +30,7 @@ import {ClassroomManagementService} from '../../../classroom-management/service/
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {SectionManagementService} from '../../../section-management/service/sectionManagement.service';
-import {Constants} from "../../../shared/constants";
+import {Constants} from '../../../shared/constants';
 
 @Component({
    selector: 'app-timetable-edit',
@@ -121,8 +121,12 @@ export class EditTimetableComponent implements OnInit {
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
       });
-      this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
-      this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
+      this.buildingService.getBuildingsByCollegeId(this.college.id).subscribe(value => {
+         this.buildings = value;
+      });
+      this.classroomService.getClassroomsByBuilding(this.building.id).subscribe(value => {
+         this.classrooms = value;
+      });
       this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
       this.facultyMemberService.getFacultyMembersByCollege(this.college.id).subscribe(value => {
          this.facultyMembers = value;
@@ -155,7 +159,9 @@ export class EditTimetableComponent implements OnInit {
             this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
 
             this.buildingSelect.setDisabledState(false);
-            this.buildings = this.buildingService.getBuildingsByCollege(this.collegeSelect.value);
+            this.buildingService.getBuildingsByCollegeId(this.collegeSelect.value).subscribe(value1 => {
+               this.buildings = value1;
+            });
 
             this.facultyMemberSelect.setDisabledState(false);
             this.facultyMemberService.getFacultyMembersByCollege(this.collegeSelect.value).subscribe(value1 => {
@@ -194,7 +200,9 @@ export class EditTimetableComponent implements OnInit {
       this.buildingSelect.valueChange.subscribe(value => {
          if (this.buildingSelect.value !== undefined) {
             this.classroomSelect.setDisabledState(false);
-            this.classrooms = this.classroomService.getClassroomsByBuilding(this.buildingSelect.value);
+            this.classroomService.getClassroomsByBuilding(this.buildingSelect.value).subscribe(value1 => {
+               this.classrooms = value1;
+            });
          } else {
             this.classroomSelect.setDisabledState(true);
          }

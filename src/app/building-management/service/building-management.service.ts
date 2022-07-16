@@ -46,6 +46,9 @@ export class BuildingManagementService {
       return (value.collegeDTO?.id === collegeId);
     });
   }
+   getBuildingsByCollegeId(collegeId: number): Observable<BuildingModel[]> {
+      return this.httpClient.get<BuildingModel[]>(Constants.buildingsByCollegeIdUrl + collegeId);
+   }
 
    getDepartments():
       Observable<DepartmentModel[]> {

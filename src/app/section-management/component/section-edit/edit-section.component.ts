@@ -21,7 +21,6 @@ import {Constants} from '../../../shared/constants';
 import {
    StudentEnrollmentManagementService
 } from '../../../studentEnrollment-management/service/studentEnrollment-management.service';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 import {

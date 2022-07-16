@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
@@ -77,7 +77,9 @@ export class AddFacultyMemberComponent implements OnInit {
     this.collegeManagementService.getAllColleges().subscribe(Response => {
       this.colleges = Response;
     });
-    this.departmentService.getDepartments();
+    this.departmentService.getDepartments().subscribe(value => {
+       this.departments = value;
+    });
   }
 
   ngAfterViewInit(): void {

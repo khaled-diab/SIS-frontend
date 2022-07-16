@@ -120,8 +120,12 @@ export class EditSectionTimetableComponent implements OnInit {
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
       });
-      this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
-      this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
+      this.buildingService.getBuildingsByCollegeId(this.college.id).subscribe(value => {
+         this.buildings = value;
+      });
+      this.classroomService.getClassroomsByBuilding(this.building.id).subscribe(value => {
+         this.classrooms = value;
+      });
       this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
       this.facultyMemberService.getFacultyMembersByCollege(this.college.id).subscribe(value => {
          this.facultyMembers = value;
@@ -138,7 +142,9 @@ export class EditSectionTimetableComponent implements OnInit {
       this.buildingSelect.valueChange.subscribe(_ => {
          if (this.buildingSelect.value !== undefined) {
             this.classroomSelect.setDisabledState(false);
-            this.classrooms = this.classroomService.getClassroomsByBuilding(this.buildingSelect.value);
+            this.classroomService.getClassroomsByBuilding(this.buildingSelect.value).subscribe(value => {
+               this.classrooms = value;
+            });
          } else {
             this.classroomSelect.setDisabledState(true);
          }

@@ -14,10 +14,8 @@ import {DepartmentService} from '../../../department-management/service/departme
 import {AcademicYearService} from '../../../academic-year-management/service/academic-year.service';
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
 import {CourseManagementService} from '../../../course-management/service/course-management.service';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
-import {FacultyMemberRequestModel} from '../../../shared/model/facultyMember-management/facultyMember-request-model';
 import {LectureTypeModel} from '../../../shared/model/lectureType-model';
 import {BuildingModel} from '../../../shared/model/building-management/building-model';
 import {ClassroomModel} from '../../../shared/model/classroom-management/classroom-model';
@@ -30,7 +28,7 @@ import {TimetableManagementService} from '../../service/timetable-management.ser
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Constants} from "../../../shared/constants";
+import {Constants} from '../../../shared/constants';
 
 @Component({
    selector: 'app-timetable-add',
@@ -118,8 +116,12 @@ export class AddTimetableComponent implements OnInit {
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
       });
-      this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
-      this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
+      this.buildingService.getBuildingsByCollegeId(this.college.id).subscribe(value => {
+         this.buildings = value;
+      });
+      this.classroomService.getClassroomsByBuilding(this.building.id).subscribe(value => {
+         this.classrooms = value;
+      });
       this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
       this.facultyMemberService.getFacultyMembersByCollege(this.college.id).subscribe(value => {
          this.facultyMembers = value;
@@ -137,7 +139,9 @@ export class AddTimetableComponent implements OnInit {
       this.buildingSelect.valueChange.subscribe(value => {
          if (this.buildingSelect.value !== undefined) {
             this.classroomSelect.setDisabledState(!this.isDisabled);
-            this.classrooms = this.classroomService.getClassroomsByBuilding(this.buildingSelect.value.id);
+            this.classroomService.getClassroomsByBuilding(this.buildingSelect.value.id).subscribe(value1 => {
+               this.classrooms = value1;
+            });
          } else {
             this.classroomSelect.setDisabledState(this.isDisabled);
          }
