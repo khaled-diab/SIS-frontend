@@ -19,10 +19,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { AttendaneReportByStudentService } from './service/attendane-report-by-student.service';
 import { EditStatuesComponent } from './componets/edit-statues/edit-statues.component';
-import { ReportStudentParentComponent } from './components/report-student-parent/report-student-parent.component';
+import { ReportStudentParentComponent } from './componets/report-student-parent/report-student-parent.component';
 import { AttendaneDetailsByStudentComponent } from './componets/attendane-details-by-student/attendane-details-by-student.component';
 import { AttendaneReportByStudentComponent } from './componets/attendane-report-by-student/attendane-report-by-student.component';
 import { AttendaneReportByStudentFilterComponent } from './componets/attendane-report-by-student-filter/attendane-report-by-student-filter.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 @NgModule({
@@ -52,6 +53,8 @@ import { AttendaneReportByStudentFilterComponent } from './componets/attendane-r
     MatSortModule,
     MatDialogModule,
     ReactiveFormsModule,
+    BreadcrumbModule
+
   ],
   providers: [AttendaneReportByStudentService],
   entryComponents: [EditStatuesComponent]

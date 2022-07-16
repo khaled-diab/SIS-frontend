@@ -33,6 +33,10 @@ export class CreateacademicyearComponent implements OnInit {
       this.academicYearModel.end_date = this.form.get('end_date')?.value;
       console.log(this.academicYearModel);
     }
+    if (this.form.get('start_date')?.value > this.form.get('end_date')?.value) {
+      this.snackBar.open('End Date must be greater than Start Date!', undefined, {duration: 3500});
+      return;
+   }
     this.academicYearService.postAcademicYear(this.academicYearModel).subscribe((Response) => {
         this.snackBar.open('Academic Year Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
         this.route.navigate(['/academicyears-management', 'academic-year-list']);

@@ -31,12 +31,16 @@
                   <mat-label>Start Date</mat-label>
                   <input id="start_date" formControlName="start_date" matInput required type="date" >
                   <mat-error *ngIf="form.controls['startDate']?.errors?.required"> Required</mat-error>
+                  <mat-error *ngIf="form.get('code')?.errors?.serverError">{{errorMessage}}</mat-error>
+
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                   <mat-label>End Date</mat-label>
                   <input id="end_date" formControlName="end_date" matInput required type="date" >
                   <mat-error *ngIf="form.controls['endDate']?.errors?.required"> Required</mat-error>
+                  <mat-error *ngIf="form.get('code')?.errors?.serverError">{{errorMessage}}</mat-error>
+
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input" >
@@ -49,15 +53,7 @@
                   <mat-error *ngIf="form.get('academicYearMenu')?.errors?.required">Required</mat-error>
                 </mat-form-field>
 
-                <!--mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input" >
-                  <mat-label >Department</mat-label>
-                  <mat-select  formControlName="departmentMenu" id="departmentMenu"  required >
-                    <mat-option *ngFor="let col of departments" [value]="col">
-                      {{col.nameEn}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
-                </--mat-form-field-->
+           
 
 
 

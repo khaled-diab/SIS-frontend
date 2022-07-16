@@ -4,7 +4,7 @@ import { SecurityGuard } from '../security/service/security.guard';
 import { AttendaneDetailsByStudentComponent } from './componets/attendane-details-by-student/attendane-details-by-student.component';
 import { AttendaneReportByStudentComponent } from './componets/attendane-report-by-student/attendane-report-by-student.component';
 import { EditStatuesComponent } from './componets/edit-statues/edit-statues.component';
-import { ReportStudentParentComponent } from './components/report-student-parent/report-student-parent.component';
+import { ReportStudentParentComponent } from './componets/report-student-parent/report-student-parent.component';
 
 const routes: Routes = [ {
   path: '',
@@ -28,7 +28,7 @@ const routes: Routes = [ {
     }
   },
   {
-    path: 'attendane-details-by-student',
+    path: 'attendane-details-by-student/:sectionId/:studentId/:studentName/:courseName/:sectionName',
     component: AttendaneDetailsByStudentComponent,
     canActivate: [SecurityGuard],
     data: {

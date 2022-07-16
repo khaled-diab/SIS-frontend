@@ -40,6 +40,11 @@ export class CreateAcademicTermComponent implements OnInit {
       this.academicTerm.academicYearDTO = new AcademicTermModel();
       this.academicTerm.academicYearDTO.id = this.form.get('academicYearMenu')?.value;
     }
+    if (this.form.get('start_date')?.value > this.form.get('end_date')?.value) {
+      this.snackBar.open('End Date must be greater than Start Date!', undefined, {duration: 3500});
+      return;
+   }
+
     this.academicterm.postAcademicTerm(this.academicTerm).subscribe((Response) => {
         this.snackBar.open('Academic Term Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
         this.academicterm.closeSaveEvent.next();

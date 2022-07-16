@@ -44,6 +44,42 @@ export class Constants {
    public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
    public static readonly getStudentUrl = environment.baseURL + '/students/';
    public static readonly filterStudentRecordUrl = environment.baseURL + '/students/searchRecords/';
+  // College Url
+  public static readonly collegePageUrl = environment.baseURL + '/colleges/findAll/';
+  public static readonly deleteCollegeUrl = environment.baseURL + '/colleges/deleteCollege/';
+  public static readonly saveCollegeUrl = environment.baseURL + '/colleges/add';
+  // Building Url
+  public static readonly buildingPageUrl = environment.baseURL + '/building/all/';
+  public static readonly deleteBuildingUrl = environment.baseURL + '/building/delete/';
+  public static readonly saveBuildingUrl = environment.baseURL + '/building/addOrUpdate';
+  // Classroom Url
+  public static readonly classroomPageUrl = environment.baseURL + '/classroom/all/';
+  public static readonly deleteClassroomUrl = environment.baseURL + '/classroom/delete/';
+  public static readonly saveClassroomUrl = environment.baseURL + '/classroom/addOrUpdate';
+  // Course Url
+  public static readonly getCourses = environment.baseURL + '/courses/all';
+  public static readonly coursePageUrl = environment.baseURL + '/courses/search/';
+  public static readonly saveCourseUrl = environment.baseURL + '/courses/save';
+  public static readonly deleteCourseUrl = environment.baseURL + '/courses/delete/';
+  public static readonly allCoursesUrl = environment.baseURL + '/courses/all/';
+  public static readonly getCourseById = environment.baseURL + '/courses';
+  // Faculty Member Url
+  public static readonly facultyMemberPageUrl = environment.baseURL + '/facultyMembers/datapage';
+  public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
+  public static readonly saveFacultyMemberUrl = environment.baseURL + '/facultyMembers/saveFacultyMember';
+  public static readonly deleteFacultyMemberUrl = environment.baseURL + '/facultyMembers/delete/';
+  public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
+  public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
+  public static readonly allFacultyMembersUrl = environment.baseURL + '/facultyMembers/all';
+  public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
+  /* Student Url */
+  public static readonly deleteStudentUrl = environment.baseURL + '/students/deleteStudent/';
+  public static readonly addStudentUrl = environment.baseURL + '/students/addStudent/';
+  public static readonly updateStudentUrl = environment.baseURL + '/students/updateStudent/';
+  public static readonly filterStudentUrl = environment.baseURL + '/students/searchStudent/';
+  public static readonly uploadStudentImgUrl = environment.baseURL + '/students/upload/';
+  public static readonly StudentImgUrl = environment.baseURL + '/students/download/';
+  public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
 
    // Section URLs
    public static readonly getSections = environment.baseURL + '/sections/all';
@@ -118,6 +154,30 @@ export class Constants {
    public static readonly sortDESCIcon = 'arrow_downward';
    public static readonly sortASCHint = 'Sort Ascending';
    public static readonly sortDescHint = 'Sort Descending';
+  // Academic Years URLS
+  public static readonly getAcademicYears = environment.baseURL + '/academicYears/all';
+  public static readonly addAcademicYears = environment.baseURL + '/academicYears/addAcademicYear';
+  public static readonly deleteAcademicYears = environment.baseURL + '/academicYears/delete';
+  // Academic Terms URLS
+  public static readonly getAcademicTerms = environment.baseURL + '/academicTerms/all';
+  public static readonly addAcademicTerms = environment.baseURL + '/academicTerms/addAcademicTerms';
+  public static readonly deleteAcademicTerms = environment.baseURL + '/academicTerms/delete';
+  // Attendane Details By Lectures
+  public static readonly studentAttendanceReport = environment.baseURL + '/attendanceDetails/getAttendancesByLectureId';
+  public static readonly lecturesReport = environment.baseURL + '/lectures/getFacultyMemberLecturesToReport';
+  public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/updateReport';
+  // Attendane Details By Student
+  public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
+  public static readonly studentReportDetails =
+  environment.baseURL + '/attendanceDetails/getAttendancesBySectionIdAndStudentId';
+  public static readonly studentAttendanceDetails = environment.baseURL + '/attendanceDetails/updateStatusByStudentId';
+  // Sort
+  public static readonly ASC = 'ASC';
+  public static readonly DESC = 'DESC';
+  public static readonly sortASCIcon = 'arrow_upward';
+  public static readonly sortDESCIcon = 'arrow_downward';
+  public static readonly sortASCHint = 'Sort Ascending';
+  public static readonly sortDescHint = 'Sort Descending';
 
    /* Validation Regex */
    public static readonly ENGLISH_CHARACTERS = '^[a-zA-Z ]+$';

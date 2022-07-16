@@ -65,7 +65,7 @@ export class EditStatuesComponent implements OnInit {
     this.lectureReportService.editattendanceStatues(this.data).subscribe((Response) => {
       console.log(Response);
       this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
-      this.route.navigate(['/attendancereportsbylecture-management', 'attendane-details-by-lecture']);
+      // this.route.navigate(['/attendancereportsbylecture-management', 'attendane-details-by-lecture']);
       this.lectureReportService.closeSaveEvent.next();
     }, error => {
       const formControl = this.form.get(error.error.field);

@@ -5,5 +5,7 @@ code ='';
 name ='';
 start_date ='';
 end_date ='';
+status: boolean;
+
 
 }

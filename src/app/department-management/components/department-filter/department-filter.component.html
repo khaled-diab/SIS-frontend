@@ -1,5 +1,11 @@
 <mat-card class="mat-elevation-z8">
     <div class="container">
+      <div class="col-12">
+        <div class="subTitle ">
+          <h4>System Management/Department</h4>
+          <hr>
+        </div>
+      </div>
       <form class="form-row form">
         <div class="form-group col-6 search-box ">
           <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
@@ -8,7 +14,7 @@
         </div>
         <div class="col-4 mt-1">
           <mat-form-field appearance="outline">
-            <mat-label>Colleges</mat-label>
+            <mat-label>College</mat-label>
             <mat-select #collegeSelect>
               <mat-option [value]="undefined">
                 Choose College

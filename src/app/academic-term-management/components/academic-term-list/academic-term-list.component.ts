@@ -24,7 +24,7 @@ import {AcademicYearService} from "../../../academic-year-management/service/aca
 export class AcademicTermListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: AcademicTermModel[];
-  displayedColumns = ['NO.', 'name', 'start_date', 'end_date', 'academic_year', 'Actions'];
+  displayedColumns = ['NO.', 'name', 'start_date', 'end_date','status','academic_year', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -61,7 +61,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
 
   addOrUpdateAcademicTerm(academicTerm: AcademicTermModel): void {
     if (this.isSmallScreen) {
-      this.router.navigateByUrl('/academics-term-management/create-academic-term', {state: academicTerm}).then(_ => console.log());
+      this.router.navigateByUrl('/academicterms-management/create-academic-term', {state: academicTerm}).then(_ => console.log());
     } else {
       this.dialog.open(CreateAcademicTermComponent, {data: academicTerm});
       this.service.closeSaveEvent.subscribe(e => {
@@ -140,7 +140,6 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
         AcademicTermService.academicTermsList = value;
         console.log(value);
       });
-
   }
 
   private handleSuccessfulDeletion(): void {
