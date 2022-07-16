@@ -1,9 +1,13 @@
 <div class="p-3">
-    <div class="d-flex justify-content-end mt-3">
-      <div class="p-3">
 
-            
-    </div>
+      <div class="d-flex justify-content-end mt-6">
+        <div *ngIf="tableData" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
+           <h3  >{{'Course Name: '+CourseName +': Section'+SectionNumber}}</h3>
+           <h3 >{{'Student Name: '+StudentName}}</h3>
+        </div>
+     </div>
+          
+
         <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
           <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
     
@@ -30,7 +34,7 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Status
               </mat-header-cell>
               <mat-cell   *matCellDef="let row"
-              [ngClass]="{'make-green': row.attendanceStatus=='present','make-red': row.attendanceStatus=='absent' }" >{{row.attendanceStatus}}</mat-cell>
+              [ngClass]="{'make-green': row.attendanceStatus=='Present','make-red': row.attendanceStatus=='Absent' }" >{{row.attendanceStatus}}</mat-cell>
             </ng-container>
            
            

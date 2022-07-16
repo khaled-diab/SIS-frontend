@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {AcademicTermModel} from 'src/app/shared/model/academicTerm-management/academic-term-model';
 import {AcademicTermRequestModel} from 'src/app/shared/model/academicTerm-management/academic-term-request-model';
+import { MessageResponse } from 'src/app/shared/model/message-response';
 import {Constants} from '../../shared/constants';
 
 @Injectable({
@@ -20,8 +21,8 @@ export class AcademicTermService {
 
 
 
-  public postAcademicTerm(academicTerm: AcademicTermModel) {
-    return this.http.post(Constants.addAcademicTerms, academicTerm);
+  public postAcademicTerm(academicTerm: AcademicTermModel):Observable<MessageResponse> {
+    return this.http.post <MessageResponse>(Constants.addAcademicTerms, academicTerm);
   }
 
   deleteAcademicTerm(id: number) {

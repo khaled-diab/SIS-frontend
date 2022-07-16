@@ -23,7 +23,7 @@ import {take} from 'rxjs/operators';
 export class AcademicTermListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: AcademicTermModel[];
-  displayedColumns = ['NO.', 'name', 'start_date', 'end_date','academic_year', 'Actions'];
+  displayedColumns = ['NO.', 'name', 'start_date', 'end_date','status','academic_year', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];

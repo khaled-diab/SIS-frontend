@@ -28,7 +28,7 @@ const routes: Routes = [ {
     }
   },
   {
-    path: 'attendane-details-by-student/:sectionId/:studentId',
+    path: 'attendane-details-by-student/:sectionId/:studentId/:studentName/:courseName/:sectionName',
     component: AttendaneDetailsByStudentComponent,
     canActivate: [SecurityGuard],
     data: {

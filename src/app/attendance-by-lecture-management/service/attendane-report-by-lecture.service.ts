@@ -39,11 +39,15 @@ public getsection(id:number):Observable<SectionModel>{
   return this.http.get <SectionModel>(`${Constants.getSection}/${id}`);
 
 }
+public getcourse(id:number):Observable<CourseModel>{
+  return this.http.get <CourseModel>(`${Constants.getCourseById}/${id}`);
+
+}
 public getStudentAttendanceReport(lectureId : string | null):Observable<any>{
   return this.http.get <any>(`${Constants.studentAttendanceReport}/${lectureId}`);
 }
 editattendanceStatues(attendance :AttendanceDetailsModel) {
-   return this.http.put(`${Constants.attendanceDetails}`,attendance);
+   return this.http.post(`${Constants.attendanceDetails}`,attendance);
 }
 
 }

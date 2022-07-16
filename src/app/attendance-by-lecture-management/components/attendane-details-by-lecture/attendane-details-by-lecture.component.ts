@@ -33,7 +33,7 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
   pageIndex = 1;
   defaultPageSize = 10;
   lectureId: string | null;
-  coursename = '';
+  courseName :string | null;
   date: string;
   from: Time;
   to: Time;
@@ -72,8 +72,10 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-     // this.activatedRoute.paramMap.subscribe(() => {
-     // });
+    this.courseName=this.activatedRoute.snapshot.params['CourseName'];
+    this.date=this.activatedRoute.snapshot.params['lectureDate'];
+    this.from=this.activatedRoute.snapshot.params['lectureStartTime'];
+    this.to=this.activatedRoute.snapshot.params['lectureEndTime'];
 
 
      this.dataSource = new MatTableDataSource<any>();
@@ -81,8 +83,8 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
 
 }
 ngAfterViewInit(): void {
-  // this.dataSource = new MatTableDataSource<any>();
-  // this.Subscription();
+  // this.courseName=this.activatedRoute.snapshot.paramMap.get('CourseName');
+
 }
 
 private Subscription(): Subscription[]{
@@ -95,13 +97,12 @@ private filterEventSubscription(): Subscription{
 
             return this.lectureReportService.getStudentAttendanceReport
       (this.activatedRoute.snapshot.paramMap.get('lectureId')).subscribe(Report => {
-         console.log('here');
          console.log(Report);
          this.tableData = Report.attendanceDetailsDTOs;
          this.dataSource.data = this.tableData;
          console.log(this.tableData);
      } );
-   // );
+     
 }
 
 

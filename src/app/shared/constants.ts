@@ -19,6 +19,7 @@ export class Constants {
   public static readonly saveCourseUrl = environment.baseURL + '/courses/save';
   public static readonly deleteCourseUrl = environment.baseURL + '/courses/delete/';
   public static readonly allCoursesUrl = environment.baseURL + '/courses/all/';
+  public static readonly getCourseById = environment.baseURL + '/courses';
   // Faculty Member Url
   public static readonly facultyMemberPageUrl = environment.baseURL + '/facultyMembers/datapage';
   public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
@@ -82,20 +83,21 @@ export class Constants {
    public static readonly deleteDepartments = environment.baseURL + '/departments/delete';
   // Academic Years URLS
   public static readonly getAcademicYears = environment.baseURL + '/academicYears/all';
-  public static readonly addAcademicYears = environment.baseURL + '/academicYears/add';
+  public static readonly addAcademicYears = environment.baseURL + '/academicYears/addAcademicYear';
   public static readonly deleteAcademicYears = environment.baseURL + '/academicYears/delete';
   // Academic Terms URLS
   public static readonly getAcademicTerms = environment.baseURL + '/academicTerms/all';
-  public static readonly addAcademicTerms = environment.baseURL + '/academicTerms/add';
+  public static readonly addAcademicTerms = environment.baseURL + '/academicTerms/addAcademicTerms';
   public static readonly deleteAcademicTerms = environment.baseURL + '/academicTerms/delete';
   // Attendane Details By Lectures
   public static readonly studentAttendanceReport = environment.baseURL + '/attendanceDetails/getAttendancesByLectureId';
   public static readonly lecturesReport = environment.baseURL + '/lectures/getFacultyMemberLecturesToReport';
-  public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/update';
+  public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/updateReport';
   // Attendane Details By Student
   public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
   public static readonly studentReportDetails = 
   environment.baseURL + '/attendanceDetails/getAttendancesBySectionIdAndStudentId';
+  public static readonly studentAttendanceDetails = environment.baseURL + '/attendanceDetails/updateStatusByStudentId';
   // Sort
   public static readonly ASC = 'ASC';
   public static readonly DESC = 'DESC';

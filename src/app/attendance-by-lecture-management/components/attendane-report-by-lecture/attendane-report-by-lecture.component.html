@@ -1,16 +1,14 @@
 <div class="p-3">
     <app-attendane-report-by-lecture-filter></app-attendane-report-by-lecture-filter>
-      <div class="d-flex justify-content-end mt-3">
-        <div class="p-3">
-        <mat-label *ngIf="tableData" >{{'Lectures Number'+LectureNumber}}</mat-label>
+
+      <div class="d-flex justify-content-end mt-6">
+        <div *ngIf="tableData" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
+           <h3  >{{'Lectures Number: '+LectureNumber}}</h3>
+           <h3  >{{'Attendance Rate: '+attendanceRate}}</h3>
+           <h3  >{{'Total Lectures: '+totalLectures}}</h3>
+
         </div>
-        <div class="p-3">
-          <mat-label *ngIf="tableData" >{{'Attendance Rate'+attendanceRate}}</mat-label>
-          </div>
-          <div class="p-3">
-            <mat-label *ngIf="tableData" >{{'Total Lectures'+totalLectures}}</mat-label>
-            </div>
-      </div>
+     </div>
       <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
         <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
   
@@ -79,6 +77,8 @@
                        aria-label="Select page">
         </mat-paginator>
       </div>
+      <mat-spinner *ngIf="!tableData && attendanceReportRequest.filterSection" class="text-center"></mat-spinner>
+
     </div>
     
     <mat-menu #menu="matMenu">

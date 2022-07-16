@@ -28,7 +28,7 @@ const routes: Routes = [ {
     }
   },
   {
-    path: 'attendane-details-by-lecture/:lectureId',
+    path: 'attendane-details-by-lecture/:lectureId/:CourseName/:lectureDate/:lectureStartTime/:lectureEndTime',
     component: AttendaneDetailsByLectureComponent,
     canActivate: [SecurityGuard],
     data: {

@@ -39,6 +39,11 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.end_date}}</mat-cell>
         </ng-container>
+           <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Status
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.status}}</mat-cell>
+        </ng-container>
         
         <ng-container matColumnDef="academic_year">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Academic Year

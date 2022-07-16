@@ -28,7 +28,7 @@ import {take} from 'rxjs/operators';
 export class AcademicYearListComponent implements OnInit, OnDestroy {
   tableData: AcademicYear[] = [];
   dataSource: MatTableDataSource<any>;
-  displayedColumns: any[] = ['NO.', 'name','start_date', 'end_date', 'Actions'];
+  displayedColumns: any[] = ['NO.', 'name','start_date', 'end_date','status', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];

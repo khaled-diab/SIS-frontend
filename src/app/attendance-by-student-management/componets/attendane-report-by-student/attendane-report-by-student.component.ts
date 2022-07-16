@@ -21,7 +21,7 @@ export class AttendaneReportByStudentComponent implements OnInit {
   dataSource: MatTableDataSource<AttendanceReportByStudentManagementModel>;
   tableData: AttendanceReportByStudentManagementModel[];
   attendanceStudentReportRequest :AttendanceStudentReportRequestModel=new AttendanceStudentReportRequestModel();
-  displayedColumns = ['nameOfStudent', 'absentLecture','statues', 'Actions'];
+  displayedColumns = ['nameOfStudent', 'absentLecture','rate','statues', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -32,6 +32,10 @@ export class AttendaneReportByStudentComponent implements OnInit {
   filterValue: null;
   sectionId:string|null;
   student: AttendanceReportByStudentManagementModel;
+  CoursName:string|null;
+  SectionName:string|null;
+  numberOflectures :number;
+  statues:string;
   
 
   @ViewChild(MatPaginator, {static: false})
@@ -76,15 +80,33 @@ export class AttendaneReportByStudentComponent implements OnInit {
           this.tableData = filteredData;
           console.log(filteredData);
           this.dataSource.data=this.tableData;
-   
+          this.numberOflectures=filteredData[0].numberOfLecture
+          for (let i = 0; i < filteredData.length; i++) {
+            
+            
+          
+          if(filteredData[i].rate>=25){
+          filteredData[i].statues="Forbbiden"
+          }
+          else if(filteredData[i].rate>=15 && filteredData[i].rate<25){
+            filteredData[i].statues="Alert"
+          }
+          else if(filteredData[i].rate<15){
+            filteredData[i].statues="Allowed"
+          }
+        }
+        });
+        this.lectureReportService.getsection(this.attendanceStudentReportRequest.filterSection).subscribe(data=>{
+          this.CoursName=data.courseDTO.nameEn;
+          this.SectionName=data.sectionNumber;
         });
     });
   }
   
   details(student : AttendanceReportByStudentManagementModel):void
   {
-this.router.navigateByUrl(`/attendancereportsbystudent-management/attendane-details-by-student/${this.sectionId}/${student.idOfStudent}`)
-console.log(this.sectionId)
+this.router.navigateByUrl(`/attendancereportsbystudent-management/attendane-details-by-student/${this.sectionId}/${student.idOfStudent}
+/${student.nameOfStudent}/${this.CoursName}/${this.SectionName}`)
 // this.router.navigateByUrl(`/attendancereportsbystudent-management/attendane-details-by-student/
 // ${1}/${1}`)
 

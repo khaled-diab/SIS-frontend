@@ -26,7 +26,6 @@ export class AttendaneDetailsByStudentComponent implements OnInit {
   displayedColumns = ['attendanceDate', 'lectureStartTime','lectureEndTime','attendanceStatus', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
-  date:string;
   studentUserId:string|null;
   sectionUserId:string|null;
 
@@ -38,6 +37,9 @@ export class AttendaneDetailsByStudentComponent implements OnInit {
   subscription:Subscription;
   attendanceDetails:AttendanceReportDetailsByStudent;
   data: AttendanceReportByStudentManagementModel;
+  CourseName:string|null;
+  SectionNumber:string|null;
+  StudentName:string|null;
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
     if (this.dataSource) {
@@ -62,6 +64,9 @@ export class AttendaneDetailsByStudentComponent implements OnInit {
     private activatedRoute: ActivatedRoute    ) { }
 
   ngOnInit(): void {
+this.CourseName=this.activatedRoute.snapshot.params['courseName'];
+this.SectionNumber=this.activatedRoute.snapshot.params['sectionName'];
+this.StudentName=this.activatedRoute.snapshot.params['studentName'];
     this.dataSource = new MatTableDataSource<any>();
     this.Subscription();
     

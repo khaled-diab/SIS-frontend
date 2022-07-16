@@ -37,7 +37,7 @@ export class AttendaneReportByLectureComponent implements OnInit {
   subscription: Subscription;
   searchValue: string;
   filterValue: null;
-  
+  CourseName:string;
 
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
@@ -103,8 +103,13 @@ export class AttendaneReportByLectureComponent implements OnInit {
             +Response.practicalLectures;
          
           this.attendanceRate = Math.floor((this.totalRate/this.totalLectures)*100);
-
+            this.CourseName=Response.courseDTO.nameEn;
           });
+          // this.lectureReportService.getcourse(this.attendanceReportRequest.filterCourse)
+          // .subscribe(Response=>{
+          //  this.CourseName=Response.nameEn;
+     
+          // });
          
         });
     });
@@ -113,7 +118,9 @@ export class AttendaneReportByLectureComponent implements OnInit {
   details(lecture : LectureModel):void
   {
 
-this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-details-by-lecture/'+lecture.id)
+this.router.navigateByUrl(`/attendancereportsbylecture-management/attendane-details-by-lecture/${lecture.id}/${this.CourseName}
+/${lecture.lectureDate}/${lecture.lectureStartTime}/${lecture.lectureEndTime}`);
+// 
 
   }
   // ngOnDestroy(): void {
