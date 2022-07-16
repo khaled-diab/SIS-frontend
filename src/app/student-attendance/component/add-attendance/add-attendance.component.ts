@@ -29,7 +29,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
                private facultyMemberManagementService: FacultyMemberManagementService) {
 
    }
-
    colleges: number[];
    selectedCourse: CourseModel;
    timetables: TimetableModel[];
