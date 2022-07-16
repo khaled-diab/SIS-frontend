@@ -14,16 +14,16 @@ export class AcademicTermFilterComponent implements OnInit {
   searchValue='';
   filterAcademicYear: null;
   academicYears: AcademicYear[];
- 
+
   @ViewChild('academicYearSelect', {static: true})  academicYearSelect: MatSelect;
   constructor(private academicTerm : AcademicTermService,
               private academicyear :AcademicYearService) { }
 
   ngOnInit(): void {
-    this.academicyear.getAcademicYears().subscribe(Response => {
-      this.academicYears = Response;
-      console.log(Response);
-    });
+    // this.academicyear.getAcademicYears().subscribe(Response => {
+      this.academicYears = AcademicYearService.yearsList;
+      // console.log(Response);
+    // });
    }
    applyFilter(): void {
     this.academicTerm.academicTermFilterEvent.next([this.searchValue, this.filterAcademicYear]);
@@ -37,11 +37,11 @@ export class AcademicTermFilterComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.academicYearSelect.valueChange.subscribe(value => {
-     
+
       this.filterAcademicYear = value;
       this.academicTerm.academicTermFilterEvent.next([this.searchValue, this.filterAcademicYear]);
     });
-   
+
   }
 
 }

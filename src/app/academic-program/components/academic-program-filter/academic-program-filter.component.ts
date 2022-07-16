@@ -35,7 +35,7 @@ export class AcademicProgramFilterComponent implements OnInit {
     this.collegeManagementService.getAllColleges().subscribe(Response => {
       this.colleges = Response;
     });
-    this.departmentService.getDepartments();
+    // this.departmentService.getDepartments();
   }
 
   // ngAfterViewInit(): void {

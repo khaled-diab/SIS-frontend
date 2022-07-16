@@ -30,7 +30,7 @@ export class CourseFilterComponent implements OnInit, AfterViewInit {
     this.collegeManagementService.getAllColleges().subscribe(Response => {
       this.colleges = Response;
     });
-    this.departmentService.getDepartments();
+    // this.departmentService.getDepartments();
   }
 
   ngAfterViewInit(): void {

@@ -24,7 +24,8 @@ import {FacultyMemberManagementService} from '../../../facultyMember-management/
 
 export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy{
 
-   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog, private facultyMemberManagementService: FacultyMemberManagementService) {
+   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog,
+               private facultyMemberManagementService: FacultyMemberManagementService) {
 
    }
 
@@ -39,7 +40,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    isRegTypeChanged = false;
    isSectionsChanged = false;
    lecture = new LectureModel();
-   // fc = new FacultyMemberModel();
    minCountDown = 30;
    countDown: string;
    counter: number;
@@ -49,7 +49,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    @ViewChild('regTime') regTime: MatInput;
    @ViewChild('lectureDate') lectureDate: MatInput;
    loggedIn: any;
-   facultyMember=new FacultyMemberModel();
+   facultyMember = new FacultyMemberModel();
    cancelAttendanceCodeEventSubscription: Subscription;
 
 
@@ -58,13 +58,12 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
       this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
          this.facultyMember = value;
+         console.log(value);
          this.lecture.facultyMemberDTO = this.facultyMember;
          this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
             this.sections = value;
          });
       });
-      // this.fc.id = 1;
-
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
 
@@ -91,7 +90,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
          this.studentAttendanceService.getSectionTimetables(value.id).subscribe(timeTable => {
             this.timetables = timeTable;
-            console.log(this.timetable);
 
          });
       });
@@ -102,7 +100,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
          this.lecture.lectureDay = value.day;
          this.lecture.lectureStartTime = value.startTime;
          this.lecture.lectureEndTime = value.endTime;
-         console.log(this.lecture);
 
       });
 

@@ -2,7 +2,7 @@
   <app-building-filter></app-building-filter>
   <div class="d-flex justify-content-end mt-3">
     <div class="col-1">
-      <button (click)="addOrUpdateBuilding(buildingModel)" class="align-content-center" mat-icon-button>
+      <button (click)="addOrUpdateBuilding(buildingModel,'save')" class="align-content-center" mat-icon-button>
         <mat-icon class="add" matTooltip="Add Building" matTooltipPosition="above">add_circle</mat-icon>
       </button>
     </div>
@@ -62,7 +62,7 @@
             <button (click)="viewBuilding(row)" mat-icon-button>
               <mat-icon class="eye">visibility</mat-icon>
             </button>
-            <button (click)="addOrUpdateBuilding(row)" mat-icon-button>
+            <button (click)="addOrUpdateBuilding(row,'edit')" mat-icon-button>
               <mat-icon class="user-edit">edit</mat-icon>
             </button>
             <button (click)="deleteBuilding(row)" mat-icon-button>
