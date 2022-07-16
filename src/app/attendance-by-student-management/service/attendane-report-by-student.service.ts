@@ -37,6 +37,6 @@ export class AttendaneReportByStudentService {
     return this.http.get <any>(`${Constants.studentReportDetails}/${sectionId}/${studentId}`);
   }
   editattendanceStatues(id:number , attendance :AttendanceReportDetailsByStudent) {
-    return this.http.post(`${Constants.studentAttendanceDetails}?id=${id}`,attendance);
+    return this.http.post(`${Constants.studentAttendanceDetails}/${id}`,attendance);
  }
 }

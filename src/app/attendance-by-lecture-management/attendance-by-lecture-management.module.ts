@@ -25,6 +25,8 @@ import {
 import {ReportLectureParentComponent} from './components/report-lecture-parent/report-lecture-parent.component';
 import {AttendaneReportByLectureService} from './service/attendane-report-by-lecture.service';
 import {EditStatuesComponent} from './components/edit-statues/edit-statues.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import {MenuItem} from 'primeng/api';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import {EditStatuesComponent} from './components/edit-statues/edit-statues.compo
     MatSortModule,
     MatDialogModule,
     ReactiveFormsModule,
+    BreadcrumbModule
+    
   ],
 
   providers: [AttendaneReportByLectureService],

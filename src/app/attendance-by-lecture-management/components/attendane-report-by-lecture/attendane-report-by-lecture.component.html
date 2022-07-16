@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-end mt-6">
         <div *ngIf="tableData" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
            <h3  >{{'Lectures Number: '+LectureNumber}}</h3>
-           <h3  >{{'Attendance Rate: '+attendanceRate}}</h3>
+           <h3  >{{'Attendance Average: '+attendanceRate}}</h3>
            <h3  >{{'Total Lectures: '+totalLectures}}</h3>
 
         </div>
@@ -21,14 +21,14 @@
           </ng-container>
     
           <ng-container matColumnDef="lectureStartTime">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Lecture StartTime
+            <mat-header-cell *matHeaderCellDef mat-sort-header>StartTime
             </mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.lectureStartTime}}</mat-cell>
           </ng-container>
     
     
           <ng-container matColumnDef="lectureEndTime">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Lecture EndTime
+            <mat-header-cell *matHeaderCellDef mat-sort-header>EndTime
             </mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.lectureEndTime}}</mat-cell>
           </ng-container>

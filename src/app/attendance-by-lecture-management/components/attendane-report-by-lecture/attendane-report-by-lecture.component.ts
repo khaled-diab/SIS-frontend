@@ -28,7 +28,7 @@ export class AttendaneReportByLectureComponent implements OnInit {
   LectureNumber=0;
   totalLectures=0;
   totalRate=0;
-  attendanceRate :number; 
+  attendanceRate : number; 
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -38,6 +38,8 @@ export class AttendaneReportByLectureComponent implements OnInit {
   searchValue: string;
   filterValue: null;
   CourseName:string;
+  SectionNumber:string;
+  a : number;
 
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
@@ -64,6 +66,9 @@ export class AttendaneReportByLectureComponent implements OnInit {
   ngAfterViewInit():void{
     this.dataSource=new MatTableDataSource<AttendanceReportByLectureManagementModel>();
     this.subscriptions();
+    console.log(this.totalLectures)
+    
+          console.log("attendanceRate"+this.attendanceRate);
   }
   private subscriptions(): Subscription[] {
     this.subscriptionsList.push(this.filterEventSubscription());
@@ -91,10 +96,12 @@ export class AttendaneReportByLectureComponent implements OnInit {
           this.totalRate += value[i].rate;
           
 
-            }
+            }        
+            
+            console.log(this.totalLectures);
             console.log("total Rate"+this.totalRate);  
+            this.attendanceRate = this.totalRate/this.totalLectures;
 
-            return this.totalRate;
           });
           this.lectureReportService.getsection(this.attendanceReportRequest.filterSection)
           .subscribe(Response=>{
@@ -102,15 +109,12 @@ export class AttendaneReportByLectureComponent implements OnInit {
             this.totalLectures=Response.exercisesLectures+Response.theoreticalLectures
             +Response.practicalLectures;
          
-          this.attendanceRate = Math.floor((this.totalRate/this.totalLectures)*100);
             this.CourseName=Response.courseDTO.nameEn;
+            this.SectionNumber=Response.sectionNumber;
+
           });
-          // this.lectureReportService.getcourse(this.attendanceReportRequest.filterCourse)
-          // .subscribe(Response=>{
-          //  this.CourseName=Response.nameEn;
-     
-          // });
-         
+       
+       
         });
     });
   }
@@ -119,7 +123,7 @@ export class AttendaneReportByLectureComponent implements OnInit {
   {
 
 this.router.navigateByUrl(`/attendancereportsbylecture-management/attendane-details-by-lecture/${lecture.id}/${this.CourseName}
-/${lecture.lectureDate}/${lecture.lectureStartTime}/${lecture.lectureEndTime}`);
+/${this.SectionNumber}/${lecture.lectureDate}/${lecture.lectureStartTime}/${lecture.lectureEndTime}`);
 // 
 
   }

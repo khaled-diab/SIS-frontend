@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AttendaneReportByLectureService } from 'src/app/attendance-by-lecture-management/service/attendane-report-by-lecture.service';
 import { AttendanceReportByStudentManagementModel } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-by-Student-management-model';
@@ -22,6 +23,7 @@ import { EditStatuesComponent } from '../edit-statues/edit-statues.component';
 export class AttendaneDetailsByStudentComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   tableData: any;
+  items: MenuItem[];
   attendancceReportRequest :AttendanceStudentReportRequestModel=new AttendanceStudentReportRequestModel();
   displayedColumns = ['attendanceDate', 'lectureStartTime','lectureEndTime','attendanceStatus', 'Actions'];
   pageIndex = 1;
@@ -69,6 +71,13 @@ this.SectionNumber=this.activatedRoute.snapshot.params['sectionName'];
 this.StudentName=this.activatedRoute.snapshot.params['studentName'];
     this.dataSource = new MatTableDataSource<any>();
     this.Subscription();
+    this.items = [
+      {label: 'Attendance_Reports'},
+      {label: 'Attendance_By_Lecture'},
+      {label: 'Lecture_Details'},
+      
+     
+  ];
     
 }
 
@@ -125,6 +134,14 @@ edit(details : AttendanceReportDetailsByStudent){
 ngOnDestroy(): void {
 // this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();
 }
+itemClicked(item:MenuItem) {
+  console.log('here');
+  this.router.navigateByUrl('/attendancereportsbystudent-management/attendane-report-by-student');
+  // if (item.label == 'Attendance_By_Lecture') {
+  //   console.log('here');
+  //   this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+  // } 
+};
 
 
 }

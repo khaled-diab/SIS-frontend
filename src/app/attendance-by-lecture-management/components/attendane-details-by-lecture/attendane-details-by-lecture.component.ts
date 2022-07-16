@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EditStatuesComponent } from 'src/app/attendance-by-lecture-management/components/edit-statues/edit-statues.component';
@@ -23,6 +25,8 @@ import { AttendaneReportByLectureService } from '../../service/attendane-report-
 })
 export class AttendaneDetailsByLectureComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
+  items: MenuItem[];
+  Attendance_By_Lecture:MenuItem;
   tableData: AttendanceDetailsModel[];
   attendancceReportRequest: AttendanceReportRequestModel = new AttendanceReportRequestModel();
   displayedColumns = ['universityId', 'nameAr', 'attendanceStatus', 'Actions'];
@@ -38,6 +42,7 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
   from: Time;
   to: Time;
   flag = false;
+  SectionNumber:string | null;
 //  colors = [{ attendanceStatus: "absent", color: "red" }, { attendanceStatus: "present", color: "green" }]
   isSmallScreen: boolean;
   subscriptionsList: Subscription[] = [];
@@ -72,7 +77,9 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+  
     this.courseName=this.activatedRoute.snapshot.params['CourseName'];
+    this.SectionNumber=this.activatedRoute.snapshot.params['SectionNumber'];
     this.date=this.activatedRoute.snapshot.params['lectureDate'];
     this.from=this.activatedRoute.snapshot.params['lectureStartTime'];
     this.to=this.activatedRoute.snapshot.params['lectureEndTime'];
@@ -83,7 +90,14 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
 
 }
 ngAfterViewInit(): void {
-  // this.courseName=this.activatedRoute.snapshot.paramMap.get('CourseName');
+  this.items = [
+    {label: 'Attendance_Reports'},
+    {label: 'Attendance_By_Lecture'},
+    {label: 'Lecture_Details'},
+    
+   
+];
+// this.home = {icon: 'pi pi-home'};
 
 }
 
@@ -124,7 +138,17 @@ edit(details: AttendanceDetailsModel){
     });
   }
 }
-
+clickEventHandler() {
+this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+}
+itemClicked(item:MenuItem) {
+  console.log('here');
+  this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+  // if (item.label == 'Attendance_By_Lecture') {
+  //   console.log('here');
+  //   this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+  // } 
+};
 // ngOnDestroy(): void {
 // this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();
 // }

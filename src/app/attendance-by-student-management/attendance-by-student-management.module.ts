@@ -23,6 +23,7 @@ import { ReportStudentParentComponent } from './componets/report-student-parent/
 import { AttendaneDetailsByStudentComponent } from './componets/attendane-details-by-student/attendane-details-by-student.component';
 import { AttendaneReportByStudentComponent } from './componets/attendane-report-by-student/attendane-report-by-student.component';
 import { AttendaneReportByStudentFilterComponent } from './componets/attendane-report-by-student-filter/attendane-report-by-student-filter.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 @NgModule({
@@ -52,6 +53,8 @@ import { AttendaneReportByStudentFilterComponent } from './componets/attendane-r
     MatSortModule,
     MatDialogModule,
     ReactiveFormsModule,
+    BreadcrumbModule
+
   ],
   providers: [AttendaneReportByStudentService],
   entryComponents: [EditStatuesComponent]
