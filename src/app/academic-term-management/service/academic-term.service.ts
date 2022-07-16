@@ -26,7 +26,7 @@ export class AcademicTermService {
   }
 
   deleteAcademicTerm(id: number) {
-    return this.http.delete(`${Constants.deleteAcademicTerms}/${id}`);
+    return this.http.get(`${Constants.deleteAcademicTerms}/${id}`);
   }
 
 

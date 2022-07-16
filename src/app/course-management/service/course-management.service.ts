@@ -52,7 +52,7 @@ export class CourseManagementService {
 
   deleteCourse(id: number): Observable<MessageResponse> {
     console.log('service' + id);
-    return this.httpClient.delete<MessageResponse>(Constants.deleteCourseUrl + id);
+    return this.httpClient.get<MessageResponse>(Constants.deleteCourseUrl + id);
   }
 
   getCoursesByDepartment(departmentId: number): Observable<CourseModel[]> {

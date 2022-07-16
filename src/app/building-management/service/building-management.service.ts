@@ -34,7 +34,7 @@ export class BuildingManagementService {
   }
 
   public deleteBuilding(id: number): Observable<MessageResponse> {
-    return this.httpClient.delete<MessageResponse>(Constants.deleteBuildingUrl + id);
+    return this.httpClient.get<MessageResponse>(Constants.deleteBuildingUrl + id);
   }
 
   public saveBuilding(building: BuildingModel): Observable<MessageResponse> {

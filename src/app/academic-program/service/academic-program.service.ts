@@ -46,7 +46,8 @@ export class AcademicProgramService {
    }
 
    deleteAcademicProgram(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteAcademicPrograms + id);
+      console.log("delete");
+      return this.httpClient.get<MessageResponse>(Constants.deleteAcademicPrograms + id);
    }
 
 

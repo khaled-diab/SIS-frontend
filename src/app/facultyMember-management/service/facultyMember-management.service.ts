@@ -64,7 +64,7 @@ export class FacultyMemberManagementService {
    }
 
    deleteFacultyMember(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteFacultyMemberUrl + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteFacultyMemberUrl + id);
    }
 
    facultyMemberById(id: number): Observable<MessageResponse> {

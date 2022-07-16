@@ -57,8 +57,6 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>();
     this.subscriptionsList = this.subscriptions();
-     this.tableData = AcademicTermService.academicTermsList;
-     this.dataSource.data = this.tableData;
   }
 
   addOrUpdateAcademicTerm(academicTerm: AcademicTermModel): void {
@@ -102,7 +100,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
   }
 
   private subscriptions(): Subscription[] {
-    // this.subscriptionsList.push(this.initialDataSubscription());
+    this.subscriptionsList.push(this.initialDataSubscription());
     this.subscriptionsList.push(this.filterEventSubscription());
     this.subscriptionsList.push(this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
       this.isSmallScreen = value.matches;
@@ -139,6 +137,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.tableData = value;
         this.dataSource.data = this.tableData;
+        AcademicTermService.academicTermsList = value;
         console.log(value);
       });
 

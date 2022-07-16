@@ -26,7 +26,7 @@ export class ClassroomManagementService {
    }
 
    public deleteClassroom(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteClassroomUrl + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteClassroomUrl + id);
    }
 
    public saveClassroom(classroom: ClassroomModel): Observable<MessageResponse> {
