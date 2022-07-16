@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TimetableManagementService} from '../../service/timetable-management.service';
 import {Constants} from '../../../shared/constants';
-import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
+import {TimetableTableRecordsModel} from '../../../shared/model/timetable-management/timetableTableRecords-model';
 
 @Component({
    selector: 'app-student-timetables-filter',
@@ -11,7 +11,7 @@ import {TimetableModel} from '../../../shared/model/timetable-management/timetab
 export class StudentTimetablesFilterComponent implements OnInit {
 
    loggedIn: any;
-   timetables: TimetableModel[] = [];
+   timetables: TimetableTableRecordsModel[] = [];
    set = new Set<string>();
    map = new Map<string, number>([
       ['Saturday', 1],
@@ -48,7 +48,7 @@ export class StudentTimetablesFilterComponent implements OnInit {
 
    select(daySelect: string): any {
       // console.log(daySelect);
-      const times: TimetableModel[] = this.timetables.filter(timetable => {
+      const times: TimetableTableRecordsModel[] = this.timetables.filter(timetable => {
          return timetable.day === daySelect;
       });
       this.timetableManagementService.timetableFilterByDayEvent.next(times);

@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {TimetableManagementService} from '../../service/timetable-management.service';
 import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
+import {TimetableTableRecordsModel} from "../../../shared/model/timetable-management/timetableTableRecords-model";
 
 
 @Component({
@@ -12,7 +13,7 @@ import {FacultyMemberModel} from '../../../shared/model/facultyMember-management
 })
 export class FacultyMemberTimetablesListComponent implements OnInit, OnDestroy {
 
-   tableData: TimetableModel[];
+   tableData: TimetableTableRecordsModel[];
    displayedColumns = ['No.', 'startTime', 'endTime', 'section', 'lectureTypeId', 'buildingId', 'classroomId'];
    pageIndex = 0;
    defaultPgeSize = 50;

@@ -7,6 +7,7 @@ import {
    FacultyMemberManagementService
 } from '../../../facultyMember-management/service/facultyMember-management.service';
 import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
+import {TimetableTableRecordsModel} from '../../../shared/model/timetable-management/timetableTableRecords-model';
 
 @Component({
    selector: 'app-facultyMember-timetables-filter',
@@ -17,7 +18,7 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
 
    loggedIn: any;
    facultyMember = new FacultyMemberModel();
-   timetables: TimetableModel[] = [];
+   timetables: TimetableTableRecordsModel[] = [];
    set = new Set<string>();
    map = new Map<string, number>([
       ['Saturday', 1],
@@ -44,7 +45,7 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
          this.facultyMember = value;
          this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
          this.timetableManagementService
-            .searchTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
+            .filterTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
             this.timetables = value1.data;
             this.timetables.forEach(value2 => {
                this.set.add(value2.day);
@@ -60,7 +61,7 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
 
    select(daySelect: string): void {
       // console.log(daySelect);
-      const times: TimetableModel[] = this.timetables.filter(timetable => {
+      const times: TimetableTableRecordsModel[] = this.timetables.filter(timetable => {
          return timetable.day === daySelect;
       });
       this.timetableManagementService.timetableFilterByDayEvent.next(times);

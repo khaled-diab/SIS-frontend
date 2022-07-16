@@ -28,28 +28,28 @@
       <ng-container matColumnDef="section">
         <mat-header-cell *matHeaderCellDef>Section
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.courseDTO.nameEn + ' - ' + row.sectionDTO.sectionNumber}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.courseName + ' - ' + row.sectionName}}</mat-cell>
       </ng-container>
 
       <!-- lectureType Column -->
       <ng-container matColumnDef="lectureTypeId">
         <mat-header-cell *matHeaderCellDef>lecture Type
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.lectureTypeDTO.nameEn}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.lectureTypeName}}</mat-cell>
       </ng-container>
 
       <!-- building Column -->
       <ng-container matColumnDef="buildingId">
         <mat-header-cell *matHeaderCellDef>Building
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.buildingDTO.name}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.buildingName}}</mat-cell>
       </ng-container>
 
       <!-- classroom Column -->
       <ng-container matColumnDef="classroomId">
         <mat-header-cell *matHeaderCellDef>Classroom
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.classroomDTO.name}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.classroomName}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -135,4 +135,8 @@ export class SectionStudentsListComponent implements OnInit {
    private handleFailedDeletion(): void {
       this.snackBar.open('Student Enrollment Deletion Failed', undefined, {duration: 2000});
    }
+
+   Back(): void {
+      this.route.navigate(['/sections-management', 'section-list']);
+   }
 }
