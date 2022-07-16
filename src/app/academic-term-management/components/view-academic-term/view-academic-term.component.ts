@@ -44,10 +44,10 @@ export class ViewAcademicTermComponent implements OnInit {
 
       }
     );
-    this.academicYearService.getAcademicYears().subscribe(Response => {
-      this.academicYears = Response;
-      console.log(Response);
-    });
+    // this.academicYearService.getAcademicYears().subscribe(Response => {
+      this.academicYears = AcademicYearService.yearsList;
+      // console.log(Response);
+    // });
     this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
       if (value.matches) {
         this.fetchDataFromRouter(history.state);

@@ -13,6 +13,7 @@ import {CreateAcademicTermComponent} from '../create-academic-term/create-academ
 import {DeleteAcademicTermComponent} from '../delete-academic-term/delete-academic-term.component';
 import {ViewAcademicTermComponent} from '../view-academic-term/view-academic-term.component';
 import {take} from 'rxjs/operators';
+import {AcademicYearService} from "../../../academic-year-management/service/academic-year.service";
 
 
 @Component({
@@ -23,7 +24,7 @@ import {take} from 'rxjs/operators';
 export class AcademicTermListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: AcademicTermModel[];
-  displayedColumns = ['NO.', 'name', 'start_date', 'end_date','academic_year', 'Actions'];
+  displayedColumns = ['NO.', 'name', 'start_date', 'end_date', 'academic_year', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -71,6 +72,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
           this.service.getAcademicTerms().subscribe(data => {
             this.tableData = data;
             this.dataSource.data = this.tableData;
+            AcademicTermService.academicTermsList = this.tableData;
           });
         }
       }, error => {
@@ -135,8 +137,10 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.tableData = value;
         this.dataSource.data = this.tableData;
+        AcademicTermService.academicTermsList = value;
         console.log(value);
       });
+
   }
 
   private handleSuccessfulDeletion(): void {
@@ -145,6 +149,8 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.tableData = value;
         this.dataSource.data = this.tableData;
+        AcademicTermService.academicTermsList = this.tableData;
+
       });
     this.snackBar.open('Academic Term Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
   }

@@ -22,12 +22,15 @@ import {LectureTypeModel} from '../../../shared/model/lectureType-model';
 import {BuildingModel} from '../../../shared/model/building-management/building-model';
 import {ClassroomModel} from '../../../shared/model/classroom-management/classroom-model';
 import {TimetableManagementService} from '../../service/timetable-management.service';
-import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {
+   FacultyMemberManagementService
+} from '../../../facultyMember-management/service/facultyMember-management.service';
 import {BuildingManagementService} from '../../../building-management/service/building-management.service';
 import {ClassroomManagementService} from '../../../classroom-management/service/classroom-management.service';
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {SectionManagementService} from '../../../section-management/service/sectionManagement.service';
+import {Constants} from '../../../shared/constants';
 
 @Component({
    selector: 'app-timetable-edit',
@@ -55,7 +58,7 @@ export class EditTimetableComponent implements OnInit {
    building = new BuildingModel();
    buildings: BuildingModel[];
    classrooms: ClassroomModel[];
-   days: string[];
+   days: string[] = Constants.Days;
    errorMessage: string;
    form: FormGroup;
 
@@ -113,35 +116,31 @@ export class EditTimetableComponent implements OnInit {
       this.department = this.data.departmentDTO;
       this.course = this.data.courseDTO;
 
-      this.academicYearService.getAcademicYears().subscribe(Response => {
-         this.academicYears = Response;
-         this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
-         console.log(this.academicTerms);
-      });
-
+      this.academicYears = AcademicYearService.yearsList;
+      this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYear.id);
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
-         this.buildings = this.buildingService.getBuildingsByCollege(this.college.id);
-         this.classrooms = this.classroomService.getClassroomsByBuilding(this.building.id);
-         this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.facultyMembers = this.facultyMemberService.getFacultyMembersByCollege(this.college.id);
-         this.courses = this.courseService.getCoursesByDepartment(this.department.id);
-         this.sections = this.sectionService.getSectionsByCourse(this.course.id);
+      });
+      this.buildingService.getBuildingsByCollegeId(this.college.id).subscribe(value => {
+         this.buildings = value;
+      });
+      this.classroomService.getClassroomsByBuilding(this.building.id).subscribe(value => {
+         this.classrooms = value;
+      });
+      this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
+      this.facultyMemberService.getFacultyMembersByCollege(this.college.id).subscribe(value => {
+         this.facultyMembers = value;
+      });
+      this.courseService.getCoursesByDepartment(this.department.id).subscribe(value => {
+         this.courses = value;
+      });
+      this.sectionService.getSectionsByCourse(this.course.id).subscribe(value => {
+         this.sections = value;
       });
 
       this.lectureTypeService.getAllLectureTypes().subscribe(Response => {
          this.lectureTypes = Response;
       });
-
-      this.days = [
-         'Saturday',
-         'Sunday',
-         'Monday',
-         'Tuesday',
-         'Wednesday',
-         'Thursday',
-         'Friday'
-      ];
    }
 
    ngAfterViewInit(): void {
@@ -160,10 +159,14 @@ export class EditTimetableComponent implements OnInit {
             this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
 
             this.buildingSelect.setDisabledState(false);
-            this.buildings = this.buildingService.getBuildingsByCollege(this.collegeSelect.value);
+            this.buildingService.getBuildingsByCollegeId(this.collegeSelect.value).subscribe(value1 => {
+               this.buildings = value1;
+            });
 
             this.facultyMemberSelect.setDisabledState(false);
-            this.facultyMembers = this.facultyMemberService.getFacultyMembersByCollege(this.collegeSelect.value);
+            this.facultyMemberService.getFacultyMembersByCollege(this.collegeSelect.value).subscribe(value1 => {
+               this.facultyMembers = value1;
+            });
          } else {
             this.departmentSelect.setDisabledState(true);
             this.buildingSelect.setDisabledState(true);
@@ -174,7 +177,9 @@ export class EditTimetableComponent implements OnInit {
       this.departmentSelect.valueChange.subscribe(value => {
          if (this.departmentSelect.value !== undefined) {
             this.courseSelect.setDisabledState(false);
-            this.courses = this.courseService.getCoursesByDepartment(this.departmentSelect.value);
+            this.courseService.getCoursesByDepartment(this.departmentSelect.value).subscribe(value1 => {
+               this.courses = value1;
+            });
          } else {
 
             this.courseSelect.setDisabledState(true);
@@ -184,7 +189,9 @@ export class EditTimetableComponent implements OnInit {
       this.courseSelect.valueChange.subscribe(value => {
          if (this.courseSelect.value !== undefined) {
             this.sectionSelect.setDisabledState(false);
-            this.sections = this.sectionService.getSectionsByCourse(this.courseSelect.value);
+            this.sectionService.getSectionsByCourse(this.courseSelect.value).subscribe(value1 => {
+               this.sections = value1;
+            });
          } else {
             this.sectionSelect.setDisabledState(true);
          }
@@ -193,7 +200,9 @@ export class EditTimetableComponent implements OnInit {
       this.buildingSelect.valueChange.subscribe(value => {
          if (this.buildingSelect.value !== undefined) {
             this.classroomSelect.setDisabledState(false);
-            this.classrooms = this.classroomService.getClassroomsByBuilding(this.buildingSelect.value);
+            this.classroomService.getClassroomsByBuilding(this.buildingSelect.value).subscribe(value1 => {
+               this.classrooms = value1;
+            });
          } else {
             this.classroomSelect.setDisabledState(true);
          }

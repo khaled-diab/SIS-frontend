@@ -25,14 +25,14 @@ export class ClassroomsListComponent implements OnInit, OnDestroy {
 
   dataSource: MatTableDataSource<any>;
   tableData: ClassroomModel[];
-  displayedColumns = ['id', 'code', 'nameAr', 'nameEn', 'capacity', 'department', 'building', 'status', 'Actions'];
+  displayedColumns = ['id', 'code', 'name', 'capacity', 'buildingCode', 'buildingName', 'college', 'status', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
   isSmallScreen: boolean;
   classroomModel = new ClassroomModel();
   searchValue: string;
-  filterDepartment: undefined;
+  filterCollege: undefined;
   filterBuilding: undefined;
 
   @ViewChild(MatPaginator, {static: false})
@@ -73,7 +73,7 @@ export class ClassroomsListComponent implements OnInit, OnDestroy {
         if (e !== 'Cancel') {
           this.snackBar.open('Classroom Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
           console.log('here');
-          this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterDepartment, this.filterBuilding]);
+          this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterCollege, this.filterBuilding]);
         }
       }, error => {
         this.snackBar.open('Classroom Saving Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
@@ -91,7 +91,7 @@ export class ClassroomsListComponent implements OnInit, OnDestroy {
         if (e !== 'Cancel') {
           this.snackBar.open('Classroom Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
           console.log('here');
-          this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterDepartment, this.filterBuilding]);
+          this.classroomManagementService.classroomFilterEvent.next([this.searchValue, this.filterCollege, this.filterBuilding]);
         }
       }, error => {
         this.snackBar.open('Classroom Saving Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
@@ -126,7 +126,7 @@ export class ClassroomsListComponent implements OnInit, OnDestroy {
         if (list[1] === null) {
           this.pageIndex = 1;
           this.searchValue = list[0]?.trim().toLowerCase();
-          this.filterBuilding = this.filterDepartment = undefined;
+          this.filterBuilding = this.filterCollege = undefined;
           this.dataSource.filter = this.searchValue;
         } else {
           this.classroomManagementService.getClassrooms().subscribe(allClassrooms => {
@@ -136,9 +136,9 @@ export class ClassroomsListComponent implements OnInit, OnDestroy {
             this.searchValue = list[0]?.trim().toLowerCase();
             this.dataSource.filter = this.searchValue;
             if (list[1] !== undefined) {
-              this.filterDepartment = list[1];
+              this.filterCollege = list[1];
               this.dataSource.data = this.dataSource.data.filter(value1 => {
-                return (value1.departmentDTO.id === list[1]);
+                return (value1.collegeDTO.id === list[1]);
               });
               if (list[2] !== undefined) {
                 this.filterBuilding = list[2];
@@ -149,7 +149,7 @@ export class ClassroomsListComponent implements OnInit, OnDestroy {
                 this.filterBuilding = undefined;
               }
             }else{
-              this.filterDepartment = undefined;
+              this.filterCollege = undefined;
             }
           });
         }

@@ -5,6 +5,7 @@ import {Constants} from 'src/app/shared/constants';
 import {DepartmentModel} from 'src/app/shared/model/department-management/department-model';
 import {DepartmentRequestModel} from 'src/app/shared/model/department-management/department-request-model';
 import {MessageResponse} from 'src/app/shared/model/message-response';
+import {CollegeModel} from '../../shared/model/college-management/college-model';
 
 @Injectable({
    providedIn: 'root'
@@ -12,7 +13,7 @@ import {MessageResponse} from 'src/app/shared/model/message-response';
 export class DepartmentService {
    // FormData : DepartmentModel = new DepartmentModel();
 
-   static departmentsList: DepartmentModel[];
+   // static departmentsList: DepartmentModel[];
    departmentFilterEvent: Subject<any> = new Subject<any>();
    departmentDeleteEvent: Subject<any> = new Subject<any>();
    departmentSaveEvent: Subject<DepartmentModel> = new Subject<DepartmentModel>();
@@ -22,7 +23,8 @@ export class DepartmentService {
    }
 
    getDepartmentsByCollege(collegeId: number): DepartmentModel[] {
-      return DepartmentService.departmentsList.filter(value => {
+      // @ts-ignore
+      return JSON.parse(localStorage.getItem(Constants.DEPARTMENTS_LIST)).filter(value => {
          return (value.collegeDTO?.id === collegeId);
       });
    }
@@ -38,7 +40,7 @@ export class DepartmentService {
    }
 
    public deleteDepartment(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(`${Constants.deleteDepartments}/${id}`);
+      return this.httpClient.get<MessageResponse>(`${Constants.deleteDepartments}/${id}`);
    }
 
 // public saveClassroom(department: DepartmentModel): Observable<MessageResponse> {
@@ -51,5 +53,13 @@ export class DepartmentService {
 
    public saveDepartment(department: DepartmentModel) {
       return this.httpClient.post(Constants.addDepartments, department);
+   }
+   public static get departmentsList(): DepartmentModel[]{
+      // @ts-ignore
+      return JSON.parse(localStorage.getItem(Constants.DEPARTMENTS_LIST));
+   }
+   public static set departmentsList(departmentModels: DepartmentModel[]){
+      // @ts-ignore
+      localStorage.setItem(Constants.DEPARTMENTS_LIST, JSON.stringify(departmentModels));
    }
 }

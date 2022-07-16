@@ -73,7 +73,7 @@ export class StudentManagementService {
    }
 
    deleteStudent(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteStudentUrl + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteStudentUrl + id);
    }
 
    getStudent(id: number): Observable<StudentModel> {

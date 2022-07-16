@@ -16,6 +16,7 @@ import {Constants} from '../../../shared/constants';
 import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
 
 
+
 @Component({
    selector: 'app-add-attendance',
    templateUrl: './add-attendance.component.html',
@@ -24,10 +25,10 @@ import {FacultyMemberManagementService} from '../../../facultyMember-management/
 
 export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy{
 
-   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog, private facultyMemberManagementService: FacultyMemberManagementService) {
+   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog,
+               private facultyMemberManagementService: FacultyMemberManagementService) {
 
    }
-
    colleges: number[];
    selectedCourse: CourseModel;
    timetables: TimetableModel[];
@@ -39,7 +40,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    isRegTypeChanged = false;
    isSectionsChanged = false;
    lecture = new LectureModel();
-   // fc = new FacultyMemberModel();
    minCountDown = 30;
    countDown: string;
    counter: number;
@@ -49,24 +49,21 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    @ViewChild('regTime') regTime: MatInput;
    @ViewChild('lectureDate') lectureDate: MatInput;
    loggedIn: any;
-   facultyMember=new FacultyMemberModel();
+   facultyMember = new FacultyMemberModel();
    cancelAttendanceCodeEventSubscription: Subscription;
 
 
    ngOnInit(): void {
       // @ts-ignore
       this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      console.log(this.loggedIn.user);
       this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
          this.facultyMember = value;
+         console.log(value);
          this.lecture.facultyMemberDTO = this.facultyMember;
          this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
-            console.log(value);
             this.sections = value;
          });
       });
-      // this.fc.id = 1;
-
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
 
@@ -93,7 +90,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
          this.studentAttendanceService.getSectionTimetables(value.id).subscribe(timeTable => {
             this.timetables = timeTable;
-            console.log(this.timetable);
 
          });
       });
@@ -104,7 +100,6 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
          this.lecture.lectureDay = value.day;
          this.lecture.lectureStartTime = value.startTime;
          this.lecture.lectureEndTime = value.endTime;
-         console.log(this.lecture);
 
       });
 

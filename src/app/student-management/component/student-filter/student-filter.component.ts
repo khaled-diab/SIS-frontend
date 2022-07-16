@@ -25,13 +25,11 @@ export class StudentFilterComponent implements OnInit, AfterViewInit {
    constructor(private studentManagementService: StudentManagementService, private collegeManagementService: CollegeManagementService,
                private departmentService: DepartmentService){}
 
-
-
    ngOnInit(): void {
 
-      this.collegeManagementService.getAllColleges().subscribe(Response => {
-         this.colleges = Response;
-      });
+    this.collegeManagementService.getAllColleges().subscribe(value => {
+       this.colleges = value;
+    });
    }
 
    ngAfterViewInit(): void {

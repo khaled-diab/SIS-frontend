@@ -29,7 +29,7 @@ const appRoutes: Routes = [
         }
       },
       {
-        path: 'create-building',
+        path: 'create-building/:sel',
         component: SaveBuildingComponent,
         canActivate: [SecurityGuard],
         data: {

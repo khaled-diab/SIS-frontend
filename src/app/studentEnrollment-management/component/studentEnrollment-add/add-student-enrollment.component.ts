@@ -25,12 +25,12 @@ import {Subscription} from 'rxjs';
 import {SelectionModel} from '@angular/cdk/collections';
 import {StudentManagementService} from '../../../student-management/service/student-management.service';
 import {StudentRequestModel} from '../../../shared/model/student-management/student-request-model';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {SectionManagementService} from '../../../section-management/service/sectionManagement.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {Sort} from '@angular/material/sort';
+import {Constants} from '../../../shared/constants';
 
 @Component({
    selector: 'app-studentEnrollment-add',
@@ -61,17 +61,14 @@ export class AddStudentEnrollmentComponent implements OnInit {
    departments: DepartmentModel[];
    academicYears: AcademicYear[];
    academicTerms: AcademicTermModel[];
-   newAcademicTerms: AcademicTermModel[] = [];
    majors: MajorModel[];
-   newMajors: MajorModel[] = [];
    studyTypes: StudyTypeModel[];
    courses: CourseModel[];
-   courseModelRequestModel = new CourseRequestModel();
    sections: SectionModel[];
    sectionRequestModel = new SectionRequestModel();
    students: StudentModel[];
    studentFilterModel: StudentRequestModel = new StudentRequestModel();
-   levels: string[];
+   levels: string[] = Constants.LEVELS;
    errorMessage: string;
    form: FormGroup;
    isDisabled = true;
@@ -140,9 +137,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
          }
       );
 
-      this.academicYearService.getAcademicYears().subscribe(Response => {
-         this.academicYears = Response;
-      });
+      this.academicYears = AcademicYearService.yearsList;
 
       this.academicTermService.getAcademicTerms().subscribe(Response => {
          this.academicTerms = Response;
@@ -152,30 +147,17 @@ export class AddStudentEnrollmentComponent implements OnInit {
          this.colleges = Response;
       });
 
-      this.departmentService.getDepartments();
-
-      this.majorService.getAllMajors().subscribe(Response => {
-         this.majors = Response;
-      });
-
       this.studyTypeService.getAllStudyTypes().subscribe(Response => {
          this.studyTypes = Response;
       });
-
-      this.levels = ['1', '2', '3', '4', '5', '6'];
 
    }
 
    ngAfterViewInit(): void {
       this.academicYearSelect.valueChange.subscribe(value => {
          if (this.academicYearSelect.value !== undefined) {
-            this.newAcademicTerms = [];
             this.academicTermSelect.setDisabledState(!this.isDisabled);
-            for (const academicTerm of this.academicTerms) {
-               if (academicTerm.academicYearDTO.id === this.academicYearSelect.value.id) {
-                  this.newAcademicTerms.push(academicTerm);
-               }
-            }
+            this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value.id);
          } else {
             this.academicTermSelect.setDisabledState(this.isDisabled);
          }
@@ -183,10 +165,8 @@ export class AddStudentEnrollmentComponent implements OnInit {
 
       this.collegeSelect.valueChange.subscribe(value => {
          if (this.collegeSelect.value !== undefined) {
-            this.courseModelRequestModel.filterCollege = this.collegeSelect.value.id;
             this.departmentSelect.setDisabledState(!this.isDisabled);
             this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value.id);
-
             this.studentFilterModel.collegeId = this.collegeSelect.value.id;
             this.studentService.searchStudents(0, 100, this.studentFilterModel).subscribe(Response => {
                this.tableData = Response;
@@ -200,23 +180,17 @@ export class AddStudentEnrollmentComponent implements OnInit {
       this.departmentSelect.valueChange.subscribe(value => {
          if (this.departmentSelect.value !== undefined) {
             this.courseSelect.setDisabledState(!this.isDisabled);
-            this.courseModelRequestModel.filterDepartment = this.departmentSelect.value.id;
-            this.courseService.getCoursePage(1, 500, this.courseModelRequestModel).subscribe(Response => {
-               this.courses = Response.data;
+            this.majorSelect.setDisabledState(!this.isDisabled);
+            this.courseService.getCoursesByDepartment(this.departmentSelect.value.id).subscribe(value1 => {
+               this.courses = value1;
+            });
+            this.majorService.getMajorsByDepartment(this.departmentSelect.value.id).subscribe(value1 => {
+               this.majors = value1;
             });
             this.studentFilterModel.departmentId = this.departmentSelect.value.id;
             this.studentService.searchStudents(0, 100, this.studentFilterModel).subscribe(Response => {
                this.tableData = Response;
             });
-            console.log(this.studentFilterModel);
-
-            this.newMajors = [];
-            this.majorSelect.setDisabledState(!this.isDisabled);
-            for (const major of this.majors) {
-               if (major.departmentDTO.id === this.departmentSelect.value.id) {
-                  this.newMajors.push(major);
-               }
-            }
          } else {
             this.courseSelect.setDisabledState(this.isDisabled);
             this.majorSelect.setDisabledState(this.isDisabled);
@@ -270,8 +244,8 @@ export class AddStudentEnrollmentComponent implements OnInit {
       this.students = this.selection.selected;
       console.log(this.students);
       const available = this.form.get('sectionMenu')?.value.capacity - this.form.get('sectionMenu')?.value.numberOfStudents;
-      if (this.students.length > available){
-         this.snackBar.open('Failed To Enroll Students, section"s capacity is FULL',  undefined, {duration: 5000});
+      if (this.students.length > available) {
+         this.snackBar.open('Failed To Enroll Students, section"s capacity is FULL', undefined, {duration: 5000});
          return;
       }
       this.studentEnrollmentManagementService.addStudentEnrollment(this.studentEnrollment, this.students).subscribe((Response) => {

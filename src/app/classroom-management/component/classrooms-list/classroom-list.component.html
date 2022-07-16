@@ -28,19 +28,11 @@
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="nameAr">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Arabic Name
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.nameAr}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
       </ng-container>
-
-
-      <ng-container matColumnDef="nameEn">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>English Name
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.nameEn}}</mat-cell>
-      </ng-container>
-      <!-- Name Column -->
 
       <!-- Capacity -->
       <ng-container matColumnDef="capacity">
@@ -57,19 +49,26 @@
       </ng-container>
 
       <!-- Department -->
-      <ng-container matColumnDef="department">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Department
+      <ng-container matColumnDef="college">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>College
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.departmentDTO.nameEn}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.collegeDTO.nameEn}}</mat-cell>
       </ng-container>
 
 
       <!-- Building -->
-      <ng-container matColumnDef="building">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Building
+      <ng-container matColumnDef="buildingName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Building Name
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.buildingDTO.nameEn}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.buildingDTO.name}}</mat-cell>
       </ng-container>
+
+       <ng-container matColumnDef="buildingCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Building Code
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.buildingDTO.code}}</mat-cell>
+      </ng-container>
+
 
       <ng-container matColumnDef="Actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
@@ -94,7 +93,7 @@
 
     <mat-paginator
                    [pageIndex]="pageIndex - 1"
-                   [pageSizeOptions]="[1, 3, 5, 10, 25, 35, 50]"
+                   [pageSizeOptions]="[5, 10, 25, 35, 50]"
                    [pageSize]="defaultPageSize"
                    [length]=tableData.length
                    showFirstLastButtons

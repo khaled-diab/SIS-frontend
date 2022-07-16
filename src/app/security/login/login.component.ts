@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
       this.securityService.loginEvent.next('');
       this.router.navigate(['/']).then(_ => {
       });
+      this.securityService.getAllUtilData();
    }
 
    private handleFailedLogin(): void {

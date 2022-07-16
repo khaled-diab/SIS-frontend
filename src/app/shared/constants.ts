@@ -10,18 +10,19 @@ export class Constants {
    public static readonly buildingPageUrl = environment.baseURL + '/building/all/';
    public static readonly deleteBuildingUrl = environment.baseURL + '/building/delete/';
    public static readonly saveBuildingUrl = environment.baseURL + '/building/addOrUpdate';
+   public static readonly buildingsByCollegeIdUrl = environment.baseURL + '/building/buildingsByCollegeId/';
    // Classroom Url
    public static readonly classroomPageUrl = environment.baseURL + '/classroom/all/';
    public static readonly deleteClassroomUrl = environment.baseURL + '/classroom/delete/';
    public static readonly saveClassroomUrl = environment.baseURL + '/classroom/addOrUpdate';
+   public static readonly classroomsByBuildingIdUrl = environment.baseURL + '/classroom/classroomsByBuildingId/';
    // Course Url
    public static readonly getCourses = environment.baseURL + '/courses/all';
    public static readonly coursePageUrl = environment.baseURL + '/courses/search/';
    public static readonly saveCourseUrl = environment.baseURL + '/courses/save';
    public static readonly deleteCourseUrl = environment.baseURL + '/courses/delete/';
-   public static readonly allCoursesUrl = environment.baseURL + '/courses/all/';
+   public static readonly coursesByDepartmentIdUrl = environment.baseURL + '/courses/CoursesByDepartmentId/';
    // Faculty Member Url
-   public static readonly facultyMemberPageUrl = environment.baseURL + '/facultyMembers/datapage';
    public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
    public static readonly filterFacultyMemberUrl = environment.baseURL + '/facultyMembers/filter/';
    public static readonly saveFacultyMemberUrl = environment.baseURL + '/facultyMembers/saveFacultyMember';
@@ -29,9 +30,9 @@ export class Constants {
    public static readonly facultyMemberByIdUrl = environment.baseURL + '/facultyMembers/';
    public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
    public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
-   public static readonly allFacultyMembersUrl = environment.baseURL + '/facultyMembers/all';
    public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
    public static readonly facultyMemberByUserIdUrl = environment.baseURL + '/facultyMembers/facultyMemberByUserId/';
+   public static readonly facultyMembersByCollegeIdUrl = environment.baseURL + '/facultyMembers/facultyMembersByCollegeId/';
 
    /* Student Url */
    public static readonly deleteStudentUrl = environment.baseURL + '/students/deleteStudent/';
@@ -55,9 +56,9 @@ export class Constants {
    public static readonly deleteSectionUrl = environment.baseURL + '/sections/delete/';
    public static readonly SectionByIdUrl = environment.baseURL + '/sections/';
    public static readonly allSectionsUrl = environment.baseURL + '/sections/all/';
+   public static readonly sectionsByCourseIdUrl = environment.baseURL + '/sections/SectionsByCourseId/';
 
    // Timetable URLs
-   public static readonly timetablePageUrl = environment.baseURL + '/timetables/datapage';
    public static readonly searchTimetableUrl = environment.baseURL + '/timetables/search/';
    public static readonly filterTimetableUrl = environment.baseURL + '/timetables/filter/';
    public static readonly saveTimetableUrl = environment.baseURL + '/timetables/saveAll';
@@ -68,13 +69,13 @@ export class Constants {
    public static readonly studentTimetablesUrl = environment.baseURL + '/timetables/getStudentTimetables/';
 
    // StudentEnrollment URLs
-   public static readonly studentEnrollmentPageUrl = environment.baseURL + '/studentEnrollments/datapage';
    public static readonly searchStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/search/';
    public static readonly saveStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/save';
    public static readonly updateStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/update';
    public static readonly deleteStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/delete/';
    public static readonly allMajorsUrl = environment.baseURL + '/majors/all';
    public static readonly allStudyTypesUrl = environment.baseURL + '/studyTypes/all';
+   public static readonly majorsByDepartmentIdUrl = environment.baseURL + '/majors/majorsByDepartmentId/';
    /* Student Attendance Url */
    public static readonly getFacultyMemberSectionsUrl = environment.baseURL + '/sections/getFacultyMemberSections/';
    public static readonly getSectionTimeTablesUrl = environment.baseURL + '/timetables/getSectionTimeTables/';
@@ -85,8 +86,10 @@ export class Constants {
 
    // Academic Program URLS
    public static readonly getAcademicPrograms = environment.baseURL + '/academicPrograms/all';
-   public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete';
+   public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete/';
    public static readonly addAcademicPrograms = environment.baseURL + '/academicPrograms/add';
+   public static readonly academicProgramsByCollegeIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByCollegeId/';
+
    // Department URLS
    public static readonly getDepartments = environment.baseURL + '/departments/all';
    public static readonly addDepartments = environment.baseURL + '/departments/add';
@@ -150,6 +153,12 @@ export class Constants {
    public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/uploadedUsers';
    public static readonly usersFilesPageUrl = environment.baseURL + '/security/findAll/';
 
-   public  static  readonly  LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   public static readonly Days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+   public static readonly COLLEGES_LIST = 'colleges';
+   public static readonly DEPARTMENTS_LIST = 'departments';
+   public static readonly TERMS_LIST = 'terms';
+   public static readonly YEARS_LIST = 'years';
+
 
 }
