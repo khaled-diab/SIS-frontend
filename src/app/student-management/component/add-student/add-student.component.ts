@@ -31,7 +31,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    programs: AcademicProgramModel[];
    department: DepartmentModel;
    years: string[];
-   levels: string[];
+   levels = Constants.LEVELS;
    errorMessage: string;
    @ViewChild('arabicName') arabicName: NgModel;
    @ViewChild('photoInput') photoInput: ElementRef;
@@ -89,7 +89,6 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       );
       this.form.controls.photo.setValue('defaultStudentImage.png');
 
-      this.levels = ['1', '2', '3', '4', '5', '6'];
       this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;

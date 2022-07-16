@@ -43,7 +43,7 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
    ngOnInit(): void {
       this.classroomModel = new ClassroomModel();
       this.classroomModel.buildingDTO = new BuildingModel();
-      this.classroomModel.buildingDTO.collegeDTO=new CollegeModel();
+      this.classroomModel.buildingDTO.collegeDTO = new CollegeModel();
       this.classroomModel.buildingDTO.collegeDTO = new CollegeModel();
       this.classroomModel.buildingDTO.id = 0;
       this.classroomModel.buildingDTO.collegeDTO.id = 0;
@@ -58,10 +58,6 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
             capacity: new FormControl(undefined, Validators.required),
          }
       );
-      this.buildingManagementService.getBuildings().subscribe(Response => {
-         this.buildings = Response;
-         console.log(Response);
-      });
       this.collegeService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
          console.log(Response);
@@ -83,8 +79,8 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
                this.classroomModel.collegeDTO = new CollegeModel();
             } else {
             }
-            this.form.get('buildingMenu')?.setValue(this.classroomModel.buildingDTO.id);
             this.form.get('collegeMenu')?.setValue(this.classroomModel.collegeDTO.id);
+            this.form.get('buildingMenu')?.setValue(this.classroomModel.buildingDTO.id);
          }
       });
       console.log('classroom model', this.classroomModel);
@@ -106,7 +102,10 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
          this.classroomModel.collegeDTO = new CollegeModel();
          this.classroomModel.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.classroomManagementService.saveClassroom(this.classroomModel).subscribe((Response) => {
-               this.snackBar.open('Classroom Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
+               this.snackBar.open('Classroom Added Successfully', undefined, {
+                  duration: 2000,
+                  panelClass: 'successSnackBar'
+               });
                this.route.navigate(['/classrooms-management', 'classroom-list']);
                this.classroomManagementService.closeSaveEvent.next();
             }, error => {
@@ -153,6 +152,9 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
          this.classroomManagementService.classroomSaveEvent.next();
       });
       this.form.get('collegeMenu')?.valueChanges.subscribe(value => {
+         this.buildingManagementService.getBuildingsByCollegeId(this.form.get('collegeMenu')?.value).subscribe(value1 => {
+            this.buildings = value1;
+         });
          this.classroomModel.collegeDTO = new CollegeModel();
          this.classroomModel.collegeDTO.id = value;
          console.log('value= ', value);

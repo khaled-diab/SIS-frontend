@@ -59,7 +59,9 @@ export class ClassroomFilterComponent implements OnInit, AfterViewInit {
       this.collegeSelect.valueChange.subscribe(value => {
          if (this.collegeSelect.value !== undefined) {
             this.buildingSelect.setDisabledState(false);
-            this.buildings = this.buildingManagementService.getBuildingsByCollege(this.collegeSelect.value);
+            this.buildingManagementService.getBuildingsByCollegeId(this.collegeSelect.value).subscribe(value1 => {
+               this.buildings = value1;
+            });
          } else {
             this.buildingSelect.setDisabledState(true);
             this.buildingSelect.value = undefined;

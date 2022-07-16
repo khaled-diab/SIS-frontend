@@ -51,7 +51,10 @@ export class SaveClassroomComponent implements OnInit, AfterViewInit {
          console.log('Building', this.form.get('buildingMenu')?.value);
          console.log('Classroom', this.classroomModel);
          this.classroomManagementService.saveClassroom(this.classroomModel).subscribe((Response) => {
-               this.snackBar.open('Classroom Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
+               this.snackBar.open('Classroom Added Successfully', undefined, {
+                  duration: 2000,
+                  panelClass: 'successSnackBar'
+               });
                this.route.navigate(['/classrooms-management', 'classroom-list']);
                this.classroomManagementService.closeSaveEvent.next();
             }, error => {
@@ -78,6 +81,9 @@ export class SaveClassroomComponent implements OnInit, AfterViewInit {
          this.classroomManagementService.classroomSaveEvent.next();
       });
       this.form.get('collegeMenu')?.valueChanges.subscribe(value => {
+         this.buildingManagementService.getBuildingsByCollegeId(this.form.get('collegeMenu')?.value).subscribe(value1 => {
+            this.buildings = value1;
+         });
          this.classroomModel.collegeDTO.id = value;
          console.log('value= ', value);
          this.classroomManagementService.classroomSaveEvent.next();
@@ -87,7 +93,7 @@ export class SaveClassroomComponent implements OnInit, AfterViewInit {
    ngOnInit(): void {
       this.classroomModel = new ClassroomModel();
       this.classroomModel.buildingDTO = new BuildingModel();
-      this.classroomModel.buildingDTO.collegeDTO=new CollegeModel();
+      this.classroomModel.buildingDTO.collegeDTO = new CollegeModel();
       this.classroomModel.collegeDTO = new CollegeModel();
       this.classroomModel.buildingDTO.id = 0;
       this.classroomModel.buildingDTO.collegeDTO.id = 0;
@@ -101,10 +107,6 @@ export class SaveClassroomComponent implements OnInit, AfterViewInit {
             capacity: new FormControl(undefined, Validators.required),
          }
       );
-      this.buildingManagementService.getBuildings().subscribe(Response => {
-         this.buildings = Response;
-         console.log(Response);
-      });
       this.collegeService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
          console.log(Response);
