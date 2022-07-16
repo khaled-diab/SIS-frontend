@@ -55,24 +55,12 @@ export class TimetableManagementService {
    saveTimetables(timetables: TimetableModel[]): Observable<MessageResponse> {
       timetables.forEach(value => {
          value.facultyMemberDTO.user.role = new RoleModel();
-         if (value.startTime[1] === ':') {
-            value.startTime = '0' + value.startTime;
-         }
-         if (value.endTime[1] === ':') {
-            value.endTime = '0' + value.endTime;
-         }
       });
       return this.httpClient.post<MessageResponse>(Constants.saveTimetableUrl, timetables);
    }
 
    updateTimetable(timetable: TimetableModel): Observable<MessageResponse> {
       timetable.facultyMemberDTO.user.role = new RoleModel();
-      if (timetable.startTime[1] === ':') {
-         timetable.startTime = '0' + timetable.startTime;
-      }
-      if (timetable.endTime[1] === ':') {
-         timetable.endTime = '0' + timetable.endTime;
-      }
       return this.httpClient.post<MessageResponse>(Constants.updateTimetableUrl, timetable);
    }
 
@@ -89,7 +77,7 @@ export class TimetableManagementService {
       return this.httpClient.get <LectureTypeModel[]>(Constants.allLectureTypesUrl);
    }
 
-   public getStudentTimetables(userId: number): Observable<TimetableModel[]> {
-      return this.httpClient.get <TimetableModel[]>(Constants.studentTimetablesUrl + userId);
+   public getStudentTimetables(userId: number): Observable<TimetableTableRecordsModel[]> {
+      return this.httpClient.get <TimetableTableRecordsModel[]>(Constants.studentTimetablesUrl + userId);
    }
 }

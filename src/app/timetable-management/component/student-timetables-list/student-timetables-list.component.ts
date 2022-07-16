@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {TimetableManagementService} from '../../service/timetable-management.service';
-import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
+import {TimetableTableRecordsModel} from '../../../shared/model/timetable-management/timetableTableRecords-model';
 
 @Component({
    selector: 'app-student-timetables-list',
@@ -10,7 +10,7 @@ import {TimetableModel} from '../../../shared/model/timetable-management/timetab
 })
 export class StudentTimetablesListComponent implements OnInit, OnDestroy {
 
-   tableData: TimetableModel[] = [];
+   tableData: TimetableTableRecordsModel[] = [];
    displayedColumns = ['No.', 'startTime', 'endTime', 'sectionId', 'facultyMemberId', 'lectureTypeId',
       'buildingId', 'classroomId'];
    subscriptionList: Subscription[] = [];

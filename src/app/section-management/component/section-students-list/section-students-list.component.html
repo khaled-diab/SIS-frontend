@@ -51,6 +51,12 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
          </mat-table>
+         <div class="col-md-6 mr-auto col-sm-12 form-input">
+            <button mat-raised-button type="button" (click)="Back()"
+                    class="btn btn-secondary form-control">
+               Cancel
+            </button>
+         </div>
 
          <mat-paginator #paginator
                         (page)="pageChangeEvent($event)"
