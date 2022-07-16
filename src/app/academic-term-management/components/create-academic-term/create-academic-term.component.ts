@@ -78,10 +78,10 @@ export class CreateAcademicTermComponent implements OnInit {
         end_date: new FormControl(undefined, Validators.required),
       }
     );
-    this.academicYear.getAcademicYears().subscribe(Response => {
-      this.academicYears = Response;
-      console.log(Response);
-    });
+    // this.academicYear.getAcademicYears().subscribe(Response => {
+      this.academicYears = AcademicYearService.yearsList;
+      // console.log(Response);
+    // });
     this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
       if (value.matches) {
         this.fetchDataFromRouter(history.state);

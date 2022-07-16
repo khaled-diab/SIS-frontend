@@ -43,6 +43,7 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
    ngOnInit(): void {
       this.classroomModel = new ClassroomModel();
       this.classroomModel.buildingDTO = new BuildingModel();
+      this.classroomModel.buildingDTO.collegeDTO=new CollegeModel();
       this.classroomModel.buildingDTO.collegeDTO = new CollegeModel();
       this.classroomModel.buildingDTO.id = 0;
       this.classroomModel.buildingDTO.collegeDTO.id = 0;
@@ -53,7 +54,7 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
             buildingMenu: new FormControl(undefined, Validators.required),
             collegeMenu: new FormControl(undefined, Validators.required),
             code: new FormControl(undefined, Validators.required),
-            status: new FormControl(undefined, Validators.required),
+            status: new FormControl(undefined),
             capacity: new FormControl(undefined, Validators.required),
          }
       );
@@ -104,23 +105,23 @@ export class ViewClassroomComponent implements OnInit, AfterViewInit {
          // this.classroomModel.buildingDTO.collegeDTO.id = 1;
          this.classroomModel.collegeDTO = new CollegeModel();
          this.classroomModel.collegeDTO.id = this.form.get('collegeMenu')?.value;
-         ;
-      }
-      this.classroomManagementService.saveClassroom(this.classroomModel).subscribe((Response) => {
-            this.snackBar.open('Classroom Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
-            this.route.navigate(['/classrooms-management', 'classroom-list']);
-            this.classroomManagementService.closeSaveEvent.next();
-         }, error => {
-            const formControl = this.form.get(error.error.field);
-            this.errorMessage = error.error.message;
-            if (formControl) {
-               formControl.setErrors({
-                  serverError: true
-               });
+         this.classroomManagementService.saveClassroom(this.classroomModel).subscribe((Response) => {
+               this.snackBar.open('Classroom Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
+               this.route.navigate(['/classrooms-management', 'classroom-list']);
+               this.classroomManagementService.closeSaveEvent.next();
+            }, error => {
+               const formControl = this.form.get(error.error.field);
+               this.errorMessage = error.error.message;
+               if (formControl) {
+                  formControl.setErrors({
+                     serverError: true
+                  });
+               }
+               this.snackBar.open('Failed To Add Classroom', undefined, {duration: 2000});
             }
-            this.snackBar.open('Failed To Add Classroom', undefined, {duration: 2000});
-         }
-      );
+         );
+      }
+
    }
 
    /* save(): void {

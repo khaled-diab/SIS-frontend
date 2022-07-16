@@ -50,10 +50,10 @@ export class AcademicProgramPreviewComponent implements OnInit {
       collegeMenu: new FormControl(undefined, Validators.required),
       departmentMenu: new FormControl(undefined, Validators.required),
     });
-    this.departmentService.getDepartments().subscribe(Response => {
-      this.departments = Response;
-      console.log(Response);
-    });
+    // this.departmentService.getDepartments().subscribe(Response => {
+      this.departments = DepartmentService.departmentsList;
+      // console.log(Response);
+    // });
     this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
       if (value.matches) {
         this.fetchDataFromRouter(history.state);

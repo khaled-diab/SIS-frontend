@@ -7,5 +7,5 @@ export class BuildingModel extends BaseModel {
   name: string;
   status: number;
   collegeDTO: CollegeModel;
-  departmentDTO: DepartmentModel;
+  departmentDTO: DepartmentModel ;
 }

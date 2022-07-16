@@ -32,7 +32,7 @@
                <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                   <mat-label>Department</mat-label>
                   <mat-select formControlName="departmentMenu" id="departmentMenu">
-                     <mat-option [value] = "null"></mat-option>
+                     <mat-option [value] = "null">Choose Department</mat-option>
 
                      <mat-option *ngFor="let col of departments" [value]="(col == null? 0 : col.id)">
                         {{(col == null? "" : col.nameEn)}}

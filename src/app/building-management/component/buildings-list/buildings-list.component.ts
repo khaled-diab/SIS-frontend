@@ -7,7 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {DeleteBuildingDialogComponent} from '../delete-building-dialog/delete-building-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {SaveBuildingComponent} from '../save-building/save-building.component';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
@@ -62,11 +62,13 @@ export class BuildingsListComponent implements OnInit, OnDestroy {
       // setTimeout(() => this.dataSource.paginator = this.paginator);
    }
 
-   addOrUpdateBuilding(building: BuildingModel): void {
+   addOrUpdateBuilding(building: BuildingModel, sel: string): void {
       if (this.isSmallScreen) {
-         this.router.navigateByUrl('/buildings-management/create-building', {state: building}).then(_ => console.log());
+         this.router.navigateByUrl('/buildings-management/create-building');
       } else {
-         this.dialog.open(SaveBuildingComponent, {width: '900px', height: '450px', data: building});
+
+         const data: any[] = [building, sel];
+         this.dialog.open(SaveBuildingComponent, {width: '900px', height: '450px', data});
          this.buildingManagementService.closeSaveEvent.pipe(take(1)).subscribe(e => {
             console.log('subscribed to close event');
             this.dialog.closeAll();
@@ -83,7 +85,7 @@ export class BuildingsListComponent implements OnInit, OnDestroy {
 
    viewBuilding(building: BuildingModel): void {
       if (this.isSmallScreen) {
-         this.router.navigateByUrl('/buildings-management/create-building', {state: building}).then(_ => console.log());
+         this.router.navigateByUrl('/buildings-management/create-building/edit');
       } else {
          this.dialog.open(ViewBuildingComponent, {width: '900px', height: '450px', data: building});
          this.buildingManagementService.closeSaveEvent.pipe(take(1)).subscribe(e => {

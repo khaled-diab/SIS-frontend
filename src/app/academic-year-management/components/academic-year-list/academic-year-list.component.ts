@@ -61,6 +61,8 @@ export class AcademicYearListComponent implements OnInit, OnDestroy {
 
       this.dataSource = new MatTableDataSource<any>();
       this.subscriptionsList = this.subscriptions();
+      this.tableData = AcademicYearService.yearsList;
+      this.dataSource.data = this.tableData;
    }
 
    addOrUpdateAcademicYear(academicYear: AcademicYear): void {
@@ -116,7 +118,7 @@ export class AcademicYearListComponent implements OnInit, OnDestroy {
    }
 
    private subscriptions(): Subscription[] {
-      this.subscriptionsList.push(this.initialDataSubscription());
+      // this.subscriptionsList.push(this.initialDataSubscription());
       this.subscriptionsList.push(this.filterEventSubscription());
       this.subscriptionsList.push(this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
          this.isSmallScreen = value.matches;

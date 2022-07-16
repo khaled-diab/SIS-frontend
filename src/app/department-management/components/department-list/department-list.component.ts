@@ -55,6 +55,7 @@ export class DepartmentListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>();
     this.subscriptionsList = this.subscriptions();
+
   }
 
   addOrUpdateDepartment(department: DepartmentModel): void {
