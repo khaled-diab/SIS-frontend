@@ -65,7 +65,7 @@ export class SectionManagementService {
    }
 
    deleteSection(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteSectionUrl + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteSectionUrl + id);
    }
 
    getSectionById(id: number): Observable<MessageResponse> {

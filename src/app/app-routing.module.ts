@@ -60,6 +60,10 @@ const appRoutes: Routes = [
                .then(value => value.AttendanceByLectureManagementModule)
          },
          {
+            path: 'attendancereportsbystudent-management',
+            loadChildren: () => import('./attendance-by-student-management/attendance-by-student-management.module').then(value => value.AttendanceByStudentManagementModule)
+         },
+         {
             path: 'student-attendance',
             loadChildren: () => import('./student-attendance/student-attendance.module').then(value => value.StudentAttendanceModule)
          },

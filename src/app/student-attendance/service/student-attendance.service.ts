@@ -29,7 +29,6 @@ export class StudentAttendanceService {
     return this.httpClient.get<TimetableModel[]>(Constants.getSectionTimeTablesUrl + sectionId );
   }
   addLecture(lecture: LectureModel): Observable < LectureModel > {
-     lecture.facultyMemberDTO.user.role=new RoleModel();
     return this.httpClient.post<LectureModel>(Constants.addLectureUrl, lecture);
   }
   addManualAttendance(attendanceDetailsModels: AttendanceDetailsModel[]): Observable < AttendanceDetailsModel[] > {
@@ -37,7 +36,6 @@ export class StudentAttendanceService {
   }
 
   disableLecture(lecture: LectureModel): Observable<MessageResponse>{
-     lecture.facultyMemberDTO.user.role=new RoleModel();
      console.log(lecture);
     return this.httpClient.post<MessageResponse>(Constants.disableLectureUrl + lecture.id, lecture);
   }

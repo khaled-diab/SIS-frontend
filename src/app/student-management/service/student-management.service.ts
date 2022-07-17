@@ -68,7 +68,7 @@ export class StudentManagementService {
    }
 
    updateStudent(student: StudentModel): Observable<MessageResponse> {
-      student.user.role = new RoleModel();
+      // student.user.role = new RoleModel();
       return this.httpClient.post<MessageResponse>(Constants.updateStudentUrl, student);
    }
 

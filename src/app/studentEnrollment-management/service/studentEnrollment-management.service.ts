@@ -66,7 +66,7 @@ export class StudentEnrollmentManagementService {
    }
 
    deleteStudentEnrollment(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteStudentEnrollmentUrl + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteStudentEnrollmentUrl + id);
    }
 
    public getAllMajors():

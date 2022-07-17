@@ -121,14 +121,11 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          this.departmentSelect.setDisabledState(false);
          this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
          this.deptOption = false;
-
-      });
-      this.departmentSelect.openedChange.subscribe(value => {
          this.academicProgramService.getAcademicProgramsByCollege(this.collegeSelect.value).subscribe(value1 => {
             this.programs = value1;
-         });
-         this.programSelect.setDisabledState(false);
+            this.programSelect.setDisabledState(false);
 
+         });
 
       });
    }

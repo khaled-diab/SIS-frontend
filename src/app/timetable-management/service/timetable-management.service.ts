@@ -65,7 +65,7 @@ export class TimetableManagementService {
    }
 
    deleteTimetable(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(Constants.deleteTimetableUrl + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteTimetableUrl + id);
    }
 
    getTimetableById(id: number): Observable<MessageResponse> {

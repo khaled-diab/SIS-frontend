@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EditStatuesComponent } from 'src/app/attendance-by-lecture-management/components/edit-statues/edit-statues.component';
@@ -23,6 +25,8 @@ import { AttendaneReportByLectureService } from '../../service/attendane-report-
 })
 export class AttendaneDetailsByLectureComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
+  items: MenuItem[];
+  Attendance_By_Lecture:MenuItem;
   tableData: AttendanceDetailsModel[];
   attendancceReportRequest: AttendanceReportRequestModel = new AttendanceReportRequestModel();
   displayedColumns = ['universityId', 'nameAr', 'attendanceStatus', 'Actions'];
@@ -33,11 +37,12 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
   pageIndex = 1;
   defaultPageSize = 10;
   lectureId: string | null;
-  coursename = '';
+  courseName :string | null;
   date: string;
   from: Time;
   to: Time;
   flag = false;
+  SectionNumber:string | null;
 //  colors = [{ attendanceStatus: "absent", color: "red" }, { attendanceStatus: "present", color: "green" }]
   isSmallScreen: boolean;
   subscriptionsList: Subscription[] = [];
@@ -68,12 +73,16 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
               public dialog: MatDialog,
               private changeDetectorRef: ChangeDetectorRef,
               private breakpointObserver: BreakpointObserver,
-              private activatedRoute: ActivatedRoute,
+              private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
-     // this.activatedRoute.paramMap.subscribe(() => {
-     // });
+
+    this.courseName=this.activatedRoute.snapshot.params['CourseName'];
+    this.SectionNumber=this.activatedRoute.snapshot.params['SectionNumber'];
+    this.date=this.activatedRoute.snapshot.params['lectureDate'];
+    this.from=this.activatedRoute.snapshot.params['lectureStartTime'];
+    this.to=this.activatedRoute.snapshot.params['lectureEndTime'];
 
 
      this.dataSource = new MatTableDataSource<any>();
@@ -81,8 +90,15 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
 
 }
 ngAfterViewInit(): void {
-  // this.dataSource = new MatTableDataSource<any>();
-  // this.Subscription();
+  this.items = [
+    {label: 'Attendance_Reports'},
+    {label: 'Attendance_By_Lecture'},
+    {label: 'Lecture_Details'},
+
+
+];
+// this.home = {icon: 'pi pi-home'};
+
 }
 
 private Subscription(): Subscription[]{
@@ -92,36 +108,18 @@ private Subscription(): Subscription[]{
 }
 private filterEventSubscription(): Subscription{
 
-  // return this.lectureReportService.attendanceDetailsByLectureFilterEvent.subscribe(
-  //   value => {
-  //      this.attendancceReportRequest = value;
-  //           this.lectureId = this.attendancceReportRequest.lectureId;
-  //           console.log(this.attendancceReportRequest.lectureId);
+
             return this.lectureReportService.getStudentAttendanceReport
       (this.activatedRoute.snapshot.paramMap.get('lectureId')).subscribe(Report => {
-         console.log('here');
          console.log(Report);
          this.tableData = Report.attendanceDetailsDTOs;
          this.dataSource.data = this.tableData;
          console.log(this.tableData);
      } );
-   // );
+
 }
 
-// private initialDataSubscription(): Subscription{
-//
-//   return this.lectureReportService.getStudentAttendanceReport(31).subscribe(Report =>
-//     {
-//        console.log('here');
-//        console.log(Report.attendanceDetailsDTOs);
-//        this.tableData = Report.attendanceDetailsDTOs;
-//        this.dataSource.data = this.tableData;
-//        console.log(this.tableData);
-//
-//
-//
-//     });
-// }
+
 edit(details: AttendanceDetailsModel){
   if (this.isSmallScreen) {
     this.router.navigateByUrl('/attendancereportsbylecture-management/edit-status', {state: details}).then(_ => console.log());
@@ -140,7 +138,17 @@ edit(details: AttendanceDetailsModel){
     });
   }
 }
-
+clickEventHandler() {
+this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+}
+itemClicked(item:MenuItem) {
+  console.log('here');
+  this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+  // if (item.label == 'Attendance_By_Lecture') {
+  //   console.log('here');
+  //   this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+  // }
+};
 // ngOnDestroy(): void {
 // this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();
 // }

@@ -40,7 +40,7 @@ export class DepartmentService {
    }
 
    public deleteDepartment(id: number): Observable<MessageResponse> {
-      return this.httpClient.delete<MessageResponse>(`${Constants.deleteDepartments}/${id}`);
+      return this.httpClient.get<MessageResponse>(`${Constants.deleteDepartments}/${id}`);
    }
 
 // public saveClassroom(department: DepartmentModel): Observable<MessageResponse> {

@@ -1,1 +1,38 @@
-<p>edit-statues works!</p>
+<div class="main-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="pageTitle">
+            <h2>Edit Statues</h2>
+          </div>
+        </div>
+        <div class="col-12">
+          <hr>
+          <div class="row">
+            <form class="submission-form col-sm-12 col-lg-8" [formGroup]="form" id="form">
+              <div class="form-row">
+
+                  <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
+                    <mat-select id="attendanceStatus" formControlName="attendanceStatus" required>
+                      <mat-option value="Present">Present</mat-option>
+                      <mat-option value="Absent">Absent</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls['attendanceStatus']?.errors?.required"> Required</mat-error>
+                  </mat-form-field>
+                <div  class="col-md-6 mr-auto col-sm-12 form-input">
+                  <button (click)="add()" mat-raised-button type="submit" form="form" 
+                  *ngIf="form.valid"  class="mainBtn btn btn-primary form-control">Update</button>
+                </div>
+               
+                <div class="col-md-6 mr-auto col-sm-12 form-input">
+                  <button (click)="cancel()" form="form" mat-raised-button class="mainBtn btn btn-primary form-control">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div> 

@@ -106,18 +106,18 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          } else {
             this.departmentMenu.setDisabledState(true);
             this.departmentMenu.value = undefined;
+            this.programs = [];
+            this.programMenu.value = undefined;
+            this.programMenu.setDisabledState(true);
+
          }
          this.departments = this.departmentService.getDepartmentsByCollege(this.collegeList.value.id);
-
          this.deptOption = false;
-
-      });
-      this.departmentMenu.valueChange.subscribe(value => {
-
          this.programMenu.setDisabledState(false);
          this.academicProgramService.getAcademicProgramsByCollege(this.collegeList.value.id).subscribe(value1 => {
             this.programs = value1;
          });
+
       });
    }
 

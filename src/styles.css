@@ -67,3 +67,6 @@ normal-form {
    background-color: var(--main-color) !important;
    cursor:not-allowed!important;
 }
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+   stroke: var(--secondary-color)!important;
+}

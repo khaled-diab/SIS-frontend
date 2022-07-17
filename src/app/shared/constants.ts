@@ -22,6 +22,8 @@ export class Constants {
    public static readonly saveCourseUrl = environment.baseURL + '/courses/save';
    public static readonly deleteCourseUrl = environment.baseURL + '/courses/delete/';
    public static readonly coursesByDepartmentIdUrl = environment.baseURL + '/courses/CoursesByDepartmentId/';
+   public static readonly getCourseById = environment.baseURL + '/courses';
+
    // Faculty Member Url
    public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
    public static readonly filterFacultyMemberUrl = environment.baseURL + '/facultyMembers/filter/';
@@ -44,6 +46,7 @@ export class Constants {
    public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
    public static readonly getStudentUrl = environment.baseURL + '/students/';
    public static readonly filterStudentRecordUrl = environment.baseURL + '/students/searchRecords/';
+
 
    // Section URLs
    public static readonly getSections = environment.baseURL + '/sections/all';
@@ -84,7 +87,7 @@ export class Constants {
 
    // Academic Program URLS
    public static readonly getAcademicPrograms = environment.baseURL + '/academicPrograms/all';
-   public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete';
+   public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete/';
    public static readonly addAcademicPrograms = environment.baseURL + '/academicPrograms/add';
    public static readonly academicProgramsByCollegeIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByCollegeId/';
 
@@ -108,6 +111,9 @@ export class Constants {
    public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/update';
    // Attendane Details By Student
    public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
+   public static readonly studentReportDetails =
+      environment.baseURL + '/attendanceDetails/getAttendancesBySectionIdAndStudentId';
+   public static readonly studentAttendanceDetails = environment.baseURL + '/attendanceDetails/updateStatusByStudentId';
 
    // Sort
    public static readonly ASC = 'ASC';
@@ -116,6 +122,8 @@ export class Constants {
    public static readonly sortDESCIcon = 'arrow_downward';
    public static readonly sortASCHint = 'Sort Ascending';
    public static readonly sortDescHint = 'Sort Descending';
+
+
 
    /* Validation Regex */
    public static readonly ENGLISH_CHARACTERS = '^[a-zA-Z ]+$';

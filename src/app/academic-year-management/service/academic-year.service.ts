@@ -27,7 +27,7 @@ export class AcademicYearService {
 
 
   public deleteAcademic(id: number): Observable<MessageResponse> {
-    return this.http.delete<MessageResponse>(`${Constants.deleteAcademicYears}/${id}`);
+    return this.http.get<MessageResponse>(`${Constants.deleteAcademicYears}/${id}`);
   }
 
 

@@ -91,7 +91,7 @@ export class AcademicProgramPreviewComponent implements OnInit {
     }
     this.academicProgramService.saveAcademicprogram(this.academicProgramModel).subscribe((Response) => {
         this.snackBar.open('Academic Program Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
-        window.location.reload();
+        // window.location.reload();
         this.academicProgramService.academicProgramSaveCloseEvent.next();
       }, error => {
         const formControl = this.form.get(error.error.field);

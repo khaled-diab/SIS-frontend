@@ -33,11 +33,15 @@
                 <mat-label>Start Date</mat-label>
                 <input [disabled]="readOnly" id="start_date" formControlName="start_date" matInput required type="date">
                 <mat-error *ngIf="form.controls['start_date']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.get('code')?.errors?.serverError">{{errorMessage}}</mat-error>
+
               </mat-form-field>
               <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                 <mat-label>End Date</mat-label>
                 <input [disabled]="readOnly" id="end_date" formControlName="end_date" matInput required type="date" >
                 <mat-error *ngIf="form.controls['end_date']?.errors?.required"> Required</mat-error>
+                <mat-error *ngIf="form.get('code')?.errors?.serverError">{{errorMessage}}</mat-error>
+
               </mat-form-field>
 
 

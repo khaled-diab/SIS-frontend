@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Constants } from 'src/app/shared/constants';
 import { AttendanceReportByStudentManagementModel } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-by-Student-management-model';
+import { AttendanceReportDetailsByStudent } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-details-by-student';
 import { CourseModel } from 'src/app/shared/model/course-management/course-model';
 import { SectionModel } from 'src/app/shared/model/section-model';
+import { AttendanceByStudentManagementModule } from '../attendance-by-student-management.module';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +31,12 @@ export class AttendaneReportByStudentService {
     console.log(sectionId);
     return this.http.get <AttendanceReportByStudentManagementModel[]>(`${Constants.studentReport}/${sectionId}`);
   }
+  public getStudentReportDetails(sectionId :string | null,studentId : string | null):Observable<any>{
+    console.log(sectionId);
+    console.log(studentId);
+    return this.http.get <any>(`${Constants.studentReportDetails}/${sectionId}/${studentId}`);
+  }
+  editattendanceStatues(id:number , attendance :AttendanceReportDetailsByStudent) {
+    return this.http.post(`${Constants.studentAttendanceDetails}/${id}`,attendance);
+ }
 }
