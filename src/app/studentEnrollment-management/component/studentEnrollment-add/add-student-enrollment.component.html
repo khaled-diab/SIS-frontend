@@ -11,7 +11,7 @@
 
             <!--  submission Form   -->
             <div class="row">
-               <form (ngSubmit)="add()" [formGroup]="form" class="submission-form col-sm-12 col-md-8 form" id="form">
+               <form (ngSubmit)="add()" [formGroup]="form" class="submission-form col-sm-12 form" id="form">
                   <div class="form-row form">
 
                      <!-- academic year -->
@@ -123,26 +123,29 @@
          </div>
       </div>
 
-      <!-- search table data -->
-      <mat-form-field appearance="outline" class="col-md-4 col-sm-12 searchField">
-         <mat-label>Search</mat-label>
-         <input (keyup)="applyFilter()" class="searchInput" type="search" matInput name="search"
-                [(ngModel)]="studentFilterModel.filterValue">
-         <!--      <button class="btn btn-primary search-btn " type="button" id="search (click)="applyFilter()"">Search</button>-->
-      </mat-form-field>
+      <div class="row">
+         <!-- search table data -->
+         <div class="col-3 searchInput">
+            <mat-form-field appearance="outline">
+               <mat-label>Search</mat-label>
+               <input (keyup)="applyFilter()" class="searchInput" type="search" matInput name="search"
+                      [(ngModel)]="studentFilterModel.filterValue">
+            </mat-form-field>
+         </div>
 
-      <div>
-         <mat-form-field appearance="outline" class="col-md-3 col-sm-12">
-            <mat-label>Level</mat-label>
-            <mat-select #levelSelect>
-               <mat-option [value]="undefined">
-                  Choose Level
-               </mat-option>
-               <mat-option *ngFor="let level of levels" [value]="level">
-                  {{level}}
-               </mat-option>
-            </mat-select>
-         </mat-form-field>
+         <div class="col-3">
+            <mat-form-field appearance="outline">
+               <mat-label>Level</mat-label>
+               <mat-select #levelSelect>
+                  <mat-option [value]="undefined">
+                     Choose Level
+                  </mat-option>
+                  <mat-option *ngFor="let level of levels" [value]="level">
+                     {{level}}
+                  </mat-option>
+               </mat-select>
+            </mat-form-field>
+         </div>
       </div>
 
       <!-- table data -->

@@ -48,14 +48,12 @@ export class Constants {
    // Section URLs
    public static readonly getSections = environment.baseURL + '/sections/all';
    public static readonly getSection = environment.baseURL + '/sections';
-   public static readonly sectionPageUrl = environment.baseURL + '/sections/datapage';
    public static readonly searchSectionUrl = environment.baseURL + '/sections/search/';
    public static readonly filterSectionUrl = environment.baseURL + '/sections/filter/';
    public static readonly saveSectionUrl = environment.baseURL + '/sections/save';
    public static readonly updateSectionUrl = environment.baseURL + '/sections/update';
    public static readonly deleteSectionUrl = environment.baseURL + '/sections/delete/';
    public static readonly SectionByIdUrl = environment.baseURL + '/sections/';
-   public static readonly allSectionsUrl = environment.baseURL + '/sections/all/';
    public static readonly sectionsByCourseIdUrl = environment.baseURL + '/sections/SectionsByCourseId/';
 
    // Timetable URLs

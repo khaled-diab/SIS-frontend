@@ -248,6 +248,10 @@ export class AddStudentEnrollmentComponent implements OnInit {
          this.snackBar.open('Failed To Enroll Students, section"s capacity is FULL', undefined, {duration: 5000});
          return;
       }
+      if (this.students.length === 0) {
+         this.snackBar.open('Failed To Enroll Students, Add at least one student!', undefined, {duration: 5000});
+         return;
+      }
       this.studentEnrollmentManagementService.addStudentEnrollment(this.studentEnrollment, this.students).subscribe((Response) => {
             this.snackBar.open('Student Enrolled Successfully', undefined, {
                duration: 2000,
@@ -258,12 +262,19 @@ export class AddStudentEnrollmentComponent implements OnInit {
             console.log(this.studentEnrollment);
             const formControl = this.form.get(error.error.field);
             this.errorMessage = error.error.message;
-            if (formControl) {
-               formControl.setErrors({
-                  serverError: true
-               });
+            console.log(error.error.field + ' field ' + this.errorMessage);
+            if (error.error.field === 'exists') {
+               console.log(error.error.field + ' field ');
+               this.snackBar.open(this.errorMessage, undefined, {duration: 5000});
+            } else {
+               if (formControl) {
+                  formControl.setErrors({
+                     serverError: true
+                  });
+               }
+               this.snackBar.open('Failed To Enroll Student', undefined, {duration: 2000});
             }
-            this.snackBar.open('Failed To Enroll Student', undefined, {duration: 2000});
+
          }
       );
    }

@@ -327,7 +327,7 @@ button[id="search"] {
 }
 
 .full-width-table {
-   width: 70%;
+   /*width: 70%;*/
    /*margin-left: auto;*/
    margin-right: auto;
 }
@@ -430,4 +430,15 @@ img {
    background-color: darkgray;
    color: #FFFFFF;
    cursor: not-allowed !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+   opacity: 0.03 !important;
+   background-color: var(--secondary-color) !important;
+   border-color: #FFFFFF !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+   background-color: var(--secondary-color);
+   border-color: #FFFFFF !important;
 }

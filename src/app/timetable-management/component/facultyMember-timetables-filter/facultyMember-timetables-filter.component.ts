@@ -6,7 +6,6 @@ import {FacultyMemberModel} from '../../../shared/model/facultyMember-management
 import {
    FacultyMemberManagementService
 } from '../../../facultyMember-management/service/facultyMember-management.service';
-import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 import {TimetableTableRecordsModel} from '../../../shared/model/timetable-management/timetableTableRecords-model';
 
 @Component({
@@ -39,24 +38,25 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
 
    ngOnInit(): void {
       // @ts-ignore
-      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      console.log(this.loggedIn.user.id);
-      this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
-         this.facultyMember = value;
-         this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
-         this.timetableManagementService
-            .filterTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
-            this.timetables = value1.data;
-            this.timetables.forEach(value2 => {
-               this.set.add(value2.day);
-            });
-            this.days = Array.from(this.set.values());
-            this.days = this.days.sort((a: string, b: string) => {
-               // @ts-ignore
-               return (this.map.get(a) < this.map.get(b)) ? -1 : 1;
-            });
+      this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      console.log(this.facultyMember);
+      // console.log(this.loggedIn.user);
+      // this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
+      //    this.facultyMember = value;
+      this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
+      this.timetableManagementService
+         .filterTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
+         this.timetables = value1.data;
+         this.timetables.forEach(value2 => {
+            this.set.add(value2.day);
+         });
+         this.days = Array.from(this.set.values());
+         this.days = this.days.sort((a: string, b: string) => {
+            // @ts-ignore
+            return (this.map.get(a) < this.map.get(b)) ? -1 : 1;
          });
       });
+      // });
    }
 
    select(daySelect: string): void {

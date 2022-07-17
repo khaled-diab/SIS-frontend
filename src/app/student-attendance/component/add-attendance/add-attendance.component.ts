@@ -3,7 +3,7 @@ import {StudentAttendanceService} from '../../service/student-attendance.service
 import {CourseModel} from '../../../shared/model/course-management/course-model';
 import {TimetableModel} from '../../../shared/model/timetable-model';
 import {MatSelect} from '@angular/material/select';
-import { formatDate} from '@angular/common';
+import {formatDate} from '@angular/common';
 import {SectionModel} from '../../../shared/model/section-model';
 import {LectureModel} from '../../../shared/model/student-attendance/lecture-model';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
@@ -13,7 +13,6 @@ import {Subscription} from 'rxjs';
 import {AttendanceCounter} from '../../../shared/model/student-attendance/attendanceCounter';
 import {MatInput} from '@angular/material/input';
 import {Constants} from '../../../shared/constants';
-import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
 
 
 @Component({
@@ -22,10 +21,9 @@ import {FacultyMemberManagementService} from '../../../facultyMember-management/
    styleUrls: ['./add-attendance.component.css']
 })
 
-export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy{
+export class AddAttendanceComponent implements OnInit, AfterViewInit, OnDestroy {
 
-   constructor(private studentAttendanceService: StudentAttendanceService,  private dialog: MatDialog,
-               private facultyMemberManagementService: FacultyMemberManagementService) {
+   constructor(private studentAttendanceService: StudentAttendanceService, private dialog: MatDialog) {
 
    }
 
@@ -48,21 +46,17 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
    @ViewChild('regTypeMenu') regTypeMenu: MatSelect;
    @ViewChild('regTime') regTime: MatInput;
    @ViewChild('lectureDate') lectureDate: MatInput;
-   loggedIn: any;
    facultyMember = new FacultyMemberModel();
    cancelAttendanceCodeEventSubscription: Subscription;
 
 
    ngOnInit(): void {
       // @ts-ignore
-      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
-         this.facultyMember = value;
-         console.log(value);
-         this.lecture.facultyMemberDTO = this.facultyMember;
-         this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
-            this.sections = value;
-         });
+      this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      console.log(this.facultyMember);
+      this.lecture.facultyMemberDTO = this.facultyMember;
+      this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
+         this.sections = value;
       });
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
@@ -78,7 +72,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
    ngAfterViewInit(): void {
 
-      this.regTime.value  = this.minCountDown.toString(this.minCountDown);
+      this.regTime.value = this.minCountDown.toString(this.minCountDown);
       this.counter = this.minCountDown;
       this.lecture.facultyMemberDTO = this.facultyMember;
       this.coursesMenu.valueChange.subscribe(value => {
@@ -106,7 +100,7 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
       this.regTypeMenu.valueChange.subscribe(value => {
          this.isRegTypeChanged = true;
          this.timeDisabled = (value === 'Manual');
-         if (value === 'Automatic'){
+         if (value === 'Automatic') {
             this.countDown = '30';
          }
          this.lecture.attendanceType = value;
@@ -114,11 +108,11 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
    }
 
-   save(): void{
+   save(): void {
 
-      if (this.lecture.attendanceType !== 'Manual'){
+      if (this.lecture.attendanceType !== 'Manual') {
          this.lecture.attendanceStatus = true;
-      }else{
+      } else {
          this.lecture.attendanceCode = 0;
       }
       this.studentAttendanceService.addLecture(this.lecture).subscribe(value => {
@@ -126,10 +120,10 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
          value.lectureDate = today;
 
          this.lecture = value;
-         if (this.lecture.attendanceType === 'Manual'){
+         if (this.lecture.attendanceType === 'Manual') {
             this.lecture.attendanceCode = 0;
             this.studentAttendanceService.saveLectureEvent.next(this.lecture);
-         }else{
+         } else {
             // console.log('auto');
 
             const dialogConfig = new MatDialogConfig();
@@ -150,18 +144,19 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
       this.cancelAttendanceCodeEventSubscription.unsubscribe();
    }
 
-   attendanceTimeChange(event: any): void{
-      if (event.target.value < 30){
+   attendanceTimeChange(event: any): void {
+      if (event.target.value < 30) {
          this.counter = 30;
          event.target.value = 30;
       }
       this.counter = event.target.value;
    }
-   changeDate(val: any): void{
+
+   changeDate(val: any): void {
       if (this.lecture.id === 0) {
          this.isLectureDateChanged = true;
          this.lecture.lectureDate = val;
-      }else{
+      } else {
          this.lecture.id = 0;
          this.isLectureDateChanged = true;
          this.lecture.lectureDate = val;

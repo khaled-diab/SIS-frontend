@@ -149,3 +149,14 @@ button[type="button"] {
   padding-right: 0 !important;
   padding-top: 0 !important;
 }
+
+button {
+   padding: 5px;
+   background-color: var(--main-color);
+   margin-bottom: 10px;
+}
+
+button:hover {
+   padding: 5px;
+   background-color: var(--main-color);
+}

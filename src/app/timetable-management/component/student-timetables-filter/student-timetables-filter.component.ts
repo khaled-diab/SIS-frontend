@@ -10,7 +10,7 @@ import {TimetableTableRecordsModel} from '../../../shared/model/timetable-manage
 })
 export class StudentTimetablesFilterComponent implements OnInit {
 
-   loggedIn: any;
+   student: any;
    timetables: TimetableTableRecordsModel[] = [];
    set = new Set<string>();
    map = new Map<string, number>([
@@ -29,11 +29,11 @@ export class StudentTimetablesFilterComponent implements OnInit {
 
    ngOnInit(): void {
       // @ts-ignore
-      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      console.log(this.loggedIn.user);
+      this.student = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      console.log(this.student.user);
       this.timetableManagementService
-         .getStudentTimetables(this.loggedIn.user.id).subscribe(value => {
-         console.log(this.loggedIn.user.id);
+         .getStudentTimetables(this.student.id).subscribe(value => {
+         console.log(this.student.user.id);
          this.timetables = value;
          this.timetables.forEach(value2 => {
             this.set.add(value2.day);
