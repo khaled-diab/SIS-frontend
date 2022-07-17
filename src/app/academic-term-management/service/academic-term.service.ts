@@ -54,4 +54,10 @@ export class AcademicTermService {
       // @ts-ignore
       localStorage.setItem(Constants.TERMS_LIST, JSON.stringify(academicTermModels));
    }
+   // public static getCurrent():AcademicTermModel[]{
+   //    // @ts-ignore
+   //    return JSON.parse(localStorage.getItem(Constants.TERMS_LIST)).sort((a:AcademicTermModel,b:AcademicTermModel)=>{
+   //        new Date(a.end_date) - new Date(b.end_date)
+   //    });
+   // }
 }

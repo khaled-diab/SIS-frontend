@@ -89,7 +89,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
             // year: new FormControl(this.student.year, Validators.required),
             photo: new FormControl(this.student.photo),
             collegeMenu: new FormControl(this.student.collegeDTO.id, Validators.required),
-            departmentMenu: new FormControl(this.student.departmentDTO?.id),
+            departmentMenu: new FormControl(this.student.departmentDTO?.id, Validators.required),
             programMenu: new FormControl(this.student.academicProgramDTO?.id),
          }
       );
@@ -108,7 +108,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
          this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-         this.academicProgramService.getAcademicProgramsByCollege(this.college?.id).subscribe(value => {
+         this.academicProgramService.getAcademicProgramsByDepartment(this.department?.id).subscribe(value => {
             this.programs = value;
          });
       });
@@ -116,18 +116,30 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
 
    ngAfterViewInit(): void {
       this.collegeSelect.valueChange.subscribe(value => {
-         this.form.get('programMenu')?.setValue(null);
-         this.form.get('departmentMenu')?.setValue(null);
+         this.departmentSelect.value = undefined;
+         this.programSelect.value = undefined;
+
+         this.form.patchValue({
+           departmentMenu: undefined,
+            programMenu: undefined
+         }) ;
          this.departmentSelect.setDisabledState(false);
          this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
          this.deptOption = false;
-         this.academicProgramService.getAcademicProgramsByCollege(this.collegeSelect.value).subscribe(value1 => {
-            this.programs = value1;
+
+      });
+      this.departmentSelect.valueChange.subscribe(value => {
+         this.programSelect.value = undefined;
+         this.form.patchValue({
+            programMenu: undefined
+         }) ;
+         this.academicProgramService.getAcademicProgramsByDepartment(this.departmentSelect.value).subscribe(value2 => {
+            this.programs = value2;
             this.programSelect.setDisabledState(false);
 
          });
-
       });
+
    }
 
    update(): void {
@@ -150,16 +162,16 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          // this.student.year = this.form.get('year')?.value;
          this.student.photo = this.form.get('photo')?.value;
          this.student.collegeDTO.id = this.form.get('collegeMenu')?.value;
-         this.student.departmentDTO = new DepartmentModel();
+         // this.student.departmentDTO = new DepartmentModel();
          this.student.academicProgramDTO = new AcademicProgramModel();
-         this.student.departmentDTO.id = -1;
+         // this.student.departmentDTO.id = -1;
          this.student.academicProgramDTO.id = -1;
-         console.log(this.form.get('programMenu')?.value);
-         if (this.form.get('departmentMenu')?.value != -1 && this.form.get('departmentMenu')?.value != null) {
-            this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
-         }
+         // console.log(this.form.get('programMenu')?.value);
+         // if (this.form.get('departmentMenu')?.value != -1 && this.form.get('departmentMenu')?.value != null) {
+         this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
+         // }
          if (this.form.get('programMenu')?.value != -1 && this.form.get('programMenu')?.value != null) {
-            this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
+         this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
          }
          this.student.id = this.data.st.id;
          console.log(this.student);

@@ -64,11 +64,11 @@
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input" >
                         <mat-label >Department</mat-label>
 
-                        <mat-select #departmentSelect  [value]="defDept"    [formControlName]="'departmentMenu'"     >
+                        <mat-select #departmentSelect  [value]="defDept"    [formControlName]="'departmentMenu'"   required  >
                            <!--                  <mat-option *ngIf="deptOption" [value]="1">-->
                            <!--                    None-->
                            <!--                  </mat-option>-->
-                           <mat-option [value]="-1" >Choose Department</mat-option>
+<!--                           <mat-option [value]="-1" >Choose Department</mat-option>-->
                            <mat-option *ngFor="let dept of departments" [value]="dept.id">
                               {{dept?.nameEn}}
                            </mat-option>
@@ -177,7 +177,7 @@
 
                      <div class="col-12">
                         <div class="col-md-3 mr-auto col-sm-12 form-input" *ngIf="!isDisabled && data.sel===1 ;else editBtn">
-                           <button mat-raised-button type="submit" form="form"   class="btn btn-primary form-control" [disabled]="form.invalid ">Update</button>
+                           <button mat-raised-button type="submit" form="form"   class="btn btn-primary form-control" [disabled]="form.invalid " [ngClass]="{'disabled-btn':form.invalid}">Update</button>
                         </div>
                         <ng-template #editBtn>
                            <div class="col-md-3 mr-auto col-sm-12 form-input">

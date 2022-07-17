@@ -89,7 +89,7 @@ export class Constants {
    public static readonly getAcademicPrograms = environment.baseURL + '/academicPrograms/all';
    public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete/';
    public static readonly addAcademicPrograms = environment.baseURL + '/academicPrograms/add';
-   public static readonly academicProgramsByCollegeIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByCollegeId/';
+   public static readonly academicProgramsByDepartmentIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByDepartmentId/';
 
    // Department URLS
    public static readonly getDepartments = environment.baseURL + '/departments/all';

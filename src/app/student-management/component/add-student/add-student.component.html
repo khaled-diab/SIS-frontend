@@ -54,27 +54,28 @@
                            </mat-option>
                         </mat-select>
                         <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
-
+                        <mat-error *ngIf="form.get('collegeMenu')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Department</mat-label>
 
-                        <mat-select #departmentMenu formControlName="departmentMenu" >
+                        <mat-select #departmentMenu formControlName="departmentMenu" required >
 <!--                           <mat-option *ngIf="deptOption" [value]="1">-->
 <!--                              None-->
 <!--                           </mat-option>-->
-                           <mat-option [value]="null">Choose Department</mat-option>
+<!--                           <mat-option [value]="null">Choose Department</mat-option>-->
                            <mat-option *ngFor="let dept of departments" [value]="dept">
                               {{dept.nameEn}}
                            </mat-option>
                         </mat-select>
-
+                        <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+                        <mat-error *ngIf="form.get('departmentMenu')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
-                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
+                     <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input" >
                         <mat-label>Academic Program</mat-label>
-                        <mat-select #programMenu formControlName="programMenu" >
+                        <mat-select #programMenu formControlName="programMenu"  >
 <!--                           <mat-option *ngIf="deptOption" [value]="1">-->
 <!--                              None-->
 <!--                           </mat-option>-->
@@ -83,6 +84,8 @@
                               {{program.name_en}}
                            </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="form.get('programMenu')?.errors?.required">Required</mat-error>
+                        <mat-error *ngIf="form.get('programMenu')?.errors?.serverError">{{errorMessage}}</mat-error>
 
                      </mat-form-field>
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">

@@ -14,6 +14,7 @@ import {AttendanceCounter} from '../../../shared/model/student-attendance/attend
 import {MatInput} from '@angular/material/input';
 import {Constants} from '../../../shared/constants';
 import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {AcademicTermService} from "../../../academic-term-management/service/academic-term.service";
 
 
 
