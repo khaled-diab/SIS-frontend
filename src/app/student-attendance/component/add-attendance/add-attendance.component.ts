@@ -56,12 +56,14 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
 
    ngOnInit(): void {
       // @ts-ignore
-      this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      // this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
-         this.lecture.facultyMemberDTO = this.facultyMember;
-         this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value => {
-            this.sections = value;
+      this.loggedIn = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
+         this.facultyMember = value;
+         this.lecture.facultyMemberDTO = value;
+         this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value2 => {
+            this.sections = value2;
          });
+      });
       // });
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {
          {
