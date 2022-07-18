@@ -125,9 +125,13 @@ export class AddStudentEnrollmentComponent implements OnInit {
 
    ngOnInit(): void {
       this.subscriptions();
+      this.academicYears = AcademicYearService.yearsList;
+      this.academicTerms = AcademicTermService.academicTermsList;
+      this.academicYearSelect.value = AcademicTermService.currentTerm.academicYearDTO;
+      this.academicTermSelect.value = AcademicTermService.currentTerm;
       this.form = new FormGroup({
-            academicYearMenu: new FormControl(undefined, Validators.required),
-            academicTermMenu: new FormControl(undefined, Validators.required),
+            academicYearMenu: new FormControl(AcademicTermService.currentTerm.academicYearDTO.id, Validators.required),
+            academicTermMenu: new FormControl(AcademicTermService.currentTerm.id, Validators.required),
             collegeMenu: new FormControl(undefined, Validators.required),
             departmentMenu: new FormControl(undefined, Validators.required),
             majorMenu: new FormControl(undefined),
@@ -136,12 +140,6 @@ export class AddStudentEnrollmentComponent implements OnInit {
             sectionMenu: new FormControl(undefined, Validators.required)
          }
       );
-
-      this.academicYears = AcademicYearService.yearsList;
-
-      this.academicTermService.getAcademicTerms().subscribe(Response => {
-         this.academicTerms = Response;
-      });
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
@@ -155,12 +153,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
 
    ngAfterViewInit(): void {
       this.academicYearSelect.valueChange.subscribe(value => {
-         if (this.academicYearSelect.value !== undefined) {
-            this.academicTermSelect.setDisabledState(!this.isDisabled);
-            this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value.id);
-         } else {
-            this.academicTermSelect.setDisabledState(this.isDisabled);
-         }
+         this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value);
       });
 
       this.collegeSelect.valueChange.subscribe(value => {
@@ -224,9 +217,9 @@ export class AddStudentEnrollmentComponent implements OnInit {
       if (this.form.valid) {
          console.log(this.form.get('academicYearMenu')?.value);
          this.studentEnrollment.academicYearDTO = new AcademicYear();
-         this.studentEnrollment.academicYearDTO = this.form.get('academicYearMenu')?.value;
+         this.studentEnrollment.academicYearDTO.id = this.form.get('academicYearMenu')?.value;
          this.studentEnrollment.academicTermDTO = new AcademicTermModel();
-         this.studentEnrollment.academicTermDTO = this.form.get('academicTermMenu')?.value;
+         this.studentEnrollment.academicTermDTO.id = this.form.get('academicTermMenu')?.value;
          this.studentEnrollment.collegeDTO = new CollegeModel();
          this.studentEnrollment.collegeDTO = this.form.get('collegeMenu')?.value;
          this.studentEnrollment.departmentDTO = new DepartmentModel();

@@ -10,7 +10,6 @@ import {DepartmentService} from '../../../department-management/service/departme
 import {AcademicYear} from '../../../shared/model/academicYear-Management/academic-year';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {Router} from '@angular/router';
 import {AcademicYearService} from '../../../academic-year-management/service/academic-year.service';
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
@@ -84,7 +83,7 @@ export class EditStudentEnrollmentComponent implements OnInit {
             collegeMenu: new FormControl(this.studentEnrollment.collegeDTO.id, Validators.required),
             departmentMenu: new FormControl(this.studentEnrollment.departmentDTO.id, Validators.required),
             courseMenu: new FormControl(this.studentEnrollment.courseDTO.id, Validators.required),
-            majorMenu: new FormControl(this.studentEnrollment.majorDTO),
+            majorMenu: new FormControl(this.studentEnrollment.majorDTO.id),
             studyTypeMenu: new FormControl(this.studentEnrollment.studyTypeDTO.id, Validators.required),
             sectionMenu: new FormControl(this.studentEnrollment.sectionDTO.id, Validators.required),
             student: new FormControl(this.studentEnrollment.studentDTO.id, Validators.required),
@@ -110,7 +109,7 @@ export class EditStudentEnrollmentComponent implements OnInit {
       this.form.get('collegeMenu')?.setValue(this.studentEnrollment.collegeDTO.id);
       this.form.get('departmentMenu')?.setValue(this.studentEnrollment.departmentDTO.id);
       this.form.get('courseMenu')?.setValue(this.studentEnrollment.courseDTO.id);
-      this.form.get('majorMenu')?.setValue(this.studentEnrollment.majorDTO);
+      this.form.get('majorMenu')?.setValue(this.studentEnrollment.majorDTO.id);
       this.form.get('studyTypeMenu')?.setValue(this.studentEnrollment.studyTypeDTO.id);
       this.form.get('sectionMenu')?.setValue(this.studentEnrollment.sectionDTO.id);
 
@@ -198,7 +197,7 @@ export class EditStudentEnrollmentComponent implements OnInit {
          this.studentEnrollment.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.studentEnrollment.departmentDTO.id = this.form.get('departmentMenu')?.value;
          this.studentEnrollment.courseDTO.id = this.form.get('courseMenu')?.value;
-         this.studentEnrollment.majorDTO = this.form.get('majorMenu')?.value;
+         this.studentEnrollment.majorDTO.id = this.form.get('majorMenu')?.value;
          this.studentEnrollment.studyTypeDTO.id = this.form.get('studyTypeMenu')?.value;
          this.studentEnrollment.sectionDTO.id = this.form.get('sectionMenu')?.value;
          this.studentEnrollment.id = this.data.id;

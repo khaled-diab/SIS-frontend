@@ -107,7 +107,7 @@ export class EditSectionComponent implements OnInit, OnDestroy {
             academicTermMenu: new FormControl(this.section.academicTermDTO.id, Validators.required),
             collegeMenu: new FormControl(this.section.collegeDTO.id, Validators.required),
             departmentMenu: new FormControl(this.section.departmentDTO.id, Validators.required),
-            majorMenu: new FormControl(this.section.majorDTO),
+            majorMenu: new FormControl(this.section.majorDTO.id),
             studyTypeMenu: new FormControl(this.section.studyTypeDTO.id, Validators.required),
             courseMenu: new FormControl(this.section.courseDTO.id, Validators.required),
             sectionNumber: new FormControl(this.section.sectionNumber, Validators.compose([Validators.required,
@@ -274,7 +274,7 @@ export class EditSectionComponent implements OnInit, OnDestroy {
          this.section.academicTermDTO.id = this.form.get('academicTermMenu')?.value;
          this.section.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.section.departmentDTO.id = this.form.get('departmentMenu')?.value;
-         this.section.majorDTO = this.form.get('majorMenu')?.value;
+         this.section.majorDTO.id = this.form.get('majorMenu')?.value;
          this.section.studyTypeDTO.id = this.form.get('studyTypeMenu')?.value;
          this.section.courseDTO.id = this.form.get('courseMenu')?.value;
          this.section.sectionNumber = this.form.get('sectionNumber')?.value;
