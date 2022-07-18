@@ -56,7 +56,7 @@ export class AcademicProgramService {
       });
    }
 
-   getAcademicProgramsByCollege(collegeId: number): Observable<AcademicProgramModel[]> {
-      return this.httpClient.get<AcademicProgramModel[]>(Constants.academicProgramsByCollegeIdUrl + collegeId);
+   getAcademicProgramsByDepartment(collegeId: number): Observable<AcademicProgramModel[]> {
+      return this.httpClient.get<AcademicProgramModel[]>(Constants.academicProgramsByDepartmentIdUrl + collegeId);
    }
 }

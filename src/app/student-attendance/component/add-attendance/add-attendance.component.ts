@@ -14,6 +14,7 @@ import {AttendanceCounter} from '../../../shared/model/student-attendance/attend
 import {MatInput} from '@angular/material/input';
 import {Constants} from '../../../shared/constants';
 import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {AcademicTermService} from "../../../academic-term-management/service/academic-term.service";
 
 
 
@@ -59,10 +60,10 @@ export class AddAttendanceComponent implements OnInit, AfterViewInit , OnDestroy
       this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       // this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
       //    this.facultyMember = value;
-      this.lecture.facultyMemberDTO = this.facultyMember;
-      this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value2 => {
-         this.sections = value2;
-      });
+         this.lecture.facultyMemberDTO = this.facultyMember;
+         this.studentAttendanceService.getFacultyMemberSections(this.facultyMember.id).subscribe(value2 => {
+            this.sections = value2;
+         });
       // });
       // });
       this.cancelAttendanceCodeEventSubscription = this.studentAttendanceService.cancelAttendanceCodeDialogEvent.subscribe(value => {

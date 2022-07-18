@@ -47,6 +47,9 @@ export class SecurityService {
       this.academicTermService.getAcademicTerms().subscribe(value => {
          localStorage.setItem(Constants.TERMS_LIST, JSON.stringify(value));
       });
+      this.academicTermService.getCurrentTerm().subscribe(value => {
+         localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value));
+      });
    }
 
 }

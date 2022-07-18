@@ -88,7 +88,7 @@ export class Constants {
    public static readonly getAcademicPrograms = environment.baseURL + '/academicPrograms/all';
    public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete/';
    public static readonly addAcademicPrograms = environment.baseURL + '/academicPrograms/add';
-   public static readonly academicProgramsByCollegeIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByCollegeId/';
+   public static readonly academicProgramsByDepartmentIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByDepartmentId/';
 
    // Department URLS
    public static readonly getDepartments = environment.baseURL + '/departments/all';
@@ -104,6 +104,8 @@ export class Constants {
    public static readonly getAcademicTerms = environment.baseURL + '/academicTerms/all';
    public static readonly addAcademicTerms = environment.baseURL + '/academicTerms/add';
    public static readonly deleteAcademicTerms = environment.baseURL + '/academicTerms/delete';
+   public static readonly getCurrentTerm = environment.baseURL + '/academicTerms/getCurrentTerm';
+
    // Attendane Details By Lectures
    public static readonly studentAttendanceReport = environment.baseURL + '/attendanceDetails/getAttendancesByLectureId';
    public static readonly lecturesReport = environment.baseURL + '/lectures/getFacultyMemberLecturesToReport';
@@ -159,10 +161,13 @@ export class Constants {
 
    public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
    public static readonly Days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-   public static readonly COLLEGES_LIST = 'colleges';
+
+   /* local storage keys */
    public static readonly DEPARTMENTS_LIST = 'departments';
    public static readonly TERMS_LIST = 'terms';
    public static readonly YEARS_LIST = 'years';
+   public static readonly CURRENT_TERM = 'current_term';
+
 
 
 }

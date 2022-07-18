@@ -14,6 +14,7 @@ import {DeleteAcademicTermComponent} from '../delete-academic-term/delete-academ
 import {ViewAcademicTermComponent} from '../view-academic-term/view-academic-term.component';
 import {take} from 'rxjs/operators';
 import {AcademicYearService} from "../../../academic-year-management/service/academic-year.service";
+import {Constants} from "../../../shared/constants";
 
 
 @Component({
@@ -73,6 +74,9 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
             this.tableData = data;
             this.dataSource.data = this.tableData;
             AcademicTermService.academicTermsList = this.tableData;
+             this.service.getCurrentTerm().subscribe(value2 => {
+                localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value2));
+             });
           });
         }
       }, error => {
@@ -138,6 +142,9 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
         this.tableData = value;
         this.dataSource.data = this.tableData;
         AcademicTermService.academicTermsList = value;
+        this.service.getCurrentTerm().subscribe(value2 => {
+            localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value2));
+         });
         console.log(value);
       });
   }
@@ -149,6 +156,9 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
         this.tableData = value;
         this.dataSource.data = this.tableData;
         AcademicTermService.academicTermsList = this.tableData;
+         this.service.getCurrentTerm().subscribe(value2 => {
+            localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value2));
+         });
 
       });
     this.snackBar.open('Academic Term Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
