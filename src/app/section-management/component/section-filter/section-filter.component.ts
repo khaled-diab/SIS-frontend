@@ -57,6 +57,8 @@ export class SectionFilterComponent implements OnInit, AfterViewInit {
       this.academicYears = AcademicYearService.yearsList;
 
       this.academicTerms = AcademicTermService.academicTermsList;
+         this.academicTermSelect.value = AcademicTermService.currentTerm.id;
+         this.academicYearSelect.value = AcademicTermService.currentTerm.academicYearDTO.id;
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
