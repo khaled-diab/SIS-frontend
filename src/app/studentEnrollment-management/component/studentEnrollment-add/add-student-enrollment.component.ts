@@ -264,7 +264,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
             this.errorMessage = error.error.message;
             console.log(error.error.field + ' field ' + this.errorMessage);
             if (error.error.field === 'exists') {
-               console.log(error.error.field + ' field ');
+               // console.log(error.error.field + ' field ');
                this.snackBar.open(this.errorMessage, undefined, {duration: 5000});
             } else {
                if (formControl) {

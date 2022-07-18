@@ -20,8 +20,10 @@ mat-card {
    padding: 0 20px;
    text-align: center;
    background: var(--main-color);
+   color: #FFFFFF;
 }
 
 .mat-button-toggle:active {
-   color: #FFFFFF !important;
+   color: var(--main-color);
+   background: var(--secondary-color);
 }

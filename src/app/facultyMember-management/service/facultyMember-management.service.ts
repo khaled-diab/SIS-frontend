@@ -85,8 +85,4 @@ export class FacultyMemberManagementService {
    getFacultyMembersByCollege(collegeId: number): Observable<FacultyMemberModel[]> {
       return this.httpClient.get<FacultyMemberModel[]>(Constants.facultyMembersByCollegeIdUrl + collegeId);
    }
-
-   getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
-      return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
-   }
 }

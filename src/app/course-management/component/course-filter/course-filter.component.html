@@ -8,7 +8,7 @@
       </div>
       <form class="form-row form">
 
-         <div class="form-group col-4 search-box">
+         <div class="form-group col-md-4 col-sm-12 search-box">
             <mat-form-field appearance="outline">
                <mat-label>Search</mat-label>
                <input (keyup)="applyFilter()" class="searchInput" type="search" matInput name="search"
@@ -16,7 +16,7 @@
             </mat-form-field>
          </div>
 
-         <div class="col-4 mt-1">
+         <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
                <mat-label>Colleges</mat-label>
                <mat-select #collegeSelect>
@@ -30,7 +30,7 @@
             </mat-form-field>
          </div>
 
-         <div class="col-4 mt-1">
+         <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
                <mat-label>Departments</mat-label>
                <mat-select disabled #departmentSelect>

@@ -3,9 +3,6 @@ import {TimetableManagementService} from '../../service/timetable-management.ser
 import {TimetableRequestModel} from '../../../shared/model/timetable-management/timetable-request-model';
 import {Constants} from '../../../shared/constants';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
-import {
-   FacultyMemberManagementService
-} from '../../../facultyMember-management/service/facultyMember-management.service';
 import {TimetableTableRecordsModel} from '../../../shared/model/timetable-management/timetableTableRecords-model';
 
 @Component({
@@ -15,7 +12,6 @@ import {TimetableTableRecordsModel} from '../../../shared/model/timetable-manage
 })
 export class FacultyMemberTimetablesFilterComponent implements OnInit {
 
-   loggedIn: any;
    facultyMember = new FacultyMemberModel();
    timetables: TimetableTableRecordsModel[] = [];
    set = new Set<string>();
@@ -30,8 +26,7 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
    ]);
    days: any;
 
-   constructor(private timetableManagementService: TimetableManagementService,
-               private facultyMemberManagementService: FacultyMemberManagementService) {
+   constructor(private timetableManagementService: TimetableManagementService) {
    }
 
    timetableRequestModel: TimetableRequestModel = new TimetableRequestModel();
@@ -40,9 +35,6 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
       // @ts-ignore
       this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       console.log(this.facultyMember);
-      // console.log(this.loggedIn.user);
-      // this.facultyMemberManagementService.getFacultyMembersByUserId(this.loggedIn.user.id).subscribe(value => {
-      //    this.facultyMember = value;
       this.timetableRequestModel.filterFacultyMember = this.facultyMember.id;
       this.timetableManagementService
          .filterTimetables(0, 500, this.timetableRequestModel).subscribe(value1 => {
@@ -56,7 +48,6 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
             return (this.map.get(a) < this.map.get(b)) ? -1 : 1;
          });
       });
-      // });
    }
 
    select(daySelect: string): void {
