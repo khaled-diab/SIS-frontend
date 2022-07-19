@@ -1,0 +1,50 @@
+<div class="p-3">
+<!--   <app-student-gradeBook-filter></app-student-gradeBook-filter>-->
+
+   <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
+      <mat-table [dataSource]="tableData.data" aria-label="Elements">
+
+         <!-- Number Column -->
+         <ng-container matColumnDef="No.">
+            <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+            <mat-cell *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
+         </ng-container>
+
+         <!-- course Column -->
+         <ng-container matColumnDef="courseId">
+            <mat-header-cell *matHeaderCellDef>Course
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.courseDTO.nameAr}}</mat-cell>
+         </ng-container>
+
+         <!-- finalExamGrade Column -->
+         <ng-container matColumnDef="finalExamGrade">
+            <mat-header-cell *matHeaderCellDef>Final Exam Grade
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.finalExamGrade}}</mat-cell>
+         </ng-container>
+
+         <!-- practicalGrade Column -->
+         <ng-container matColumnDef="practicalGrade">
+            <mat-header-cell *matHeaderCellDef>Practical Grade</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.practicalGrade}}</mat-cell>
+         </ng-container>
+
+         <!-- oralGrade Column -->
+         <ng-container matColumnDef="oralGrade">
+            <mat-header-cell *matHeaderCellDef>Oral Grade</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.oralGrade}}</mat-cell>
+         </ng-container>
+
+         <!-- midGrade Column -->
+         <ng-container matColumnDef="midGrade">
+            <mat-header-cell *matHeaderCellDef>Mid Grade</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.midGrade}}</mat-cell>
+         </ng-container>
+
+         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+   </div>
+</div>

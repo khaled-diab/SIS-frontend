@@ -124,6 +124,16 @@
             </a>
          </li>
 
+         <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/gradeBook-management','facultyMember-gradeBook-list']">
+            <a>
+          <span>
+            Faculty Member GradeBook
+          </span>
+            </a>
+         </li>
+
 
          <li *ngIf="loggedInUser.user.role.roleName==='STUDENT'"
              [routerLinkActive]="['active']"
@@ -131,6 +141,16 @@
             <a>
           <span>
             Student Timetables
+          </span>
+            </a>
+         </li>
+
+         <li *ngIf="loggedInUser.user.role.roleName==='STUDENT'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/gradeBook-management','student-gradeBook-list']">
+            <a>
+          <span>
+            Student GradeBook
           </span>
             </a>
          </li>

@@ -1,0 +1,64 @@
+<div class="p-3">
+   <app-facultyMember-gradeBook-filter></app-facultyMember-gradeBook-filter>
+
+   <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
+      <mat-table [dataSource]="tableData.data" aria-label="Elements">
+
+         <!-- Number Column -->
+         <ng-container matColumnDef="No.">
+            <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+            <mat-cell *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
+         </ng-container>
+
+         <!-- university_id Column -->
+         <ng-container matColumnDef="university_id">
+            <mat-header-cell *matHeaderCellDef>University Id
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.studentDTO.universityId}}</mat-cell>
+         </ng-container>
+
+         <!-- name_ar Column -->
+         <ng-container matColumnDef="name_ar">
+            <mat-header-cell *matHeaderCellDef>Name Ar
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.studentDTO.nameAr}}</mat-cell>
+         </ng-container>
+
+         <!-- finalExamGrade Column -->
+         <ng-container matColumnDef="finalExamGrade">
+            <mat-header-cell *matHeaderCellDef>Final Exam Grade
+<!--               <br>{{'('}}{{this.gradeBook.courseDTO.finalExamGrade}}{{')'}}-->
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+         </ng-container>
+
+         <!-- practicalGrade Column -->
+         <ng-container matColumnDef="practicalGrade">
+            <mat-header-cell *matHeaderCellDef>Practical Grade
+<!--               <br>{{'('}}{{this.gradeBook.courseDTO.practicalGrade}}{{')'}}-->
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+         </ng-container>
+
+         <!-- oralGrade Column -->
+         <ng-container matColumnDef="oralGrade">
+            <mat-header-cell *matHeaderCellDef>Oral Grade
+<!--               <br>{{'('}}{{this.gradeBook.courseDTO.oralGrade}}{{')'}}-->
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+         </ng-container>
+
+         <!-- midGrade Column -->
+         <ng-container matColumnDef="midGrade">
+            <mat-header-cell *matHeaderCellDef>Mid Grade
+<!--               <br>{{'('}}{{this.gradeBook.courseDTO.midGrade}}{{')'}}-->
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+         </ng-container>
+
+         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+   </div>
+</div>

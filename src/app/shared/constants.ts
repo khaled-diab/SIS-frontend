@@ -23,6 +23,7 @@ export class Constants {
    public static readonly deleteCourseUrl = environment.baseURL + '/courses/delete/';
    public static readonly coursesByDepartmentIdUrl = environment.baseURL + '/courses/CoursesByDepartmentId/';
    public static readonly getCourseById = environment.baseURL + '/courses';
+   public static readonly getCourseByFacultyMemberId = environment.baseURL + '/courses/facultyMemberCourses/';
 
    // Faculty Member Url
    public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
@@ -115,6 +116,10 @@ export class Constants {
    public static readonly studentReportDetails =
       environment.baseURL + '/attendanceDetails/getAttendancesBySectionIdAndStudentId';
    public static readonly studentAttendanceDetails = environment.baseURL + '/attendanceDetails/updateStatusByStudentId';
+
+   // GradeBook URLs
+   public static readonly filterGradeBookUrl = environment.baseURL + '/gradeBook/filter/';
+   public static readonly updateGradeBookUrl = environment.baseURL + '/gradeBook/update/';
 
    // Sort
    public static readonly ASC = 'ASC';
