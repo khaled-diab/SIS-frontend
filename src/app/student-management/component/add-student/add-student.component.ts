@@ -14,6 +14,12 @@ import {MatSelect} from '@angular/material/select';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {HttpClient} from '@angular/common/http';
 import {AcademicProgramService} from '../../../academic-program/service/academic-program.service';
+import {UserFile} from "../../../shared/model/security/user-file";
+import {FacultyMemberModel} from "../../../shared/model/facultyMember-management/facultyMember-model";
+import {AdminModel} from "../../../shared/model/security/admin-model";
+import {ProfileService} from "../../../profile/service/profile.service";
+import {MessageService} from "primeng/api";
+import {UserModel} from "../../../shared/model/security/user-model";
 
 @Component({
    selector: 'app-add-student',
@@ -46,14 +52,18 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    url: string;
    imgFlage = 0;
    private httpClient: HttpClient;
-
+   loggedInUser: StudentModel | FacultyMemberModel | AdminModel;
+   profilePicture: UserFile | undefined;
+   profilePictureLink: string;
+   typeAdmin = Constants.ADMIN_TYPE;
    constructor(private studentManagementService: StudentManagementService,
                private snackBar: MatSnackBar,
                private route: Router,
                private collegeManagementService: CollegeManagementService,
                private departmentService: DepartmentService,
                private academicProgramService: AcademicProgramService,
-               http: HttpClient) {
+               http: HttpClient,
+               private profileService: ProfileService, private messageService: MessageService) {
       this.httpClient = http;
    }
 
@@ -62,7 +72,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       this.programMenu.setDisabledState(true);
       this.departmentMenu.setDisabledState(true);
 
-      this.url = '../assets/defaultStudentImage.png';
+      this.profilePictureLink = '../assets/defaultStudentImage.png';
       this.form = new FormGroup({
 
             nameEn: new FormControl(undefined, Validators.compose([Validators.required,
@@ -132,8 +142,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    }
 
    add(): void {
-      if (this.form.invalid) {
-      }
+
       if (this.form.valid) {
          this.student.nameEn = this.form.get('nameEn')?.value.trim();
          this.student.nameAr = this.form.get('nameAr')?.value.trim();
@@ -154,23 +163,23 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.student.departmentDTO = this.form.get('departmentMenu')?.value;
          this.student.academicProgramDTO = this.form.get('programMenu')?.value;
          this.student.photo = this.form.get('photo')?.value;
-         if (this.imgFlage === 1) {
+         // if (this.imgFlage === 1) {
             this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
-            this.student.photo = this.form.get('photo')?.value;
+            // this.student.photo = this.form.get('photo')?.value;
             //  this.httpClient.get(this.url, { responseType: 'blob' })
             // .subscribe(data => {
             //     this.photoFile = data;
-            this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe(
-               value => {
-               }
-               , error => {
-                  // console.log(error);
-               }
-            );
-            this.imgFlage = 0;
-         } else {
-            this.student.photo = Constants.defaultStudentImgUrl;
-         }
+            // this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe(
+            //    value => {
+            //    }
+            //    , error => {
+            //       // console.log(error);
+            //    }
+            // );
+         //    this.imgFlage = 0;
+         // } else {
+         //    this.student.photo = Constants.defaultStudentImgUrl;
+         // }
          // );
 
 
@@ -200,15 +209,32 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    cancel(): void {
       this.route.navigate(['/students-management', 'student-list']);
    }
-
-   onChange(): void {
-      this.photoFile = this.photoInput.nativeElement.files[0];
-      this.studentManagementService.upload(this.photoFile, this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
-            this.url = Constants.StudentImgUrl + this.photoInput.nativeElement.files[0].name;
-
-         }
-      );
-      this.imgFlage = 1;
+   //
+   // onChange(): void {
+   //    this.photoFile = this.photoInput.nativeElement.files[0];
+   //    this.studentManagementService.upload(this.photoFile, this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
+   //          this.url = Constants.StudentImgUrl + this.photoInput.nativeElement.files[0].name;
+   //
+   //       }
+   //    );
+   //    this.imgFlage = 1;
+   // }
+   uploadPhoto(event: any): void {
+      this.profileService.uploadProfilePicture(this.photoInput.nativeElement.files[0], this.form.get('universityMail')?.value).subscribe(response => {
+         const profilePicture = new UserFile(response.message, null, Constants.FILE_TYPE_PROFILE_PICTURE, null, null);
+         // if (this.student.user.userFileList.length === 0) {
+         this.student.user = new UserModel();
+         this.student.user.userFileList = [];
+            this.student.user.userFileList.push(profilePicture);
+            this.profilePicture = profilePicture;
+         // }
+         this.profilePictureLink = Constants.downloadFileURL + response.message;
+         this.profileService.updateProfilePictureEvent.next(this.profilePictureLink);
+         // localStorage.removeItem(Constants.loggedInUser);
+         // localStorage.setItem(Constants.loggedInUser, JSON.stringify(this.loggedInUser));
+      }, _ => {
+         this.messageService.add({severity: 'error', summary: 'Error', detail: 'Upload Failed'});
+      });
    }
 
 }

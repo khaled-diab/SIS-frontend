@@ -200,11 +200,11 @@
                         <h5>Personal Picture</h5>
                      </li>
                      <li class="imgBox">
-                        <img [src]="this.url" alt=" ">
+                        <img [src]="profilePictureLink" alt=" ">
                      </li>
                      <li class="choose-img">
                         <div class="add-file">
-                           <input #photoInput  (change)="onChange()" accept="image/*" id="imageFile" type="file">
+                           <input #photoInput  (change)="uploadPhoto($event)" accept="image/*" id="imageFile" type="file">
                            <label for="imageFile">Choose an Image</label>
                         </div>
                      </li>

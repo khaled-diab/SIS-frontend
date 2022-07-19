@@ -86,9 +86,9 @@ export class FacultyMemberManagementService {
       return this.httpClient.get<FacultyMemberModel[]>(Constants.facultyMembersByCollegeIdUrl + collegeId);
    }
 
-   getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
-      return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
-   }
+   // getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
+   //    return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
+   // }
 
    public uploadBulkStudents(event: any): Observable<MessageResponse> {
       const file: File = event.target.files[0];

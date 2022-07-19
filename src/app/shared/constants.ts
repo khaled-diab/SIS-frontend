@@ -159,6 +159,8 @@ export class Constants {
    public static readonly ADMIN_TYPE = 'ADMIN';
    public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/uploadedUsers';
    public static readonly usersFilesPageUrl = environment.baseURL + '/security/findAll/';
+   public static readonly changePasswordUrl = environment.baseURL + '/security/changePassword/';
+
 
    public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
    public static readonly Days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
