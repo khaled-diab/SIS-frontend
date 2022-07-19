@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 import { AttendanceReportByLectureManagementModel } from 'src/app/shared/model/attendanceReportByLecture-management/attendance-report-by-lecture-management-model';
 import { AttendanceReportRequestModel } from 'src/app/shared/model/attendanceReportByLecture-management/attendance-report-request-model';
 import { LectureModel } from 'src/app/shared/model/student-attendance/lecture-model';
@@ -36,7 +37,10 @@ export class AttendaneReportByLectureComponent implements OnInit {
   subscription: Subscription;
   searchValue: string;
   filterValue: null;
-
+  CourseName: string;
+  SectionNumber: string;
+  a: number;
+  x:number=0;
 
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
@@ -53,6 +57,7 @@ export class AttendaneReportByLectureComponent implements OnInit {
   }
   constructor(private lectureReportService: AttendaneReportByLectureService,
               private breakpointObserver: BreakpointObserver,
+              private location: Location,
               private router: Router,
               public dialog: MatDialog) { }
   ngOnInit(): void {
@@ -62,6 +67,9 @@ export class AttendaneReportByLectureComponent implements OnInit {
   ngAfterViewInit(): void{
     this.dataSource = new MatTableDataSource<AttendanceReportByLectureManagementModel>();
     this.subscriptions();
+    console.log(this.totalLectures);
+
+    console.log('attendanceRate' + this.attendanceRate);
   }
   private subscriptions(): Subscription[] {
     this.subscriptionsList.push(this.filterEventSubscription());
@@ -87,9 +95,15 @@ export class AttendaneReportByLectureComponent implements OnInit {
           .subscribe(value => {
             for (let i = 0; i < value.length; i++) {
           this.totalRate += value[i].rate;
-          console.log('total Rate' + this.totalRate);
+
 
             }
+
+            console.log(this.totalLectures);
+            console.log('total Rate' + this.totalRate);
+            this.attendanceRate = this.totalRate / this.totalLectures;
+            this.x = this.attendanceRate *100;
+
           });
           this.lectureReportService.getsection(this.attendanceReportRequest.filterSection)
           .subscribe(Response => {
@@ -97,9 +111,11 @@ export class AttendaneReportByLectureComponent implements OnInit {
             this.totalLectures = Response.exercisesLectures + Response.theoreticalLectures
             + Response.practicalLectures;
 
-            this.attendanceRate = Math.floor((this.totalRate / this.totalLectures) * 100);
+            this.CourseName = Response.courseDTO.nameEn;
+            this.SectionNumber = Response.sectionNumber;
 
           });
+
 
         });
     });
@@ -107,13 +123,18 @@ export class AttendaneReportByLectureComponent implements OnInit {
 
   details(lecture: LectureModel): void
   {
-this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-details-by-lecture/'+lecture.id);
-// this.attendanceReportRequest.lectureId = lecture.id;
 
-// this.lectureReportService.attendanceDetailsByLectureFilterEvent.next(this.attendanceReportRequest);
+this.router.navigateByUrl(`/attendancereportsbylecture-management/attendane-details-by-lecture/${lecture.id}/${this.CourseName}
+/${this.SectionNumber}/${lecture.lectureDate}/${lecture.lectureStartTime}/${lecture.lectureEndTime}`);
+//
+
   }
-
-
+  // ngOnDestroy(): void {
+  //   this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();
+  //   }
+  // back(): void {
+  //   this.location.back();
+  // }
 
 }
 

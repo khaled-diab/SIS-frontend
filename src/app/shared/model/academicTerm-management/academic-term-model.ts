@@ -6,6 +6,7 @@ export class AcademicTermModel extends BaseModel {
     name ='';
     start_date ='';
     end_date ='';
+    status: boolean;
     academicYearDTO : AcademicYear;
 }
 

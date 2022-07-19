@@ -12,16 +12,15 @@ mat-card {
    justify-content: space-between;
    align-items: center
 }
-
-.mat-button-toggle {
-   /*width: calc(100% / 7);*/
-   height: 50px;
-   line-height: 50px;
-   padding: 0 20px;
-   text-align: center;
+.mainBtn{
+   width: auto;
+   display: block;
    background: var(--main-color);
+   border: 1px solid var(--main-color);
+   padding: 1px 10px;
 }
-
-.mat-button-toggle:active {
-   color: #FFFFFF !important;
+.mainBtn2{
+   display: block;
+   background: transparent;
+   color: var(--main-color);
 }

@@ -1,8 +1,10 @@
 <div class="p-3">
     <app-attendane-report-by-student-filter></app-attendane-report-by-student-filter>
-      <div class="d-flex justify-content-end mt-3">
-     
+    <div class="d-flex justify-content-end mt-6">
+      <div *ngIf="tableData" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
+         <h3  >{{'Number Of Lectures: '+numberOflectures}}</h3>
       </div>
+   </div>
       <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
         <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
   
@@ -22,6 +24,11 @@
             <mat-cell *matCellDef="let row">{{row.absentLecture}}</mat-cell>
           </ng-container>
           
+          <ng-container matColumnDef="rate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Absent Average
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.rate}}</mat-cell>
+          </ng-container>
 
             <ng-container matColumnDef="statues">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Statues
@@ -33,7 +40,7 @@
             <mat-cell *matCellDef="let row">
               <div class="options">
                 <button  mat-icon-button>
-                  <mat-icon class="eye" (click)="details()"   >visibility</mat-icon>
+                  <mat-icon class="eye" (click)="details(row)"   >visibility</mat-icon>
                 </button>
               </div>
             </mat-cell>
@@ -52,6 +59,8 @@
                        aria-label="Select page">
         </mat-paginator>
       </div>
+      <mat-spinner *ngIf="!tableData&&attendanceStudentReportRequest.filterSection" class="text-center"></mat-spinner>
+
     </div>
     
     <mat-menu #menu="matMenu">

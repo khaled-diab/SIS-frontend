@@ -85,39 +85,49 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
             // year: new FormControl(undefined, Validators.required),
             photo: new FormControl(undefined),
             collegeMenu: new FormControl(undefined, Validators.required),
-            departmentMenu: new FormControl(undefined),
+            departmentMenu: new FormControl(undefined, Validators.required),
             programMenu: new FormControl(undefined),
 
          }
       );
       this.form.controls.photo.setValue('defaultStudentImage.png');
 
-      this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
+      // this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
       });
    }
 
    ngAfterViewInit(): void {
-
       this.collegeList.valueChange.subscribe(value => {
-         if (this.collegeList.value !== undefined) {
-            this.departmentMenu.setDisabledState(false);
-         } else {
-            this.departmentMenu.setDisabledState(true);
-            this.departmentMenu.value = undefined;
-            this.programs = [];
-            this.programMenu.value = undefined;
-            this.programMenu.setDisabledState(true);
+         this.departmentMenu.value = undefined;
+         this.programMenu.value = undefined;
 
-         }
+         console.log(this.departmentMenu.value);
+         this.form.patchValue({
+            departmentMenu: undefined,
+            programMenu: undefined
+         }) ;
+         this.departmentMenu.setDisabledState(false);
+
+         // if (this.collegeList.value !== undefined) {
+         //    this.departmentMenu.setDisabledState(false);
+         // } else {
+         //    this.departmentMenu.setDisabledState(true);
+         //
+         // }
          this.departments = this.departmentService.getDepartmentsByCollege(this.collegeList.value.id);
          this.deptOption = false;
+      });
+      this.departmentMenu.valueChange.subscribe(value => {
+         this.programMenu.value = undefined;
+         this.form.patchValue({
+            programMenu: undefined
+         }) ;
          this.programMenu.setDisabledState(false);
-         this.academicProgramService.getAcademicProgramsByCollege(this.collegeList.value.id).subscribe(value1 => {
-            this.programs = value1;
+         this.academicProgramService.getAcademicProgramsByDepartment(this.departmentMenu.value.id).subscribe(value => {
+            this.programs = value;
          });
-
       });
    }
 

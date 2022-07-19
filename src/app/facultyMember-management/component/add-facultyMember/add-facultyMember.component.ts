@@ -77,9 +77,6 @@ export class AddFacultyMemberComponent implements OnInit {
     this.collegeManagementService.getAllColleges().subscribe(Response => {
       this.colleges = Response;
     });
-    this.departmentService.getDepartments().subscribe(value => {
-       this.departments = value;
-    });
   }
 
   ngAfterViewInit(): void {

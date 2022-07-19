@@ -82,9 +82,12 @@ export class ViewAcademicTermComponent implements OnInit {
 
       this.academicTermModel.academicYearDTO = new AcademicYear();
       this.academicTermModel.academicYearDTO.id = this.form.get('academicYearMenu')?.value;
-      // this.academicTermModel.buildingDTO.collegeDTO = new CollegeModel();
-      // this.academicTermModel.buildingDTO.collegeDTO.id = 1;
+
     }
+    if (this.form.get('start_date')?.value > this.form.get('end_date')?.value) {
+      this.snackBar.open('End Date must be greater than Start Date!', undefined, {duration: 3500});
+      return;
+   }
     this.academicTermService.postAcademicTerm(this.academicTermModel).subscribe((Response) => {
         this.snackBar.open('AcademicTerm Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
         this.route.navigate(['/academics-term-management', 'academic-term-list']);

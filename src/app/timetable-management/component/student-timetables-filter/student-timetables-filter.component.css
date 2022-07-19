@@ -13,15 +13,27 @@ mat-card {
    align-items: center
 }
 
-.mat-button-toggle {
-   /*width: calc(100% / 7);*/
-   height: 50px;
-   line-height: 50px;
-   padding: 0 20px;
-   text-align: center;
-   background: var(--main-color);
-}
+/*.mat-button-toggle {*/
+/*   !*width: calc(100% / 7);*!*/
+/*   height: 50px;*/
+/*   line-height: 50px;*/
+/*   padding: 0 20px;*/
+/*   text-align: center;*/
+/*   background: var(--main-color);*/
+/*}*/
 
-.mat-button-toggle:active {
-   color: #FFFFFF !important;
+/*.mat-button-toggle:active {*/
+/*   color: #FFFFFF !important;*/
+/*}*/
+.mainBtn{
+   width: auto;
+   display: block;
+   background: var(--main-color);
+   border: 1px solid var(--main-color);
+   padding: 1px 10px;
+}
+.mainBtn2{
+   display: block;
+   background: transparent;
+   color: var(--main-color);
 }

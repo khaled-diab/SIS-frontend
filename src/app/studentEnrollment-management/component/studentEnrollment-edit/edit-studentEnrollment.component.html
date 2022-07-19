@@ -10,7 +10,7 @@
          <div class="col-12">
             <!--  submission Form   -->
             <div class="row">
-               <form (ngSubmit)="update()" [formGroup]="form" class="submission-form col-sm-12 col-md-8 form" id="form">
+               <form (ngSubmit)="update()" [formGroup]="form" class="submission-form col-sm-12 form" id="form">
                   <div class="form-row form">
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input outline">
@@ -71,7 +71,7 @@
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>Major</mat-label>
                         <mat-select #majorSelect [formControlName]="'majorMenu'">
-                           <mat-option *ngFor="let major of majors" [value]="major">
+                           <mat-option *ngFor="let major of majors" [value]="major.id">
                               {{major?.nameEn}}
                            </mat-option>
                         </mat-select>

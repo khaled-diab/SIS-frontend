@@ -61,10 +61,9 @@ export class StudentEnrollmentFilterComponent implements OnInit, AfterViewInit {
 
    ngOnInit(): void {
       this.academicYears = AcademicYearService.yearsList;
-
-      this.academicTermService.getAcademicTerms().subscribe(Response => {
-         this.academicTerms = Response;
-      });
+      this.academicYearSelect.value = AcademicTermService.currentTerm.academicYearDTO.id;
+      this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value);
+      this.academicTermSelect.value = AcademicTermService.currentTerm.id;
 
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;

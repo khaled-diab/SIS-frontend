@@ -2,13 +2,17 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {PageRequest} from '../../shared/model/page-request';
 import {HttpClient} from '@angular/common/http';
+import {PageQueryUtil} from '../../shared/model/page-query';
 import {Sort} from '@angular/material/sort';
 import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
 import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-management/facultyMember-request-model';
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
-import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
+import {
+   FacultyMemberTableRecordsModel
+} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
+import {UserModel} from '../../shared/model/security/user-model';
 import {RoleModel} from '../../shared/model/security/role-model';
 
 @Injectable({
@@ -16,6 +20,7 @@ import {RoleModel} from '../../shared/model/security/role-model';
 })
 export class FacultyMemberManagementService {
 
+   static facultyMembersList: FacultyMemberModel[];
    facultyMemberFilterEvent: Subject<FacultyMemberRequestModel> = new Subject<FacultyMemberRequestModel>();
    facultyMemberDeleteEvent: Subject<any> = new Subject<any>();
    facultyMemberCloseUpdateEvent: Subject<any> = new Subject<any>();
@@ -54,7 +59,7 @@ export class FacultyMemberManagementService {
    }
 
    updateFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
-      facultyMember.user.role = new RoleModel();
+      // facultyMember.user.role = new RoleModel();
       return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
    }
 

@@ -1,22 +1,17 @@
 <div class="p-3">
-  <div class="d-flex justify-content-end mt-3">
-    <div class="p-3">
-    <mat-label *ngIf="tableData" >{{'Course Name'+coursename}}</mat-label>
+  <div class="container">
+    <p-breadcrumb [model]="items" (onItemClick)="itemClicked($event)"></p-breadcrumb>
+</div>
+    <div *ngIf="tableData" class="row-12 " style="text-align: right; width: 100%;   margin-top: 20px;">
+       <h3  >{{'Course Name: '+courseName+': Section'+SectionNumber}}</h3>
+       <h3  >{{'Date: '+date}}</h3>
+       <h3  >{{'From: '+from}}</h3>
+       <h3  >{{'To: '+to}}</h3>
     </div>
-    <div class="p-3">
-      <mat-label *ngIf="tableData" >{{'Date'+date}}</mat-label>
-      </div>
-      <div class="p-3">
-        <mat-label *ngIf="tableData" >{{'From'+from}}</mat-label>
-        </div>
-        <div class="p-3">
-          <mat-label *ngIf="tableData" >{{'To'+to}}</mat-label>
-          </div>
-
-  </div>
-      <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-        <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
-
+ </div>
+  <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
+      <ng-container>
+          <table mat-table [dataSource]="dataSource" aria-label="Elements" matSort>
 
           <ng-container matColumnDef="universityId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>University Id
@@ -35,7 +30,8 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Status
             </mat-header-cell>
             <mat-cell   *matCellDef="let row"
-            [ngClass]="{'make-green': row.attendanceStatus=='present','make-red': row.attendanceStatus=='absent' }" >{{row.attendanceStatus}}</mat-cell>
+            [ngClass]="{'make-green': row.attendanceStatus=='Present',
+            'make-red': row.attendanceStatus=='Absent' }" >{{row.attendanceStatus}}</mat-cell>
           </ng-container>
 
 
@@ -55,17 +51,19 @@
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
 
         <mat-paginator
                        [pageIndex]="pageIndex - 1"
-                       [pageSizeOptions]="[5, 10, 25, 35, 50]"
+                       [pageSizeOptions]="[1, 3, 5, 10, 25, 35, 50]"
                        [pageSize]="defaultPageSize"
                        [length]=tableData.length
                        showFirstLastButtons
                        aria-label="Select page">
         </mat-paginator>
-      </div>
+          </table>
+          </ng-container>
+          <mat-spinner *ngIf="!tableData" class="text-center"></mat-spinner>
+
     </div>
 
     <mat-menu #menu="matMenu">
@@ -74,7 +72,4 @@
       <button mat-menu-item>Delete</button>
     </mat-menu>
 
-    <button (click)="flag=!flag" >btn</button>
-<p *ngIf="flag">{{'ssssssssssss'}}</p>
      <!-- <app-attendane-report-by-lecture-filter></app-attendane-report-by-lecture-filter> -->
-

@@ -14,6 +14,7 @@ import {DeleteAcademicTermComponent} from '../delete-academic-term/delete-academ
 import {ViewAcademicTermComponent} from '../view-academic-term/view-academic-term.component';
 import {take} from 'rxjs/operators';
 import {AcademicYearService} from "../../../academic-year-management/service/academic-year.service";
+import {Constants} from "../../../shared/constants";
 
 
 @Component({
@@ -24,7 +25,7 @@ import {AcademicYearService} from "../../../academic-year-management/service/aca
 export class AcademicTermListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any>;
   tableData: AcademicTermModel[];
-  displayedColumns = ['NO.', 'name', 'start_date', 'end_date', 'academic_year', 'Actions'];
+  displayedColumns = ['NO.', 'name', 'start_date', 'end_date','status','academic_year', 'Actions'];
   pageIndex = 1;
   defaultPageSize = 10;
   subscriptionsList: Subscription[] = [];
@@ -61,7 +62,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
 
   addOrUpdateAcademicTerm(academicTerm: AcademicTermModel): void {
     if (this.isSmallScreen) {
-      this.router.navigateByUrl('/academics-term-management/create-academic-term', {state: academicTerm}).then(_ => console.log());
+      this.router.navigateByUrl('/academicterms-management/create-academic-term', {state: academicTerm}).then(_ => console.log());
     } else {
       this.dialog.open(CreateAcademicTermComponent, {data: academicTerm});
       this.service.closeSaveEvent.subscribe(e => {
@@ -73,6 +74,9 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
             this.tableData = data;
             this.dataSource.data = this.tableData;
             AcademicTermService.academicTermsList = this.tableData;
+             this.service.getCurrentTerm().subscribe(value2 => {
+                localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value2));
+             });
           });
         }
       }, error => {
@@ -138,9 +142,11 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
         this.tableData = value;
         this.dataSource.data = this.tableData;
         AcademicTermService.academicTermsList = value;
+        this.service.getCurrentTerm().subscribe(value2 => {
+            localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value2));
+         });
         console.log(value);
       });
-
   }
 
   private handleSuccessfulDeletion(): void {
@@ -150,6 +156,9 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
         this.tableData = value;
         this.dataSource.data = this.tableData;
         AcademicTermService.academicTermsList = this.tableData;
+         this.service.getCurrentTerm().subscribe(value2 => {
+            localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value2));
+         });
 
       });
     this.snackBar.open('Academic Term Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});

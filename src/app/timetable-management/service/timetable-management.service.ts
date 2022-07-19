@@ -77,7 +77,7 @@ export class TimetableManagementService {
       return this.httpClient.get <LectureTypeModel[]>(Constants.allLectureTypesUrl);
    }
 
-   public getStudentTimetables(userId: number): Observable<TimetableTableRecordsModel[]> {
-      return this.httpClient.get <TimetableTableRecordsModel[]>(Constants.studentTimetablesUrl + userId);
+   public getStudentTimetables(studentId: number): Observable<TimetableTableRecordsModel[]> {
+      return this.httpClient.get <TimetableTableRecordsModel[]>(Constants.studentTimetablesUrl + studentId);
    }
 }

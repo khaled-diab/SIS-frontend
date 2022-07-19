@@ -11,7 +11,6 @@ import {AcademicTermModel} from '../../../shared/model/academicTerm-management/a
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
 import {AcademicYearService} from '../../../academic-year-management/service/academic-year.service';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
-import {CourseRequestModel} from '../../../shared/model/course-management/course-request-model';
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {CourseManagementService} from '../../../course-management/service/course-management.service';
@@ -47,16 +46,16 @@ export class TimetableFilterComponent implements OnInit, AfterViewInit {
    departments: DepartmentModel[];
    academicYears: AcademicYear[];
    academicTerms: AcademicTermModel[];
-   newAcademicTerms: AcademicTermModel[] = [];
    courses: CourseModel[];
-   courseModelRequestModel = new CourseRequestModel();
    sections: SectionModel[];
    sectionRequestModel = new SectionRequestModel();
    days: string[] = Constants.Days;
 
    ngOnInit(): void {
       this.academicYears = AcademicYearService.yearsList;
-      this.academicTerms = AcademicTermService.academicTermsList;
+      this.academicYearSelect.value = AcademicTermService.currentTerm.academicYearDTO.id;
+      this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value);
+      this.academicTermSelect.value = AcademicTermService.currentTerm.id;
       this.collegeManagementService.getAllColleges().subscribe(Response => {
          this.colleges = Response;
       });
@@ -67,12 +66,6 @@ export class TimetableFilterComponent implements OnInit, AfterViewInit {
          if (this.academicYearSelect.value !== undefined) {
             this.academicTermSelect.setDisabledState(false);
             this.academicTerms = this.academicTermService.getAcademicTermsByAcademicYears(this.academicYearSelect.value);
-            // this.newAcademicTerms = [];
-            // for (const academicTerm of this.academicTerms) {
-            //    if (academicTerm.academicYearDTO.id === this.academicYearSelect.value) {
-            //       this.newAcademicTerms.push(academicTerm);
-            //    }
-            // }
          } else {
             this.academicTermSelect.setDisabledState(true);
          }
@@ -101,11 +94,6 @@ export class TimetableFilterComponent implements OnInit, AfterViewInit {
             this.courseService.getCoursesByDepartment(this.departmentSelect.value).subscribe(value1 => {
                this.courses = value1;
             });
-            // this.courseModelRequestModel.filterCollege = this.collegeSelect.value;
-            // this.courseModelRequestModel.filterDepartment = this.departmentSelect.value;
-            // this.courseService.getCoursePage(1, 500, this.courseModelRequestModel).subscribe(Response => {
-            //    this.courses = Response.data;
-            // });
          } else {
             this.courseSelect.setDisabledState(true);
          }
@@ -116,7 +104,6 @@ export class TimetableFilterComponent implements OnInit, AfterViewInit {
       this.courseSelect.valueChange.subscribe(value => {
          if (this.courseSelect.value !== undefined) {
             this.sectionSelect.setDisabledState(false);
-            // this.sectionRequestModel.filterCourse = this.courseSelect.value;
             this.sectionService.getSectionsByCourse(this.courseSelect.value).subscribe(Response => {
                this.sections = Response;
             });

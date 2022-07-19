@@ -10,14 +10,14 @@
          <div class="col-12">
 
             <!--  submission Form   -->
-            <form (ngSubmit)="add()" [formGroup]="form" class="submission-form col-sm-12 col-md-8 form" id="form">
+            <form (ngSubmit)="add()" [formGroup]="form" class="submission-form col-sm-12 form" id="form">
                <div class="form-row form">
 
                   <!-- academic year -->
                   <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                      <mat-label>Academic Year</mat-label>
                      <mat-select #academicYearSelect [formControlName]="'academicYearMenu'" required>
-                        <mat-option *ngFor="let year of academicYears" [value]="year">
+                        <mat-option *ngFor="let year of academicYears" [value]="year.id">
                            {{year.name}}
                         </mat-option>
                      </mat-select>
@@ -27,9 +27,8 @@
                   <!-- academic term -->
                   <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                      <mat-label>Academic Term</mat-label>
-                     <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required
-                                 [disabled]="isDisabled">
-                        <mat-option *ngFor="let Term of academicTerms" [value]="Term">
+                     <mat-select #academicTermSelect [formControlName]="'academicTermMenu'" required>
+                        <mat-option *ngFor="let Term of academicTerms" [value]="Term.id">
                            {{Term.name}}
                         </mat-option>
                      </mat-select>

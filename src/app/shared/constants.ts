@@ -22,6 +22,8 @@ export class Constants {
    public static readonly saveCourseUrl = environment.baseURL + '/courses/save';
    public static readonly deleteCourseUrl = environment.baseURL + '/courses/delete/';
    public static readonly coursesByDepartmentIdUrl = environment.baseURL + '/courses/CoursesByDepartmentId/';
+   public static readonly getCourseById = environment.baseURL + '/courses';
+
    // Faculty Member Url
    public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
    public static readonly filterFacultyMemberUrl = environment.baseURL + '/facultyMembers/filter/';
@@ -31,7 +33,6 @@ export class Constants {
    public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
    public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
    public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
-   public static readonly facultyMemberByUserIdUrl = environment.baseURL + '/facultyMembers/facultyMemberByUserId/';
    public static readonly facultyMembersByCollegeIdUrl = environment.baseURL + '/facultyMembers/facultyMembersByCollegeId/';
 
    /* Student Url */
@@ -45,17 +46,16 @@ export class Constants {
    public static readonly getStudentUrl = environment.baseURL + '/students/';
    public static readonly filterStudentRecordUrl = environment.baseURL + '/students/searchRecords/';
 
+
    // Section URLs
    public static readonly getSections = environment.baseURL + '/sections/all';
    public static readonly getSection = environment.baseURL + '/sections';
-   public static readonly sectionPageUrl = environment.baseURL + '/sections/datapage';
    public static readonly searchSectionUrl = environment.baseURL + '/sections/search/';
    public static readonly filterSectionUrl = environment.baseURL + '/sections/filter/';
    public static readonly saveSectionUrl = environment.baseURL + '/sections/save';
    public static readonly updateSectionUrl = environment.baseURL + '/sections/update';
    public static readonly deleteSectionUrl = environment.baseURL + '/sections/delete/';
    public static readonly SectionByIdUrl = environment.baseURL + '/sections/';
-   public static readonly allSectionsUrl = environment.baseURL + '/sections/all/';
    public static readonly sectionsByCourseIdUrl = environment.baseURL + '/sections/SectionsByCourseId/';
 
    // Timetable URLs
@@ -88,7 +88,7 @@ export class Constants {
    public static readonly getAcademicPrograms = environment.baseURL + '/academicPrograms/all';
    public static readonly deleteAcademicPrograms = environment.baseURL + '/academicPrograms/delete/';
    public static readonly addAcademicPrograms = environment.baseURL + '/academicPrograms/add';
-   public static readonly academicProgramsByCollegeIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByCollegeId/';
+   public static readonly academicProgramsByDepartmentIdUrl = environment.baseURL + '/academicPrograms/academicProgramsByDepartmentId/';
 
    // Department URLS
    public static readonly getDepartments = environment.baseURL + '/departments/all';
@@ -104,12 +104,17 @@ export class Constants {
    public static readonly getAcademicTerms = environment.baseURL + '/academicTerms/all';
    public static readonly addAcademicTerms = environment.baseURL + '/academicTerms/add';
    public static readonly deleteAcademicTerms = environment.baseURL + '/academicTerms/delete';
+   public static readonly getCurrentTerm = environment.baseURL + '/academicTerms/getCurrentTerm';
+
    // Attendane Details By Lectures
    public static readonly studentAttendanceReport = environment.baseURL + '/attendanceDetails/getAttendancesByLectureId';
    public static readonly lecturesReport = environment.baseURL + '/lectures/getFacultyMemberLecturesToReport';
    public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/update';
    // Attendane Details By Student
    public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
+   public static readonly studentReportDetails =
+      environment.baseURL + '/attendanceDetails/getAttendancesBySectionIdAndStudentId';
+   public static readonly studentAttendanceDetails = environment.baseURL + '/attendanceDetails/updateStatusByStudentId';
 
    // Sort
    public static readonly ASC = 'ASC';
@@ -118,6 +123,8 @@ export class Constants {
    public static readonly sortDESCIcon = 'arrow_downward';
    public static readonly sortASCHint = 'Sort Ascending';
    public static readonly sortDescHint = 'Sort Descending';
+
+
 
    /* Validation Regex */
    public static readonly ENGLISH_CHARACTERS = '^[a-zA-Z ]+$';
@@ -155,10 +162,13 @@ export class Constants {
 
    public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
    public static readonly Days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-   public static readonly COLLEGES_LIST = 'colleges';
+
+   /* local storage keys */
    public static readonly DEPARTMENTS_LIST = 'departments';
    public static readonly TERMS_LIST = 'terms';
    public static readonly YEARS_LIST = 'years';
+   public static readonly CURRENT_TERM = 'current_term';
+
 
 
 }
