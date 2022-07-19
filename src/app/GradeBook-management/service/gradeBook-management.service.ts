@@ -7,6 +7,8 @@ import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
 import {GradeBookModel} from '../../shared/model/gradebook-management/gradeBook-model';
 import {GradeBookRequestModel} from '../../shared/model/gradebook-management/gradeBook-request-model';
+import {CourseModel} from '../../shared/model/course-management/course-model';
+import {StudentModel} from '../../shared/model/student-management/student-model';
 
 @Injectable({
    providedIn: 'root'
@@ -16,6 +18,7 @@ export class GradeBookManagementService {
    gradeBookFilterEvent: Subject<GradeBookRequestModel> = new Subject<GradeBookRequestModel>();
    gradeBookUpdateEvent: Subject<GradeBookModel> = new Subject<GradeBookModel>();
    gradeBookCloseUpdateEvent: Subject<any> = new Subject<any>();
+   gradeBookFilterCourseIdEvent: Subject<any> = new Subject<any>();
 
    constructor(private httpClient: HttpClient) {
    }
@@ -40,6 +43,14 @@ export class GradeBookManagementService {
 
    updateGradeBook(gradeBookModel: GradeBookModel): Observable<MessageResponse> {
       return this.httpClient.post<MessageResponse>(Constants.updateGradeBookUrl, gradeBookModel);
+   }
+
+   getCoursesByFacultyMemberId(termId: number, facultyMemberId: number): Observable<CourseModel[]> {
+      return this.httpClient.get<CourseModel[]>(Constants.getCourseByFacultyMemberId + termId + '/' + facultyMemberId);
+   }
+
+   getStudentsByCoursesId(courseId: number): Observable<StudentModel[]> {
+      return this.httpClient.get<StudentModel[]>(Constants.getStudentsCourseId + courseId);
    }
 
 }

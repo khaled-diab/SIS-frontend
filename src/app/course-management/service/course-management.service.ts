@@ -59,7 +59,8 @@ export class CourseManagementService {
       return this.httpClient.get<CourseModel[]>(Constants.coursesByDepartmentIdUrl + departmentId);
    }
 
-   getCoursesByFacultyMemberId(facultyMemberId: number): Observable<CourseModel[]> {
-      return this.httpClient.get<CourseModel[]>(Constants.getCourseByFacultyMemberId + facultyMemberId);
+   public getCourse(id: number): Observable<CourseModel> {
+      return this.httpClient.get<CourseModel>(Constants.getCourseById + '/' + id);
+
    }
 }

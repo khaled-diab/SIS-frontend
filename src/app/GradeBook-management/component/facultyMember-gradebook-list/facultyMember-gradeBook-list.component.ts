@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {GradeBookModel} from '../../../shared/model/gradebook-management/gradeBook-model';
 // @ts-ignore
 import {GradeBookManagementService} from '../../service/gradeBook-management.service';
-import {PageRequest} from '../../../shared/model/page-request';
+import {StudentModel} from '../../../shared/model/student-management/student-model';
+import {CourseModel} from '../../../shared/model/course-management/course-model';
+import {CourseManagementService} from '../../../course-management/service/course-management.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -13,18 +15,28 @@ import {PageRequest} from '../../../shared/model/page-request';
 })
 export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
 
-   tableData: PageRequest<GradeBookModel>;
+   course = new CourseModel();
+   term: any;
+   tableData: StudentModel[];
    displayedColumns = ['No.', 'university_id', 'name_ar', 'finalExamGrade', 'practicalGrade', 'oralGrade', 'midGrade'];
-   pageIndex = 0;
-   defaultPgeSize = 50;
    subscriptionList: Subscription[] = [];
-   gradeBook = new GradeBookModel();
+   form: FormGroup;
 
-   constructor(private gradeBookManagementService: GradeBookManagementService) {
+   constructor(private gradeBookManagementService: GradeBookManagementService,
+               private courseManagementService: CourseManagementService) {
    }
 
    ngOnInit(): void {
       this.subscriptionList = this.subscriptions();
+      this.form = new FormGroup({
+            academicTerm: new FormControl(this.term, Validators.required),
+            course: new FormControl(this.course.id, Validators.required),
+            finalExamGrade: new FormControl(undefined),
+            practicalGrade: new FormControl(undefined),
+            oralGrade: new FormControl(undefined),
+            midGrade: new FormControl(undefined),
+         }
+      );
    }
 
    private subscriptions(): Subscription[] {
@@ -34,11 +46,22 @@ export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
    }
 
    private filterEventSubscription(): Subscription {
-      return this.gradeBookManagementService.gradeBookFilterEvent.subscribe(value => {
-         this.gradeBookManagementService.filterGradeBook(0, 500, value).subscribe(value1 => {
+      this.gradeBookManagementService.gradeBookFilterEvent.subscribe(value => {
+         this.term = value.filterAcademicTerm;
+      });
+      return this.gradeBookManagementService.gradeBookFilterCourseIdEvent.subscribe(value => {
+         this.term = value.term;
+         this.gradeBookManagementService.getStudentsByCoursesId(value).subscribe(value1 => {
             this.tableData = value1;
+            this.courseManagementService.getCourse(value).subscribe(value2 => {
+               this.course = value2;
+            });
          });
       });
+   }
+
+   save(): any{
+      // type your code here, please
    }
 
    ngOnDestroy(): void {

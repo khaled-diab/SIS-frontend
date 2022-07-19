@@ -7,7 +7,6 @@ import {MatSelect} from '@angular/material/select';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
-import {CourseManagementService} from '../../../course-management/service/course-management.service';
 
 @Component({
    selector: 'app-facultyMember-gradeBook-filter',
@@ -24,8 +23,7 @@ export class FacultyMemberGradeBookFilterComponent implements OnInit {
    academicTerms: AcademicTermModel[];
    courses: CourseModel[];
 
-   constructor(private gradeBookManagementService: GradeBookManagementService,
-               private courseService: CourseManagementService) {
+   constructor(private gradeBookManagementService: GradeBookManagementService) {
    }
 
    ngOnInit(): void {
@@ -33,7 +31,7 @@ export class FacultyMemberGradeBookFilterComponent implements OnInit {
       this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       this.academicTerms = AcademicTermService.academicTermsList;
       this.academicTermSelect.value = AcademicTermService.currentTerm.id;
-      this.courseService.getCoursesByFacultyMemberId(this.facultyMember.id).subscribe(value => {
+      this.gradeBookManagementService.getCoursesByFacultyMemberId(this.academicTermSelect.value, this.facultyMember.id).subscribe(value => {
          this.courses = value;
       });
       this.gradeBookRequestModel.filterFacultyMember = this.facultyMember.id;
@@ -42,12 +40,15 @@ export class FacultyMemberGradeBookFilterComponent implements OnInit {
 
    ngAfterViewInit(): void {
       this.academicTermSelect.valueChange.subscribe(value => {
+         this.gradeBookManagementService.getCoursesByFacultyMemberId(this.academicTermSelect.value, this.facultyMember.id).subscribe(value1 => {
+            this.courses = value1;
+         });
          this.gradeBookRequestModel.filterAcademicTerm = value;
          this.gradeBookManagementService.gradeBookFilterEvent.next(this.gradeBookRequestModel);
       });
       this.courseSelect.valueChange.subscribe(value => {
-         this.gradeBookRequestModel.filterCourse = value;
-         this.gradeBookManagementService.gradeBookFilterEvent.next(this.gradeBookRequestModel);
+         // this.gradeBookRequestModel.filterCourse = value;
+         this.gradeBookManagementService.gradeBookFilterCourseIdEvent.next(value);
       });
    }
 
