@@ -48,12 +48,10 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
    form: FormGroup;
    deptOption = false;
-   photoFile: any;
    url: string;
-   imgFlage = 0;
    private httpClient: HttpClient;
    loggedInUser: StudentModel | FacultyMemberModel | AdminModel;
-   profilePicture: UserFile | undefined;
+   // profilePicture: UserFile | undefined;
    profilePictureLink: string;
    typeAdmin = Constants.ADMIN_TYPE;
    constructor(private studentManagementService: StudentManagementService,
@@ -164,7 +162,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.student.academicProgramDTO = this.form.get('programMenu')?.value;
          this.student.photo = this.form.get('photo')?.value;
          // if (this.imgFlage === 1) {
-            this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
+         //    this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
             // this.student.photo = this.form.get('photo')?.value;
             //  this.httpClient.get(this.url, { responseType: 'blob' })
             // .subscribe(data => {
@@ -219,23 +217,25 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    //    );
    //    this.imgFlage = 1;
    // }
-   uploadPhoto(event: any): void {
-      this.profileService.uploadProfilePicture(this.photoInput.nativeElement.files[0], this.form.get('universityMail')?.value).subscribe(response => {
-         const profilePicture = new UserFile(response.message, null, Constants.FILE_TYPE_PROFILE_PICTURE, null, null);
-         // if (this.student.user.userFileList.length === 0) {
-         this.student.user = new UserModel();
-         this.student.user.userFileList = [];
-            this.student.user.userFileList.push(profilePicture);
-            this.profilePicture = profilePicture;
-         // }
-         this.profilePictureLink = Constants.downloadFileURL + response.message;
-         this.profileService.updateProfilePictureEvent.next(this.profilePictureLink);
-         // localStorage.removeItem(Constants.loggedInUser);
-         // localStorage.setItem(Constants.loggedInUser, JSON.stringify(this.loggedInUser));
-      }, _ => {
-         this.messageService.add({severity: 'error', summary: 'Error', detail: 'Upload Failed'});
-      });
-   }
+   // uploadPhoto(event: any): void {
+   //    this.profileService.uploadProfilePictureNoEvent(this.photoInput.nativeElement.files[0], this.form.get('universityMail')?.value).subscribe(response => {
+   //       console.log(response);
+   //       const profilePicture = new UserFile(response.message, null, Constants.FILE_TYPE_PROFILE_PICTURE, null, null);
+   //       // if (this.student.user.userFileList.length === 0) {
+   //       this.student.user = new UserModel();
+   //       this.student.user.id=-1;
+   //       this.student.user.userFileList = [];
+   //          this.student.user.userFileList.push(profilePicture);
+   //          this.profilePicture = profilePicture;
+   //       // }
+   //       this.profilePictureLink = Constants.downloadFileURL + response.message;
+   //       this.profileService.updateProfilePictureEvent.next(this.profilePictureLink);
+   //       // localStorage.removeItem(Constants.loggedInUser);
+   //       // localStorage.setItem(Constants.loggedInUser, JSON.stringify(this.loggedInUser));
+   //    }, _ => {
+   //       this.messageService.add({severity: 'error', summary: 'Error', detail: 'Upload Failed'});
+   //    });
+   // }
 
 }
 

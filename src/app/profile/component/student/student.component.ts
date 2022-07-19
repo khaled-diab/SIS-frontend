@@ -72,10 +72,10 @@ export class StudentComponent implements OnInit {
 
       // @ts-ignore
       this.loggedInUser = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-      console.log(this.loggedInUser);
       this.student = this.loggedInUser;
       this.profilePicture = this.loggedInUser?.user?.userFileList.filter(value => value.type === Constants.FILE_TYPE_PROFILE_PICTURE).pop();
-      if (this.student.user.userFileList != undefined && this.student.user.userFileList.length > 0) {
+      console.log(this.profilePicture);
+      if (this.profilePicture) {
          this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
       } else {
          this.profilePictureLink = '../assets/defaultStudentImage.png';

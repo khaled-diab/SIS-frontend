@@ -22,6 +22,7 @@ export class ProfileService {
       return this.http.post<MessageResponse>(Constants.uploadProfilePicture, formData);
    }
    public uploadProfilePictureNoEvent(image: any, email: string): Observable<MessageResponse> {
+      console.log(image);
       const file: File = image;
       const formData = new FormData();
       formData.append('file', file, file.name.replaceAll('-', ''));
