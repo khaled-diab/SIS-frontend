@@ -14,12 +14,12 @@ import {MatSelect} from '@angular/material/select';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {HttpClient} from '@angular/common/http';
 import {AcademicProgramService} from '../../../academic-program/service/academic-program.service';
-import {UserFile} from "../../../shared/model/security/user-file";
-import {FacultyMemberModel} from "../../../shared/model/facultyMember-management/facultyMember-model";
-import {AdminModel} from "../../../shared/model/security/admin-model";
-import {ProfileService} from "../../../profile/service/profile.service";
-import {MessageService} from "primeng/api";
-import {UserModel} from "../../../shared/model/security/user-model";
+import {UserFile} from '../../../shared/model/security/user-file';
+import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
+import {AdminModel} from '../../../shared/model/security/admin-model';
+import {ProfileService} from '../../../profile/service/profile.service';
+import {MessageService} from 'primeng/api';
+import {UserModel} from '../../../shared/model/security/user-model';
 
 @Component({
    selector: 'app-add-student',
@@ -40,7 +40,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    levels = Constants.LEVELS;
    errorMessage: string;
    @ViewChild('arabicName') arabicName: NgModel;
-   @ViewChild('photoInput') photoInput: ElementRef;
+   // @ViewChild('photoInput') photoInput: ElementRef;
    @ViewChild('Form2') Form2Element: ElementRef;
    @ViewChild('collegeList', {static: true}) collegeList: MatSelect;
    @ViewChild('departmentMenu', {static: true}) departmentMenu: MatSelect;
@@ -48,12 +48,13 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
    form: FormGroup;
    deptOption = false;
-   url: string;
+   // url: string;
    private httpClient: HttpClient;
    loggedInUser: StudentModel | FacultyMemberModel | AdminModel;
    // profilePicture: UserFile | undefined;
-   profilePictureLink: string;
-   typeAdmin = Constants.ADMIN_TYPE;
+   // profilePictureLink: string;
+   // typeAdmin = Constants.ADMIN_TYPE;
+
    constructor(private studentManagementService: StudentManagementService,
                private snackBar: MatSnackBar,
                private route: Router,
@@ -70,7 +71,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       this.programMenu.setDisabledState(true);
       this.departmentMenu.setDisabledState(true);
 
-      this.profilePictureLink = '../assets/defaultStudentImage.png';
+      // this.profilePictureLink = '../assets/defaultStudentImage.png';
       this.form = new FormGroup({
 
             nameEn: new FormControl(undefined, Validators.compose([Validators.required,
@@ -91,7 +92,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
             parentPhone: new FormControl(undefined, Validators.pattern(Constants.DIGITS_ONLY_11)),
             level: new FormControl(undefined),
             // year: new FormControl(undefined, Validators.required),
-            photo: new FormControl(undefined),
+            // photo: new FormControl(undefined),
             collegeMenu: new FormControl(undefined, Validators.required),
             departmentMenu: new FormControl(undefined, Validators.required),
             programMenu: new FormControl(undefined),
@@ -115,7 +116,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.form.patchValue({
             departmentMenu: undefined,
             programMenu: undefined
-         }) ;
+         });
          this.departmentMenu.setDisabledState(false);
 
          // if (this.collegeList.value !== undefined) {
@@ -131,10 +132,10 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.programMenu.value = undefined;
          this.form.patchValue({
             programMenu: undefined
-         }) ;
+         });
          this.programMenu.setDisabledState(false);
-         this.academicProgramService.getAcademicProgramsByDepartment(this.departmentMenu.value.id).subscribe(value => {
-            this.programs = value;
+         this.academicProgramService.getAcademicProgramsByDepartment(this.departmentMenu.value.id).subscribe(value1 => {
+            this.programs = value1;
          });
       });
    }
@@ -160,20 +161,20 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
          this.student.collegeDTO = this.form.get('collegeMenu')?.value;
          this.student.departmentDTO = this.form.get('departmentMenu')?.value;
          this.student.academicProgramDTO = this.form.get('programMenu')?.value;
-         this.student.photo = this.form.get('photo')?.value;
+         // this.student.photo = this.form.get('photo')?.value;
          // if (this.imgFlage === 1) {
          //    this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
-            // this.student.photo = this.form.get('photo')?.value;
-            //  this.httpClient.get(this.url, { responseType: 'blob' })
-            // .subscribe(data => {
-            //     this.photoFile = data;
-            // this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe(
-            //    value => {
-            //    }
-            //    , error => {
-            //       // console.log(error);
-            //    }
-            // );
+         // this.student.photo = this.form.get('photo')?.value;
+         //  this.httpClient.get(this.url, { responseType: 'blob' })
+         // .subscribe(data => {
+         //     this.photoFile = data;
+         // this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe(
+         //    value => {
+         //    }
+         //    , error => {
+         //       // console.log(error);
+         //    }
+         // );
          //    this.imgFlage = 0;
          // } else {
          //    this.student.photo = Constants.defaultStudentImgUrl;
@@ -207,6 +208,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
    cancel(): void {
       this.route.navigate(['/students-management', 'student-list']);
    }
+
    //
    // onChange(): void {
    //    this.photoFile = this.photoInput.nativeElement.files[0];

@@ -92,7 +92,7 @@ export class StudentComponent implements OnInit {
             parentPhone: new FormControl(this.student.parentPhone, Validators.pattern(Constants.DIGITS_ONLY_11)),
             level: new FormControl(this.student.level),
             // year: new FormControl(this.student.year, Validators.required),
-            photo: new FormControl(this.student.photo),
+            // photo: new FormControl(this.student.photo),
             collegeMenu: new FormControl(this.student.collegeDTO?.id, Validators.required),
             departmentMenu: new FormControl(this.student.departmentDTO?.id, Validators.required),
             programMenu: new FormControl(this.student.academicProgramDTO?.id),
@@ -153,13 +153,13 @@ export class StudentComponent implements OnInit {
          this.student.alternativeMail = this.form.get('alternativeMail')?.value;
          this.student.parentPhone = this.form.get('parentPhone')?.value;
          this.student.level = this.form.get('level')?.value;
-         this.student.photo = this.form.get('photo')?.value;
+         // this.student.photo = this.form.get('photo')?.value;
          this.student.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.student.academicProgramDTO = new AcademicProgramModel();
          this.student.academicProgramDTO.id = -1;
 
          this.student.departmentDTO.id = this.form.get('departmentMenu')?.value;
-         if (this.form.get('programMenu')?.value != -1 && this.form.get('programMenu')?.value != null) {
+         if (this.form.get('programMenu')?.value !== -1 && this.form.get('programMenu')?.value != null) {
             this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
          }
 

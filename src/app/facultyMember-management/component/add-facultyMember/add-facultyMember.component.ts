@@ -31,11 +31,11 @@ export class AddFacultyMemberComponent implements OnInit {
   @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
   @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
   @ViewChild('arabicName') arabicName: NgModel;
-  @ViewChild('photoInput') photoInput: ElementRef;
+  // @ViewChild('photoInput') photoInput: ElementRef;
   form: FormGroup;
-  photoFile: any;
-  url: string;
-  imgFlag = 0;
+  // photoFile: any;
+  // url: string;
+  // imgFlag = 0;
 
   constructor(private facultyMemberManagementService: FacultyMemberManagementService,
               private snackBar: MatSnackBar,
@@ -47,7 +47,7 @@ export class AddFacultyMemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.url = '../assets/defaultStudentImage.png';
+    // this.url = '../assets/defaultStudentImage.png';
     this.form = new FormGroup({
         nameEn: new FormControl(undefined, Validators.compose([Validators.required,
           Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
@@ -62,13 +62,13 @@ export class AddFacultyMemberComponent implements OnInit {
         universityMail: new FormControl(undefined, Validators.compose([Validators.required,
           Validators.email])),
         alternativeMail: new FormControl(undefined, Validators.email),
-        photo: new FormControl(undefined),
+        // photo: new FormControl(undefined),
         degreeMenu: new FormControl(undefined, Validators.required),
         collegeMenu: new FormControl(undefined, Validators.required),
         departmentMenu: new FormControl(undefined, Validators.required),
       }
     );
-    this.form.controls.photo.setValue('defaultStudentImage.png');
+    // this.form.controls.photo.setValue('defaultStudentImage.png');
 
     this.facultyMemberManagementService.getAllDegrees().subscribe(Response => {
       this.degrees = Response;
@@ -100,18 +100,18 @@ export class AddFacultyMemberComponent implements OnInit {
       this.facultyMember.birthDate = this.form.get('birthDate')?.value;
       this.facultyMember.universityMail = this.form.get('universityMail')?.value;
       this.facultyMember.alternativeMail = this.form.get('alternativeMail')?.value;
-      this.facultyMember.photo = this.form.get('photo')?.value;
-      this.httpClient.get(this.url, {responseType: 'blob'})
-        .subscribe(data => {
-          this.photoFile = data;
-          this.facultyMemberManagementService.upload(this.photoFile, this.facultyMember.photo).pipe(take(1)).subscribe(
-            value => {
-            }
-            , error => {
-              console.log(error);
-            }
-          );
-        });
+      // this.facultyMember.photo = this.form.get('photo')?.value;
+      // this.httpClient.get(this.url, {responseType: 'blob'})
+      //   .subscribe(data => {
+      //     this.photoFile = data;
+      //     this.facultyMemberManagementService.upload(this.photoFile, this.facultyMember.photo).pipe(take(1)).subscribe(
+      //       value => {
+      //       }
+      //       , error => {
+      //         console.log(error);
+      //       }
+      //     );
+      //   });
       console.log(this.form.get('collegeMenu')?.value);
       this.facultyMember.degreeDTO = new DegreeModel();
       this.facultyMember.degreeDTO = this.form.get('degreeMenu')?.value;
@@ -145,15 +145,15 @@ export class AddFacultyMemberComponent implements OnInit {
     this.route.navigate(['/facultyMembers-management', 'facultyMember-list']);
   }
 
-  onChange(): void {
-    this.photoFile = this.photoInput.nativeElement.files[0];
-    this.facultyMemberManagementService.upload(this.photoFile, this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
-        this.url = Constants.StudentImgUrl + this.photoInput.nativeElement.files[0].name;
-        console.log(this.url);
-      }
-    );
-    this.form.controls.photo.setValue('FacultyMember-' + this.facultyMember.id + this.photoInput.nativeElement.files[0].name);
-    this.imgFlag = 1;
-  }
+  // onChange(): void {
+  //   this.photoFile = this.photoInput.nativeElement.files[0];
+  //   this.facultyMemberManagementService.upload(this.photoFile, this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
+  //       this.url = Constants.StudentImgUrl + this.photoInput.nativeElement.files[0].name;
+  //       console.log(this.url);
+  //     }
+  //   );
+  //   this.form.controls.photo.setValue('FacultyMember-' + this.facultyMember.id + this.photoInput.nativeElement.files[0].name);
+  //   this.imgFlag = 1;
+  // }
 
 }

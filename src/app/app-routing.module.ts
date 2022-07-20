@@ -7,8 +7,6 @@ import {RegisterComponent} from './security/register/register.component';
 import {SecurityGuard} from './security/service/security.guard';
 import {ProfileComponent} from './profile/component/profile.component';
 import {ImportedUsersComponent} from './imported-users/imported-users.component';
-import {StudentComponent} from "./profile/component/student/student.component";
-import {StaffComponent} from "./profile/component/staff/staff.component";
 
 
 const appRoutes: Routes = [
@@ -63,6 +61,7 @@ const appRoutes: Routes = [
          },
          {
             path: 'attendancereportsbystudent-management',
+            // tslint:disable-next-line:max-line-length
             loadChildren: () => import('./attendance-by-student-management/attendance-by-student-management.module').then(value => value.AttendanceByStudentManagementModule)
          },
          {
@@ -87,22 +86,6 @@ const appRoutes: Routes = [
             canActivate: [SecurityGuard],
             data: {
                name: 'profile'
-            }
-         },
-         {
-            path: 'student-profile',
-            component: StudentComponent,
-            canActivate: [SecurityGuard],
-            data: {
-               name: 'student-profile'
-            }
-         },
-         {
-            path: 'facultyMember-profile',
-            component: StaffComponent,
-            canActivate: [SecurityGuard],
-            data: {
-               name: 'facultyMember-profile'
             }
          },
          {

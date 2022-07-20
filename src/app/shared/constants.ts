@@ -25,13 +25,13 @@ export class Constants {
    public static readonly getCourseById = environment.baseURL + '/courses';
 
    // Faculty Member Url
-   public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
+   // public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
    public static readonly filterFacultyMemberUrl = environment.baseURL + '/facultyMembers/filter/';
    public static readonly saveFacultyMemberUrl = environment.baseURL + '/facultyMembers/saveFacultyMember';
    public static readonly deleteFacultyMemberUrl = environment.baseURL + '/facultyMembers/delete/';
    public static readonly facultyMemberByIdUrl = environment.baseURL + '/facultyMembers/';
-   public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
-   public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
+   // public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
+   // public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
    public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
    public static readonly facultyMembersByCollegeIdUrl = environment.baseURL + '/facultyMembers/facultyMembersByCollegeId/';
 
@@ -41,8 +41,8 @@ export class Constants {
    public static readonly updateStudentUrl = environment.baseURL + '/students/updateStudent/';
    public static readonly filterStudentUrl = environment.baseURL + '/students/searchStudent/';
    public static readonly uploadStudentImgUrl = environment.baseURL + '/students/upload/';
-   public static readonly StudentImgUrl = environment.baseURL + '/students/download/';
-   public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
+   // public static readonly StudentImgUrl = environment.baseURL + '/students/download/';
+   // public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
    public static readonly getStudentUrl = environment.baseURL + '/students/';
    public static readonly filterStudentRecordUrl = environment.baseURL + '/students/searchRecords/';
 
@@ -162,7 +162,7 @@ export class Constants {
    public static readonly changePasswordUrl = environment.baseURL + '/security/changePassword/';
 
 
-   public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
    public static readonly Days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
    /* local storage keys */

@@ -18,7 +18,7 @@ export class StudentModel extends BaseModel {
   parentPhone: string;
   level: string;
   year: string;
-  photo: string;
+  // photo: string;
   departmentDTO: DepartmentModel ;
   collegeDTO: CollegeModel;
   academicProgramDTO: AcademicProgramModel ;

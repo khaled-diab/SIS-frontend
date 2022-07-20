@@ -28,13 +28,13 @@ export class PreviewFacultyMemberComponent implements OnInit {
    errorMessage: string;
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
    @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
-   @ViewChild('photoInput') photoInput: ElementRef;
-   @ViewChild('img') img: ElementRef;
+   // @ViewChild('photoInput') photoInput: ElementRef;
+   // @ViewChild('img') img: ElementRef;
 
    form: FormGroup;
-   photoFile: any;
-   url: string;
-   imgFlag = 0;
+   // photoFile: any;
+   // url: string;
+   // imgFlag = 0;
 
    constructor(@Inject(MAT_DIALOG_DATA) public data: FacultyMemberModel,
                private facultyMemberManagementService: FacultyMemberManagementService,
@@ -46,7 +46,7 @@ export class PreviewFacultyMemberComponent implements OnInit {
    ngOnInit(): void {
       this.facultyMember = this.data;
       this.college = this.data.collegeDTO;
-      this.url = Constants.FacultyMemberImgUrl + this.facultyMember.photo;
+      // this.url = Constants.FacultyMemberImgUrl + this.facultyMember.photo;
       this.form = new FormGroup({
             nameEn: new FormControl(this.facultyMember.nameEn, Validators.compose([Validators.required,
                Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
@@ -61,7 +61,7 @@ export class PreviewFacultyMemberComponent implements OnInit {
             universityMail: new FormControl(this.facultyMember.universityMail, Validators.compose([Validators.required,
                Validators.email])),
             alternativeMail: new FormControl(this.facultyMember.alternativeMail, Validators.email),
-            photo: new FormControl(this.facultyMember.photo),
+            // photo: new FormControl(this.facultyMember.photo),
             degreeMenu: new FormControl(this.facultyMember.degreeDTO.id, Validators.required),
             collegeMenu: new FormControl(this.facultyMember.collegeDTO.id, Validators.required),
             departmentMenu: new FormControl(this.facultyMember.departmentDTO.id, Validators.required),
@@ -109,23 +109,23 @@ export class PreviewFacultyMemberComponent implements OnInit {
          this.facultyMember.birthDate = this.form.get('birthDate')?.value;
          this.facultyMember.universityMail = this.form.get('universityMail')?.value;
          this.facultyMember.alternativeMail = this.form.get('alternativeMail')?.value;
-         this.facultyMember.photo = this.form.get('photo')?.value;
+         // this.facultyMember.photo = this.form.get('photo')?.value;
          this.facultyMember.degreeDTO.id = this.form.get('degreeMenu')?.value;
          this.facultyMember.collegeDTO.id = this.form.get('collegeMenu')?.value;
          this.facultyMember.departmentDTO.id = this.form.get('departmentMenu')?.value;
          this.facultyMember.id = this.data.id;
 
-         if (this.imgFlag === 1) {
-            this.facultyMemberManagementService.upload(this.photoFile, this.facultyMember.photo).pipe(take(1)).subscribe(
-               value => {
-               }
-
-               , error => {
-                  console.log(error);
-               }
-            );
-            this.imgFlag = 0;
-         }
+         // if (this.imgFlag === 1) {
+         //    this.facultyMemberManagementService.upload(this.photoFile, this.facultyMember.photo).pipe(take(1)).subscribe(
+         //       value => {
+         //       }
+         //
+         //       , error => {
+         //          console.log(error);
+         //       }
+         //    );
+         //    this.imgFlag = 0;
+         // }
 
       }
 
@@ -152,13 +152,13 @@ export class PreviewFacultyMemberComponent implements OnInit {
       this.facultyMemberManagementService.facultyMemberCloseUpdateEvent.next();
    }
 
-   onChange(): void {
-      this.photoFile = this.photoInput.nativeElement.files[0];
-      this.facultyMemberManagementService.upload(this.photoFile, this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
-            this.url = Constants.FacultyMemberImgUrl + this.photoInput.nativeElement.files[0].name;
-         }
-      );
-      this.form.controls.photo.setValue('FacultyMember-' + this.facultyMember.id + this.photoInput.nativeElement.files[0].name);
-      this.imgFlag = 1;
-   }
+   // onChange(): void {
+   //    this.photoFile = this.photoInput.nativeElement.files[0];
+   //    this.facultyMemberManagementService.upload(this.photoFile, this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
+   //          this.url = Constants.FacultyMemberImgUrl + this.photoInput.nativeElement.files[0].name;
+   //       }
+   //    );
+   //    this.form.controls.photo.setValue('FacultyMember-' + this.facultyMember.id + this.photoInput.nativeElement.files[0].name);
+   //    this.imgFlag = 1;
+   // }
 }
