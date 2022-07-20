@@ -146,8 +146,6 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
 
 
       if (this.form.valid) {
-      }
-      {
          this.student.nameEn = this.form.get('nameEn')?.value.trim();
          this.student.nameAr = this.form.get('nameAr')?.value.trim();
          this.student.universityId = this.form.get('universityId')?.value;

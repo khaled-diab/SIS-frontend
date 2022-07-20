@@ -12,6 +12,7 @@ import {CollegeManagementService} from '../../college-management/service/college
 import {DepartmentService} from '../../department-management/service/department.service';
 import {AcademicTermService} from '../../academic-term-management/service/academic-term.service';
 import {AcademicYearService} from '../../academic-year-management/service/academic-year.service';
+import {ProfilePasswordModel} from "../../shared/model/security/profile-password-model";
 
 @Injectable({
    providedIn: 'root'
@@ -51,5 +52,7 @@ export class SecurityService {
          localStorage.setItem(Constants.CURRENT_TERM, JSON.stringify(value));
       });
    }
-
+   public changePassword(profilePasswordModel: ProfilePasswordModel): Observable<MessageResponse> {
+      return this.httpClient.post<MessageResponse>(Constants.changePasswordUrl, profilePasswordModel);
+   }
 }
