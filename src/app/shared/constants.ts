@@ -160,7 +160,7 @@ export class Constants {
    public static readonly FILE_UPLOAD_TOPIC_NAME = '/topic/uploadedUsers';
    public static readonly usersFilesPageUrl = environment.baseURL + '/security/findAll/';
 
-   public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8'];
+   public static readonly LEVELS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
    public static readonly Days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
    /* local storage keys */
