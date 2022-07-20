@@ -35,7 +35,11 @@ export class AttendaneReportByStudentComponent implements OnInit {
   CoursName:string|null;
   SectionName:string|null;
   numberOflectures :number;
+  totalLectures:number;
   statues:string;
+  totalRate=0;
+  attendanceRate:number;
+  numberOfStudents:number;
   
 
   @ViewChild(MatPaginator, {static: false})
@@ -57,7 +61,8 @@ export class AttendaneReportByStudentComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog) { }
   ngOnInit(): void {
-    // this.dataSource = new MatTableDataSource<any>();
+    // @ts-ignore
+
     // this.subscriptions();
   }
   ngAfterViewInit():void{
@@ -81,12 +86,13 @@ export class AttendaneReportByStudentComponent implements OnInit {
           console.log(filteredData);
           this.dataSource.data=this.tableData;
           this.numberOflectures=filteredData[0].numberOfLecture
+          this.totalRate=0;
           for (let i = 0; i < filteredData.length; i++) {
             
             
           
           if(filteredData[i].rate>=25){
-          filteredData[i].statues="Forbbiden"
+          filteredData[i].statues="Banned"
           }
           else if(filteredData[i].rate>=15 && filteredData[i].rate<25){
             filteredData[i].statues="Alert"
@@ -94,11 +100,19 @@ export class AttendaneReportByStudentComponent implements OnInit {
           else if(filteredData[i].rate<15){
             filteredData[i].statues="Allowed"
           }
+           this.totalRate+=filteredData[i].rate;
+           
         }
+        this.numberOfStudents=filteredData.length;
+        console.log('Rate'+this.totalRate)
+        this.attendanceRate = this.totalRate / this.numberOfStudents;
+            console.log('Rate'+ this.attendanceRate)
         });
         this.lectureReportService.getsection(this.attendanceStudentReportRequest.filterSection).subscribe(data=>{
           this.CoursName=data.courseDTO.nameEn;
           this.SectionName=data.sectionNumber;
+          this.totalLectures=data.exercisesLectures+data.practicalLectures+data.theoreticalLectures
+          console.log('Total Lectures'+this.totalLectures)
         });
     });
   }

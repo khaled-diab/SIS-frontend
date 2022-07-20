@@ -16,6 +16,15 @@ table {
     justify-content: center !important;
   
   }
+  .make-green {
+    background-color: #1E8B17;
+  }
+  .make-red {
+    background-color:#F00B0B;
+  }
+  .make-orange {
+    background-color:darkorange
+  }
   
   mat-header-cell {
     display: flex;
@@ -116,3 +125,6 @@ table {
     margin-left: 20px;
   
   }
+  ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: var(--secondary-color)!important;
+ }

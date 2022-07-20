@@ -39,4 +39,7 @@ export class AttendaneReportByStudentService {
   editattendanceStatues(id:number , attendance :AttendanceReportDetailsByStudent) {
     return this.http.post(`${Constants.studentAttendanceDetails}/${id}`,attendance);
  }
+ getSectionsByFacultyMember(id : number):Observable<SectionModel[]>{
+  return this.http.get <SectionModel[]>(Constants.sectionsByFacultyMemberUrl+id);
+ }
 }

@@ -1,12 +1,34 @@
 <div class="p-3">
   <div class="container">
-    <p-breadcrumb [model]="items" (onItemClick)="itemClicked($event)"></p-breadcrumb>
+    <p-breadcrumb class="subTitle " [model]="items" (onItemClick)="itemClicked($event)"></p-breadcrumb>
 </div>
     <div *ngIf="tableData" class="row-12 " style="text-align: right; width: 100%;   margin-top: 20px;">
-       <h3  >{{'Course Name: '+courseName+': Section'+SectionNumber}}</h3>
-       <h3  >{{'Date: '+date}}</h3>
+      
+      <div class="mid-grid">
+        <div class="grid-item">
+          <h3>{{'Course Name: '}}</h3>
+          <p>{{courseName+': Section'+SectionNumber}}</p>
+        </div>
+        <div class="grid-item">
+          <h3>{{'Date: '}}</h3>
+          <p>{{date}}</p>
+        </div>
+        <div class="grid-item">
+          <h3>{{'From: '}}</h3>
+          <p>{{from}}</p>
+        </div>
+      
+      <div class="grid-item">
+        <h3>{{'To: '}}</h3>
+        <p>{{to}}</p>
+      </div>
+    </div>
+
+      
+       
+       <!-- <h3  >{{'Date: '+date}}</h3>
        <h3  >{{'From: '+from}}</h3>
-       <h3  >{{'To: '+to}}</h3>
+       <h3  >{{'To: '+to}}</h3> -->
     </div>
  </div>
   <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">

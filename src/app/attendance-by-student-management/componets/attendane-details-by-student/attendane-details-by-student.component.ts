@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AttendaneReportByLectureService } from 'src/app/attendance-by-lecture-management/service/attendane-report-by-lecture.service';
 import { AttendanceReportByStudentManagementModel } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-by-Student-management-model';
@@ -73,8 +73,8 @@ this.StudentName=this.activatedRoute.snapshot.params['studentName'];
     this.Subscription();
     this.items = [
       {label: 'Attendance_Reports'},
-      {label: 'Attendance_By_Lecture'},
-      {label: 'Lecture_Details'},
+      {label: 'Attendance_By_Student'},
+      {label: 'Student_Details'},
       
      
   ];

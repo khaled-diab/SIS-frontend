@@ -11,11 +11,14 @@ table {
     margin-right: auto;
   }
   .make-green {
-    color:#1E8B17;
+    background-color: #1E8B17;
   }
   .make-red {
-    color:#F00B0B;
+    background-color:#F00B0B;
   }
+  ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: var(--secondary-color)!important;
+ }
   mat-cell {
     display: flex !important;
     justify-content: center !important;

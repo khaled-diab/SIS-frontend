@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { AttendaneReportByLectureService } from 'src/app/attendance-by-lecture-management/service/attendane-report-by-lecture.service';
 import { AttendanceReportDetailsByStudent } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-details-by-student';
 import { AttendaneReportByStudentService } from '../../service/attendane-report-by-student.service';
 
@@ -29,9 +29,10 @@ export class EditStatuesComponent implements OnInit {
   statues='';
   constructor(@Inject(MAT_DIALOG_DATA) public data: AttendanceReportDetailsByStudent,
     private studentReportService: AttendaneReportByStudentService,
+    private lectureReportService:AttendaneReportByLectureService,
     private breakpointObserver: BreakpointObserver,
     private snackBar: MatSnackBar,
-    private route: Router) { }
+    ) { }
 
   ngOnInit(): void {
     this.attendaceReportModdel = new AttendanceReportDetailsByStudent();
@@ -56,35 +57,34 @@ export class EditStatuesComponent implements OnInit {
    add(): void {
     if (this.form.valid) {
       
-      // this.attendaceReportModdel.attendanceStatus = this.form.get('attendanceStatus')?.value;
       this.statues=this.form.get('attendanceStatus')?.value;
       this.data.attendanceStatus=this.statues;
     }
-    this.studentReportService.editattendanceStatues(this.data.id,this.data).subscribe((Response) => {
+    this.studentReportService.editattendanceStatues(this.data.id,this.data)
+    .subscribe((Response) => {
       console.log(Response);
       this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
-      this.studentReportService.closeSaveEvent.next();
+      this.lectureReportService.closeSaveEvent.next();
     }, error => {
-      const formControl = this.form.get(error.error.field);
-      this.errorMessage = error.error.message;
-      if (formControl) {
-        formControl.setErrors({
-          serverError: true
-        });
-      }
-      this.snackBar.open('Failed Editing Attendance Statues', undefined, {duration: 2000});
+      // const formControl = this.form.get(error.error.field);
+      // this.errorMessage = error.error.message;
+   
+      this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000 ,panelClass: 'successSnackBar'});
+      this.snackBar.dismiss();
+
+
     }
   );
 }
-save(): void {
-  console.log('attendance model ', this.attendaceReportModdel);
-  this.studentReportService.editattendanceStatues(this.data.id,this.data).subscribe(value => {
+// save(): void {
+//   console.log('attendance model ', this.attendaceReportModdel);
+//   this.studentReportService.editattendanceStatues(this.data.id,this.data).subscribe(value => {
     
-    this.studentReportService.closeSaveEvent.next();
-  });
-}
+//     this.lectureReportService.closeSaveEvent.next();
+//   });
+// }
 cancel(): void {
-  this.studentReportService.closeSaveEvent.next('Cancel');
+  this.lectureReportService.closeSaveEvent.next('Cancel');
 
 }
 

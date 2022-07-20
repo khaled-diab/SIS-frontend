@@ -104,8 +104,9 @@ mat-form-field {
 
 
 .search-box button {
+  padding: 7px 10px;
   background-color: var(--main-color);
-  border: none;
+  width: 100px;
 }
 
 .search-box button:active {
@@ -158,4 +159,14 @@ button[type="button"]:hover {
   color: var(--main-color);
   padding: 4px;
 
+}
+button{
+
+  padding: 7px 10px;
+  background-color: var(--main-color);
+    width: 100px;
+}
+button:hover{
+  padding: 5px;
+  background-color: var(--main-color);
 }
