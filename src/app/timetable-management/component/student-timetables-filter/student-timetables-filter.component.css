@@ -3,36 +3,25 @@ mat-card {
    margin: auto;
 }
 
-.timetable mat-button-toggle-group {
+.timetable {
    margin: auto !important;
 }
 
 .timetable {
    display: flex;
-   justify-content: space-between;
    align-items: center
 }
 
-/*.mat-button-toggle {*/
-/*   !*width: calc(100% / 7);*!*/
-/*   height: 50px;*/
-/*   line-height: 50px;*/
-/*   padding: 0 20px;*/
-/*   text-align: center;*/
-/*   background: var(--main-color);*/
-/*}*/
-
-/*.mat-button-toggle:active {*/
-/*   color: #FFFFFF !important;*/
-/*}*/
-.mainBtn{
+.mainBtn {
+   margin-left: 10px;
    width: auto;
    display: block;
    background: var(--main-color);
    border: 1px solid var(--main-color);
    padding: 1px 10px;
 }
-.mainBtn2{
+
+.mainBtn2 {
    display: block;
    background: transparent;
    color: var(--main-color);

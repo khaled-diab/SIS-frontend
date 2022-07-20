@@ -59,7 +59,6 @@ export class FacultyMemberManagementService {
    }
 
    updateFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
-      // facultyMember.user.role = new RoleModel();
       return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
    }
 
@@ -84,10 +83,6 @@ export class FacultyMemberManagementService {
 
    getFacultyMembersByCollege(collegeId: number): Observable<FacultyMemberModel[]> {
       return this.httpClient.get<FacultyMemberModel[]>(Constants.facultyMembersByCollegeIdUrl + collegeId);
-   }
-
-   getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
-      return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
    }
 
    public uploadBulkStudents(event: any): Observable<MessageResponse> {
