@@ -4,7 +4,7 @@
       <div class="row">
          <div class="col-12">
             <div class="pageTitle">
-               <h2>{{"Student Profile"}}</h2>
+               <h2>Preview Profile</h2>
             </div>
          </div>
          <div class="col-12">
@@ -246,18 +246,18 @@
                         </mat-form-field>
 
 
-                     <div class="col-md-3 mr-auto col-sm-12 form-input">
-                        <button [disabled]="passForm.invalid " [ngClass]="{'disabled-btn':passForm.invalid}"
-                                class="btn btn-primary form-control" form="passForm"
-                                mat-raised-button type="submit">Update
-                        </button>
-                     </div>
-                     <div class="col-md-3 mr-auto col-sm-12 form-input">
-                        <button (click)=" this.enableChangePass = false" class="btn btn-primary form-control"
-                                mat-raised-button
-                                type="button">Cancel
-                        </button>
-                     </div>
+                        <div class="col-md-3 mr-auto col-sm-12 form-input">
+                           <button [disabled]="passForm.invalid " [ngClass]="{'disabled-btn':passForm.invalid}"
+                                   class="btn btn-primary form-control" form="passForm"
+                                   mat-raised-button type="submit">Update
+                           </button>
+                        </div>
+                        <div class="col-md-3 mr-auto col-sm-12 form-input">
+                           <button (click)=" this.enableChangePass = false" class="btn btn-primary form-control"
+                                   mat-raised-button
+                                   type="button">Cancel
+                           </button>
+                        </div>
                      </div>
                   </form>
 
@@ -270,3 +270,4 @@
 
    </div>
 
+</div>

@@ -95,12 +95,12 @@
          User Management
       </mat-expansion-panel-header>
       <ul>
-         <li *ngIf="loggedInUser.user.role.roleName==='STUDENT'"
+         <li *ngIf="loggedInUser.user.role.roleName==='STUDENT' || loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
              [routerLinkActive]="['active']"
-             [routerLink]="['/student-profile']">
+             [routerLink]="['/profile']">
             <a>
           <span>
-            Student Profile
+            Profile
           </span>
             </a>
          </li>
@@ -195,7 +195,8 @@
          </li>
       </ul>
    </mat-expansion-panel>
-   <mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN' || loggedInUser.user.role.roleName==='FACULTY_MEMBER'" >
+   <mat-accordion
+      *ngIf="loggedInUser.user.role.roleName==='ADMIN' || loggedInUser.user.role.roleName==='FACULTY_MEMBER'">
       <mat-expansion-panel
          #attendanceReportExpansion
          (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
