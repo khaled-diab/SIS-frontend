@@ -19,8 +19,10 @@ import {UserFile} from '../../../shared/model/security/user-file';
 import {ProfileService} from '../../service/profile.service';
 import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../security/service/security.service';
-import {ProfilePasswordModel} from '../../../shared/model/security/profile-password-model';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {UpdatePasswordComponent} from '../update-password/update-password.component';
+import {take} from 'rxjs/operators';
 
 @Component({
    selector: 'app-student',
@@ -29,34 +31,23 @@ import {Router} from '@angular/router';
 })
 export class StudentComponent implements OnInit {
 
-   isDisabled = true;
    student: StudentModel = new StudentModel();
    colleges: CollegeModel[];
    college = new CollegeModel();
    departments: DepartmentModel[];
    programs: AcademicProgramModel[];
    department = new DepartmentModel();
-   years: string[];
    levels = Constants.LEVELS;
    errorr = false;
    errorMessage: string;
-   @ViewChild('arabicName') arabicName: NgModel;
    @ViewChild('photoInput') photoInput: ElementRef;
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
    @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
    @ViewChild('programSelect', {static: true}) programSelect: MatSelect;
-   deptOption = false;
-   @ViewChild('img') img: ElementRef;
    form: FormGroup;
-   passForm: FormGroup;
-   title = 'Update Student';
    loggedInUser: StudentModel;
    profilePicture: UserFile | undefined;
    profilePictureLink: string;
-   typeAdmin = Constants.ADMIN_TYPE;
-   isPassChanged = false;
-   enableChangePass = false;
-   profilePasswordModel: ProfilePasswordModel = new ProfilePasswordModel();
 
    constructor(private studentManagementService: StudentManagementService,
                private snackBar: MatSnackBar,
@@ -65,7 +56,8 @@ export class StudentComponent implements OnInit {
                private academicProgramService: AcademicProgramService,
                private profileService: ProfileService, private messageService: MessageService,
                private securityService: SecurityService,
-               private router: Router) {
+               private router: Router,
+               private dialog: MatDialog) {
    }
 
    ngOnInit(): void {
@@ -74,7 +66,6 @@ export class StudentComponent implements OnInit {
       this.loggedInUser = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       this.student = this.loggedInUser;
       this.profilePicture = this.loggedInUser?.user?.userFileList.filter(value => value.type === Constants.FILE_TYPE_PROFILE_PICTURE).pop();
-      console.log(this.profilePicture);
       if (this.profilePicture) {
          this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
       } else {
@@ -108,13 +99,6 @@ export class StudentComponent implements OnInit {
 
          }
       );
-      this.passForm = new FormGroup({
-
-            oldPass: new FormControl(undefined, Validators.compose([Validators.required, Validators.minLength(8)])),
-            newPass: new FormControl(undefined, Validators.compose([Validators.required, Validators.minLength(8)])),
-
-         }
-      );
 
       this.college = this.student.collegeDTO;
       this.department = this.student.departmentDTO;
@@ -138,7 +122,6 @@ export class StudentComponent implements OnInit {
          });
          this.departmentSelect.setDisabledState(false);
          this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
-         this.deptOption = false;
 
       });
       this.departmentSelect.valueChange.subscribe(value => {
@@ -239,34 +222,14 @@ export class StudentComponent implements OnInit {
       });
    }
 
-   updatePass(): void {
-      if (this.passForm.valid) {
-         this.profilePasswordModel.oldPass = this.passForm.get('oldPass')?.value.trim();
-         this.profilePasswordModel.newPass = this.passForm.get('newPass')?.value.trim();
-         this.profilePasswordModel.userName = this.loggedInUser.user.email;
+   changePassword(): void{
 
+      this.dialog.open(UpdatePasswordComponent);
+      this.profileService.closeUpdatePasswordEvent.pipe(take(1)).subscribe(_value => {
+            this.dialog.closeAll();
+         }
+      );
 
-         this.securityService.changePassword(this.profilePasswordModel).subscribe((value) => {
-               this.snackBar.open('Password Updated Successfully', undefined, {
-                  duration: 3000,
-                  panelClass: 'successSnackBar'
-               });
-            }
-            , error => {
-               // const formControl = this.form.get(error.error.field);
-               // this.errorMessage = error.error.message;
-               // console.log(error.error.field);
-               // console.log(this.errorMessage);
-               // if (formControl) {
-               //    formControl.setErrors({
-               //       serverError: true
-               //    });
-               // }
-               this.snackBar.open('Failed To Update Password', undefined, {duration: 3000});
-               this.errorr = true;
-            }
-         );
-      }
    }
 }
 
