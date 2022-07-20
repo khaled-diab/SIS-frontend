@@ -24,6 +24,7 @@ import {UpdateFacultyMemberComponent} from './component/update-facultyMember/upd
 import {AddFacultyMemberComponent} from './component/add-facultyMember/add-facultyMember.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -39,27 +40,28 @@ import {ModalModule} from 'ngx-bootstrap/modal';
   exports: [
     FacultyMembersListComponent
   ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    FacultyMemberManagementRoutingModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    ModalModule.forRoot()
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatButtonModule,
+        RouterModule,
+        FacultyMemberManagementRoutingModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSortModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        ModalModule.forRoot(),
+        ToastModule
+    ]
 })
 export class FacultyMemberManagementModule {
 }

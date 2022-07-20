@@ -22,7 +22,7 @@ import {MessageService} from 'primeng/api';
    templateUrl: './students-list.component.html',
    styleUrls: ['./students-list.component.css']
 })
-export class StudentsListComponent implements OnInit , OnDestroy {
+export class StudentsListComponent implements OnInit, OnDestroy {
 
 
    @ViewChild('paginator') paginator: MatPaginator;
@@ -30,7 +30,7 @@ export class StudentsListComponent implements OnInit , OnDestroy {
    tableData: PageRequest<StudentRecordModel>;
    x: number;
    studentRequestModel: StudentRequestModel = new StudentRequestModel();
-   displayedColumns = ['NO.', 'universityId', 'nameAr',  'departmentId','collegeId', 'level', 'Actions'];
+   displayedColumns = ['NO.', 'universityId', 'nameAr', 'departmentId', 'collegeId', 'level', 'Actions'];
    pageIndex = 0;
    defaultPgeSize = 10;
    department: string;
@@ -164,7 +164,7 @@ export class StudentsListComponent implements OnInit , OnDestroy {
          dialogConfig.data = data;
          this.dialog.open(UpdateStudentComponent, dialogConfig);
 
-         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(value => {
+         this.studentManagementService.studentCloseUpdateEvent.pipe(take(1)).subscribe(_ => {
                this.dialog.closeAll();
                this.refreshStudents();
             }
@@ -179,9 +179,9 @@ export class StudentsListComponent implements OnInit , OnDestroy {
 
    uploadBulkStudents($event: any): void {
       this.studentManagementService.uploadBulkStudents($event).subscribe(value => {
-         this.messageService.add({severity: 'success', summary: 'Success', detail: value.message});
+         this.messageService.add({severity: 'success', summary: 'Success', detail: value.message, life: 4000});
       }, _ => {
-         this.messageService.add({severity: 'error', summary: 'Error', detail: 'File could not be uploaded try again later'});
+         this.messageService.add({severity: 'error', summary: 'Error', detail: 'File could not be uploaded try again later', life: 4000});
       });
    }
 }

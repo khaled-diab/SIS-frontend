@@ -24,6 +24,15 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
       ['Thursday', 6],
       ['Friday', 7]
    ]);
+   flags = new Map<string, boolean>([
+      ['Saturday', false],
+      ['Sunday', false],
+      ['Monday', false],
+      ['Tuesday', false],
+      ['Wednesday', false],
+      ['Thursday', false],
+      ['Friday', false]
+   ]);
    days: any;
 
    constructor(private timetableManagementService: TimetableManagementService) {
@@ -51,6 +60,17 @@ export class FacultyMemberTimetablesFilterComponent implements OnInit {
    }
 
    select(daySelect: string): void {
+      this.flags = new Map<string, boolean>([
+         ['Saturday', false],
+         ['Sunday', false],
+         ['Monday', false],
+         ['Tuesday', false],
+         ['Wednesday', false],
+         ['Thursday', false],
+         ['Friday', false]
+      ]);
+      this.flags.set(daySelect, !this.flags.get(daySelect));
+
       // console.log(daySelect);
       const times: TimetableTableRecordsModel[] = this.timetables.filter(timetable => {
          return timetable.day === daySelect;

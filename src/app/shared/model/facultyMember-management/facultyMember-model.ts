@@ -14,7 +14,7 @@ export class FacultyMemberModel extends BaseModel {
   nationalID: string;
   phone: string;
   birthDate: Date;
-  photo: string;
+  // photo: string;
   degreeDTO: DegreeModel;
   departmentDTO: DepartmentModel;
   collegeDTO: CollegeModel;

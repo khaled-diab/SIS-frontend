@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {TimetableManagementService} from '../../service/timetable-management.service';
-import {TimetableModel} from '../../../shared/model/timetable-management/timetable-model';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
-import {TimetableTableRecordsModel} from "../../../shared/model/timetable-management/timetableTableRecords-model";
+import {TimetableTableRecordsModel} from '../../../shared/model/timetable-management/timetableTableRecords-model';
 
 
 @Component({

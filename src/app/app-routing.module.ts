@@ -61,6 +61,7 @@ const appRoutes: Routes = [
          },
          {
             path: 'attendancereportsbystudent-management',
+            // tslint:disable-next-line:max-line-length
             loadChildren: () => import('./attendance-by-student-management/attendance-by-student-management.module').then(value => value.AttendanceByStudentManagementModule)
          },
          {
