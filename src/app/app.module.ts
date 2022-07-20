@@ -41,6 +41,8 @@ import {MatCardModule} from '@angular/material/card';
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { UpdatePasswordComponent } from './profile/component/update-password/update-password.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
    declarations: [
@@ -55,7 +57,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
       ProfileComponent,
       StaffComponent,
       StudentComponent,
-      ImportedUsersComponent
+      ImportedUsersComponent,
+      UpdatePasswordComponent
    ],
    imports: [
       AppRoutingModule,
@@ -86,7 +89,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
       MatCardModule,
       TableModule,
       PaginatorModule,
-      ProgressSpinnerModule
+      ProgressSpinnerModule,
+      MatDialogModule
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
    bootstrap: [AppComponent],

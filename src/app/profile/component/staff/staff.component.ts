@@ -5,7 +5,7 @@ import {DepartmentModel} from '../../../shared/model/department-management/depar
 import {DegreeModel} from '../../../shared/model/Degree-management/degree-model';
 import {MatSelect} from '@angular/material/select';
 import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {
    FacultyMemberManagementService
 } from '../../../facultyMember-management/service/facultyMember-management.service';
@@ -21,6 +21,7 @@ import {ProfileService} from '../../service/profile.service';
 import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../security/service/security.service';
 import {Router} from '@angular/router';
+import {UpdatePasswordComponent} from "../update-password/update-password.component";
 
 @Component({
    selector: 'app-staff',
@@ -58,7 +59,8 @@ export class StaffComponent implements OnInit {
                private departmentService: DepartmentService,
                private profileService: ProfileService, private messageService: MessageService,
                private securityService: SecurityService,
-               private router: Router) {
+               private router: Router,
+               private dialog: MatDialog) {
    }
 
    ngOnInit(): void {
@@ -210,5 +212,14 @@ export class StaffComponent implements OnInit {
             }
          );
       }
+   }
+   changePassword(): void{
+
+      this.dialog.open(UpdatePasswordComponent);
+      this.profileService.closeUpdatePasswordEvent.pipe(take(1)).subscribe(_value => {
+            this.dialog.closeAll();
+         }
+      );
+
    }
 }
