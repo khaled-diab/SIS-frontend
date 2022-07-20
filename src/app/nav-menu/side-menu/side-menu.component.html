@@ -195,36 +195,36 @@
          </li>
       </ul>
    </mat-expansion-panel>
-   <mat-accordion
-      *ngIf="loggedInUser.user.role.roleName==='ADMIN' || loggedInUser.user.role.roleName==='FACULTY_MEMBER'">
-      <mat-expansion-panel
-         #attendanceReportExpansion
-         (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
-         [expanded]="false"
-         class="mat-expansion-panel-body">
-         <mat-expansion-panel-header>
-            Attendance Reports
-         </mat-expansion-panel-header>
-         <ul>
-            <li [routerLinkActiveOptions]="{exact: true}"
-                [routerLinkActive]="['active']"
-                [routerLink]="['/attendancereportsbylecture-management','attendane-report-by-lecture']">
-               <a>
+</mat-accordion>
+<mat-accordion
+   *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'">
+   <mat-expansion-panel
+      #attendanceReportExpansion
+      (afterExpand)="closeOtherExpansions(attendanceReportExpansion)"
+      [expanded]="false"
+      class="mat-expansion-panel-body">
+      <mat-expansion-panel-header>
+         Attendance Reports
+      </mat-expansion-panel-header>
+      <ul>
+         <li [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/attendancereportsbylecture-management','attendane-report-by-lecture']">
+            <a>
             <span>
               Attendance By Lecture
             </span>
-               </a>
-            </li>
-            <li [routerLinkActiveOptions]="{exact: true}"
-                [routerLinkActive]="['active']"
-                [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
-               <a>
+            </a>
+         </li>
+         <li [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/attendancereportsbystudent-management','attendane-report-by-student']">
+            <a>
              <span>
                Attendance By Student
              </span>
-               </a>
-            </li>
-         </ul>
-      </mat-expansion-panel>
-   </mat-accordion>
+            </a>
+         </li>
+      </ul>
+   </mat-expansion-panel>
 </mat-accordion>
