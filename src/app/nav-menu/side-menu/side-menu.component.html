@@ -123,12 +123,65 @@
             </a>
          </li>
 
+      </ul>
+   </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion>
+   <mat-expansion-panel
+      #academicDataExpansion
+      (afterExpand)="closeOtherExpansions(academicDataExpansion)"
+      [expanded]="false"
+      class="mat-expansion-panel-body">
+      <mat-expansion-panel-header>
+         Academic Data Management
+      </mat-expansion-panel-header>
+      <ul>
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'"
+             [routerLinkActiveOptions]="{exact: true}"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/sections-management','section-list']">
+            <a>
+          <span>
+            Sections
+          </span>
+            </a>
+         </li>
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/timetables-management','timetable-list']">
+            <a>
+          <span>
+            Timetables
+          </span>
+            </a>
+         </li>
+         <li *ngIf="loggedInUser.user.role.roleName==='ADMIN'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/studentEnrollments-management','studentEnrollment-list']">
+            <a>
+          <span>
+            Student Enrollments
+          </span>
+            </a>
+         </li>
+
          <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
              [routerLinkActive]="['active']"
              [routerLink]="['/timetables-management','facultyMember-timetables-list']">
             <a>
           <span>
             Timetables
+          </span>
+            </a>
+         </li>
+
+         <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/gradeBook-management','facultyMember-gradeBook-list']">
+            <a>
+          <span>
+            GradeBook
           </span>
             </a>
          </li>
@@ -144,6 +197,16 @@
             </a>
          </li>
 
+         <li *ngIf="loggedInUser.user.role.roleName==='STUDENT'"
+             [routerLinkActive]="['active']"
+             [routerLink]="['/gradeBook-management','student-gradeBook-list']">
+            <a>
+          <span>
+            GradeBook
+          </span>
+            </a>
+         </li>
+
          <li *ngIf="loggedInUser.user.role.roleName==='FACULTY_MEMBER'"
              [routerLinkActive]="['active']"
              [routerLink]="['/student-attendance','student-attendance-list']">
@@ -154,45 +217,6 @@
             </a>
          </li>
 
-      </ul>
-   </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion *ngIf="loggedInUser.user.role.roleName==='ADMIN'">
-   <mat-expansion-panel
-      #academicDataExpansion
-      (afterExpand)="closeOtherExpansions(academicDataExpansion)"
-      [expanded]="false"
-      class="mat-expansion-panel-body">
-      <mat-expansion-panel-header>
-         Academic Data Management
-      </mat-expansion-panel-header>
-      <ul>
-         <li [routerLinkActiveOptions]="{exact: true}"
-             [routerLinkActive]="['active']"
-             [routerLink]="['/sections-management','section-list']">
-            <a>
-          <span>
-            Sections
-          </span>
-            </a>
-         </li>
-         <li [routerLinkActive]="['active']"
-             [routerLink]="['/timetables-management','timetable-list']">
-            <a>
-          <span>
-            Timetables
-          </span>
-            </a>
-         </li>
-         <li [routerLinkActive]="['active']"
-             [routerLink]="['/studentEnrollments-management','studentEnrollment-list']">
-            <a>
-          <span>
-            Student Enrollments
-          </span>
-            </a>
-         </li>
       </ul>
    </mat-expansion-panel>
 </mat-accordion>

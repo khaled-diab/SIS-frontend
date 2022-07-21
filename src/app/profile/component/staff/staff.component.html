@@ -36,33 +36,18 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>College</mat-label>
-                        <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
-                           <mat-option *ngFor="let col of colleges" [value]="col.id">
-                              {{col.nameEn}}
-                           </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
+                        <input #collegeSelect [formControlName]="'college'" matInput readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Department</mat-label>
-                        <mat-select #departmentSelect [formControlName]="'departmentMenu'" required>
-                           <mat-option *ngFor="let dept of departments" [value]="dept.id">
-                              {{dept.nameEn}}
-                           </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="form.get('departmentMenu')?.errors?.required">Required</mat-error>
+                        <input #departmentSelect [formControlName]="'department'" matInput readonly>
                      </mat-form-field>
 
                      <!-- degree -->
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Degree</mat-label>
-                        <mat-select [formControlName]="'degreeMenu'" required>
-                           <mat-option *ngFor="let degree of degrees" [value]="degree.id">
-                              {{degree.nameEn}}
-                           </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="form.get('degreeMenu')?.errors?.required">Required</mat-error>
+                        <input [formControlName]="'degree'" matInput readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
@@ -76,22 +61,17 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label> Nationality</mat-label>
-                        <input formControlName="nationality" matInput name="nationality" required>
-                        <mat-error *ngIf="form.controls['nationality']?.errors?.required"> Required</mat-error>
-                        <mat-error *ngIf="form.get('nationality')?.errors?.serverError">{{errorMessage}}</mat-error>
+                        <input [formControlName]="'nationality'" matInput readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label>National Id</mat-label>
-                        <input formControlName="nationalId" matInput name="nationalId" required>
-                        <mat-error *ngIf="form.controls['nationalId']?.errors?.required"> Required</mat-error>
-                        <mat-error *ngIf="form.controls['nationalId']?.errors?.pattern">Must be 14 digits</mat-error>
-                        <mat-error *ngIf="form.get('nationalId')?.errors?.serverError">{{errorMessage}}</mat-error>
+                        <input [formControlName]="'nationalId'" matInput readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label> Birth Date</mat-label>
-                        <input type="date" formControlName="birthDate" matInput name="birthDate" required>
+                        <input type="date" [formControlName]="'birthDate'" matInput readonly>
                      </mat-form-field>
 
                      <!--   Additional Information  -->

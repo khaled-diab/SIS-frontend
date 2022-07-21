@@ -5,7 +5,7 @@ import {DepartmentModel} from '../../../shared/model/department-management/depar
 import {DegreeModel} from '../../../shared/model/Degree-management/degree-model';
 import {MatSelect} from '@angular/material/select';
 import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {
    FacultyMemberManagementService
 } from '../../../facultyMember-management/service/facultyMember-management.service';
@@ -21,7 +21,7 @@ import {ProfileService} from '../../service/profile.service';
 import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../security/service/security.service';
 import {Router} from '@angular/router';
-import {UpdatePasswordComponent} from "../update-password/update-password.component";
+import {UpdatePasswordComponent} from '../update-password/update-password.component';
 
 @Component({
    selector: 'app-staff',
@@ -79,18 +79,17 @@ export class StaffComponent implements OnInit {
                Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
             nameAr: new FormControl(this.facultyMember.nameAr, Validators.compose([Validators.required,
                Validators.pattern(Constants.ARABIC_CHARACTERS)])),
-            nationality: new FormControl(this.facultyMember.nationality, Validators.required),
-            nationalId: new FormControl(this.facultyMember.nationalID, Validators.compose([Validators.required,
-               Validators.pattern(Constants.DIGITS_ONLY_14)])),
+            nationality: new FormControl(this.facultyMember.nationality),
+            nationalId: new FormControl(this.facultyMember.nationalID),
             phone: new FormControl(this.facultyMember.phone, Validators.compose([Validators.required,
                Validators.pattern(Constants.DIGITS_ONLY_11)])),
-            birthDate: new FormControl(this.facultyMember.birthDate, Validators.required),
+            birthDate: new FormControl(this.facultyMember.birthDate),
             universityMail: new FormControl(this.facultyMember.universityMail, Validators.compose([Validators.required,
                Validators.email])),
             alternativeMail: new FormControl(this.facultyMember.alternativeMail, Validators.email),
-            degreeMenu: new FormControl(this.facultyMember.degreeDTO.id, Validators.required),
-            collegeMenu: new FormControl(this.facultyMember.collegeDTO.id, Validators.required),
-            departmentMenu: new FormControl(this.facultyMember.departmentDTO.id, Validators.required),
+            degree: new FormControl(this.facultyMember.degreeDTO.nameAr),
+            college: new FormControl(this.facultyMember.collegeDTO.nameEn),
+            department: new FormControl(this.facultyMember.departmentDTO.nameEn)
          }
       );
       this.passForm = new FormGroup({
@@ -100,43 +99,15 @@ export class StaffComponent implements OnInit {
                Validators.compose([Validators.required, Validators.minLength(8)])),
          }
       );
-      this.degree = this.facultyMember.degreeDTO;
-      this.college = this.facultyMember.collegeDTO;
-      this.department = this.facultyMember.departmentDTO;
-
-      this.facultyMemberManagementService.getAllDegrees().subscribe(Response => {
-         this.degrees = Response;
-      });
-      this.collegeManagementService.getAllColleges().subscribe(Response => {
-         this.colleges = Response;
-      });
-      this.departments = this.departmentService.getDepartmentsByCollege(this.college.id);
-   }
-
-   ngAfterViewInit(): void {
-      this.collegeSelect.valueChange.subscribe(value => {
-         if (this.collegeSelect.value !== undefined) {
-            this.departmentSelect.setDisabledState(false);
-            this.departments = this.departmentService.getDepartmentsByCollege(this.collegeSelect.value);
-         } else {
-            this.departmentSelect.setDisabledState(true);
-         }
-      });
    }
 
    update(): void {
       if (this.form.valid) {
          this.facultyMember.nameEn = this.form.get('nameEn')?.value;
          this.facultyMember.nameAr = this.form.get('nameAr')?.value;
-         this.facultyMember.nationality = this.form.get('nationality')?.value;
-         this.facultyMember.nationalID = this.form.get('nationalId')?.value;
          this.facultyMember.phone = this.form.get('phone')?.value;
-         this.facultyMember.birthDate = this.form.get('birthDate')?.value;
          this.facultyMember.universityMail = this.form.get('universityMail')?.value;
          this.facultyMember.alternativeMail = this.form.get('alternativeMail')?.value;
-         this.facultyMember.degreeDTO.id = this.form.get('degreeMenu')?.value;
-         this.facultyMember.collegeDTO.id = this.form.get('collegeMenu')?.value;
-         this.facultyMember.departmentDTO.id = this.form.get('departmentMenu')?.value;
       }
       console.log(this.facultyMember);
       this.facultyMemberManagementService.updateFacultyMember(this.facultyMember).subscribe((Response) => {
@@ -214,9 +185,11 @@ export class StaffComponent implements OnInit {
       }
    }
    changePassword(): void{
-
-      this.dialog.open(UpdatePasswordComponent);
-      this.profileService.closeUpdatePasswordEvent.pipe(take(1)).subscribe(_value => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.width = '60%';
+      dialogConfig.height = '450px';
+      this.dialog.open(UpdatePasswordComponent, dialogConfig);
+      this.profileService.closeUpdatePasswordEvent.pipe(take(1)).subscribe(value => {
             this.dialog.closeAll();
          }
       );

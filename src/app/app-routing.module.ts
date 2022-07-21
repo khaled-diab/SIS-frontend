@@ -81,6 +81,10 @@ const appRoutes: Routes = [
             loadChildren: () => import('./studentEnrollment-management/studentEnrollment-management.module').then(value => value.StudentEnrollmentManagementModule)
          },
          {
+            path: 'gradeBook-management',
+            loadChildren: () => import('./gradeBook-management/gradeBook-management.module').then(value => value.GradeBookManagementModule)
+         },
+         {
             path: 'profile',
             component: ProfileComponent,
             canActivate: [SecurityGuard],

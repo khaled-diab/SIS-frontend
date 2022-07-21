@@ -1,12 +1,7 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StudentModel} from '../../../shared/model/student-management/student-model';
-import {CollegeModel} from '../../../shared/model/college-management/college-model';
-import {DepartmentModel} from '../../../shared/model/department-management/department-model';
-import {AcademicProgramModel} from '../../../shared/model/academicProgram-management/academicProgram-model';
 import {Constants} from '../../../shared/constants';
-import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
-import {MatSelect} from '@angular/material/select';
-import {UserFile} from '../../../shared/model/security/user-file';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProfilePasswordModel} from '../../../shared/model/security/profile-password-model';
 import {StudentManagementService} from '../../../student-management/service/student-management.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -16,16 +11,13 @@ import {AcademicProgramService} from '../../../academic-program/service/academic
 import {ProfileService} from '../../service/profile.service';
 import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../security/service/security.service';
-import {Router} from '@angular/router';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-update-password',
-  templateUrl: './update-password.component.html',
-  styleUrls: ['./update-password.component.css']
+   selector: 'app-update-password',
+   templateUrl: './update-password.component.html',
+   styleUrls: ['./update-password.component.css']
 })
 export class UpdatePasswordComponent implements OnInit {
-
 
    student: StudentModel = new StudentModel();
    errorr = false;
@@ -34,35 +26,34 @@ export class UpdatePasswordComponent implements OnInit {
    loggedInUser: StudentModel;
    isPassChanged = false;
    profilePasswordModel: ProfilePasswordModel = new ProfilePasswordModel();
+
    constructor(private studentManagementService: StudentManagementService,
                private snackBar: MatSnackBar,
                private collegeManagementService: CollegeManagementService,
                private departmentService: DepartmentService,
                private academicProgramService: AcademicProgramService,
                private profileService: ProfileService, private messageService: MessageService,
-               private securityService: SecurityService,
-               private router: Router) {
+               private securityService: SecurityService) {
    }
 
+   ngOnInit(): void {
+      // @ts-ignore
+      this.loggedInUser = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      this.student = this.loggedInUser;
+      this.passForm = new FormGroup({
+            oldPass: new FormControl(undefined,
+               Validators.compose([Validators.required, Validators.minLength(8)])),
+            newPass: new FormControl(undefined,
+               Validators.compose([Validators.required, Validators.minLength(8)])),
+         }
+      );
+   }
 
-  ngOnInit(): void {
-     // @ts-ignore
-     this.loggedInUser = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-     this.student = this.loggedInUser;
-     this.passForm = new FormGroup({
-
-           oldPass: new FormControl(undefined, Validators.compose([Validators.required, Validators.minLength(8)])),
-           newPass: new FormControl(undefined, Validators.compose([Validators.required, Validators.minLength(8)])),
-
-        }
-     );
-  }
    updatePass(): void {
       if (this.passForm.valid) {
          this.profilePasswordModel.oldPass = this.passForm.get('oldPass')?.value.trim();
          this.profilePasswordModel.newPass = this.passForm.get('newPass')?.value.trim();
          this.profilePasswordModel.userName = this.loggedInUser.user.email;
-
 
          this.securityService.changePassword(this.profilePasswordModel).subscribe((value) => {
                this.snackBar.open('Password Updated Successfully', undefined, {
@@ -85,7 +76,8 @@ export class UpdatePasswordComponent implements OnInit {
          );
       }
    }
-   cancel(): void{
+
+   cancel(): void {
       this.profileService.closeUpdatePasswordEvent.next(1);
    }
 }
