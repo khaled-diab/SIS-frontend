@@ -2,18 +2,13 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {PageRequest} from '../../shared/model/page-request';
 import {HttpClient} from '@angular/common/http';
-import {PageQueryUtil} from '../../shared/model/page-query';
 import {Sort} from '@angular/material/sort';
 import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
 import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-management/facultyMember-request-model';
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
-import {
-   FacultyMemberTableRecordsModel
-} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
-import {UserModel} from '../../shared/model/security/user-model';
-import {RoleModel} from '../../shared/model/security/role-model';
+import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
 
 @Injectable({
    providedIn: 'root'
@@ -84,10 +79,6 @@ export class FacultyMemberManagementService {
 
    getFacultyMembersByCollege(collegeId: number): Observable<FacultyMemberModel[]> {
       return this.httpClient.get<FacultyMemberModel[]>(Constants.facultyMembersByCollegeIdUrl + collegeId);
-   }
-
-   getFacultyMembersByUserId(userId: number): Observable<FacultyMemberModel> {
-      return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByUserIdUrl + userId);
    }
 
    public uploadBulkStudents(event: any): Observable<MessageResponse> {
