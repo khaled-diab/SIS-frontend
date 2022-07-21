@@ -7,7 +7,7 @@ import {GradeBookModel} from '../../../shared/model/gradebook-management/gradeBo
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SectionModel} from '../../../shared/model/section-model';
 import {SectionManagementService} from '../../../section-management/service/sectionManagement.service';
-import {GradeBookRequestModel} from "../../../shared/model/gradebook-management/gradeBook-request-model";
+import {GradeBookRequestModel} from '../../../shared/model/gradebook-management/gradeBook-request-model';
 
 @Component({
    selector: 'app-facultyMember-gradeBook-list',

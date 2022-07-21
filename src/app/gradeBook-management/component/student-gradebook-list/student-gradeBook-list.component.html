@@ -14,7 +14,7 @@
          <ng-container matColumnDef="courseId">
             <mat-header-cell *matHeaderCellDef>Course
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.sectionDTO.courseDTO.nameAr}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.courseNameAr}}</mat-cell>
          </ng-container>
 
          <!-- finalExamGrade Column -->
@@ -22,26 +22,26 @@
             <mat-header-cell *matHeaderCellDef>Final Exam Grade
             </mat-header-cell>
             <mat-cell
-               *matCellDef="let row">{{row.finalExamGrade}}{{' / '}}{{row.sectionDTO.courseDTO.finalExamGrade}}</mat-cell>
+               *matCellDef="let row">{{row.finalExamGrade}}{{' / '}}{{row.courseFinalExamGrade}}</mat-cell>
          </ng-container>
 
          <!-- practicalGrade Column -->
          <ng-container matColumnDef="practicalGrade">
             <mat-header-cell *matHeaderCellDef>Practical Grade</mat-header-cell>
             <mat-cell
-               *matCellDef="let row">{{row.practicalGrade}}{{' / '}}{{row.sectionDTO.courseDTO.practicalGrade}}</mat-cell>
+               *matCellDef="let row">{{row.practicalGrade}}{{' / '}}{{row.coursePracticalGrade}}</mat-cell>
          </ng-container>
 
          <!-- oralGrade Column -->
          <ng-container matColumnDef="oralGrade">
             <mat-header-cell *matHeaderCellDef>Oral Grade</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.oralGrade}}{{' / '}}{{row.sectionDTO.courseDTO.oralGrade}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.oralGrade}}{{' / '}}{{row.courseOralGrade}}</mat-cell>
          </ng-container>
 
          <!-- midGrade Column -->
          <ng-container matColumnDef="midGrade">
             <mat-header-cell *matHeaderCellDef>Mid Grade</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.midGrade}}{{' / '}}{{row.sectionDTO.courseDTO.midGrade}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.midGrade}}{{' / '}}{{row.courseMidGrade}}</mat-cell>
          </ng-container>
 
          <!-- totalGrade Column -->
@@ -49,7 +49,7 @@
             <mat-header-cell *matHeaderCellDef>Total Grade
             </mat-header-cell>
             <mat-cell
-               *matCellDef="let row">{{row.practicalGrade + row.midGrade + row.finalExamGrade + row.oralGrade}}{{' / '}}{{row.sectionDTO.courseDTO.finalGrade}}
+               *matCellDef="let row">{{row.practicalGrade + row.midGrade + row.finalExamGrade + row.oralGrade}}{{' / '}}{{row.courseTotalGrade}}
             </mat-cell>
          </ng-container>
 

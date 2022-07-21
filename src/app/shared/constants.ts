@@ -115,6 +115,7 @@ export class Constants {
    public static readonly filterGradeBookUrl = environment.baseURL + '/gradeBook/filter/';
    public static readonly updateGradeBookUrl = environment.baseURL + '/gradeBook/updateGradeBooks/';
    public static readonly getSectionsByFacultyMemberId = environment.baseURL + '/gradeBook/sectionsByFacultyMemberId/';
+   public static readonly getGradeBooksByTermIdAndStudentId = environment.baseURL + '/gradeBook/getGradeBooksByTermIdAndStudentId/';
 
    // Sort
    public static readonly ASC = 'ASC';

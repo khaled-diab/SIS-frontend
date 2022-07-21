@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Constants} from '../../../shared/constants';
 import {GradeBookService} from '../../service/gradeBook.service';
-import {GradeBookRequestModel} from '../../../shared/model/gradebook-management/gradeBook-request-model';
 import {MatSelect} from '@angular/material/select';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
@@ -19,7 +18,6 @@ export class StudentGradeBookFilterComponent implements OnInit {
    @ViewChild('courseSelect', {static: true}) courseSelect: MatSelect;
 
    student = new StudentModel();
-   gradeBookRequestModel: GradeBookRequestModel = new GradeBookRequestModel();
    academicTerms: AcademicTermModel[];
    courses: CourseModel[];
 
@@ -30,15 +28,11 @@ export class StudentGradeBookFilterComponent implements OnInit {
       // @ts-ignore
       this.student = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       this.academicTerms = AcademicTermService.academicTermsList;
-      this.academicTermSelect.value = AcademicTermService.currentTerm.id;
-      this.gradeBookRequestModel.filterStudent = this.student.id;
-      this.gradeBookManagementService.gradeBookFilterEvent.next([this.gradeBookRequestModel, undefined]);
    }
 
    ngAfterViewInit(): void {
       this.academicTermSelect.valueChange.subscribe(value => {
-         this.gradeBookRequestModel.filterAcademicTerm = value;
-         this.gradeBookManagementService.gradeBookFilterEvent.next([this.gradeBookRequestModel, undefined]);
+         this.gradeBookManagementService.gradeBookStudentRecordsFilterEvent.next([value, this.student.id]);
       });
    }
 }

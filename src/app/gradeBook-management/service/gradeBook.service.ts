@@ -7,6 +7,7 @@ import {MessageResponse} from '../../shared/model/message-response';
 import {GradeBookModel} from '../../shared/model/gradebook-management/gradeBook-model';
 import {GradeBookRequestModel} from '../../shared/model/gradebook-management/gradeBook-request-model';
 import {SectionModel} from '../../shared/model/section-model';
+import {GradeBookStudentRecordsModel} from '../../shared/model/gradebook-management/gradeBookStudentRecords-model';
 
 @Injectable({
    providedIn: 'root'
@@ -14,6 +15,7 @@ import {SectionModel} from '../../shared/model/section-model';
 export class GradeBookService {
 
    gradeBookFilterEvent: Subject<any[]> = new Subject<any[]>();
+   gradeBookStudentRecordsFilterEvent: Subject<any[]> = new Subject<any[]>();
 
    constructor(private httpClient: HttpClient) {
    }
@@ -30,6 +32,10 @@ export class GradeBookService {
 
    getSectionsByFacultyMemberId(termId: number, facultyMemberId: number): Observable<SectionModel[]> {
       return this.httpClient.get<SectionModel[]>(Constants.getSectionsByFacultyMemberId + termId + '/' + facultyMemberId);
+   }
+
+   getGradeBooksByTermIdAndStudentId(termId: number, studentId: number): Observable<GradeBookStudentRecordsModel[]> {
+      return this.httpClient.get<GradeBookStudentRecordsModel[]>(Constants.getGradeBooksByTermIdAndStudentId + termId + '/' + studentId);
    }
 
 }
