@@ -17,13 +17,13 @@
 
          <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
-               <mat-label>Courses</mat-label>
-               <mat-select #courseSelect>
+               <mat-label>section</mat-label>
+               <mat-select #sectionSelect>
                   <mat-option [value]="undefined">
-                     Choose Course
+                     Choose section
                   </mat-option>
-                  <mat-option *ngFor="let course of courses" [value]="course.id">
-                     {{course.nameEn}}
+                  <mat-option *ngFor="let section of sections" [value]="section">
+                     {{section.courseDTO.nameEn + ': ' + section.sectionNumber}}
                   </mat-option>
                </mat-select>
             </mat-form-field>

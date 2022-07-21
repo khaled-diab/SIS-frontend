@@ -2,14 +2,13 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 // @ts-ignore
 import {GradeBookManagementService} from '../../service/gradeBook-management.service';
-import {StudentModel} from '../../../shared/model/student-management/student-model';
-import {CourseModel} from '../../../shared/model/course-management/course-model';
-import {CourseManagementService} from '../../../course-management/service/course-management.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {GradeBookModel} from '../../../shared/model/gradebook-management/gradeBook-model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
+import {SectionModel} from '../../../shared/model/section-model';
+import {SectionManagementService} from '../../../section-management/service/sectionManagement.service';
 
 
 @Component({
@@ -19,10 +18,10 @@ import {AcademicTermModel} from '../../../shared/model/academicTerm-management/a
 })
 export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
 
-   course = new CourseModel();
-   courseId: any;
-   term: any;
-   tableData: StudentModel[];
+   sectionDTO = new SectionModel();
+   sectionId: any;
+   termId: any;
+   tableData: GradeBookModel[];
    gradeBooks: GradeBookModel[] = [];
    displayedColumns = ['No.', 'university_id', 'name_ar', 'finalExamGrade', 'practicalGrade', 'oralGrade', 'midGrade'];
    subscription: Subscription;
@@ -33,14 +32,14 @@ export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
    @ViewChild('paginator') paginator: MatPaginator;
 
    constructor(private gradeBookManagementService: GradeBookManagementService,
-               private courseManagementService: CourseManagementService,
+               private sectionManagementService: SectionManagementService,
                private snackBar: MatSnackBar) {
    }
 
    ngOnInit(): void {
       this.form = new FormGroup({
-            academicTerm: new FormControl(this.term, Validators.required),
-            course: new FormControl(this.course.id, Validators.required),
+            academicTerm: new FormControl(this.termId, Validators.required),
+            section: new FormControl(this.sectionDTO, Validators.required),
             finalExamGrade: new FormControl(undefined),
             practicalGrade: new FormControl(undefined),
             oralGrade: new FormControl(undefined),
@@ -48,13 +47,12 @@ export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
          }
       );
       this.subscription = this.gradeBookManagementService.gradeBookFilterCourseIdEvent.subscribe(array => {
-         this.term = array[0];
-         this.courseId = array[1];
-         this.gradeBookManagementService.getStudentsByCoursesId(this.pageIndex, this.defaultPageSize, this.courseId).subscribe(value1 => {
-            this.tableData = value1.data;
-            this.totalCount = value1.totalCount;
-            this.courseManagementService.getCourse(this.courseId).subscribe(course => {
-               this.course = course;
+         this.termId = array[0];
+         this.sectionDTO = array[1];
+         this.gradeBookManagementService.gradeBookFilterEvent.subscribe(gradeBookRequestModel => {
+            this.gradeBookManagementService.filterGradeBook(this.pageIndex, this.defaultPageSize, gradeBookRequestModel).subscribe(gradeBooks => {
+               this.tableData = gradeBooks.data;
+               this.totalCount = gradeBooks.totalCount;
             });
          });
       });
@@ -63,22 +61,23 @@ export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
    pageChangeEvent(event: PageEvent): void {
       this.paginator.pageIndex = event.pageIndex;
       this.paginator.pageSize = event.pageSize;
-      this.gradeBookManagementService.getStudentsByCoursesId(this.paginator
-         .pageIndex, this.paginator.pageSize, this.courseId).subscribe(value1 => {
-         this.tableData = value1.data;
-         this.totalCount = value1.totalCount;
+      this.gradeBookManagementService.gradeBookFilterEvent.subscribe(gradeBookRequestModel => {
+         this.gradeBookManagementService.filterGradeBook(this.paginator
+            .pageIndex, this.paginator.pageSize, gradeBookRequestModel).subscribe(page => {
+            this.tableData = page.data;
+            this.totalCount = page.totalCount;
+         });
       });
    }
 
    save(): any {
-      this.tableData.forEach(student => {
+      this.tableData.forEach(formGradeBook => {
          const gradeBook = new GradeBookModel();
          gradeBook.academicTermDTO = new AcademicTermModel();
-         gradeBook.academicTermDTO.id = this.term;
-         gradeBook.courseDTO = new CourseModel();
-         gradeBook.courseDTO.id = this.courseId;
-         // gradeBook.studentDTO = new StudentModel();
-         gradeBook.studentDTO = student;
+         gradeBook.academicTermDTO.id = this.termId;
+         gradeBook.sectionDTO = new SectionModel();
+         gradeBook.sectionDTO = this.sectionDTO;
+         gradeBook.studentDTO = formGradeBook.studentDTO;
          gradeBook.finalExamGrade = this.form.get('finalExamGrade')?.value;
          gradeBook.midGrade = this.form.get('midGrade')?.value;
          gradeBook.practicalGrade = this.form.get('practicalGrade')?.value;

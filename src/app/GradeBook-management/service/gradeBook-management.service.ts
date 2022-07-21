@@ -9,6 +9,7 @@ import {GradeBookModel} from '../../shared/model/gradebook-management/gradeBook-
 import {GradeBookRequestModel} from '../../shared/model/gradebook-management/gradeBook-request-model';
 import {CourseModel} from '../../shared/model/course-management/course-model';
 import {StudentModel} from '../../shared/model/student-management/student-model';
+import {SectionModel} from '../../shared/model/section-model';
 
 @Injectable({
    providedIn: 'root'
@@ -45,12 +46,12 @@ export class GradeBookManagementService {
       return this.httpClient.post<MessageResponse>(Constants.updateGradeBookUrl, gradeBookModels);
    }
 
-   getCoursesByFacultyMemberId(termId: number, facultyMemberId: number): Observable<CourseModel[]> {
-      return this.httpClient.get<CourseModel[]>(Constants.getCourseByFacultyMemberId + termId + '/' + facultyMemberId);
+   getSectionsByFacultyMemberId(termId: number, facultyMemberId: number): Observable<SectionModel[]> {
+      return this.httpClient.get<SectionModel[]>(Constants.getSectionsByFacultyMemberId + termId + '/' + facultyMemberId);
    }
 
-   getStudentsByCoursesId(pageNumber: number, pageSize: number, courseId: number): Observable<PageRequest<StudentModel>> {
-      return this.httpClient.get<PageRequest<StudentModel>>(Constants.getStudentsCourseId + (pageNumber + 1) + '/' + pageSize + '/' + courseId);
-   }
+   // getStudentsBySectionId(pageNumber: number, pageSize: number, sectionId: number): Observable<PageRequest<StudentModel>> {
+   //    return this.httpClient.get<PageRequest<StudentModel>>(Constants.getStudentsCourseId + (pageNumber + 1) + '/' + pageSize + '/' + sectionId);
+   // }
 
 }

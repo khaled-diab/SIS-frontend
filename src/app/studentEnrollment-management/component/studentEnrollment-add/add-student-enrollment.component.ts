@@ -31,6 +31,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {Sort} from '@angular/material/sort';
 import {Constants} from '../../../shared/constants';
+import {GradeBookModel} from '../../../shared/model/gradebook-management/gradeBook-model';
+import {GradeBookManagementService} from '../../../GradeBook-management/service/gradeBook-management.service';
 
 @Component({
    selector: 'app-studentEnrollment-add',
@@ -51,6 +53,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
                private courseService: CourseManagementService,
                private sectionService: SectionManagementService,
                private studentService: StudentManagementService,
+               private gradeBookManagementService: GradeBookManagementService,
                http: HttpClient) {
       this.httpClient = http;
    }
@@ -72,6 +75,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
    errorMessage: string;
    form: FormGroup;
    isDisabled = true;
+   gradeBooks: GradeBookModel[] = [];
 
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
    @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
@@ -236,6 +240,22 @@ export class AddStudentEnrollmentComponent implements OnInit {
       }
       this.students = this.selection.selected;
       console.log(this.students);
+
+      this.students.forEach(student => {
+         const gradeBook = new GradeBookModel();
+         gradeBook.academicTermDTO = new AcademicTermModel();
+         gradeBook.academicTermDTO.id = this.form.get('academicTermMenu')?.value;
+         gradeBook.sectionDTO = new SectionModel();
+         gradeBook.sectionDTO = this.form.get('sectionMenu')?.value;
+         gradeBook.studentDTO = student;
+         gradeBook.finalExamGrade = 0;
+         gradeBook.midGrade = 0;
+         gradeBook.practicalGrade = 0;
+         gradeBook.oralGrade = 0;
+         console.log(gradeBook);
+         this.gradeBooks.push(gradeBook);
+      });
+
       const available = this.form.get('sectionMenu')?.value.capacity - this.form.get('sectionMenu')?.value.numberOfStudents;
       if (this.students.length > available) {
          this.snackBar.open('Failed To Enroll Students, section"s capacity is FULL', undefined, {duration: 5000});
@@ -246,6 +266,14 @@ export class AddStudentEnrollmentComponent implements OnInit {
          return;
       }
       this.studentEnrollmentManagementService.addStudentEnrollment(this.studentEnrollment, this.students).subscribe((Response) => {
+            this.gradeBookManagementService.updateGradeBook(this.gradeBooks).subscribe(value => {
+               this.snackBar.open('GradeBook Updated Successfully', undefined, {
+                  duration: 4000,
+                  panelClass: 'successSnackBar'
+               });
+            }, error => {
+               this.snackBar.open('Failed To Update GradeBook', undefined, {duration: 4000});
+            });
             this.snackBar.open('Student Enrolled Successfully', undefined, {
                duration: 2000,
                panelClass: 'successSnackBar'

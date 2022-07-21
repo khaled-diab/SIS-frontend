@@ -1,5 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
+// @ts-ignore
 import {StudentGradeBookListComponent} from './student-gradeBook-list.component';
 
 describe('StudentGradeBookListComponent', () => {

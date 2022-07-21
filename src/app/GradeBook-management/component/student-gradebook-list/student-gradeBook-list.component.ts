@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {GradeBookModel} from '../../../shared/model/gradebook-management/gradeBook-model';
+// @ts-ignore
 import {GradeBookManagementService} from '../../service/gradeBook-management.service';
 import {PageRequest} from '../../../shared/model/page-request';
 import {Constants} from '../../../shared/constants';
