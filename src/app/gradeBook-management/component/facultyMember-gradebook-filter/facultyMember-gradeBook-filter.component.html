@@ -1,13 +1,11 @@
 <mat-card class="mat-elevation-z8">
    <div class="container">
       <form class="form-row form">
+
          <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
                <mat-label>AcademicTerms</mat-label>
                <mat-select #academicTermSelect>
-                  <mat-option [value]="undefined">
-                     Choose Academic Term
-                  </mat-option>
                   <mat-option *ngFor="let academicTerm of academicTerms" [value]="academicTerm.id">
                      {{academicTerm.name}}
                   </mat-option>
@@ -19,9 +17,6 @@
             <mat-form-field appearance="outline">
                <mat-label>section</mat-label>
                <mat-select #sectionSelect>
-                  <mat-option [value]="undefined">
-                     Choose section
-                  </mat-option>
                   <mat-option *ngFor="let section of sections" [value]="section">
                      {{section.courseDTO.nameEn + ': ' + section.sectionNumber}}
                   </mat-option>

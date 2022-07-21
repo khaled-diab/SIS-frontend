@@ -1,12 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SecurityGuard} from '../security/service/security.guard';
+import {GradeBookParentComponent} from './component/gradeBook-parent/gradeBook-parent.component';
+import {StudentGradeBookListComponent} from './component/student-gradebook-list/student-gradeBook-list.component';
 import {
    FacultyMemberGradeBookListComponent
 } from './component/facultyMember-gradebook-list/facultyMember-gradeBook-list.component';
-import {StudentGradeBookListComponent} from './component/student-gradebook-list/student-gradeBook-list.component';
-// @ts-ignore
-import {GradeBookParentComponent} from './component/gradeBook-parent/gradeBook-parent.component';
 
 
 const appRoutes: Routes = [

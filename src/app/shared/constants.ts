@@ -25,13 +25,10 @@ export class Constants {
    public static readonly getCourseById = environment.baseURL + '/courses';
 
    // Faculty Member Url
-   // public static readonly searchFacultyMemberUrl = environment.baseURL + '/facultyMembers/search/';
    public static readonly filterFacultyMemberUrl = environment.baseURL + '/facultyMembers/filter/';
    public static readonly saveFacultyMemberUrl = environment.baseURL + '/facultyMembers/saveFacultyMember';
    public static readonly deleteFacultyMemberUrl = environment.baseURL + '/facultyMembers/delete/';
    public static readonly facultyMemberByIdUrl = environment.baseURL + '/facultyMembers/';
-   // public static readonly uploadFacultyMemberImgUrl = environment.baseURL + '/facultyMembers/upload/';
-   // public static readonly FacultyMemberImgUrl = environment.baseURL + '/facultyMembers/download/';
    public static readonly FacultyMemberDegrees = environment.baseURL + '/degrees/all';
    public static readonly facultyMembersByCollegeIdUrl = environment.baseURL + '/facultyMembers/facultyMembersByCollegeId/';
 
@@ -41,8 +38,6 @@ export class Constants {
    public static readonly updateStudentUrl = environment.baseURL + '/students/updateStudent/';
    public static readonly filterStudentUrl = environment.baseURL + '/students/searchStudent/';
    public static readonly uploadStudentImgUrl = environment.baseURL + '/students/upload/';
-   // public static readonly StudentImgUrl = environment.baseURL + '/students/download/';
-   // public static readonly defaultStudentImgUrl = 'defaultStudentImage.png';
    public static readonly getStudentUrl = environment.baseURL + '/students/';
    public static readonly filterStudentRecordUrl = environment.baseURL + '/students/searchRecords/';
 
@@ -120,7 +115,6 @@ export class Constants {
    public static readonly filterGradeBookUrl = environment.baseURL + '/gradeBook/filter/';
    public static readonly updateGradeBookUrl = environment.baseURL + '/gradeBook/updateGradeBooks/';
    public static readonly getSectionsByFacultyMemberId = environment.baseURL + '/gradeBook/sectionsByFacultyMemberId/';
-   public static readonly getStudentsCourseId = environment.baseURL + '/gradeBook/courseStudents/';
 
    // Sort
    public static readonly ASC = 'ASC';

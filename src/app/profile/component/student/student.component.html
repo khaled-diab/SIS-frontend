@@ -23,8 +23,6 @@
                         <mat-error *ngIf="form.controls['nameAr']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.controls['nameAr']?.errors?.pattern">Arabic Letters only</mat-error>
                         <mat-error *ngIf="form.get('nameAr')?.errors?.serverError">{{errorMessage}}</mat-error>
-
-
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
@@ -33,51 +31,27 @@
                         <mat-error *ngIf="form.controls['nameEn']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.controls['nameEn']?.errors?.pattern"> English Letters only</mat-error>
                         <mat-error *ngIf="form.get('nameEn')?.errors?.serverError">{{errorMessage}}</mat-error>
-
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>University Id</mat-label>
-                        <input #universityId formControlName="universityId" matInput name="universityId" required>
-                        <mat-error *ngIf="form.get('universityId')?.errors?.min">Invalid University Id</mat-error>
-                        <mat-error *ngIf="form.controls['universityId']?.errors?.required"> Required</mat-error>
-                        <mat-error *ngIf="form.get('universityId')?.errors?.pattern">Invalid University Id</mat-error>
-                        <mat-error *ngIf="form.get('universityId')?.errors?.serverError">{{errorMessage}}</mat-error>
-
+                        <input #universityId formControlName="universityId" matInput readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>College</mat-label>
-
-                        <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
-                           <mat-option *ngFor="let col of colleges" [value]="col.id">
-                              {{col.nameEn}}
-                           </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
-
+                        <input #collegeSelect [formControlName]="'collegeMenu'" matInput readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Department</mat-label>
-
-                        <mat-select #departmentSelect [formControlName]="'departmentMenu'" [value]="-1" required>
-                           <!--                  <mat-option *ngIf="deptOption" [value]="1">-->
-                           <!--                    None-->
-                           <!--                  </mat-option>-->
-                           <!--                           <mat-option [value]="-1" >Choose Department</mat-option>-->
-                           <mat-option *ngFor="let dept of departments" [value]="dept.id">
-                              {{dept?.nameEn}}
-                           </mat-option>
-                        </mat-select>
-
+                        <input #departmentSelect [formControlName]="'departmentMenu'" matInput required>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>Academic Program</mat-label>
                         <mat-select #programSelect [value]="-1" formControlName="programMenu">
                            <mat-option [value]="-1">Choose Program</mat-option>
-
                            <mat-option *ngFor="let program of programs" [value]="program.id">
                               {{program?.name_en}}
                            </mat-option>
@@ -92,35 +66,17 @@
                            </mat-option>
                         </mat-select>
                         <mat-error *ngIf="form.get('level')?.errors?.required">Required</mat-error>
-
                      </mat-form-field>
-
-                     <!--                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
-                     <!--                        <mat-label>Year</mat-label>-->
-                     <!--                        <mat-select    formControlName="year"  required >-->
-                     <!--                           <mat-option *ngFor="let year of years" [value]="year">-->
-                     <!--                              {{year}}-->
-                     <!--                           </mat-option>-->
-                     <!--                        </mat-select>-->
-                     <!--                        <mat-error *ngIf="form.get('year')?.errors?.required">Required</mat-error>-->
-                     <!--                     </mat-form-field>-->
-
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label> Nationality</mat-label>
-                        <input #nationality formControlName="nationality" matInput name="nationality" required>
-                        <mat-error *ngIf="form.controls['nationality']?.errors?.required"> Required</mat-error>
-                        <mat-error *ngIf="form.get('nationality')?.errors?.pattern">Invalid Nationality</mat-error>
-                        <mat-error *ngIf="form.get('nationality')?.errors?.serverError">{{errorMessage}}</mat-error>
-                     </mat-form-field>
-                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
-                        <mat-label>National Id</mat-label>
-                        <input #nationalId formControlName="nationalId" matInput name="nationalId" required>
-                        <mat-error *ngIf="form.controls['nationalId']?.errors?.required"> Required</mat-error>
-                        <mat-error *ngIf="form.controls['nationalId']?.errors?.pattern">Must be 14 digits</mat-error>
-                        <mat-error *ngIf="form.get('nationalId')?.errors?.serverError">{{errorMessage}}</mat-error>
+                        <input #nationality formControlName="nationality" matInput readonly>
                      </mat-form-field>
 
+                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
+                        <mat-label>National Id</mat-label>
+                        <input #nationalId formControlName="nationalId" matInput readonly>
+                     </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>University Mail</mat-label>
@@ -129,9 +85,7 @@
                         <mat-error *ngIf="form.controls['universityMail']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('universityMail')?.errors?.email">Invalid Email</mat-error>
                         <mat-error *ngIf="form.get('universityMail')?.errors?.serverError">{{errorMessage}}</mat-error>
-
                      </mat-form-field>
-
 
                      <!--              Additional Information-->
                      <div class="col-12">
@@ -142,12 +96,9 @@
                      </div>
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label> Birth Date</mat-label>
-                        <input #birthDate formControlName="birthDate" matInput name="birthDate"
-                               placeholder="DOB(DD/MM/YYYY)"
-                               required type="date">
-                        <mat-error *ngIf="form.controls['birthDate']?.errors?.required"> Required</mat-error>
-
+                        <input #birthDate formControlName="birthDate" matInput name="birthDate" readonly>
                      </mat-form-field>
+
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label> Mobile Number</mat-label>
                         <input formControlName="phone" matInput required>
@@ -163,7 +114,6 @@
                                type="email">
                         <mat-error *ngIf="form.get('alternativeMail')?.errors?.email">Invalid Email</mat-error>
                         <mat-error *ngIf="form.get('alternativeMail')?.errors?.serverError">{{errorMessage}}</mat-error>
-
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
@@ -171,9 +121,7 @@
                         <input #parentPhone formControlName="parentPhone" matInput name="parentPhone">
                         <mat-error *ngIf="form.get('parentPhone')?.errors?.pattern">Invalid Mobile Number</mat-error>
                         <mat-error *ngIf="form.get('parentPhone')?.errors?.serverError">{{errorMessage}}</mat-error>
-
                      </mat-form-field>
-
 
                      <div class="col-md-2 mr-auto col-sm-12 form-input">
                         <button [disabled]="form.invalid " [ngClass]="{'disabled-btn':form.invalid}"
@@ -186,7 +134,6 @@
                                 type="button">Cancel
                         </button>
                      </div>
-                     <!--                     <div class="col-12">-->
 
                      <div class="col-md-4 mr-auto  col-sm-12 form-input">
                         <button (click)="changePassword()" class="btn btn-primary form-control"
@@ -195,7 +142,6 @@
                         </button>
                      </div>
                   </div>
-                  <!--                  </div>-->
                </form>
 
 

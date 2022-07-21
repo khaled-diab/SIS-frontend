@@ -1,8 +1,8 @@
 <div class="p-3">
    <div class="container">
       <app-facultyMember-gradeBook-filter></app-facultyMember-gradeBook-filter>
-      <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-         <mat-table [dataSource]="tableData" [formGroup]="form" aria-label="Elements">
+      <div *ngIf="gradeBooks" class="mat-elevation-z8 mt-3 full-width-table">
+         <mat-table [dataSource]="gradeBooks" aria-label="Elements">
 
             <!-- Number Column -->
             <ng-container matColumnDef="No.">
@@ -27,40 +27,54 @@
             <!-- finalExamGrade Column -->
             <ng-container matColumnDef="finalExamGrade">
                <mat-header-cell *matHeaderCellDef>Final Exam Grade
-                  <!--               <br>{{'('}}{{this.sectionDTO.courseDTO.finalExamGrade}}{{')'}}-->
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.finalExamGrade}}{{')'}}
                </mat-header-cell>
-               <mat-cell *matCellDef="let row"><input type="number" [value]="row.finalExamGrade" min="0" matInput
-                                                      formControlName="finalExamGrade">
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].finalExamGrade"
+                                                                   matInput
+                                                                   min="0" type="number">
                </mat-cell>
             </ng-container>
 
             <!-- practicalGrade Column -->
             <ng-container matColumnDef="practicalGrade">
                <mat-header-cell *matHeaderCellDef>Practical Grade
-                  <!--               <br>{{'('}}{{this.sectionDTO.courseDTO.practicalGrade}}{{')'}}-->
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.practicalGrade}}{{')'}}
                </mat-header-cell>
-               <mat-cell *matCellDef="let row"><input type="number" [value]="row.practicalGrade" min="0" matInput
-                                                      formControlName="practicalGrade">
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].practicalGrade"
+                                                                   matInput min="0"
+                                                                   type="number">
                </mat-cell>
             </ng-container>
 
             <!-- oralGrade Column -->
             <ng-container matColumnDef="oralGrade">
                <mat-header-cell *matHeaderCellDef>Oral Grade
-                  <!--               <br>{{'('}}{{this.sectionDTO.courseDTO.oralGrade}}{{')'}}-->
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.oralGrade}}{{')'}}
                </mat-header-cell>
-               <mat-cell *matCellDef="let row"><input type="number" [value]="row.oralGrade" min="0" matInput
-                                                      formControlName="oralGrade">
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].oralGrade"
+                                                                   matInput min="0"
+                                                                   type="number">
                </mat-cell>
             </ng-container>
 
             <!-- midGrade Column -->
             <ng-container matColumnDef="midGrade">
                <mat-header-cell *matHeaderCellDef>Mid Grade
-                  <!--               <br>{{'('}}{{this.sectionDTO.courseDTO.midGrade}}{{')'}}-->
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.midGrade}}{{')'}}
                </mat-header-cell>
-               <mat-cell *matCellDef="let row"><input type="number" [value]="row.midGrade" min="0" matInput
-                                                      formControlName="midGrade"></mat-cell>
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].midGrade"
+                                                                   matInput min="0"
+                                                                   type="number"></mat-cell>
+            </ng-container>
+
+            <!-- totalGrade Column -->
+            <ng-container matColumnDef="totalGrade">
+               <mat-header-cell *matHeaderCellDef>Total Grade
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.finalGrade}}{{')'}}
+               </mat-header-cell>
+               <mat-cell
+                  *matCellDef="let row">{{row.practicalGrade + row.midGrade + row.finalExamGrade + row.oralGrade}}
+               </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -80,7 +94,7 @@
       <div class="d-flex justify-content-end mt-3">
          <div class="col-60">
             <div appearance="outline" class="col-md-3 col-sm-12 form-input">
-               <button mat-raised-button type="button" class="btn btn-primary form-control" (click)="save()">Save
+               <button (click)="save()" class="btn btn-primary form-control" mat-raised-button type="button">Save
                </button>
             </div>
          </div>

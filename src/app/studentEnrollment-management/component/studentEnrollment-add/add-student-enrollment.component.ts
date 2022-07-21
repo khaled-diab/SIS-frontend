@@ -32,7 +32,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {Sort} from '@angular/material/sort';
 import {Constants} from '../../../shared/constants';
 import {GradeBookModel} from '../../../shared/model/gradebook-management/gradeBook-model';
-import {GradeBookManagementService} from '../../../GradeBook-management/service/gradeBook-management.service';
+import {GradeBookService} from '../../../gradeBook-management/service/gradeBook.service';
 
 @Component({
    selector: 'app-studentEnrollment-add',
@@ -53,7 +53,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
                private courseService: CourseManagementService,
                private sectionService: SectionManagementService,
                private studentService: StudentManagementService,
-               private gradeBookManagementService: GradeBookManagementService,
+               private gradeBookManagementService: GradeBookService,
                http: HttpClient) {
       this.httpClient = http;
    }
@@ -267,7 +267,7 @@ export class AddStudentEnrollmentComponent implements OnInit {
       }
       this.studentEnrollmentManagementService.addStudentEnrollment(this.studentEnrollment, this.students).subscribe((Response) => {
             this.gradeBookManagementService.updateGradeBook(this.gradeBooks).subscribe(value => {
-               this.snackBar.open('GradeBook Updated Successfully', undefined, {
+               this.snackBar.open('GradeBook Added Successfully', undefined, {
                   duration: 4000,
                   panelClass: 'successSnackBar'
                });

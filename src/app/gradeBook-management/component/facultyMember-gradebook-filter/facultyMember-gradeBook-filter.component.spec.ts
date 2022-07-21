@@ -1,8 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {
-   FacultyMemberGradeBookFilterComponent
-} from './facultyMember-gradeBook-filter.component';
+import {FacultyMemberGradeBookFilterComponent} from './facultyMember-gradeBook-filter.component';
 
 describe('FacultyMemberGradeBookFilterComponent', () => {
    let component: FacultyMemberGradeBookFilterComponent;

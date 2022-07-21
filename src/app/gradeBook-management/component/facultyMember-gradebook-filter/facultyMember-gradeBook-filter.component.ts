@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Constants} from '../../../shared/constants';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
-// @ts-ignore
-import {GradeBookManagementService} from '../../service/gradeBook-management.service';
+import {GradeBookService} from '../../service/gradeBook.service';
 import {GradeBookRequestModel} from '../../../shared/model/gradebook-management/gradeBook-request-model';
 import {MatSelect} from '@angular/material/select';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
@@ -24,7 +23,7 @@ export class FacultyMemberGradeBookFilterComponent implements OnInit {
    academicTerms: AcademicTermModel[];
    sections: SectionModel[];
 
-   constructor(private gradeBookManagementService: GradeBookManagementService) {
+   constructor(private gradeBookManagementService: GradeBookService) {
    }
 
    ngOnInit(): void {
@@ -41,17 +40,14 @@ export class FacultyMemberGradeBookFilterComponent implements OnInit {
       this.academicTermSelect.valueChange.subscribe(value => {
          this.gradeBookManagementService.getSectionsByFacultyMemberId(this.academicTermSelect.value, this.facultyMember.id).subscribe(sections => {
             this.sections = sections;
+            this.gradeBookManagementService.gradeBookFilterEvent.next([undefined, undefined]);
          });
       });
       this.sectionSelect.valueChange.subscribe(value => {
-         this.gradeBookManagementService.gradeBookFilterCourseIdEvent.next([this.academicTermSelect.value, value]);
          this.gradeBookRequestModel.filterAcademicTerm = this.academicTermSelect.value;
          this.gradeBookRequestModel.filterSection = value.id;
-         this.gradeBookManagementService.gradeBookFilterEvent.next(this.gradeBookRequestModel);
+         this.gradeBookManagementService.gradeBookFilterEvent.next([this.gradeBookRequestModel, value]);
       });
    }
 
-   applyFilter(): void {
-      this.gradeBookManagementService.gradeBookFilterEvent.next(this.gradeBookRequestModel);
-   }
 }
