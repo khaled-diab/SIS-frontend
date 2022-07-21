@@ -89,15 +89,15 @@ export class StudentComponent implements OnInit {
             // year: new FormControl(this.student.year, Validators.required),
             collegeMenu: new FormControl(this.student.collegeDTO?.nameEn),
             departmentMenu: new FormControl(this.student.departmentDTO?.nameEn),
-            programMenu: new FormControl(this.student.academicProgramDTO?.id),
+            programMenu: new FormControl(this.student.academicProgramDTO?.name_en),
 
          }
       );
 
-      this.department = this.student.departmentDTO;
-      this.academicProgramService.getAcademicProgramsByDepartment(this.department?.id).subscribe(value => {
-         this.programs = value;
-      });
+      // this.department = this.student.departmentDTO;
+      // this.academicProgramService.getAcademicProgramsByDepartment(this.department?.id).subscribe(value => {
+      //    this.programs = value;
+      // });
    }
 
    update(): void {
@@ -108,11 +108,11 @@ export class StudentComponent implements OnInit {
          this.student.universityMail = this.form.get('universityMail')?.value;
          this.student.alternativeMail = this.form.get('alternativeMail')?.value;
          this.student.parentPhone = this.form.get('parentPhone')?.value;
-         this.student.level = this.form.get('level')?.value;
-         this.student.academicProgramDTO.id = -1;
-         if (this.form.get('programMenu')?.value !== -1 && this.form.get('programMenu')?.value != null) {
-            this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
-         }
+         // this.student.level = this.form.get('level')?.value;
+         // this.student.academicProgramDTO.id = -1;
+         // if (this.form.get('programMenu')?.value !== -1 && this.form.get('programMenu')?.value != null) {
+         //    this.student.academicProgramDTO.id = this.form.get('programMenu')?.value;
+         // }
 
          this.studentManagementService.updateStudent(this.student).subscribe(() => {
                this.snackBar.open('Profile Updated Successfully', undefined, {
@@ -129,8 +129,6 @@ export class StudentComponent implements OnInit {
             , error => {
                const formControl = this.form.get(error.error.field);
                this.errorMessage = error.error.message;
-               console.log(error.error.field);
-               console.log(this.errorMessage);
                if (formControl) {
                   formControl.setErrors({
                      serverError: true

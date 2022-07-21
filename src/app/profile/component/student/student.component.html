@@ -45,27 +45,19 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Department</mat-label>
-                        <input #departmentSelect [formControlName]="'departmentMenu'" matInput required>
+                        <input #departmentSelect [formControlName]="'departmentMenu'" matInput  readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>Academic Program</mat-label>
-                        <mat-select #programSelect [value]="-1" formControlName="programMenu">
-                           <mat-option [value]="-1">Choose Program</mat-option>
-                           <mat-option *ngFor="let program of programs" [value]="program.id">
-                              {{program?.name_en}}
-                           </mat-option>
-                        </mat-select>
+                        <input matInput #programSelect  formControlName="programMenu" readonly>
+
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>Level</mat-label>
-                        <mat-select #level formControlName="level" required>
-                           <mat-option *ngFor="let level of levels" [value]="level">
-                              {{level}}
-                           </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="form.get('level')?.errors?.required">Required</mat-error>
+                        <input matInput #level formControlName="level" readonly>
+
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
@@ -80,8 +72,8 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>University Mail</mat-label>
-                        <input #universityMail formControlName="universityMail" matInput name="universityMail"
-                               required type="email">
+                        <input #universityMail formControlName="universityMail" matInput name="universityMail" readonly
+                                type="email">
                         <mat-error *ngIf="form.controls['universityMail']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('universityMail')?.errors?.email">Invalid Email</mat-error>
                         <mat-error *ngIf="form.get('universityMail')?.errors?.serverError">{{errorMessage}}</mat-error>

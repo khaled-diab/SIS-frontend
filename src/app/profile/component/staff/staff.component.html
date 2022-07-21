@@ -53,10 +53,7 @@
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>University Mail</mat-label>
                         <input type="email" formControlName="universityMail" matInput name="universityMail"
-                               required>
-                        <mat-error *ngIf="form.controls['universityMail']?.errors?.required"> Required</mat-error>
-                        <mat-error *ngIf="form.get('universityMail')?.errors?.email">Invalid Email</mat-error>
-                        <mat-error *ngIf="form.get('universityMail')?.errors?.serverError">{{errorMessage}}</mat-error>
+                               readonly>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
