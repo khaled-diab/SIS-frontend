@@ -1,24 +1,25 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Constants} from '../../../shared/constants';
-import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
+// @ts-ignore
 import {GradeBookManagementService} from '../../service/gradeBook-management.service';
 import {GradeBookRequestModel} from '../../../shared/model/gradebook-management/gradeBook-request-model';
 import {MatSelect} from '@angular/material/select';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
+import {StudentModel} from '../../../shared/model/student-management/student-model';
 
 @Component({
-   selector: 'app-facultyMember-gradeBook-filter',
-   templateUrl: './facultyMember-gradeBook-filter.component.html',
-   styleUrls: ['./facultyMember-gradeBook-filter.component.css']
+   selector: 'app-student-gradeBook-filter',
+   templateUrl: './student-gradeBook-filter.component.html',
+   styleUrls: ['./student-gradeBook-filter.component.css']
 })
-export class FacultyMemberGradeBookFilterComponent implements OnInit {
+export class StudentGradeBookFilterComponent implements OnInit {
 
    @ViewChild('academicTermSelect', {static: true}) academicTermSelect: MatSelect;
    @ViewChild('courseSelect', {static: true}) courseSelect: MatSelect;
 
-   facultyMember = new FacultyMemberModel();
+   student = new StudentModel();
    gradeBookRequestModel: GradeBookRequestModel = new GradeBookRequestModel();
    academicTerms: AcademicTermModel[];
    courses: CourseModel[];
@@ -28,22 +29,17 @@ export class FacultyMemberGradeBookFilterComponent implements OnInit {
 
    ngOnInit(): void {
       // @ts-ignore
-      this.facultyMember = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      this.student = JSON.parse(localStorage.getItem(Constants.loggedInUser));
       this.academicTerms = AcademicTermService.academicTermsList;
       this.academicTermSelect.value = AcademicTermService.currentTerm.id;
-      this.gradeBookManagementService.getCoursesByFacultyMemberId(this.academicTermSelect.value, this.facultyMember.id).subscribe(value => {
-         this.courses = value;
-      });
+      this.gradeBookRequestModel.filterStudent = this.student.id;
+      this.gradeBookManagementService.gradeBookFilterEvent.next(this.gradeBookRequestModel);
    }
 
    ngAfterViewInit(): void {
       this.academicTermSelect.valueChange.subscribe(value => {
-         this.gradeBookManagementService.getCoursesByFacultyMemberId(this.academicTermSelect.value, this.facultyMember.id).subscribe(value1 => {
-            this.courses = value1;
-         });
-      });
-      this.courseSelect.valueChange.subscribe(value => {
-         this.gradeBookManagementService.gradeBookFilterCourseIdEvent.next([this.academicTermSelect.value, value]);
+         this.gradeBookRequestModel.filterAcademicTerm = value;
+         this.gradeBookManagementService.gradeBookFilterEvent.next(this.gradeBookRequestModel);
       });
    }
 

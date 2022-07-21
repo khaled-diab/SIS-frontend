@@ -2,7 +2,7 @@
    <app-facultyMember-gradeBook-filter></app-facultyMember-gradeBook-filter>
 
    <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
-      <mat-table [dataSource]="tableData" aria-label="Elements">
+      <mat-table [dataSource]="tableData" [formGroup]="form" aria-label="Elements">
 
          <!-- Number Column -->
          <ng-container matColumnDef="No.">
@@ -29,7 +29,8 @@
             <mat-header-cell *matHeaderCellDef>Final Exam Grade
                <br>{{'('}}{{this.course.finalExamGrade}}{{')'}}
             </mat-header-cell>
-            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+            <mat-cell *matCellDef="let row"><input type="number" min="0" matInput formControlName="finalExamGrade">
+            </mat-cell>
          </ng-container>
 
          <!-- practicalGrade Column -->
@@ -37,7 +38,8 @@
             <mat-header-cell *matHeaderCellDef>Practical Grade
                <br>{{'('}}{{this.course.practicalGrade}}{{')'}}
             </mat-header-cell>
-            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+            <mat-cell *matCellDef="let row"><input type="number" min="0" matInput formControlName="practicalGrade">
+            </mat-cell>
          </ng-container>
 
          <!-- oralGrade Column -->
@@ -45,7 +47,8 @@
             <mat-header-cell *matHeaderCellDef>Oral Grade
                <br>{{'('}}{{this.course.oralGrade}}{{')'}}
             </mat-header-cell>
-            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+            <mat-cell *matCellDef="let row"><input type="number" min="0" matInput formControlName="oralGrade">
+            </mat-cell>
          </ng-container>
 
          <!-- midGrade Column -->
@@ -53,12 +56,26 @@
             <mat-header-cell *matHeaderCellDef>Mid Grade
                <br>{{'('}}{{this.course.midGrade}}{{')'}}
             </mat-header-cell>
-            <mat-cell *matCellDef="let row"><input type="number" value="0" matInput></mat-cell>
+            <mat-cell *matCellDef="let row"><input type="number" min="0" matInput formControlName="midGrade"></mat-cell>
          </ng-container>
 
          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
-
+      <mat-paginator #paginator
+                     (page)="pageChangeEvent($event)"
+                     [length]="totalCount"
+                     [pageIndex]="pageIndex"
+                     [pageSizeOptions]="[1, 5, 10, 25, 50]"
+                     [pageSize]="defaultPageSize"
+                     aria-label="Select page"
+                     showFirstLastButtons>
+      </mat-paginator>
    </div>
+
+   <div class="col-md-6 mr-auto col-sm-12 form-input">
+      <button mat-raised-button type="button" class="btn btn-primary form-control" (click)="save()">Update
+      </button>
+   </div>
+
 </div>

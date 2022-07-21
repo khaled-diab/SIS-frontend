@@ -27,11 +27,13 @@ import {StudentGradeBookListComponent} from './component/student-gradebook-list/
 // @ts-ignore
 import {GradeBookManagementRoutingModule} from './gradeBook-management-routing.module';
 import {GradeBookParentComponent} from './component/gradeBook-parent/gradeBook-parent.component';
+import {StudentGradeBookFilterComponent} from './component/student-gradebook-filter/student-gradeBook-filter.component';
 
 @NgModule({
    declarations: [
       FacultyMemberGradeBookListComponent,
       FacultyMemberGradeBookFilterComponent,
+      StudentGradeBookFilterComponent,
       StudentGradeBookListComponent,
       GradeBookParentComponent
    ],

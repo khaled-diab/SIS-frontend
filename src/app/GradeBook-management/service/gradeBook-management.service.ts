@@ -18,7 +18,7 @@ export class GradeBookManagementService {
    gradeBookFilterEvent: Subject<GradeBookRequestModel> = new Subject<GradeBookRequestModel>();
    gradeBookUpdateEvent: Subject<GradeBookModel> = new Subject<GradeBookModel>();
    gradeBookCloseUpdateEvent: Subject<any> = new Subject<any>();
-   gradeBookFilterCourseIdEvent: Subject<any> = new Subject<any>();
+   gradeBookFilterCourseIdEvent: Subject<any[]> = new Subject<any[]>();
 
    constructor(private httpClient: HttpClient) {
    }
@@ -41,16 +41,16 @@ export class GradeBookManagementService {
       return gradeBookRequestModel;
    }
 
-   updateGradeBook(gradeBookModel: GradeBookModel): Observable<MessageResponse> {
-      return this.httpClient.post<MessageResponse>(Constants.updateGradeBookUrl, gradeBookModel);
+   updateGradeBook(gradeBookModels: GradeBookModel[]): Observable<MessageResponse> {
+      return this.httpClient.post<MessageResponse>(Constants.updateGradeBookUrl, gradeBookModels);
    }
 
    getCoursesByFacultyMemberId(termId: number, facultyMemberId: number): Observable<CourseModel[]> {
       return this.httpClient.get<CourseModel[]>(Constants.getCourseByFacultyMemberId + termId + '/' + facultyMemberId);
    }
 
-   getStudentsByCoursesId(courseId: number): Observable<StudentModel[]> {
-      return this.httpClient.get<StudentModel[]>(Constants.getStudentsCourseId + courseId);
+   getStudentsByCoursesId(pageNumber: number, pageSize: number, courseId: number): Observable<PageRequest<StudentModel>> {
+      return this.httpClient.get<PageRequest<StudentModel>>(Constants.getStudentsCourseId + (pageNumber + 1) + '/' + pageSize + '/' + courseId);
    }
 
 }

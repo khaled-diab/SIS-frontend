@@ -4,7 +4,7 @@ export class GradeBookRequestModel {
    filterAcademicTerm: number;
    filterCourse: number;
    filterStudent: number;
-   filterFacultyMember: number;
+   // filterFacultyMember: number;
    sortDirection: string | null = Constants.ASC;
    sortBy = 'student';
 }
