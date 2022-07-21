@@ -19,7 +19,7 @@ export class FacultyMemberGradeBookListComponent implements OnInit, OnDestroy {
    sectionDTO = new SectionModel();
    sectionId: any;
    gradeBooks: GradeBookModel[] = [];
-   displayedColumns = ['No.', 'university_id', 'name_ar', 'finalExamGrade', 'practicalGrade', 'oralGrade', 'midGrade', 'totalGrade'];
+   displayedColumns = ['No.', 'university_id', 'name_ar', 'midGrade', 'practicalGrade', 'oralGrade', 'finalExamGrade', 'totalGrade'];
    subscription: Subscription;
    form: FormGroup;
    pageIndex = 0;

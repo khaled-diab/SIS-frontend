@@ -11,7 +11,7 @@ import {GradeBookStudentRecordsModel} from '../../../shared/model/gradebook-mana
 export class StudentGradeBookListComponent implements OnInit, OnDestroy {
 
    tableData: GradeBookStudentRecordsModel[] = [];
-   displayedColumns = ['No.', 'courseId', 'finalExamGrade', 'practicalGrade', 'oralGrade', 'midGrade', 'totalGrade'];
+   displayedColumns = ['No.', 'courseId', 'midGrade', 'practicalGrade', 'oralGrade', 'finalExamGrade', 'totalGrade'];
    subscriptionList: Subscription[] = [];
 
    constructor(private gradeBookManagementService: GradeBookService) {
