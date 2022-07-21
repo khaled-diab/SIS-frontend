@@ -64,7 +64,6 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
       }
 
       this.student = this.data.st;
-      console.log(this.student.user);
 
       // this.url = Constants.StudentImgUrl + this.student.photo;
       //

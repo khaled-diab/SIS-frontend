@@ -99,7 +99,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
          }
       );
-      this.form.controls.photo.setValue('defaultStudentImage.png');
+      // this.form.controls.photo.setValue('defaultStudentImage.png');
 
       // this.years = ['First Year', 'Second Year', 'Third Year', 'Fourth Year', 'Fifth Year', 'Sixth Year', 'Seventh Year'];
       this.collegeManagementService.getAllColleges().subscribe(Response => {

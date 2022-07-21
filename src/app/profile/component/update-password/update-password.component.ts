@@ -72,15 +72,13 @@ export class UpdatePasswordComponent implements OnInit {
                this.profileService.closeUpdatePasswordEvent.next();
             }
             , error => {
-               // const formControl = this.form.get(error.error.field);
-               // this.errorMessage = error.error.message;
-               // console.log(error.error.field);
-               // console.log(this.errorMessage);
-               // if (formControl) {
-               //    formControl.setErrors({
-               //       serverError: true
-               //    });
-               // }
+               const formControl = this.passForm.get(error.error.field);
+               this.errorMessage = error.error.message;
+               if (formControl) {
+                  formControl.setErrors({
+                     serverError: true
+                  });
+               }
                this.snackBar.open('Failed To Update Password', undefined, {duration: 3000});
                this.errorr = true;
             }
