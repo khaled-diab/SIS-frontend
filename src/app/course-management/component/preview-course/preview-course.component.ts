@@ -46,24 +46,18 @@ export class PreviewCourseComponent implements OnInit, AfterViewInit {
           Validators.pattern(Constants.ENGLISH_CHARACTERS)])),
         totalHours: new FormControl(undefined, Validators.compose([Validators.required,
           Validators.pattern(Constants.FLOAT_NUMBERS)])),
-        theoreticalHours: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern(Constants.FLOAT_NUMBERS)])),
-        exercisesHours: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern(Constants.FLOAT_NUMBERS)])),
-        practicalHours: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern(Constants.FLOAT_NUMBERS)])),
+        theoreticalHours: new FormControl(undefined, Validators.pattern(Constants.FLOAT_NUMBERS)),
+        exercisesHours: new FormControl(undefined, Validators.pattern(Constants.FLOAT_NUMBERS)),
+        practicalHours: new FormControl(undefined, Validators.pattern(Constants.FLOAT_NUMBERS)),
         weeks: new FormControl(undefined, Validators.compose([Validators.required,
           Validators.pattern(Constants.DIGITS_ONLY)])),
         finalGrade: new FormControl(undefined, Validators.compose([Validators.required,
           Validators.pattern(Constants.FLOAT_NUMBERS)])),
         finalExamGrade: new FormControl(undefined, Validators.compose([Validators.required,
           Validators.pattern(Constants.FLOAT_NUMBERS)])),
-        practicalGrade: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern(Constants.FLOAT_NUMBERS)])),
-        oralGrade: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern(Constants.FLOAT_NUMBERS)])),
-        midGrade: new FormControl(undefined, Validators.compose([Validators.required,
-          Validators.pattern(Constants.FLOAT_NUMBERS)])),
+        practicalGrade: new FormControl(undefined, Validators.pattern(Constants.FLOAT_NUMBERS)),
+        oralGrade: new FormControl(undefined, Validators.pattern(Constants.FLOAT_NUMBERS)),
+        midGrade: new FormControl(undefined, Validators.pattern(Constants.FLOAT_NUMBERS)),
         collegeMenu: new FormControl(undefined, Validators.required),
         departmentMenu: new FormControl(undefined, Validators.required),
       }
@@ -108,17 +102,6 @@ export class PreviewCourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.form.get('collegeMenu')?.valueChanges.subscribe(value => {
-    //   this.courseModel.collegeDTO = new CollegeModel();
-    //   this.courseModel.collegeDTO.id = value;
-    //   console.log('value= ', value);
-    // });
-    // this.form.get('departmentMenu')?.valueChanges.subscribe(value => {
-    //   this.courseModel.departmentDTO = new DepartmentModel();
-    //   this.courseModel.departmentDTO.id = value;
-    //   console.log('value= ', value);
-    //   this.courseManagementService.courseSaveEvent.next();
-    // });
     this.collegeSelect.valueChange.subscribe(() => {
       if (this.collegeSelect.value !== undefined) {
         this.departmentSelect.setDisabledState(false);

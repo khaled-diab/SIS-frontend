@@ -90,4 +90,8 @@ export class ImportedUsersComponent implements OnInit {
    downloadFile(userFile: UserFile): void {
       FileSaver.saveAs(userFile.fileLink, userFile.fileName);
    }
+   resetFilter(): void {
+      this.userFilesRequestModel = new GeneralSearchRequest();
+      this.importedUsersService.importedUsersFilterEvent.next(this.userFilesRequestModel);
+   }
 }

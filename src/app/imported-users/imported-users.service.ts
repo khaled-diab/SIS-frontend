@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {GeneralSearchRequest} from '../shared/model/general-search-request';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {PageRequest} from '../shared/model/page-request';
 import {Constants} from '../shared/constants';
 import {HttpClient} from '@angular/common/http';
@@ -13,6 +13,8 @@ export class ImportedUsersService {
 
    constructor(private httpClient: HttpClient) {
    }
+
+   importedUsersFilterEvent: Subject<GeneralSearchRequest> = new Subject<GeneralSearchRequest>();
 
    public getUsersFilesPage(pageNumber: number, pageSize: number, collegeFilterModel: GeneralSearchRequest): Observable<PageRequest<UserFile>> {
       return this.httpClient.post<PageRequest<UserFile>>(Constants.usersFilesPageUrl + pageNumber + '/' + pageSize, collegeFilterModel);

@@ -13,7 +13,7 @@ import {CourseManagementService} from '../../../course-management/service/course
 import {SectionManagementService} from '../../service/sectionManagement.service';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';
 import {StudyTypeModel} from '../../../shared/model/studyType-model';
-import {MajorModel} from '../../../shared/model/major-model';
+import {MajorModel} from '../../../shared/model/major-management/major-model';
 import {
    StudentEnrollmentManagementService
 } from '../../../studentEnrollment-management/service/studentEnrollment-management.service';

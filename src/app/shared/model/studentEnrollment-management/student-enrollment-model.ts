@@ -6,7 +6,7 @@ import {CourseModel} from '../course-management/course-model';
 import {SectionModel} from '../section-management/section-model';
 import {BaseModel} from '../base-model';
 import {StudentModel} from '../student-management/student-model';
-import {MajorModel} from '../major-model';
+import {MajorModel} from '../major-management/major-model';
 import {StudyTypeModel} from '../studyType-model';
 
 export class StudentEnrollmentModel extends BaseModel {

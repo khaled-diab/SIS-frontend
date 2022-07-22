@@ -3,6 +3,17 @@ mat-card {
   margin: auto;
 }
 
+button {
+   padding: 5px;
+   background-color: var(--main-color);
+   margin-bottom: 10px;
+}
+
+button:hover {
+   padding: 5px;
+   background-color: var(--main-color);
+}
+
 mat-form-field {
   width: 60%;
 }

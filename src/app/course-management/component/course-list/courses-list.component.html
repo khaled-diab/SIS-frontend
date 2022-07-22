@@ -2,7 +2,7 @@
    <app-course-filter></app-course-filter>
    <div class="d-flex justify-content-end mt-3">
       <div class="col-1">
-         <button (click)="addOrUpdateCourse(courseModel)" class="align-content-center" mat-icon-button>
+         <button (click)="addOrUpdateCourse(courseModel, 'add')" class="align-content-center" mat-icon-button>
             <mat-icon class="add" matTooltip="Add Course" matTooltipPosition="above">add_circle</mat-icon>
          </button>
       </div>
@@ -50,7 +50,7 @@
                   <button (click)="previewCourse(row)" mat-icon-button>
                      <mat-icon class="eye">visibility</mat-icon>
                   </button>
-                  <button (click)="addOrUpdateCourse(row)" mat-icon-button>
+                  <button (click)="addOrUpdateCourse(row, 'update')" mat-icon-button>
                      <mat-icon class="user-edit">edit</mat-icon>
                   </button>
                   <button (click)="deleteCourse(row)" mat-icon-button>

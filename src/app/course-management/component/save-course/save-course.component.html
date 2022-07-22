@@ -40,7 +40,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Total hours</mat-label>
-                        <input #totalHours formControlName="totalHours" matInput name="totalHours" required>
+                        <input type="number" min="0" formControlName="totalHours" matInput name="totalHours" required>
                         <mat-error *ngIf="form.controls['totalHours']?.errors?.pattern">Invalid Total hours</mat-error>
                         <mat-error *ngIf="form.controls['totalHours']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('totalHours')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -49,37 +49,32 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Theoretical hours</mat-label>
-                        <input #theoreticalHours formControlName="theoreticalHours" matInput name="theoreticalHours"
-                               required>
+                        <input type="number" min="0" formControlName="theoreticalHours" matInput name="theoreticalHours" >
                         <mat-error *ngIf="form.controls['theoreticalHours']?.errors?.pattern">Invalid Theoretical
-                           hours
-                        </mat-error>
-                        <mat-error *ngIf="form.controls['theoreticalHours']?.errors?.required"> Required</mat-error>
+                           hours</mat-error>
                         <mat-error
                            *ngIf="form.get('theoreticalHours')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Exercises hours</mat-label>
-                        <input #exercisesHours formControlName="exercisesHours" matInput name="exercisesHours" required>
+                        <input type="number" min="0" formControlName="exercisesHours" matInput name="exercisesHours">
                         <mat-error *ngIf="form.controls['exercisesHours']?.errors?.pattern">Invalid Exercises hours
                         </mat-error>
-                        <mat-error *ngIf="form.controls['exercisesHours']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('exercisesHours')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Practical hours</mat-label>
-                        <input #practicalHours formControlName="practicalHours" matInput name="practicalHours" required>
+                        <input type="number" min="0" formControlName="practicalHours" matInput name="practicalHours">
                         <mat-error *ngIf="form.controls['practicalHours']?.errors?.pattern">Invalid Practical hours
                         </mat-error>
-                        <mat-error *ngIf="form.controls['practicalHours']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('practicalHours')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Weeks</mat-label>
-                        <input #weeks formControlName="weeks" matInput name="weeks" required>
+                        <input type="number" min="0" formControlName="weeks" matInput name="weeks" required>
                         <mat-error *ngIf="form.controls['weeks']?.errors?.pattern">Invalid Weeks</mat-error>
                         <mat-error *ngIf="form.controls['weeks']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('weeks')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -87,7 +82,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Final Grade</mat-label>
-                        <input #finalGrade formControlName="finalGrade" matInput name="finalGrade" required>
+                        <input type="number" min="0" formControlName="finalGrade" matInput name="finalGrade" required>
                         <mat-error *ngIf="form.controls['finalGrade']?.errors?.pattern">Invalid Final Grade</mat-error>
                         <mat-error *ngIf="form.controls['finalGrade']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('finalGrade')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -95,7 +90,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Final Exam Grade</mat-label>
-                        <input #finalExamGrade formControlName="finalExamGrade" matInput name="weeks" required>
+                        <input type="number" min="0" formControlName="finalExamGrade" matInput name="weeks" required>
                         <mat-error *ngIf="form.controls['finalExamGrade']?.errors?.pattern">Invalid Final Exam Grade
                         </mat-error>
                         <mat-error *ngIf="form.controls['finalExamGrade']?.errors?.required"> Required</mat-error>
@@ -104,26 +99,23 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Practical Grade</mat-label>
-                        <input #practicalGrade formControlName="practicalGrade" matInput name="practicalGrade" required>
+                        <input type="number" min="0" formControlName="practicalGrade" matInput name="practicalGrade">
                         <mat-error *ngIf="form.controls['practicalGrade']?.errors?.pattern">Invalid Practical Grade
                         </mat-error>
-                        <mat-error *ngIf="form.controls['practicalGrade']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('practicalGrade')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Oral Grade</mat-label>
-                        <input #oralGrade formControlName="oralGrade" matInput name="oralGrade" required>
+                        <input type="number" min="0" formControlName="oralGrade" matInput name="oralGrade">
                         <mat-error *ngIf="form.controls['oralGrade']?.errors?.pattern">Invalid Oral Grade</mat-error>
-                        <mat-error *ngIf="form.controls['oralGrade']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('oralGrade')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>Mid Grade</mat-label>
-                        <input #midGrade formControlName="midGrade" matInput name="midGrade" required>
+                        <input type="number" min="0" formControlName="midGrade" matInput name="midGrade">
                         <mat-error *ngIf="form.controls['midGrade']?.errors?.pattern">Invalid Mid Grade</mat-error>
-                        <mat-error *ngIf="form.controls['midGrade']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('midGrade')?.errors?.serverError">{{errorMessage}}</mat-error>
                      </mat-form-field>
 
@@ -131,7 +123,7 @@
                         <mat-label>College</mat-label>
 
                         <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
-                           <mat-option *ngFor="let col of colleges" [value]="col.id">
+                           <mat-option *ngFor="let col of colleges" [value]="col?.id">
                               {{col.nameEn}}
                            </mat-option>
                         </mat-select>
@@ -141,8 +133,8 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
                         <mat-label>Department</mat-label>
-                        <mat-select #departmentSelect formControlName="departmentMenu" #departmentMenu required>
-                           <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                        <mat-select #departmentSelect formControlName="departmentMenu" required>
+                           <mat-option *ngFor="let dept of departments" [value]="dept?.id">
                               {{dept.nameEn}}
                            </mat-option>
                         </mat-select>

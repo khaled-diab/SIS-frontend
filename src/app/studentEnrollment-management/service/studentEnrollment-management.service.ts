@@ -6,7 +6,7 @@ import {PageQueryUtil} from '../../shared/model/page-query';
 import {Sort} from '@angular/material/sort';
 import {Constants} from '../../shared/constants';
 import {MessageResponse} from '../../shared/model/message-response';
-import {MajorModel} from '../../shared/model/major-model';
+import {MajorModel} from '../../shared/model/major-management/major-model';
 import {StudyTypeModel} from '../../shared/model/studyType-model';
 import {StudentModel} from '../../shared/model/student-management/student-model';
 import {StudentArray} from '../../shared/model/studentEnrollment-management/student-array';
@@ -67,11 +67,6 @@ export class StudentEnrollmentManagementService {
 
    deleteStudentEnrollment(id: number): Observable<MessageResponse> {
       return this.httpClient.get<MessageResponse>(Constants.deleteStudentEnrollmentUrl + id);
-   }
-
-   public getAllMajors():
-      Observable<MajorModel[]> {
-      return this.httpClient.get <MajorModel[]>(Constants.allMajorsUrl);
    }
 
    public getAllStudyTypes():

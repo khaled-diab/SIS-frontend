@@ -1,19 +1,32 @@
 mat-card {
-  width: 90%;
-  margin: auto;
+   width: 90%;
+   margin: auto;
 }
 
+
+button {
+   padding: 5px;
+   background-color: var(--main-color);
+   margin-bottom: 10px;
+}
+
+button:hover {
+   padding: 5px;
+   background-color: var(--main-color);
+}
+
+
 mat-form-field {
-  width: 60%;
+   width: 60%;
 }
 
 .align {
-  display: flex;
-  align-content: space-around;
+   display: flex;
+   align-content: space-around;
 }
 
 mat-form-field.input-field {
-  position: relative;
+   position: relative;
 }
 
 
@@ -25,6 +38,7 @@ mat-form-field.input-field {
    margin: 20px 0;
    display: inline-block
 }
+
 .subTitle h4::after {
    content: '';
    position: absolute;
@@ -38,10 +52,10 @@ mat-form-field.input-field {
 }
 
 mat-form-field.input-field button {
-  position: absolute;;
-  top: 0;
-  right: 0;
-  height: 100%;
+   position: absolute;;
+   top: 0;
+   right: 0;
+   height: 100%;
 }
 
 /*form.form {*/
@@ -50,52 +64,51 @@ mat-form-field.input-field button {
 /*}*/
 
 .search-box {
-  position: relative;
-  margin: auto;
+   position: relative;
+   margin: auto;
 }
 
 .search-box .search-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
+   position: absolute;
+   top: 0;
+   right: 0;
+   height: 100%;
 }
 
 .search-box input {
-  box-shadow: none;
-  height: 50px;
-  outline: none;
+   box-shadow: none;
+   height: 50px;
+   outline: none;
 }
 
 .search-box input:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: var(--main-color);
+   box-shadow: none;
+   outline: none;
+   border-color: var(--main-color);
 }
 
 .search-box button:focus {
-  box-shadow: none;
-}
-mat-form-field{
-  display: inline;
-  width: 40%;
-  margin-left: 20px;
-  margin-top: 10px;
+   box-shadow: none;
 }
 
-
+mat-form-field {
+   display: inline;
+   width: 40%;
+   margin-left: 20px;
+   margin-top: 10px;
+}
 
 
 .search-box button {
-  background-color: var(--main-color);
-  border: none;
+   background-color: var(--main-color);
+   border: none;
 }
 
 .search-box button:active {
-  background-color: var(--secondary-color);
+   background-color: var(--secondary-color);
 }
 
-.addBtn{
-  background-color: var(--main-color);
-  color: white;
+.addBtn {
+   background-color: var(--main-color);
+   color: white;
 }

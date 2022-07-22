@@ -1,5 +1,5 @@
 import {BaseModel} from '../base-model';
-import {MajorModel} from '../major-model';
+import {MajorModel} from '../major-management/major-model';
 import {StudyTypeModel} from '../studyType-model';
 import {CollegeModel} from '../college-management/college-model';
 import {DepartmentModel} from '../department-management/department-model';

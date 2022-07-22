@@ -15,7 +15,7 @@ import {AcademicYearService} from '../../../academic-year-management/service/aca
 import {AcademicTermService} from '../../../academic-term-management/service/academic-term.service';
 import {CourseManagementService} from '../../../course-management/service/course-management.service';
 import {StudentEnrollmentModel} from '../../../shared/model/studentEnrollment-management/student-enrollment-model';
-import {MajorModel} from '../../../shared/model/major-model';
+import {MajorModel} from '../../../shared/model/major-management/major-model';
 import {StudyTypeModel} from '../../../shared/model/studyType-model';
 import {SectionModel} from '../../../shared/model/section-management/section-model';
 import {SectionRequestModel} from '../../../shared/model/section-management/section-request-model';

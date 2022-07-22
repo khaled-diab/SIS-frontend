@@ -4,7 +4,7 @@ import {CollegeModel} from '../../../shared/model/college-management/college-mod
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {AcademicYear} from '../../../shared/model/academicYear-Management/academic-year';
 import {AcademicTermModel} from '../../../shared/model/academicTerm-management/academic-term-model';
-import {MajorModel} from '../../../shared/model/major-model';
+import {MajorModel} from '../../../shared/model/major-management/major-model';
 import {StudyTypeModel} from '../../../shared/model/studyType-model';
 import {CourseModel} from '../../../shared/model/course-management/course-model';
 import {MatSelect} from '@angular/material/select';

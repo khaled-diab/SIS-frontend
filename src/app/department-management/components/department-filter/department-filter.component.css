@@ -6,7 +6,16 @@ mat-card {
 /* mat-form-field {
   width: 60%;
 } */
+button {
+   padding: 5px;
+   background-color: var(--main-color);
+   margin-bottom: 10px;
+}
 
+button:hover {
+   padding: 5px;
+   background-color: var(--main-color);
+}
 .subTitle h4 {
   color: var(--main-color);
   font-size: 30px;

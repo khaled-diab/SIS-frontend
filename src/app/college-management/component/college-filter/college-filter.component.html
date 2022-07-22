@@ -1,11 +1,21 @@
 <mat-card class="mat-elevation-z8">
   <div class="container">
+     <div class="col-12">
+        <div class="subTitle ">
+           <h4>System Management / College Management</h4>
+           <hr>
+        </div>
+     </div>
     <form class="form-row form">
-      <div class="form-group col-12 m-auto search-box ">
+          <div class="form-group col-12 m-auto search-box ">
         <input [(ngModel)]="collegeRequestModel.filterValue" class="form-control" id="exampleInputEmail1"
                name="filterValue" placeholder="Search" type="text">
         <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button>
       </div>
+       <div class="col-12"></div>
+       <div appearance="outline" class="form-group col-md-3 col-sm-12">
+          <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+       </div>
     </form>
   </div>
 </mat-card>

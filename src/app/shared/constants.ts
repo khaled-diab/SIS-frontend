@@ -68,7 +68,11 @@ export class Constants {
    public static readonly saveStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/save';
    public static readonly updateStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/update';
    public static readonly deleteStudentEnrollmentUrl = environment.baseURL + '/studentEnrollments/delete/';
-   public static readonly allMajorsUrl = environment.baseURL + '/majors/all';
+   public static readonly filterMajorsUrl = environment.baseURL + '/majors/filter/';
+   public static readonly addMajorUrl = environment.baseURL + '/majors/add';
+   public static readonly updateMajorUrl = environment.baseURL + '/majors/update/';
+   public static readonly deleteMajorUrl = environment.baseURL + '/majors/delete/';
+   public static readonly majorByIdUrl = environment.baseURL + '/majors/';
    public static readonly allStudyTypesUrl = environment.baseURL + '/studyTypes/all';
    public static readonly majorsByDepartmentIdUrl = environment.baseURL + '/majors/majorsByDepartmentId/';
    /* Student Attendance Url */

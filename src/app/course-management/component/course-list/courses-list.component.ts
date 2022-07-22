@@ -67,7 +67,9 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       });
    }
 
-   addOrUpdateCourse(course: CourseModel): void {
+   addOrUpdateCourse(course: CourseModel, sel: string): void {
+      sessionStorage.setItem('courseData', JSON.stringify(course));
+      sessionStorage.setItem('courseFlag', JSON.stringify(sel));
       if (this.isSmallScreen) {
          this.route.navigate(['/courses-management', 'create-course'], {state: {data: course}});
       } else {

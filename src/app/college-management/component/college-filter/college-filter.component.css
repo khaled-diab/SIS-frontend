@@ -3,6 +3,37 @@ mat-card {
   margin: auto;
 }
 
+.subTitle h4 {
+   color: var(--main-color);
+   font-size: 30px;
+   font-weight: bold;
+   position: relative;
+   margin: 20px 0;
+   display: inline-block
+}
+.subTitle h4::after {
+   content: '';
+   position: absolute;
+   bottom: -10px;
+   left: 0;
+   /*    width: 10%;*/
+   height: 5px;
+   margin-top: 20px;
+   background: var(--secondary-color);
+   animation: expand 5s 0.5s ease-in-out infinite;
+}
+
+button {
+   padding: 5px;
+   background-color: var(--main-color);
+   margin-bottom: 10px;
+}
+
+button:hover {
+   padding: 5px;
+   background-color: var(--main-color);
+}
+
 mat-form-field {
   width: 80%;
 }
