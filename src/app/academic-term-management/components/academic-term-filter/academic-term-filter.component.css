@@ -181,9 +181,9 @@ button[type="button"]:hover {
 
 }
 button{
-  padding: 5px;
+  padding: 7px 10px;
   background-color: var(--main-color);
-  margin-bottom: 10px;
+    width: 100px;
 }
 button:hover{
   padding: 5px;

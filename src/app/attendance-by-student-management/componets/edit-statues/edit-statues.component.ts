@@ -54,28 +54,31 @@ export class EditStatuesComponent implements OnInit {
     });
   
     }
-   add(): void {
-    if (this.form.valid) {
-      
-      this.statues=this.form.get('attendanceStatus')?.value;
-      this.data.attendanceStatus=this.statues;
-    }
-    this.studentReportService.editattendanceStatues(this.data.id,this.data)
-    .subscribe((Response) => {
-      console.log(Response);
-      this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
-      this.lectureReportService.closeSaveEvent.next();
-    }, error => {
-      // const formControl = this.form.get(error.error.field);
-      // this.errorMessage = error.error.message;
-   
-      this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000 ,panelClass: 'successSnackBar'});
-      this.snackBar.dismiss();
-
-
-    }
-  );
-}
+    add(): void {
+      if (this.form.valid) {
+        
+        // this.attendaceReportModdel.attendanceStatus = this.form.get('attendanceStatus')?.value;
+        this.statues=this.form.get('attendanceStatus')?.value;
+        this.data.attendanceStatus=this.statues;
+      }
+      this.studentReportService.editattendanceStatues(this.data.id,this.data).subscribe((Response) => {
+        console.log(Response);
+        this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
+        this.studentReportService.closeSaveEvent.next();
+        
+      }, error => {
+        const formControl = this.form.get(error.error.field);
+        this.errorMessage = error.error.message;
+        if (formControl) {
+          formControl.setErrors({
+            serverError: true
+          });
+        }
+        this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
+        
+      }
+    );
+  }
 // save(): void {
 //   console.log('attendance model ', this.attendaceReportModdel);
 //   this.studentReportService.editattendanceStatues(this.data.id,this.data).subscribe(value => {
