@@ -143,7 +143,7 @@ export class StudentComponent implements OnInit {
 
 
    cancel(): void {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/dashboard').then();
    }
 
    uploadPhoto(event: any): void {
@@ -175,7 +175,7 @@ export class StudentComponent implements OnInit {
       dialogConfig.width = '60%';
       dialogConfig.height = '450px';
       this.dialog.open(UpdatePasswordComponent, dialogConfig);
-      this.profileService.closeUpdatePasswordEvent.pipe(take(1)).subscribe(value => {
+      this.profileService.closeUpdatePasswordEvent.pipe(take(1)).subscribe(_ => {
             this.dialog.closeAll();
          }
       );
