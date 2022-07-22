@@ -9,45 +9,50 @@ import {UserFile} from '../../shared/model/security/user-file';
 import {ProfileService} from '../../profile/service/profile.service';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+   selector: 'app-nav-bar',
+   templateUrl: './nav-bar.component.html',
+   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
 
-  @Input() sideMenu: MatSidenav;
-  loggedInUser: StudentModel | FacultyMemberModel | AdminModel;
-  profilePicture: UserFile | undefined;
-  profilePictureLink: string | undefined;
+   @Input() sideMenu: MatSidenav;
+   loggedInUser: StudentModel | FacultyMemberModel | AdminModel;
+   profilePicture: UserFile | undefined;
+   profilePictureLink: string | undefined;
 
-  constructor(private router: Router, private profileService: ProfileService) {
-  }
+   constructor(private router: Router, private profileService: ProfileService) {
+   }
 
-  ngOnInit(): void {
-    this.profileService.updateProfilePictureEvent.subscribe(value => this.profilePictureLink = value);
-    // @ts-ignore
-    this.loggedInUser = JSON.parse(localStorage.getItem(Constants.loggedInUser));
-    this.profilePicture = this.loggedInUser?.user?.userFileList.filter(value => value.type === Constants.FILE_TYPE_PROFILE_PICTURE).pop();
-    this.getProfileImageLink();
-  }
+   ngOnInit(): void {
+      this.profileService.updateProfilePictureEvent.subscribe(value => this.profilePictureLink = value);
+      // @ts-ignore
+      this.loggedInUser = JSON.parse(localStorage.getItem(Constants.loggedInUser));
+      this.profilePicture = this.loggedInUser?.user?.userFileList.filter(value => value.type === Constants.FILE_TYPE_PROFILE_PICTURE).pop();
+      this.getProfileImageLink();
+   }
 
-  public logout(): void {
-    localStorage.removeItem(Constants.authHeader);
-    localStorage.removeItem(Constants.loggedInUser);
-    localStorage.removeItem(Constants.screens);
-    this.router.navigate(['/login']).then(_ => {
-    });
-  }
+   public logout(): void {
+      localStorage.removeItem(Constants.authHeader);
+      localStorage.removeItem(Constants.loggedInUser);
+      localStorage.removeItem(Constants.screens);
+      this.router.navigate(['/login']).then(_ => {
+      });
+   }
 
-  getProfileImageLink(): void {
-    if (this.profilePicture === undefined) {
-      return;
-    }
-    this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
-  }
+   getProfileImageLink(): void {
+      if (this.profilePicture === undefined) {
+         return;
+      }
+      this.profilePictureLink = Constants.downloadFileURL + this.profilePicture?.directories;
+   }
 
-  goToProfile(): void {
-    this.router.navigate(['/profile']).then(_ => {
-    });
-  }
+   goToProfile(): void {
+      if (this.loggedInUser.user.role.roleName === 'ADMIN') {
+         this.router.navigate(['/dashboard']).then(_ => {
+         });
+      } else {
+         this.router.navigate(['/profile']).then(_ => {
+         });
+      }
+   }
 }
