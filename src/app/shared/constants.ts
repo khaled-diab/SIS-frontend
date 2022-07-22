@@ -175,6 +175,7 @@ export class Constants {
    public static readonly TERMS_LIST = 'terms';
    public static readonly YEARS_LIST = 'years';
    public static readonly CURRENT_TERM = 'current_term';
+   public static readonly collectAdminDashboardDataUrl = environment.baseURL + '/dashboard/admin';
 
 
 

@@ -36,13 +36,17 @@ import {StaffComponent} from './profile/component/staff/staff.component';
 import {StudentComponent} from './profile/component/student/student.component';
 import {DataViewModule} from 'primeng/dataview';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ImportedUsersComponent } from './imported-users/imported-users.component';
+import {ImportedUsersComponent} from './imported-users/imported-users.component';
 import {MatCardModule} from '@angular/material/card';
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import { UpdatePasswordComponent } from './profile/component/update-password/update-password.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {ParentDashboardComponent} from './dashboard/component/parent-dashboard/parent-dashboard.component';
+import {StudentDashboardComponent} from './dashboard/component/parent-dashboard/student-dashboard/student-dashboard.component';
+import {StaffDashboardComponent} from './dashboard/component/parent-dashboard/staff-dashboard/staff-dashboard.component';
+import {AdminDashboardComponent} from './dashboard/component/parent-dashboard/admin-dashboard/admin-dashboard.component';
+import {UpdatePasswordComponent} from './profile/component/update-password/update-password.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
    declarations: [
@@ -58,6 +62,10 @@ import {MatDialogModule} from "@angular/material/dialog";
       StaffComponent,
       StudentComponent,
       ImportedUsersComponent,
+      ParentDashboardComponent,
+      StudentDashboardComponent,
+      StaffDashboardComponent,
+      AdminDashboardComponent,
       UpdatePasswordComponent
    ],
    imports: [

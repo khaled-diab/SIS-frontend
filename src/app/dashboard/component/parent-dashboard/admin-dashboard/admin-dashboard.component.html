@@ -1,0 +1,35 @@
+<div *ngIf="adminDashboardModel" class="container">
+   <div class="row">
+      <div class="col-3">
+         <div class="card-counter success">
+            <em class="fa fa-users"></em>
+            <span class="count-name">Active Students</span>
+            <span class="count-numbers">{{adminDashboardModel.activeStudents}}</span>
+         </div>
+      </div>
+
+      <div class="col-3">
+         <div class="card-counter danger">
+            <em class="fa fa-ban"></em>
+            <span class="count-name">Inactive Students</span>
+            <span class="count-numbers">{{adminDashboardModel.inActiveStudents}}</span>
+         </div>
+      </div>
+
+      <div class="col-3">
+         <div class="card-counter success">
+            <em class="fa fa-users"></em>
+            <span class="count-name">Active Staff Members</span>
+            <span class="count-numbers">{{adminDashboardModel.activeStaff}}</span>
+         </div>
+      </div>
+
+      <div class="col-3">
+         <div class="card-counter danger">
+            <em class="fa fa-ban"></em>
+            <span class="count-name">Inactive Staff Members</span>
+            <span class="count-numbers">{{adminDashboardModel.inActiveStaff}}</span>
+         </div>
+      </div>
+   </div>
+</div>

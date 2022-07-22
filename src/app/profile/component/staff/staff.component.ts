@@ -1,21 +1,18 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FacultyMemberModel} from '../../../shared/model/facultyMember-management/facultyMember-model';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {DegreeModel} from '../../../shared/model/Degree-management/degree-model';
 import {MatSelect} from '@angular/material/select';
 import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {
-   FacultyMemberManagementService
-} from '../../../facultyMember-management/service/facultyMember-management.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {FacultyMemberManagementService} from '../../../facultyMember-management/service/facultyMember-management.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {CollegeManagementService} from '../../../college-management/service/college-management.service';
 import {DepartmentService} from '../../../department-management/service/department.service';
 import {Constants} from '../../../shared/constants';
 import {take} from 'rxjs/operators';
 import {ProfilePasswordModel} from '../../../shared/model/security/profile-password-model';
-import {StudentModel} from '../../../shared/model/student-management/student-model';
 import {UserFile} from '../../../shared/model/security/user-file';
 import {ProfileService} from '../../service/profile.service';
 import {MessageService} from 'primeng/api';
@@ -137,7 +134,7 @@ export class StaffComponent implements OnInit {
    }
 
    cancel(): void {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/dashboard').then();
    }
 
    uploadPhoto(event: any): void {
@@ -171,13 +168,13 @@ export class StaffComponent implements OnInit {
          this.profilePasswordModel.userName = this.loggedInUser.user.email;
 
 
-         this.securityService.changePassword(this.profilePasswordModel).subscribe((value) => {
+         this.securityService.changePassword(this.profilePasswordModel).subscribe((_) => {
                this.snackBar.open('Password Updated Successfully', undefined, {
                   duration: 3000,
                   panelClass: 'successSnackBar'
                });
             }
-            , error => {
+            , _ => {
                this.snackBar.open('Failed To Update Password', undefined, {duration: 3000});
                this.errorr = true;
             }

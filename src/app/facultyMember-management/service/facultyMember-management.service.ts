@@ -8,9 +8,7 @@ import {MessageResponse} from '../../shared/model/message-response';
 import {FacultyMemberRequestModel} from '../../shared/model/facultyMember-management/facultyMember-request-model';
 import {FacultyMemberModel} from '../../shared/model/facultyMember-management/facultyMember-model';
 import {DegreeModel} from '../../shared/model/Degree-management/degree-model';
-import {
-   FacultyMemberTableRecordsModel
-} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
+import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-management/facultyMemberTableRecords-model';
 
 @Injectable({
    providedIn: 'root'
@@ -23,6 +21,7 @@ export class FacultyMemberManagementService {
 
    constructor(private httpClient: HttpClient) {
    }
+
    //
    // public searchFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
    //    Observable<PageRequest<FacultyMemberModel>> {
