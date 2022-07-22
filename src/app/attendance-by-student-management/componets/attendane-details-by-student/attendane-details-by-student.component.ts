@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AttendaneReportByLectureService } from 'src/app/attendance-by-lecture-management/service/attendane-report-by-lecture.service';
 import { AttendanceReportByStudentManagementModel } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-by-Student-management-model';
@@ -73,8 +73,8 @@ this.StudentName=this.activatedRoute.snapshot.params['studentName'];
     this.Subscription();
     this.items = [
       {label: 'Attendance_Reports'},
-      {label: 'Attendance_By_Lecture'},
-      {label: 'Lecture_Details'},
+      {label: 'Attendance_By_Student'},
+      {label: 'Student_Details'},
       
      
   ];
@@ -117,7 +117,7 @@ edit(details : AttendanceReportDetailsByStudent){
     this.router.navigateByUrl('/attendancereportsbystudent-management/edit-status', {state: details}).then(_ => console.log());
   } else {
     this.dialog.open(EditStatuesComponent, {data: details});
-    this.lectureReportService.closeSaveEvent.subscribe(e => {
+    this.studentReportService.closeSaveEvent.subscribe(e => {
       this.dialog.closeAll();
       if (e !== 'Cancel') {
         this.snackBar.open('Attendance Statues Edited Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
@@ -126,6 +126,8 @@ edit(details : AttendanceReportDetailsByStudent){
       }
       },
      error => {
+      this.dialog.closeAll();
+
       this.snackBar.open('Attendance Statues Editing Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
     });
   }
@@ -135,9 +137,9 @@ ngOnDestroy(): void {
 // this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();
 }
 itemClicked(item:MenuItem) {
-  console.log('here');
+  // console.log('here');
   this.router.navigateByUrl('/attendancereportsbystudent-management/attendane-report-by-student');
-  // if (item.label == 'Attendance_By_Lecture') {
+  // if (item== 'Attendance_By_Lecture') {
   //   console.log('here');
   //   this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
   // } 

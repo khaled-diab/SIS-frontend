@@ -79,13 +79,13 @@ export class EditStatuesComponent implements OnInit {
     }
   );
 }
-save(): void {
-  console.log('attendance model ', this.attendaceReportModdel);
-  this.lectureReportService.editattendanceStatues(this.data).subscribe(value => {
+// save(): void {
+//   console.log('attendance model ', this.attendaceReportModdel);
+//   this.lectureReportService.editattendanceStatues(this.data).subscribe(value => {
     
-    this.lectureReportService.closeSaveEvent.next();
-  });
-}
+//     this.lectureReportService.closeSaveEvent.next();
+//   });
+// }
 cancel(): void {
   this.lectureReportService.closeSaveEvent.next('Cancel');
 

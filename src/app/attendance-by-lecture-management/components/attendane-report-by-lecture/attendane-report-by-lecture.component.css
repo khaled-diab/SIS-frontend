@@ -119,3 +119,14 @@ table {
 ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
    stroke: var(--secondary-color)!important;
 }
+
+
+.mid-grid .lec-info{
+  text-align: left;
+    width: 100%;
+    margin: 20px auto;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

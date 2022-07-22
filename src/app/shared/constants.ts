@@ -52,7 +52,7 @@ export class Constants {
    public static readonly deleteSectionUrl = environment.baseURL + '/sections/delete/';
    public static readonly SectionByIdUrl = environment.baseURL + '/sections/';
    public static readonly sectionsByCourseIdUrl = environment.baseURL + '/sections/SectionsByCourseId/';
-
+   public static readonly sectionsByFacultyMemberUrl = environment.baseURL + '/sections/getFacultyMemberSections/';
    // Timetable URLs
    public static readonly searchTimetableUrl = environment.baseURL + '/timetables/search/';
    public static readonly filterTimetableUrl = environment.baseURL + '/timetables/filter/';
@@ -108,7 +108,7 @@ export class Constants {
    // Attendane Details By Lectures
    public static readonly studentAttendanceReport = environment.baseURL + '/attendanceDetails/getAttendancesByLectureId';
    public static readonly lecturesReport = environment.baseURL + '/lectures/getFacultyMemberLecturesToReport';
-   public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/update';
+   public static readonly attendanceDetails = environment.baseURL + '/attendanceDetails/updateReport';
    // Attendane Details By Student
    public static readonly studentReport = environment.baseURL + '/attendanceDetails/getAttendancesBySectionId';
    public static readonly studentReportDetails =

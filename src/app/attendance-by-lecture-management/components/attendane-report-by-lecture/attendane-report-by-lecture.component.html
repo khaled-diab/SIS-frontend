@@ -1,8 +1,8 @@
 <div class="p-3">
     <app-attendane-report-by-lecture-filter></app-attendane-report-by-lecture-filter>
 
-      <div class="d-flex justify-content-end mt-6">
-        <div *ngIf="tableData" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
+      <div class="d-flex justify-content-end mt-6 mid-grid">
+        <div *ngIf="tableData" class="row-12 lec-info">
            <h3  >{{'Lectures Number: '+LectureNumber}}</h3>
            <h3  >{{'Attendance Average: '}}{{x | number :'1.0-2'}}{{' %'}}</h3>
            <h3  >{{'Total Lectures: '+totalLectures}}</h3>

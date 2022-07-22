@@ -6,16 +6,7 @@ mat-card {
 /* mat-form-field {
   width: 60%;
 } */
-button {
-   padding: 5px;
-   background-color: var(--main-color);
-   margin-bottom: 10px;
-}
 
-button:hover {
-   padding: 5px;
-   background-color: var(--main-color);
-}
 .subTitle h4 {
   color: var(--main-color);
   font-size: 30px;
@@ -188,4 +179,14 @@ button[type="button"]:hover {
   color: var(--main-color);
   padding: 4px;
 
+}
+
+button{
+  padding: 7px 10px;
+  background-color: var(--main-color);
+    width: 100px;
+}
+button:hover{
+  padding: 5px;
+  background-color: var(--main-color);
 }
