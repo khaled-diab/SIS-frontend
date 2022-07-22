@@ -75,7 +75,8 @@ export class EditStatuesComponent implements OnInit {
           });
         }
         this.snackBar.open('Attendace Statues Edited Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
-        
+        this.studentReportService.closeSaveEvent.next();
+
       }
     );
   }
