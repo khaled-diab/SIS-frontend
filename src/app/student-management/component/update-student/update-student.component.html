@@ -1,6 +1,3 @@
-
-
-
 <!--       Wrapped Content   -->
 <div class="main-content">
    <div class="container">
@@ -18,11 +15,11 @@
 
             <!--  Submition Form   -->
             <div class="row">
-               <form class="submition-form col-sm-12 col-lg-8" [formGroup]="form" id="form" (ngSubmit)="update()" >
+               <form class="submition-form col-sm-12 " [formGroup]="form" id="form" (ngSubmit)="update()">
                   <div class="form-row">
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
                         <mat-label>Arabic Name</mat-label>
-                        <input     formControlName="nameAr"   matInput name="arabicName" required>
+                        <input formControlName="nameAr" matInput name="arabicName" required>
                         <mat-error *ngIf="form.controls['nameAr']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.controls['nameAr']?.errors?.pattern">Arabic Letters only</mat-error>
                         <mat-error *ngIf="form.get('nameAr')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -32,7 +29,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>English Name</mat-label>
-                        <input id="nameEn" formControlName="nameEn" matInput required >
+                        <input id="nameEn" formControlName="nameEn" matInput required>
                         <mat-error *ngIf="form.controls['nameEn']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.controls['nameEn']?.errors?.pattern"> English Letters only</mat-error>
                         <mat-error *ngIf="form.get('nameEn')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -41,7 +38,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input">
                         <mat-label>University Id</mat-label>
-                        <input #universityId   formControlName="universityId" matInput name="universityId" required>
+                        <input #universityId formControlName="universityId" matInput name="universityId" required>
                         <mat-error *ngIf="form.get('universityId')?.errors?.min">Invalid University Id</mat-error>
                         <mat-error *ngIf="form.controls['universityId']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('universityId')?.errors?.pattern">Invalid University Id</mat-error>
@@ -49,10 +46,10 @@
 
                      </mat-form-field>
 
-                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input" >
-                        <mat-label >College</mat-label>
+                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                        <mat-label>College</mat-label>
 
-                        <mat-select  #collegeSelect [formControlName]="'collegeMenu'"  required >
+                        <mat-select #collegeSelect [formControlName]="'collegeMenu'" required>
                            <mat-option *ngFor="let col of colleges" [value]="col.id">
                               {{col.nameEn}}
                            </mat-option>
@@ -61,14 +58,14 @@
 
                      </mat-form-field>
 
-                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input" >
-                        <mat-label >Department</mat-label>
+                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">
+                        <mat-label>Department</mat-label>
 
-                        <mat-select #departmentSelect  [value]="defDept"    [formControlName]="'departmentMenu'"   required  >
+                        <mat-select #departmentSelect [value]="defDept" [formControlName]="'departmentMenu'" required>
                            <!--                  <mat-option *ngIf="deptOption" [value]="1">-->
                            <!--                    None-->
                            <!--                  </mat-option>-->
-<!--                           <mat-option [value]="-1" >Choose Department</mat-option>-->
+                           <!--                           <mat-option [value]="-1" >Choose Department</mat-option>-->
                            <mat-option *ngFor="let dept of departments" [value]="dept.id">
                               {{dept?.nameEn}}
                            </mat-option>
@@ -78,7 +75,7 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>Academic Program</mat-label>
-                        <mat-select #programSelect [value]="defProg"    formControlName="programMenu"  >
+                        <mat-select #programSelect [value]="defProg" formControlName="programMenu">
                            <mat-option [value]="-1">Choose Program</mat-option>
 
                            <mat-option *ngFor="let program of programs" [value]="program.id">
@@ -98,20 +95,20 @@
 
                      </mat-form-field>
 
-<!--                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
-<!--                        <mat-label>Year</mat-label>-->
-<!--                        <mat-select    formControlName="year"  required >-->
-<!--                           <mat-option *ngFor="let year of years" [value]="year">-->
-<!--                              {{year}}-->
-<!--                           </mat-option>-->
-<!--                        </mat-select>-->
-<!--                        <mat-error *ngIf="form.get('year')?.errors?.required">Required</mat-error>-->
-<!--                     </mat-form-field>-->
+                     <!--                     <mat-form-field appearance="outline" class="col-md-6 select-sm col-sm-12 form-input">-->
+                     <!--                        <mat-label>Year</mat-label>-->
+                     <!--                        <mat-select    formControlName="year"  required >-->
+                     <!--                           <mat-option *ngFor="let year of years" [value]="year">-->
+                     <!--                              {{year}}-->
+                     <!--                           </mat-option>-->
+                     <!--                        </mat-select>-->
+                     <!--                        <mat-error *ngIf="form.get('year')?.errors?.required">Required</mat-error>-->
+                     <!--                     </mat-form-field>-->
 
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label> Nationality</mat-label>
-                        <input #nationality  formControlName="nationality" matInput name="nationality" required>
+                        <input #nationality formControlName="nationality" matInput name="nationality" required>
                         <mat-error *ngIf="form.controls['nationality']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('nationality')?.errors?.pattern">Invalid Nationality</mat-error>
                         <mat-error *ngIf="form.get('nationality')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -127,7 +124,8 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label>University Mail</mat-label>
-                        <input type="email" #universityMail  formControlName="universityMail" matInput name="universityMail" required>
+                        <input type="email" #universityMail formControlName="universityMail" matInput
+                               name="universityMail" required>
                         <mat-error *ngIf="form.controls['universityMail']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('universityMail')?.errors?.email">Invalid Email</mat-error>
                         <mat-error *ngIf="form.get('universityMail')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -143,13 +141,14 @@
                      </div>
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
                         <mat-label> Birth Date</mat-label>
-                        <input type="date" #birthDate placeholder="DOB(DD/MM/YYYY)"   formControlName="birthDate" matInput name="birthDate" required >
+                        <input type="date" #birthDate placeholder="DOB(DD/MM/YYYY)" formControlName="birthDate" matInput
+                               name="birthDate" required>
                         <mat-error *ngIf="form.controls['birthDate']?.errors?.required"> Required</mat-error>
 
                      </mat-form-field>
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label> Mobile Number</mat-label>
-                        <input    formControlName="phone" matInput required>
+                        <input formControlName="phone" matInput required>
                         <mat-error *ngIf="form.controls['phone']?.errors?.required"> Required</mat-error>
                         <mat-error *ngIf="form.get('phone')?.errors?.pattern">Invalid Mobile Number</mat-error>
                         <mat-error *ngIf="form.get('phone')?.errors?.serverError">{{errorMessage}}</mat-error>
@@ -158,64 +157,68 @@
 
                      <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
                         <mat-label>Alternative Mail</mat-label>
-                        <input type="email" #alternativeMail   formControlName="alternativeMail" matInput name="alternativeMail" >
+                        <input type="email" #alternativeMail formControlName="alternativeMail" matInput
+                               name="alternativeMail">
                         <mat-error *ngIf="form.get('alternativeMail')?.errors?.email">Invalid Email</mat-error>
                         <mat-error *ngIf="form.get('alternativeMail')?.errors?.serverError">{{errorMessage}}</mat-error>
 
                      </mat-form-field>
 
                      <mat-form-field appearance="outline" class="col-md-6 mr-auto col-sm-12 form-input">
-                        <mat-label >Parent Mobile no.</mat-label>
-                        <input #parentPhone  formControlName="parentPhone" matInput name="parentPhone" >
+                        <mat-label>Parent Mobile no.</mat-label>
+                        <input #parentPhone formControlName="parentPhone" matInput name="parentPhone">
                         <mat-error *ngIf="form.get('parentPhone')?.errors?.pattern">Invalid Mobile Number</mat-error>
                         <mat-error *ngIf="form.get('parentPhone')?.errors?.serverError">{{errorMessage}}</mat-error>
 
                      </mat-form-field>
 
 
-
-
                      <div class="col-12">
-                        <div class="col-md-3 mr-auto col-sm-12 form-input" *ngIf="!isDisabled && data.sel===1 ;else editBtn">
-                           <button mat-raised-button type="submit" form="form"   class="btn btn-primary form-control" [disabled]="form.invalid " [ngClass]="{'disabled-btn':form.invalid}">Update</button>
+                        <div class="col-md-3 mr-auto col-sm-12 form-input"
+                             *ngIf="!isDisabled && data.sel===1 ;else editBtn">
+                           <button mat-raised-button type="submit" form="form" class="btn btn-primary form-control"
+                                   [disabled]="form.invalid " [ngClass]="{'disabled-btn':form.invalid}">Update
+                           </button>
                         </div>
                         <ng-template #editBtn>
                            <div class="col-md-3 mr-auto col-sm-12 form-input">
-                              <button mat-raised-button type="button"  (click)="edit()"   class="btn btn-primary form-control" >Edit</button>
+                              <button mat-raised-button type="button" (click)="edit()"
+                                      class="btn btn-primary form-control">Edit
+                              </button>
                            </div>
                         </ng-template>
                         <div class="col-md-3 mr-auto col-sm-12 form-input">
-                           <button mat-raised-button type="button"  (click)="cancel()"   class="btn btn-primary form-control" >Cancel</button>
+                           <button mat-raised-button type="button" (click)="cancel()"
+                                   class="btn btn-primary form-control">Cancel
+                           </button>
                         </div>
                      </div>
                   </div>
                </form>
 
 
-               <!--  Change Personal Image       -->
-               <div class="change-img col-sm-12 col-lg-4">
-                  <ul class="">
-                     <li>
-                        <h5>Personal Picture</h5>
-                     </li>
-                     <li class="imgBox">
-                        <img [src]="url" alt= ""#img>
-                     </li>
-                     <li class="choose-img">
-                        <div class="add-file">
-                           <input #photoInput (change)="onChange()"  type="file" id="imageFile" accept="image/*">
-                           <label *ngIf="this.data.sel===1" for="imageFile">Choose an Image</label>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
+               <!--               &lt;!&ndash;  Change Personal Image       &ndash;&gt;-->
+               <!--               <div class="change-img col-sm-12 col-lg-4">-->
+               <!--                  <ul class="">-->
+               <!--                     <li>-->
+               <!--                        <h5>Personal Picture</h5>-->
+               <!--                     </li>-->
+               <!--                     <li class="imgBox">-->
+               <!--                        <img [src]="url" alt= ""#img>-->
+               <!--                     </li>-->
+               <!--                     <li class="choose-img">-->
+               <!--                        <div class="add-file">-->
+               <!--                           <input #photoInput (change)="onChange()"  type="file" id="imageFile" accept="image/*">-->
+               <!--                           <label *ngIf="this.data.sel===1" for="imageFile">Choose an Image</label>-->
+               <!--                        </div>-->
+               <!--                     </li>-->
+               <!--                  </ul>-->
+               <!--               </div>-->
 
             </div>
 
 
-
          </div>
-
 
 
       </div>

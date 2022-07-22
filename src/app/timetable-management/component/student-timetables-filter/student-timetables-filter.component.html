@@ -1,9 +1,9 @@
 <mat-card class="mat-elevation-z8">
    <div class="timetable">
-      <mat-button-toggle-group class="timetable">
+      <div class="timetable">
          <button *ngFor='let day of this.days' class="mainBtn btn btn-primary form-control" (click)="select(day)" mat-raised-button
                  [ngClass]="{'mainBtn2':flags.get(day)}"
                             [value]="day">{{day}} </button>
-      </mat-button-toggle-group>
+      </div>
    </div>
 </mat-card>

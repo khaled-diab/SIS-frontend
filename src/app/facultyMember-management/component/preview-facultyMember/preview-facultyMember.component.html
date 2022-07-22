@@ -15,7 +15,7 @@
 
         <!--  submission Form   -->
         <div class="row">
-          <form (ngSubmit)="update()" [formGroup]="form" class="submission-form col-sm-12 col-lg-8" id="form">
+          <form (ngSubmit)="update()" [formGroup]="form" class="submission-form col-sm-12 " id="form">
             <div class="form-row">
 
               <mat-form-field appearance="outline" class="col-md-6 col-sm-12  form-input outline ">
@@ -139,24 +139,24 @@
             </div>
           </form>
 
-          <!--  Change Personal Image       -->
-          <div class="change-img col-sm-12 col-lg-4">
-            <ul class="">
-              <li>
-                <h5>Personal Picture</h5>
-              </li>
-              <li class="imgBox">
-                <img [src]="url" alt=" " #img>
-              </li>
-              <li class="choose-img">
-                <div class="add-file">
-                  <input [disabled]="isDisabled" #photoInput (change)="onChange()" type="file" id="imageFile"
-                         accept="image/*">
-                  <label *ngIf="!isDisabled" for="imageFile">Choose an Image</label>
-                </div>
-              </li>
-            </ul>
-          </div>
+<!--          &lt;!&ndash;  Change Personal Image       &ndash;&gt;-->
+<!--          <div class="change-img col-sm-12 col-lg-4">-->
+<!--            <ul class="">-->
+<!--              <li>-->
+<!--                <h5>Personal Picture</h5>-->
+<!--              </li>-->
+<!--              <li class="imgBox">-->
+<!--                <img [src]="url" alt=" " #img>-->
+<!--              </li>-->
+<!--              <li class="choose-img">-->
+<!--                <div class="add-file">-->
+<!--                  <input [disabled]="isDisabled" #photoInput (change)="onChange()" type="file" id="imageFile"-->
+<!--                         accept="image/*">-->
+<!--                  <label *ngIf="!isDisabled" for="imageFile">Choose an Image</label>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
         </div>
       </div>
     </div>

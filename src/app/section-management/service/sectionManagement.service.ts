@@ -71,6 +71,9 @@ export class SectionManagementService {
    getSectionById(id: number): Observable<MessageResponse> {
       return this.httpClient.get<MessageResponse>(Constants.SectionByIdUrl + id);
    }
+   getSection(id: number): Observable<SectionModel> {
+      return this.httpClient.get<SectionModel>(Constants.SectionByIdUrl + id);
+   }
 
    getSectionsByCourse(courseId: number): Observable<SectionModel[]> {
       return this.httpClient.get<SectionModel[]>(Constants.sectionsByCourseIdUrl + courseId);

@@ -45,6 +45,8 @@ import {ParentDashboardComponent} from './dashboard/component/parent-dashboard/p
 import {StudentDashboardComponent} from './dashboard/component/parent-dashboard/student-dashboard/student-dashboard.component';
 import {StaffDashboardComponent} from './dashboard/component/parent-dashboard/staff-dashboard/staff-dashboard.component';
 import {AdminDashboardComponent} from './dashboard/component/parent-dashboard/admin-dashboard/admin-dashboard.component';
+import {UpdatePasswordComponent} from './profile/component/update-password/update-password.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
    declarations: [
@@ -63,7 +65,8 @@ import {AdminDashboardComponent} from './dashboard/component/parent-dashboard/ad
       ParentDashboardComponent,
       StudentDashboardComponent,
       StaffDashboardComponent,
-      AdminDashboardComponent
+      AdminDashboardComponent,
+      UpdatePasswordComponent
    ],
    imports: [
       AppRoutingModule,
@@ -94,7 +97,8 @@ import {AdminDashboardComponent} from './dashboard/component/parent-dashboard/ad
       MatCardModule,
       TableModule,
       PaginatorModule,
-      ProgressSpinnerModule
+      ProgressSpinnerModule,
+      MatDialogModule
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true}, MessageService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
    bootstrap: [AppComponent],

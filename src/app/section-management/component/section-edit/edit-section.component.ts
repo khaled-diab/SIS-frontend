@@ -217,7 +217,7 @@ export class EditSectionComponent implements OnInit, OnDestroy {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '70%';
-      dialogConfig.height = '700px';
+      dialogConfig.height = '600px';
       dialogConfig.data = row;
       this.dialog.open(AddTimetableComponent, dialogConfig);
       this.timetableService.timetableAddEvent.pipe(take(1)).subscribe(value => {
@@ -240,7 +240,7 @@ export class EditSectionComponent implements OnInit, OnDestroy {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '70%';
-      dialogConfig.height = '700px';
+      dialogConfig.height = '600px';
       dialogConfig.data = row;
       this.dialog.open(EditSectionTimetableComponent, dialogConfig);
       this.timetableService.timetableUpdateEvent.pipe(take(1)).subscribe(value => {

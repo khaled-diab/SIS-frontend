@@ -10,53 +10,57 @@ import {CourseModel} from '../../shared/model/course-management/course-model';
 import {PageQueryUtil} from '../../shared/model/page-query';
 
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
 })
 export class CourseManagementService {
 
-  static coursesList: CourseModel[];
-  courseFilterEvent: Subject<CourseRequestModel> = new Subject<CourseRequestModel>();
-  courseSaveEvent: Subject<CourseModel> = new Subject<CourseModel>();
-  courseSaveCloseEvent: Subject<any> = new Subject<any>();
-  courseDeleteEvent: Subject<any> = new Subject<any>();
+   static coursesList: CourseModel[];
+   courseFilterEvent: Subject<CourseRequestModel> = new Subject<CourseRequestModel>();
+   courseSaveEvent: Subject<CourseModel> = new Subject<CourseModel>();
+   courseSaveCloseEvent: Subject<any> = new Subject<any>();
+   courseDeleteEvent: Subject<any> = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) {
-  }
+   constructor(private httpClient: HttpClient) {
+   }
 
-  public getCoursePage(pageNumber: number, pageSize: number, courseRequestModel: CourseRequestModel):
-    Observable<PageRequest<CourseModel>> {
-    return this.httpClient.post<PageRequest<CourseModel>>(Constants.coursePageUrl + pageNumber + '/' + pageSize, courseRequestModel);
-  }
+   public getCoursePage(pageNumber: number, pageSize: number, courseRequestModel: CourseRequestModel):
+      Observable<PageRequest<CourseModel>> {
+      return this.httpClient.post<PageRequest<CourseModel>>(Constants.coursePageUrl + pageNumber + '/' + pageSize, courseRequestModel);
+   }
 
-  public getAllCourses(pageNumber: number, pageSize: number):
-    Observable<PageRequest<CourseModel>> {
-    const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
-    return this.httpClient.post<PageRequest<CourseModel>>(Constants.coursePageUrl, pageQuery);
-  }
+   public getAllCourses(pageNumber: number, pageSize: number):
+      Observable<PageRequest<CourseModel>> {
+      const pageQuery = new PageQueryUtil(pageNumber + 1, pageSize);
+      return this.httpClient.post<PageRequest<CourseModel>>(Constants.coursePageUrl, pageQuery);
+   }
 
-  public saveCourse(course: CourseModel): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(Constants.saveCourseUrl, course);
-  }
+   public saveCourse(course: CourseModel): Observable<MessageResponse> {
+      return this.httpClient.post<MessageResponse>(Constants.saveCourseUrl, course);
+   }
 
-  constructCourseRequestObject(sort: Sort, courseRequestModel: CourseRequestModel): CourseRequestModel {
-    if (sort.direction === 'asc') {
-      courseRequestModel.sortDirection = Constants.ASC;
-    } else if (sort.direction === 'desc') {
-      courseRequestModel.sortDirection = Constants.DESC;
-    } else {
-      courseRequestModel.sortDirection = null;
-    }
-    courseRequestModel.sortBy = sort.active;
-    return courseRequestModel;
-  }
+   constructCourseRequestObject(sort: Sort, courseRequestModel: CourseRequestModel): CourseRequestModel {
+      if (sort.direction === 'asc') {
+         courseRequestModel.sortDirection = Constants.ASC;
+      } else if (sort.direction === 'desc') {
+         courseRequestModel.sortDirection = Constants.DESC;
+      } else {
+         courseRequestModel.sortDirection = null;
+      }
+      courseRequestModel.sortBy = sort.active;
+      return courseRequestModel;
+   }
 
-  deleteCourse(id: number): Observable<MessageResponse> {
-    console.log('service' + id);
-    return this.httpClient.get<MessageResponse>(Constants.deleteCourseUrl + id);
-  }
+   deleteCourse(id: number): Observable<MessageResponse> {
+      console.log('service' + id);
+      return this.httpClient.get<MessageResponse>(Constants.deleteCourseUrl + id);
+   }
 
-  getCoursesByDepartment(departmentId: number): Observable<CourseModel[]> {
-     return this.httpClient.get<CourseModel[]>(Constants.coursesByDepartmentIdUrl + departmentId);
-  }
+   getCoursesByDepartment(departmentId: number): Observable<CourseModel[]> {
+      return this.httpClient.get<CourseModel[]>(Constants.coursesByDepartmentIdUrl + departmentId);
+   }
 
+   public getCourse(id: number): Observable<CourseModel> {
+      return this.httpClient.get<CourseModel>(Constants.getCourseById + '/' + id);
+
+   }
 }

@@ -33,16 +33,16 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
    errorr = false;
    errorMessage: string;
    @ViewChild('arabicName') arabicName: NgModel;
-   @ViewChild('photoInput') photoInput: ElementRef;
+   // @ViewChild('photoInput') photoInput: ElementRef;
    @ViewChild('collegeSelect', {static: true}) collegeSelect: MatSelect;
    @ViewChild('departmentSelect', {static: true}) departmentSelect: MatSelect;
    @ViewChild('programSelect', {static: true}) programSelect: MatSelect;
    deptOption = false;
    @ViewChild('img') img: ElementRef;
    form: FormGroup;
-   photoFile: any;
-   url: string;
-   imgFlage = 0;
+   // photoFile: any;
+   // url: string;
+   // imgFlage = 0;
    title = 'Update Student';
    defProg = -1;
    defDept = -1;
@@ -64,9 +64,8 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
       }
 
       this.student = this.data.st;
-      console.log(this.student.user);
 
-      this.url = Constants.StudentImgUrl + this.student.photo;
+      // this.url = Constants.StudentImgUrl + this.student.photo;
       //
       this.form = new FormGroup({
             nameEn: new FormControl(this.student.nameEn, Validators.compose([Validators.required,
@@ -87,7 +86,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
             parentPhone: new FormControl(this.student.parentPhone, Validators.pattern(Constants.DIGITS_ONLY_11)),
             level: new FormControl(this.student.level),
             // year: new FormControl(this.student.year, Validators.required),
-            photo: new FormControl(this.student.photo),
+            // photo: new FormControl(this.student.photo),
             collegeMenu: new FormControl(this.student.collegeDTO.id, Validators.required),
             departmentMenu: new FormControl(this.student.departmentDTO?.id, Validators.required),
             programMenu: new FormControl(this.student.academicProgramDTO?.id),
@@ -146,8 +145,6 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
 
 
       if (this.form.valid) {
-      }
-      {
          this.student.nameEn = this.form.get('nameEn')?.value.trim();
          this.student.nameAr = this.form.get('nameAr')?.value.trim();
          this.student.universityId = this.form.get('universityId')?.value;
@@ -160,7 +157,7 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          this.student.parentPhone = this.form.get('parentPhone')?.value;
          this.student.level = this.form.get('level')?.value;
          // this.student.year = this.form.get('year')?.value;
-         this.student.photo = this.form.get('photo')?.value;
+         // this.student.photo = this.form.get('photo')?.value;
          this.student.collegeDTO.id = this.form.get('collegeMenu')?.value;
          // this.student.departmentDTO = new DepartmentModel();
          this.student.academicProgramDTO = new AcademicProgramModel();
@@ -176,12 +173,12 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
          this.student.id = this.data.st.id;
          console.log(this.student);
 
-         if (this.imgFlage === 1) {
-            this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
-            this.student.photo = this.form.get('photo')?.value;
-            this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe();
-            this.imgFlage = 0;
-         }
+         // if (this.imgFlage === 1) {
+         //    this.form.controls.photo.setValue('Student-' + this.student.id + this.photoInput.nativeElement.files[0].name);
+         //    this.student.photo = this.form.get('photo')?.value;
+         //    this.studentManagementService.upload(this.photoFile, this.student.photo).pipe(take(1)).subscribe();
+         //    this.imgFlage = 0;
+         // }
 
          this.studentManagementService.updateStudent(this.student).subscribe(() => {
                this.snackBar.open('Student Updated Successfully', undefined, {
@@ -217,14 +214,14 @@ export class UpdateStudentComponent implements OnInit, AfterViewInit {
       this.studentManagementService.studentCloseUpdateEvent.next();
    }
 
-   onChange(): void {
-      this.photoFile = this.photoInput.nativeElement.files[0];
-      this.studentManagementService.upload(this.photoFile, 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
-            this.url = Constants.StudentImgUrl + 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name;
-         }
-      );
-      this.imgFlage = 1;
-   }
+   // onChange(): void {
+   //    this.photoFile = this.photoInput.nativeElement.files[0];
+   //    this.studentManagementService.upload(this.photoFile, 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name).pipe(take(1)).subscribe(() => {
+   //          this.url = Constants.StudentImgUrl + 'Student-' + this.student.id + this.photoInput.nativeElement.files[0].name;
+   //       }
+   //    );
+   //    this.imgFlage = 1;
+   // }
 }
 
 

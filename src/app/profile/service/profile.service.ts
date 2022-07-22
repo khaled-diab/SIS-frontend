@@ -10,12 +10,20 @@ import {MessageResponse} from '../../shared/model/message-response';
 export class ProfileService {
 
    public updateProfilePictureEvent: Subject<string> = new Subject<string>();
+   closeUpdatePasswordEvent: Subject<any> = new Subject<any>();
 
    constructor(private http: HttpClient) {
    }
 
    public uploadProfilePicture(event: any, email: string): Observable<MessageResponse> {
       const file: File = event.files.pop();
+      const formData = new FormData();
+      formData.append('file', file, file.name.replaceAll('-', ''));
+      formData.append('email', email);
+      return this.http.post<MessageResponse>(Constants.uploadProfilePicture, formData);
+   }
+   public uploadProfilePictureNoEvent(image: any, email: string): Observable<MessageResponse> {
+      const file: File = image;
       const formData = new FormData();
       formData.append('file', file, file.name.replaceAll('-', ''));
       formData.append('email', email);

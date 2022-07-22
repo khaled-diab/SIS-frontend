@@ -15,7 +15,6 @@ import {FacultyMemberTableRecordsModel} from '../../shared/model/facultyMember-m
 })
 export class FacultyMemberManagementService {
 
-   static facultyMembersList: FacultyMemberModel[];
    facultyMemberFilterEvent: Subject<FacultyMemberRequestModel> = new Subject<FacultyMemberRequestModel>();
    facultyMemberDeleteEvent: Subject<any> = new Subject<any>();
    facultyMemberCloseUpdateEvent: Subject<any> = new Subject<any>();
@@ -23,12 +22,13 @@ export class FacultyMemberManagementService {
    constructor(private httpClient: HttpClient) {
    }
 
-   public searchFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
-      Observable<PageRequest<FacultyMemberModel>> {
-      console.log(pageNumber, pageSize);
-      return this.httpClient.post<PageRequest<FacultyMemberModel>>
-      (Constants.searchFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
-   }
+   //
+   // public searchFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
+   //    Observable<PageRequest<FacultyMemberModel>> {
+   //    console.log(pageNumber, pageSize);
+   //    return this.httpClient.post<PageRequest<FacultyMemberModel>>
+   //    (Constants.searchFacultyMemberUrl + (pageNumber + 1) + '/' + pageSize, facultyMemberRequestModel);
+   // }
 
    public filterFacultyMembers(pageNumber: number, pageSize: number, facultyMemberRequestModel: FacultyMemberRequestModel):
       Observable<PageRequest<FacultyMemberTableRecordsModel>> {
@@ -54,7 +54,6 @@ export class FacultyMemberManagementService {
    }
 
    updateFacultyMember(facultyMember: FacultyMemberModel): Observable<MessageResponse> {
-      // facultyMember.user.role = new RoleModel();
       return this.httpClient.post<MessageResponse>(Constants.saveFacultyMemberUrl, facultyMember);
    }
 
@@ -62,15 +61,15 @@ export class FacultyMemberManagementService {
       return this.httpClient.get<MessageResponse>(Constants.deleteFacultyMemberUrl + id);
    }
 
-   facultyMemberById(id: number): Observable<MessageResponse> {
-      return this.httpClient.get<MessageResponse>(Constants.facultyMemberByIdUrl + id);
+   facultyMemberById(id: number): Observable<FacultyMemberModel> {
+      return this.httpClient.get<FacultyMemberModel>(Constants.facultyMemberByIdUrl + id);
    }
 
-   upload(selectedFile: File, name: string): Observable<string[]> {
-      const uploadImageData = new FormData();
-      uploadImageData.append('files', selectedFile, name);
-      return this.httpClient.post<string[]>(Constants.uploadFacultyMemberImgUrl, uploadImageData, {});
-   }
+   // upload(selectedFile: File, name: string): Observable<string[]> {
+   //    const uploadImageData = new FormData();
+   //    uploadImageData.append('files', selectedFile, name);
+   //    return this.httpClient.post<string[]>(Constants.uploadFacultyMemberImgUrl, uploadImageData, {});
+   // }
 
    public getAllDegrees():
       Observable<DegreeModel[]> {

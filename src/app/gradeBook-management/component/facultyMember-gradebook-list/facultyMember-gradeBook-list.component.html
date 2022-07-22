@@ -1,0 +1,104 @@
+<div class="p-3">
+   <div class="container">
+      <app-facultyMember-gradeBook-filter></app-facultyMember-gradeBook-filter>
+      <div *ngIf="gradeBooks" class="mat-elevation-z8 mt-3 full-width-table">
+         <mat-table [dataSource]="gradeBooks" aria-label="Elements">
+
+            <!-- Number Column -->
+            <ng-container matColumnDef="No.">
+               <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+               <mat-cell *matCellDef="let row; let i=index">{{i + 1}}</mat-cell>
+            </ng-container>
+
+            <!-- university_id Column -->
+            <ng-container matColumnDef="university_id">
+               <mat-header-cell *matHeaderCellDef>University Id
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row">{{row.studentDTO.universityId}}</mat-cell>
+            </ng-container>
+
+            <!-- name_ar Column -->
+            <ng-container matColumnDef="name_ar">
+               <mat-header-cell *matHeaderCellDef>Name Ar
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row">{{row.studentDTO.nameAr}}</mat-cell>
+            </ng-container>
+
+            <!-- finalExamGrade Column -->
+            <ng-container matColumnDef="finalExamGrade">
+               <mat-header-cell *matHeaderCellDef>Final Exam Grade
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.finalExamGrade}}{{')'}}
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].finalExamGrade"
+                                                                   matInput
+                                                                   min="0" type="number">
+               </mat-cell>
+            </ng-container>
+
+            <!-- practicalGrade Column -->
+            <ng-container matColumnDef="practicalGrade">
+               <mat-header-cell *matHeaderCellDef>Practical Grade
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.practicalGrade}}{{')'}}
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].practicalGrade"
+                                                                   matInput min="0"
+                                                                   type="number">
+               </mat-cell>
+            </ng-container>
+
+            <!-- oralGrade Column -->
+            <ng-container matColumnDef="oralGrade">
+               <mat-header-cell *matHeaderCellDef>Oral Grade
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.oralGrade}}{{')'}}
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].oralGrade"
+                                                                   matInput min="0"
+                                                                   type="number">
+               </mat-cell>
+            </ng-container>
+
+            <!-- midGrade Column -->
+            <ng-container matColumnDef="midGrade">
+               <mat-header-cell *matHeaderCellDef>Mid Grade
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.midGrade}}{{')'}}
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row; let i=index"><input [(ngModel)]="gradeBooks[i].midGrade"
+                                                                   matInput min="0"
+                                                                   type="number"></mat-cell>
+            </ng-container>
+
+            <!-- totalGrade Column -->
+            <ng-container matColumnDef="totalGrade">
+               <mat-header-cell *matHeaderCellDef>Total Grade
+                  <br>{{'('}}{{this.sectionDTO?.courseDTO?.finalGrade}}{{')'}}
+               </mat-header-cell>
+               <mat-cell
+                  *matCellDef="let row">{{row.practicalGrade + row.midGrade + row.finalExamGrade + row.oralGrade}}
+               </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+         </mat-table>
+         <mat-paginator #paginator
+                        (page)="pageChangeEvent($event)"
+                        [length]="totalCount"
+                        [pageIndex]="pageIndex"
+                        [pageSizeOptions]="[1, 5, 10, 25, 50]"
+                        [pageSize]="defaultPageSize"
+                        aria-label="Select page"
+                        showFirstLastButtons>
+         </mat-paginator>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+         <div class="col-60">
+            <div appearance="outline" class="col-md-3 col-sm-12 form-input">
+               <button (click)="save()" class="btn btn-primary form-control" mat-raised-button type="button">Save
+               </button>
+            </div>
+         </div>
+      </div>
+
+   </div>
+</div>
