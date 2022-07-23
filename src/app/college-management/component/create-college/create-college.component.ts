@@ -11,6 +11,7 @@ export class CreateCollegeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
 }
