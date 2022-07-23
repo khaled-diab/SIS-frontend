@@ -1,16 +1,27 @@
 <div class="p-3">
   <div class="container">
 
-  <p-breadcrumb [model]="items" (onItemClick)="itemClicked($event)"></p-breadcrumb>
+  <p-breadcrumb  [model]="items" (onItemClick)="itemClicked($event)"></p-breadcrumb>
 
   </div>
-      <div class="d-flex justify-content-end mt-6">
+      <!-- <div class="d-flex justify-content-end mt-6">
         <div *ngIf="tableData" class="row-12 " style="text-align: center; width: 100%;   margin-top: 20px;">
            <h3  >{{'Course Name: '+CourseName +': Section'+SectionNumber}}</h3>
            <h3 >{{'Student Name: '+StudentName}}</h3>
         </div>
-     </div>
-          
+     </div> -->
+     <div class="mid-grid" *ngIf="tableData" >
+      <div class="grid-item">
+        <h3>{{'Course Name: '}}</h3>
+        <p>{{CourseName +': Section'+SectionNumber}}</p>
+      </div>
+      <div class="grid-item">
+        <h3>{{'Student Name: '}}</h3>
+        <p>{{StudentName}}</p>
+      </div>
+    
+  
+  </div>
 
         <div *ngIf="tableData" class="mat-elevation-z8 mt-3 full-width-table">
           <mat-table [dataSource]="dataSource" aria-label="Elements" matSort>

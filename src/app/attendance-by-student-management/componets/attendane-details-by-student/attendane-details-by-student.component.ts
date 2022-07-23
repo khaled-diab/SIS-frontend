@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MenuItem } from 'primeng/api';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AttendaneReportByLectureService } from 'src/app/attendance-by-lecture-management/service/attendane-report-by-lecture.service';
 import { AttendanceReportByStudentManagementModel } from 'src/app/shared/model/attendanceReportByStudent-management/attendance-report-by-Student-management-model';
@@ -72,14 +72,14 @@ this.StudentName=this.activatedRoute.snapshot.params['studentName'];
     this.dataSource = new MatTableDataSource<any>();
     this.Subscription();
     this.items = [
-      {label: 'Attendance_Reports'},
-      {label: 'Attendance_By_Student'},
-      {label: 'Student_Details'},
+      {label: 'Attendance Reports'},
+      {label: 'Attendance By Student'},
+      {label: 'Student Details'},
       
      
   ];
-    
-}
+
+  }
 
 private Subscription():Subscription[]{
   this.subscriptionsList.push(this.filterEventSubscription());
@@ -136,13 +136,14 @@ edit(details : AttendanceReportDetailsByStudent){
 ngOnDestroy(): void {
 // this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();
 }
-itemClicked(item:MenuItem) {
-  // console.log('here');
-  this.router.navigateByUrl('/attendancereportsbystudent-management/attendane-report-by-student');
-  // if (item== 'Attendance_By_Lecture') {
-  //   console.log('here');
-  //   this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
-  // } 
+itemClicked(event:any) {
+  console.log(event.item.label);
+
+  // this.router.navigateByUrl('/attendancereportsbystudent-management/attendane-report-by-student');
+  if (event.item.label== "Attendance By Student") {
+    console.log('here');
+    this.router.navigateByUrl('/attendancereportsbystudent-management/attendane-report-by-student');
+  } 
 };
 
 
