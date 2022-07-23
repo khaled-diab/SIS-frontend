@@ -2,7 +2,7 @@
   <app-academic-program-filter></app-academic-program-filter>
   <div class="d-flex justify-content-end mt-3">
     <div class="col-1">
-      <button (click)="addOrUpdateAcademicProgram(academicProgramModel)" class="align-content-center" mat-icon-button>
+      <button (click)="addOrUpdateAcademicProgram(academicProgramModel, 'add')" class="align-content-center" mat-icon-button>
         <mat-icon class="add" matTooltip="Add Academic Program" matTooltipPosition="above">add_circle</mat-icon>
       </button>
     </div>
@@ -57,7 +57,7 @@
             <button (click)="viewAcademicProgram(row)" mat-icon-button>
               <mat-icon class="eye">visibility</mat-icon>
             </button>
-            <button (click)="addOrUpdateAcademicProgram(row)" mat-icon-button>
+            <button (click)="addOrUpdateAcademicProgram(row,'update')" mat-icon-button>
               <mat-icon class="user-edit">edit</mat-icon>
             </button>
             <button (click)="deleteAcademicProgram(row)" mat-icon-button>

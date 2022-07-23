@@ -61,15 +61,17 @@ export class AcademicProgramListComponent implements OnInit {
     this.subscriptionsList = this.subscriptions();
   }
 
-  
-  addOrUpdateAcademicProgram(academicProgram: AcademicProgramModel): void {
+
+  addOrUpdateAcademicProgram(academicProgram: AcademicProgramModel, sel: string): void {
+     sessionStorage.setItem('programData', JSON.stringify(academicProgram));
+     sessionStorage.setItem('programFlag', JSON.stringify(sel));
     if (this.isSmallScreen) {
       this.router.navigateByUrl('/academicprograms/create-academicProgaram', {state: this.academicProgramModel}).then(_ => console.log());
     } else {
       this.dialog.open(CreateAcademicProgramComponent, {data: academicProgram});
       this.academicProgramService.academicProgramSaveCloseEvent.pipe(take(1)).subscribe(e => {
         this.dialog.closeAll();
-    
+
         if (e !== 'Cancel') {
           this.snackBar.open('Academic Progaram Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
           console.log('here');
