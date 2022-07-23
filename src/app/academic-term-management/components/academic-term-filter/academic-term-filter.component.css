@@ -88,13 +88,6 @@ mat-form-field.input-field {
    animation: expand 5s 0.5s ease-in-out infinite;
 }
 
-mat-form-field.input-field button {
-  position: absolute;;
-  top: 0;
-  right: 0;
-  height: 100%;
-}
-
 form.form {
   width: 100%;
   /*margin: auto;*/
@@ -125,25 +118,11 @@ form.form {
   border-color: var(--main-color);
 }
 
-.search-box button:focus {
-  box-shadow: none;
-}
-
 mat-form-field {
   display: inline;
   width: 40%;
   margin-left: 20px;
   margin-top: 10px;
-}
-
-
-.search-box button {
-  background-color: var(--main-color);
-  border: none;
-}
-
-.search-box button:active {
-  background-color: var(--secondary-color);
 }
 
 .addBtn {
@@ -173,14 +152,4 @@ mat-form-field {
   color: var(--main-color);
   padding: 4px;
 
-}
-
-button{
-  padding: 7px 10px;
-  background-color: var(--main-color);
-    width: 100px;
-}
-button:hover{
-  padding: 5px;
-  background-color: var(--main-color);
 }

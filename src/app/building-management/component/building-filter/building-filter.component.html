@@ -2,23 +2,26 @@
    <div class="container">
       <div class="col-12">
          <div class="subTitle ">
-            <h4>System Management / Building Management</h4>
+            <h4>System Management / Building</h4>
             <hr>
          </div>
       </div>
       <form class="form-row form">
-         <div class="form-group col-6 search-box ">
-            <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
-                   name="filterValue" placeholder="Search here" type="text">
+         <div class="form-group col-md-6 col-sm-12 search-box">
+            <mat-form-field appearance="outline">
+               <mat-label>Search</mat-label>
+               <input matInput [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="searchInput" id="inputField"
+                      name="filterValue" type="search">
+            </mat-form-field>
          </div>
-         <div class="col-4 mt-1">
+         <div class="col-md-6 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
                <mat-label>College</mat-label>
                <mat-select #collegeSelect [value]="collegeSelectValue">
                   <mat-option [value]="undefined">
                      Choose College
                   </mat-option>
-                  <mat-option color="var(--main-color)" *ngFor="let college of colleges" [value]="college.id">
+                  <mat-option *ngFor="let college of colleges" [value]="college.id">
                      {{college.nameEn}}
                   </mat-option>
                </mat-select>

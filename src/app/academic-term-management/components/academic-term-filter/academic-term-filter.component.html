@@ -1,33 +1,35 @@
 <mat-card class="mat-elevation-z8">
-    <div class="container">
+   <div class="container">
       <div class="col-12">
-        <div class="subTitle ">
-          <h4>System Management / Academic Term</h4>
-          <hr>
-        </div>
+         <div class="subTitle ">
+            <h4>System Management / Academic Terms</h4>
+            <hr>
+         </div>
       </div>
       <form class="form-row form">
-        <div class="form-group col-6 search-box ">
-          <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
-                 name="filterValue" placeholder="Search here" type="text">
-          <!-- <button (click)="applyFilter()" class="btn btn-primary search-btn">Search</button> -->
-        </div>
-          <mat-form-field appearance="outline">
-            <mat-label>Academic Years</mat-label>
-            <mat-select #academicYearSelect>
-              <mat-option [value]="undefined">
-                Choose Academic Years
-              </mat-option>
-              <mat-option *ngFor="let aca of academicYears" [value]="aca.id">
-                {{aca.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-
-         <div appearance="outline" class="col-md-3 col-sm-12">
-            <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+         <div class="form-group col-md-6 col-sm-12 search-box">
+            <mat-form-field appearance="outline">
+               <mat-label>Search</mat-label>
+               <input matInput [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="searchInput"
+                      id="inputField" name="filterValue" type="search">
+            </mat-form-field>
+         </div>
+         <div class = "col-md-6 col-sm-12 mt-1">
+            <mat-form-field appearance="outline">
+               <mat-label>Academic Year</mat-label>
+               <mat-select #academicYearSelect>
+                  <mat-option [value]="undefined">
+                     Choose Academic Year
+                  </mat-option>
+                  <mat-option *ngFor="let aca of academicYears" [value]="aca.id">
+                     {{aca.name}}
+                  </mat-option>
+               </mat-select>
+            </mat-form-field>
          </div>
       </form>
-    </div>
-  </mat-card>
+      <div appearance="outline" class="col-md-3 col-sm-12">
+         <button (click)="resetFilter()" class="btn btn-info">Reset</button>
+      </div>
+   </div>
+</mat-card>

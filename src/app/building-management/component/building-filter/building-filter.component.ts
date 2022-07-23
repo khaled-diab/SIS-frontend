@@ -34,10 +34,10 @@ export class BuildingFilterComponent implements OnInit, AfterViewInit {
 
    resetFilter(): void {
       // this.buildingRequestModel = new ClassroomRequestModel(1, 10);
-      this.searchValue = ' ';
+      this.searchValue = '';
       this.filterValue = undefined;
       this.collegeSelectValue = undefined;
-      this.buildingManagementService.buildingFilterEvent.next([' ', undefined]);
+      this.buildingManagementService.buildingFilterEvent.next(['', undefined]);
    }
 
    ngAfterViewInit(): void {

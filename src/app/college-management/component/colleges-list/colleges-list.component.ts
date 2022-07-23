@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PageEvent} from '@angular/material/paginator';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {CollegeManagementService} from '../../service/college-management.service';
 import {Subscription} from 'rxjs';
 import {GeneralSearchRequest} from '../../../shared/model/general-search-request';
@@ -13,6 +13,16 @@ import {Router} from '@angular/router';
 import {ConfirmationService, MessageService, PrimeNGConfig} from 'primeng/api';
 import {LoadDataEvent} from '../../../shared/model/load-data-event';
 import {Constants} from '../../../shared/constants';
+import {Sort} from '@angular/material/sort';
+import {take} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {SaveBuildingComponent} from '../../../building-management/component/save-building/save-building.component';
+import {ViewBuildingComponent} from '../../../building-management/component/view-building/view-building.component';
+import {ViewCollegeComponent} from '../view-college/view-college.component';
+import {
+   DeleteBuildingDialogComponent
+} from '../../../building-management/component/delete-building-dialog/delete-building-dialog.component';
+import {DeleteCollegeDialogComponent} from '../delete-college-dialog/delete-college-dialog.component';
 
 @Component({
    selector: 'app-colleges-list',
@@ -21,12 +31,12 @@ import {Constants} from '../../../shared/constants';
    providers: [MessageService, ConfirmationService]
 })
 export class CollegesListComponent implements OnInit, OnDestroy {
-
+   @ViewChild('paginator') paginator: MatPaginator;
    tableData: PageRequest<CollegeModel>;
    collegeRequestModel: GeneralSearchRequest = new GeneralSearchRequest();
-   displayedColumns = ['id', 'nameEn', 'nameAr', 'code', 'Actions'];
+   displayedColumns = ['No.', 'nameEn', 'nameAr', 'code', 'Actions'];
    pageIndex = 0;
-   pageSize = 5;
+   pageSize = 10;
    subscriptionsList: Subscription[] = [];
    isSmallScreen: boolean;
    collegeModel = new CollegeModel();
@@ -38,7 +48,9 @@ export class CollegesListComponent implements OnInit, OnDestroy {
                private modalService: BsModalService,
                private breakpointObserver: BreakpointObserver,
                private snackBar: MatSnackBar,
-               private router: Router, private primengConfig: PrimeNGConfig) {
+               private router: Router,
+               private primengConfig: PrimeNGConfig,
+               public dialog: MatDialog) {
    }
 
    ngOnInit(): void {
@@ -65,41 +77,62 @@ export class CollegesListComponent implements OnInit, OnDestroy {
       }
    }
 
-   updateCollege(college: CollegeModel): void {
+   updateCollege(college: CollegeModel, sel: string): void {
       if (this.isSmallScreen) {
          this.router.navigateByUrl('/colleges-management/create-college', {state: college}).then(_ => console.log());
       } else {
-         const initialState = {
-            collegeModel: college
-         };
-         this.modalService.show(SaveCollegeComponent, {initialState, class: 'modal-lg'});
+         const data: any[] = [college, sel];
+         this.dialog.open(SaveCollegeComponent, {width: '900px', height: '450px', data});
+         this.collegeManagementService.closeSaveEvent.pipe(take(1)).subscribe(e => {
+            console.log('subscribed to close event');
+            this.dialog.closeAll();
+            if (e !== 'Cancel') {
+               console.log('entered cancel');
+               this.snackBar.open('College Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
+               this.collegeManagementService.collegeFilterEvent.next(this.collegeRequestModel);
+            }
+         }, error => {
+            this.snackBar.open('College Saving Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
+         });
       }
    }
 
 
-   viewCollege(row: CollegeModel): void {
-
+   viewCollege(college: CollegeModel): void {
+      if (this.isSmallScreen) {
+         this.router.navigateByUrl('/colleges-management/create-college/edit');
+      } else {
+         this.dialog.open(ViewCollegeComponent, {width: '900px', height: '450px', data: college});
+         this.collegeManagementService.closeSaveEvent.pipe(take(1)).subscribe(e => {
+            console.log('subscribed to close event');
+            this.dialog.closeAll();
+            if (e !== 'Cancel') {
+               console.log('here');
+               this.snackBar.open('College Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
+               this.collegeManagementService.collegeFilterEvent.next(this.collegeRequestModel);
+            }
+         }, error => {
+            this.snackBar.open('College Saving Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
+         });
+      }
    }
 
-   deleteCollege(id: number): void {
-      this.confirmationService.confirm({
-         message: 'Delete College',
-         header: '',
-         accept: () => {
-            this.collegeManagementService.deleteCollege(id).subscribe(_ => {
-               this.messageService.add({severity: 'success', summary: 'Success', detail: 'College Deleted'});
-               this.loading = true;
-               this.collegeManagementService.getCollegePage(this.pageIndex, this.pageSize, this.collegeRequestModel).subscribe(value => {
-                  this.tableData = value;
-                  this.loading = false;
-               });
-            }, _ => {
-               this.messageService.add({severity: 'error', summary: 'Error', detail: 'Deletion Failed'});
-            });
-         },
-         reject: () => {
-         }
+   sortEvent($event: Sort): void {
+      this.collegeRequestModel = this.collegeManagementService.constructCollegeRequestObject($event, this.collegeRequestModel);
+      this.collegeManagementService.getCollegePage(0, this.pageSize, this.collegeRequestModel).subscribe(value => {
+         this.tableData = value;
       });
+   }
+
+   deleteCollege(row: CollegeModel): void {
+      this.dialog.open(DeleteCollegeDialogComponent, {width: '450px'});
+      this.subscriptionsList.push(this.collegeManagementService.collegeDeleteEvent.pipe(take(1)).subscribe(_ => {
+         this.collegeManagementService.deleteCollege(row.id).subscribe(() => {
+            this.handleSuccessfulDeletion();
+         }, () => {
+            this.handleFailedDeletion();
+         });
+      }));
    }
 
    saveCollege(): Subscription {
@@ -166,6 +199,7 @@ export class CollegesListComponent implements OnInit, OnDestroy {
       return this.collegeManagementService.collegeFilterEvent
          .subscribe(value => {
             this.collegeRequestModel = value;
+            this.paginator.pageIndex = 0;
             this.collegeManagementService
                .getCollegePage(0, this.pageSize, this.collegeRequestModel)
                .subscribe(filteredData => {
@@ -183,6 +217,16 @@ export class CollegesListComponent implements OnInit, OnDestroy {
             this.tableData = value;
             this.loading = false;
          });
+   }
+
+   private handleSuccessfulDeletion(): void {
+      this.collegeManagementService
+         .collegeFilterEvent.next(this.collegeRequestModel);
+      this.snackBar.open('College Deleted Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
+   }
+
+   private handleFailedDeletion(): void {
+      this.snackBar.open('College Deletion Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
    }
 }
 

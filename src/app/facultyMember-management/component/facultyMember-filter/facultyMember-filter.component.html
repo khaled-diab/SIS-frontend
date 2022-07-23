@@ -2,12 +2,11 @@
    <div class="container">
       <div class="col-12">
          <div class="subTitle ">
-            <h4>User Management / Faculty Member Management</h4>
+            <h4>User Management / Faculty Members</h4>
             <hr>
          </div>
       </div>
       <form class="form-row form">
-
          <div class="form-group col-md-4 col-sm-12 search-box">
             <mat-form-field appearance="outline">
                <mat-label>Search</mat-label>
@@ -15,10 +14,9 @@
                       [(ngModel)]="facultyMemberFilterModel.searchValue">
             </mat-form-field>
          </div>
-
          <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
-               <mat-label>Colleges</mat-label>
+               <mat-label>College</mat-label>
                <mat-select #collegeSelect>
                   <mat-option [value]="undefined">
                      Choose College
@@ -32,7 +30,7 @@
 
          <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
-               <mat-label>Departments</mat-label>
+               <mat-label>Department</mat-label>
                <mat-select disabled #departmentSelect>
                   <mat-option [value]="undefined">
                      Choose Department
@@ -43,7 +41,6 @@
                </mat-select>
             </mat-form-field>
          </div>
-
          <div appearance="outline" class="col-md-3 col-sm-12">
             <button (click)="resetFilter()" class="btn btn-info">Reset</button>
          </div>

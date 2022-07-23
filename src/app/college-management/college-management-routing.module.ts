@@ -29,7 +29,7 @@ const appRoutes: Routes = [
         }
       },
       {
-        path: 'create-college',
+        path: 'create-college/:sel',
         component: SaveCollegeComponent,
         canActivate: [SecurityGuard],
         data: {

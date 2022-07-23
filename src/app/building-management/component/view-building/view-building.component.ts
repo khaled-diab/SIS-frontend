@@ -7,7 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSelect} from '@angular/material/select';
 import {CollegeModel} from '../../../shared/model/college-management/college-model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {DepartmentModel} from '../../../shared/model/department-management/department-model';
 import {DepartmentService} from '../../../department-management/service/department.service';
 
@@ -32,8 +32,7 @@ export class ViewBuildingComponent implements OnInit, AfterViewInit {
                private snackBar: MatSnackBar,
                private route: Router,
                private breakpointObserver: BreakpointObserver,
-               private departmentService: DepartmentService,
-              ) {
+               private departmentService: DepartmentService,) {
    }
 
    ngAfterViewInit(): void {
@@ -63,12 +62,12 @@ export class ViewBuildingComponent implements OnInit, AfterViewInit {
          console.log(this.buildingModel.code);
          this.buildingModel.collegeDTO = new CollegeModel();
          this.buildingModel.collegeDTO.id = this.form.get('collegeMenu')?.value;
-         if ( this.form.get('departmentMenu')?.value !== undefined ) {
+         if (this.form.get('departmentMenu')?.value !== undefined && this.form.get('departmentMenu')?.value != null) {
             this.buildingModel.departmentDTO = new DepartmentModel();
             this.buildingModel.departmentDTO.id = this.form.get('departmentMenu')?.value;
-         }else{
+         } else {
             // @ts-ignore
-            this.buildingModel.departmentDTO = null ;
+            this.buildingModel.departmentDTO = null;
          }
          this.buildingManagementService.saveBuilding(this.buildingModel).subscribe((Response) => {
                this.snackBar.open('Building Added Successfully', undefined, {duration: 2000, panelClass: 'successSnackBar'});
@@ -90,8 +89,6 @@ export class ViewBuildingComponent implements OnInit, AfterViewInit {
    }
 
    ngOnInit(): void {
-      // @ts-ignore
-
       this.form = new FormGroup({
             name: new FormControl(undefined, Validators.required),
             departmentMenu: new FormControl(undefined),
@@ -123,9 +120,12 @@ export class ViewBuildingComponent implements OnInit, AfterViewInit {
                this.form.get('collegeMenu')?.setValue(this.buildingModel.collegeDTO.id);
                console.log('collegeMenu: ', this.form.get('collegeMenu')?.value);
             }
-            if (this.buildingModel.collegeDTO === undefined) {
-               this.buildingModel.departmentDTO = new DepartmentModel();
+            this.form.get('collegeMenu')?.setValue(this.buildingModel.collegeDTO.id);
+            this.departments = this.departmentService.getDepartmentsByCollege(this.buildingModel.collegeDTO.id);
+            if (this.buildingModel.departmentDTO === null) {
+               // this.buildingModel.departmentDTO = new DepartmentModel();
             } else {
+               console.log(this.buildingModel.departmentDTO.id);
                this.form.get('departmentMenu')?.setValue(this.buildingModel.departmentDTO.id);
             }
          }

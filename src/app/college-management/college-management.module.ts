@@ -31,50 +31,59 @@ import {MessagesModule} from 'primeng/messages';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToastModule} from 'primeng/toast';
 import {RippleModule} from 'primeng/ripple';
-import {TooltipModule} from "primeng/tooltip";
+import {TooltipModule} from 'primeng/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ViewCollegeComponent} from './component/view-college/view-college.component';
+import {DeleteCollegeDialogComponent} from './component/delete-college-dialog/delete-college-dialog.component';
 
 
 @NgModule({
-  declarations: [
-    CollegesListComponent,
-    SaveCollegeComponent,
-    CollegeFilterComponent,
-    CollegeParentComponent
-  ],
-    imports: [
-        ModalModule.forRoot(),
-        CommonModule,
-        HttpClientModule,
-        CollegeManagementRoutingModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatIconModule,
-        MatButtonModule,
-        MatRippleModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatCardModule,
-        MatDividerModule,
-        MatMenuModule,
-        MatSelectModule,
-        MatProgressSpinnerModule,
-        FormsModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        TableModule,
-        PaginatorModule,
-        ProgressSpinnerModule,
-        ConfirmDialogModule,
-        ToastModule,
-        ButtonModule,
-        RippleModule,
-        MessagesModule,
-        TooltipModule,
-    ],
-  entryComponents: [SaveCollegeComponent],
-  bootstrap: [CollegesListComponent]
+   declarations: [
+      CollegesListComponent,
+      SaveCollegeComponent,
+      CollegeFilterComponent,
+      CollegeParentComponent,
+      ViewCollegeComponent,
+      DeleteCollegeDialogComponent,
+   ],
+   imports: [
+      ModalModule.forRoot(),
+      CommonModule,
+      HttpClientModule,
+      CollegeManagementRoutingModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatIconModule,
+      MatButtonModule,
+      MatRippleModule,
+      MatFormFieldModule,
+      ReactiveFormsModule,
+      MatInputModule,
+      MatCardModule,
+      MatDividerModule,
+      MatMenuModule,
+      MatSelectModule,
+      MatProgressSpinnerModule,
+      FormsModule,
+      MatTooltipModule,
+      MatSnackBarModule,
+      TableModule,
+      PaginatorModule,
+      ProgressSpinnerModule,
+      ConfirmDialogModule,
+      ToastModule,
+      ButtonModule,
+      RippleModule,
+      MessagesModule,
+      TooltipModule,
+      MatDialogModule,
+      MatCheckboxModule
+   ],
+   exports: [CollegesListComponent, ],
+   entryComponents: [SaveCollegeComponent],
+   bootstrap: [CollegesListComponent]
 })
 export class CollegeManagementModule {
 }

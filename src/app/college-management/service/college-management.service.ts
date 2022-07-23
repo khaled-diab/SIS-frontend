@@ -13,12 +13,13 @@ import {environment} from '../../../environments/environment';
    providedIn: 'root'
 })
 export class CollegeManagementService {
-
    constructor(private httpClient: HttpClient) {
    }
 
    collegeFilterEvent: Subject<GeneralSearchRequest> = new Subject<GeneralSearchRequest>();
+   closeSaveEvent: Subject<any> = new Subject();
    collegeSaveEvent: Subject<CollegeModel> = new Subject<CollegeModel>();
+   collegeDeleteEvent: Subject<any> = new Subject<any>();
 
    public getCollegePage(pageNumber: number, pageSize: number, collegeFilterModel: GeneralSearchRequest):
       Observable<PageRequest<CollegeModel>> {

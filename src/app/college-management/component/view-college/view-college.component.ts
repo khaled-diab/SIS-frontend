@@ -9,29 +9,25 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Constants} from '../../../shared/constants';
 
 @Component({
-   selector: 'app-create-college',
-   templateUrl: './save-college.component.html',
-   styleUrls: ['./save-college.component.css']
+   selector: 'app-view-college',
+   templateUrl: './view-college.component.html',
+   styleUrls: ['./view-college.component.css']
 })
-export class SaveCollegeComponent implements OnInit {
+export class ViewCollegeComponent implements OnInit {
 
    collegeModel: CollegeModel;
    form: FormGroup;
    errorMessage: string;
-   title = '';
+   readOnly: boolean;
 
-   constructor(@Inject(MAT_DIALOG_DATA) public data: any[],
+   constructor(@Inject(MAT_DIALOG_DATA) public data: CollegeModel,
                private snackBar: MatSnackBar,
                private route: Router,
-               private activatedRoute: ActivatedRoute,
                private breakpointObserver: BreakpointObserver,
                private collegeManagementService: CollegeManagementService) {
    }
 
    ngOnInit(): void {
-      this.activatedRoute.paramMap.subscribe(value => {
-
-      });
       this.form = new FormGroup({
             nameAr: new FormControl(undefined, Validators.compose([Validators.required,
                Validators.pattern(Constants.ARABIC_CHARACTERS)])),
@@ -40,18 +36,15 @@ export class SaveCollegeComponent implements OnInit {
             code: new FormControl(undefined, Validators.required),
          }
       );
+      this.collegeModel = this.data;
       this.breakpointObserver.observe(Breakpoints.Handset).subscribe(value => {
-         if (this.data[1] === 'save') {
-            this.title = 'Save College';
-            this.fetchDataFromRouter(history.state);
-         } else {
-            this.title = 'Edit College';
-            this.collegeModel = {...this.data[0]};
+            this.collegeModel = {...this.data};
             this.form.get('nameAr')?.setValue(this.collegeModel.nameAr);
             this.form.get('nameEn')?.setValue(this.collegeModel.nameEn);
             this.form.get('code')?.setValue(this.collegeModel.code);
-         }
       });
+      this.readOnly = true;
+      this.form.disable();
    }
 
    save(): void {
@@ -85,6 +78,10 @@ export class SaveCollegeComponent implements OnInit {
       }
    }
 
+   edit(): void {
+      this.readOnly = false;
+      this.form.enable();
+   }
 
    public cancel(): void {
       this.collegeManagementService.closeSaveEvent.next('Cancel');

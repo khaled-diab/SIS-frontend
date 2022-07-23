@@ -1,17 +1,20 @@
 <mat-card class="mat-elevation-z8">
    <div class="container">
       <div class="col-12">
-         <div class="subTitle ">
-            <h4>System Management / Classroom Management</h4>
+         <div class="subTitle">
+            <h4>System Management / Classrooms</h4>
             <hr>
          </div>
       </div>
       <form class="form-row form">
-         <div class="form-group col-6 search-box ">
-            <input [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="form-control" id="inputField"
-                   name="filterValue" placeholder="Search here" type="text">
+         <div class="form-group col-md-4 col-sm-12 search-box">
+            <mat-form-field appearance="outline">
+               <mat-label>Search</mat-label>
+               <input matInput [(ngModel)]="searchValue" #searchBox (keyup)="applyFilter()" class="searchInput" id="inputField"
+                      name="filterValue" type="search">
+            </mat-form-field>
          </div>
-         <div class="col-3 mt-1">
+         <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
                <mat-label>College</mat-label>
                <mat-select #collegeSelect [value]="collegeSelectValue">
@@ -24,7 +27,7 @@
                </mat-select>
             </mat-form-field>
          </div>
-         <div class="col-3 mt-1">
+         <div class="col-md-4 col-sm-12 mt-1">
             <mat-form-field appearance="outline">
                <mat-label>Building</mat-label>
                <mat-select disabled #buildingSelect [value]="buildingSelectValue">
@@ -35,7 +38,6 @@
                      {{building.name}}
                   </mat-option>
                </mat-select>
-               <!--mat-error *ngIf="building.invalid ">Field Required</mat-error-->
             </mat-form-field>
          </div>
          <div appearance="outline" class="col-md-3 col-sm-12">

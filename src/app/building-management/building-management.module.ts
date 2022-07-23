@@ -63,7 +63,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatTooltipModule,
         MatSnackBarModule,
         MatDialogModule,
-        // Ng2SearchPipeModule,
         MatCheckboxModule
     ],
   exports: [
