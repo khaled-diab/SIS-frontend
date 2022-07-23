@@ -106,10 +106,6 @@ img {
    font-size: 35px;
 }
 
-::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
-   stroke: var(--main-color);
-}
-
 button[type="button"] {
    width: auto;
    display: block;
@@ -123,4 +119,8 @@ button[type="button"]:hover {
    display: block;
    background: transparent;
    color: var(--main-color);
+}
+
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+   stroke: var(--secondary-color);
 }

@@ -287,3 +287,14 @@ input[type="date"] {
   padding: 10px;
 
 }
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+   opacity: 0.03 !important;
+   background-color: var(--secondary-color) !important;
+   border-color: #FFFFFF !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+   background-color: var(--secondary-color);
+   border-color: #FFFFFF !important;
+}
+

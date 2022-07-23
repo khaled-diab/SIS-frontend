@@ -106,3 +106,7 @@ img {
   width:50px;
   height: 50px;
 }
+
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+   stroke: var(--secondary-color);
+}

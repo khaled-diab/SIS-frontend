@@ -104,5 +104,5 @@ img {
    font-size: 35px;
 }
 ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
-   stroke: var(--main-color);
+   stroke: var(--secondary-color);
 }

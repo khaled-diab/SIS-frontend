@@ -119,10 +119,6 @@ mat-cell .options mat-icon.user-times {
    color: #F00B0B;
 }
 
-::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
-   stroke: var(--secondary-color);
-}
-
 .myBtn {
    padding: 5px;
    background-color: var(--main-color);
@@ -133,3 +129,7 @@ mat-cell .options mat-icon.user-times {
    padding: 5px;
    background-color: var(--main-color);
 }
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+   stroke: var(--secondary-color);
+}
+
