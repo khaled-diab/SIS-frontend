@@ -24,6 +24,7 @@ import { AcademicTermFilterComponent } from './components/academic-term-filter/a
 import { MatDialogModule } from '@angular/material/dialog';
 import { ViewAcademicTermComponent } from './components/view-academic-term/view-academic-term.component';
 import { DeleteAcademicTermComponent } from './components/delete-academic-term/delete-academic-term.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -34,27 +35,28 @@ import { DeleteAcademicTermComponent } from './components/delete-academic-term/d
     ViewAcademicTermComponent,
     DeleteAcademicTermComponent
   ],
-  imports: [
-    CommonModule,
-    AcademicTermRoutingModule,
-    MatCardModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatButtonModule,
-    RouterModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-     MatDialogModule
-  ],
+    imports: [
+        CommonModule,
+        AcademicTermRoutingModule,
+        MatCardModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatButtonModule,
+        RouterModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSortModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatCheckboxModule
+    ],
   providers:[AcademicTermService],
   entryComponents:[CreateAcademicTermComponent]
 })

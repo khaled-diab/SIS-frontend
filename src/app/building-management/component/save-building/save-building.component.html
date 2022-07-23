@@ -49,8 +49,8 @@
                         <mat-error *ngIf="form.get('collegeMenu')?.errors?.required">Required</mat-error>
                      </mat-form-field>
 
-                     <div>
-                        <mat-label appearance="outline" class="col-md-2 col-sm-2  form-input">Status</mat-label>
+                     <div class="col-md-6 select-sm col-sm-12 form-input">
+                        <mat-label appearance="outline" class="col-md-2 col-sm-2  form-input">{{'Status '}}</mat-label>
                         <mat-checkbox color="primary" id="status" formControlName="status"></mat-checkbox>
                      </div>
                   </div>

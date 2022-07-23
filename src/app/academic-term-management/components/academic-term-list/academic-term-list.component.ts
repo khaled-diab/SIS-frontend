@@ -15,6 +15,7 @@ import {ViewAcademicTermComponent} from '../view-academic-term/view-academic-ter
 import {take} from 'rxjs/operators';
 import {AcademicYearService} from "../../../academic-year-management/service/academic-year.service";
 import {Constants} from "../../../shared/constants";
+import {SecurityService} from "../../../security/service/security.service";
 
 
 @Component({
@@ -51,7 +52,7 @@ export class AcademicTermListComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, public service: AcademicTermService,
               private breakpointObserver: BreakpointObserver,
               private snackBar: MatSnackBar,
-              private router: Router,
+              private router: Router
   ) {
   }
 
