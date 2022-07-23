@@ -37,7 +37,9 @@ export class CreateAcademicTermComponent implements OnInit {
       this.academicTerm.code = this.form.get('code')?.value;
       this.academicTerm.start_date = this.form.get('start_date')?.value;
       this.academicTerm.end_date = this.form.get('end_date')?.value;
-      this.academicTerm.academicYearDTO = new AcademicTermModel();
+       this.academicTerm.status = this.form.get('status')?.value;
+
+       this.academicTerm.academicYearDTO = new AcademicTermModel();
       this.academicTerm.academicYearDTO.id = this.form.get('academicYearMenu')?.value;
     }
     if (this.form.get('start_date')?.value > this.form.get('end_date')?.value) {
@@ -81,7 +83,9 @@ export class CreateAcademicTermComponent implements OnInit {
         code: new FormControl(undefined, Validators.required),
         start_date: new FormControl(undefined, Validators.required),
         end_date: new FormControl(undefined, Validators.required),
-      }
+          status: new FormControl(false),
+
+       }
     );
     // this.academicYear.getAcademicYears().subscribe(Response => {
       this.academicYears = AcademicYearService.yearsList;
@@ -98,7 +102,9 @@ export class CreateAcademicTermComponent implements OnInit {
         this.form.get('start_date')?.setValue(this.academicTerm.start_date);
         this.form.get('code')?.setValue(this.academicTerm.code);
         this.form.get('end_date')?.setValue(this.academicTerm.end_date);
-        if (this.academicTerm.academicYearDTO === undefined) {
+         this.form.get('status')?.setValue(this.academicTerm.status);
+
+         if (this.academicTerm.academicYearDTO === undefined) {
           this.academicTerm.academicYearDTO = new AcademicYear();
           this.academicYearSelectValue = 0;
         } else {
