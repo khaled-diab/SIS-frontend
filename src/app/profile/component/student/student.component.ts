@@ -142,9 +142,9 @@ export class StudentComponent implements OnInit {
    }
 
 
-   cancel(): void {
-      this.router.navigateByUrl('/dashboard').then();
-   }
+   // cancel(): void {
+   //    this.router.navigateByUrl('/dashboard').then();
+   // }
 
    uploadPhoto(event: any): void {
       this.profileService.uploadProfilePictureNoEvent(this.photoInput.nativeElement.files[0], this.loggedInUser.user.email).subscribe(response => {

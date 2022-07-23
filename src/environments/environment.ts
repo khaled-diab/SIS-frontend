@@ -7,6 +7,9 @@ export const environment = {
    baseURL: 'http://localhost:8080/api',
    driveURL: 'http://localhost:5000/api/',
    socketUrl: 'http://localhost:8080/sis-websocket'
+   // baseURL: 'http://sis-project.us-east-1.elasticbeanstalk.com/api',
+   // driveURL: 'http://drive.us-east-1.elasticbeanstalk.com/api/',
+   // socketUrl: 'http://sis-project.us-east-1.elasticbeanstalk.com/sis-websocket'
 };
 
 /*

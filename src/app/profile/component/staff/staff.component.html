@@ -100,11 +100,11 @@
                                 [disabled]="form.invalid">Update
                         </button>
                      </div>
-                     <div class="col-md-6 col-sm-12 form-input">
-                        <button mat-raised-button type="button" (click)="cancel()" class="btn btn-primary form-control">
-                           Cancel
-                        </button>
-                     </div>
+<!--                     <div class="col-md-6 col-sm-12 form-input">-->
+<!--                        <button mat-raised-button type="button" (click)="cancel()" class="btn btn-primary form-control">-->
+<!--                           Cancel-->
+<!--                        </button>-->
+<!--                     </div>-->
 
                      <div class="col-md-4 col-sm-12 form-input">
                         <button (click)="  changePassword()" class="btn btn-primary form-control"
@@ -133,49 +133,6 @@
                         </div>
                      </li>
                   </ul>
-               </div>
-            </div>
-
-            <div *ngIf="enableChangePass">
-               <div class="subTitle">
-                  <h4>Change Password</h4>
-               </div>
-               <hr>
-               <!--  Submition Form   -->
-               <div class="row">
-                  <form (ngSubmit)="updatePass()" [formGroup]="passForm" class="submition-form col-sm-12 col-lg-8"
-                        id="passForm">
-                     <div class="form-row">
-                        <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
-                           <mat-label>Old Password</mat-label>
-                           <input formControlName="oldPass" matInput name="oldPass" required type="password">
-                           <mat-error *ngIf="passForm.get('oldPass')?.errors">Minimum 8 Characters</mat-error>
-
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" class="col-md-6 col-sm-12 form-input">
-                           <mat-label>New Password</mat-label>
-                           <input (change)="isPassChanged=true" formControlName="newPass" matInput name="newPass"
-                                  required type="password">
-                           <mat-error *ngIf="passForm.get('newPass')?.errors">Minimum 8 Characters</mat-error>
-
-                        </mat-form-field>
-
-
-                        <div class="col-md-6 col-sm-12 form-input">
-                           <button [disabled]="passForm.invalid " [ngClass]="{'disabled-btn':passForm.invalid}"
-                                   class="btn btn-primary form-control" form="passForm"
-                                   mat-raised-button type="submit">Update
-                           </button>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-input">
-                           <button (click)=" this.enableChangePass = false" class="btn btn-primary form-control"
-                                   mat-raised-button
-                                   type="button">Cancel
-                           </button>
-                        </div>
-                     </div>
-                  </form>
-
                </div>
             </div>
 

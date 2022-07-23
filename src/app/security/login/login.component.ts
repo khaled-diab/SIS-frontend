@@ -43,8 +43,13 @@ export class LoginComponent implements OnInit {
       localStorage.setItem(Constants.loggedInUser, JSON.stringify(value));
       localStorage.setItem(Constants.screens, value.user.role.roleScreens.map(screens => screens.screen).map(screen => screen.name).join());
       this.securityService.loginEvent.next('');
-      this.router.navigate(['/dashboard']).then(_ => {
-      });
+      if (value.user.role.roleName === 'ADMIN') {
+         this.router.navigate(['/dashboard']).then(_ => {
+         });
+      } else {
+         this.router.navigate(['/profile']).then(_ => {
+         });
+      }
       this.securityService.getAllUtilData();
    }
 
