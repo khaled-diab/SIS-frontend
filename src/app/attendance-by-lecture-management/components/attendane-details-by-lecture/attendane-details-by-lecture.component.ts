@@ -91,9 +91,9 @@ export class AttendaneDetailsByLectureComponent implements OnInit {
 }
 ngAfterViewInit(): void {
   this.items = [
-    {label: 'Attendance_Reports'},
-    {label: 'Attendance_By_Lecture'},
-    {label: 'Lecture_Details'},
+    {label: 'Attendance Reports'},
+    {label: 'Attendance By Lecture'},
+    {label: 'Lecture Details'},
 
 
 ];
@@ -141,13 +141,10 @@ edit(details: AttendanceDetailsModel){
 clickEventHandler() {
 this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
 }
-itemClicked(item:MenuItem) {
-  console.log('here');
-  this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
-  // if (item.label == 'Attendance_By_Lecture') {
-  //   console.log('here');
-  //   this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
-  // }
+itemClicked(event: any) {
+  if (event.item.label == 'Attendance By Lecture') {
+    this.router.navigateByUrl('/attendancereportsbylecture-management/attendane-report-by-lecture');
+  }
 };
 // ngOnDestroy(): void {
 // this.lectureReportService.attendanceDetailsByLectureFilterEvent.unsubscribe();

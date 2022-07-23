@@ -130,3 +130,25 @@ table {
     align-items: center;
     justify-content: space-around;
 }
+.mid-grid{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+ }
+ .mid-grid .grid-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ }
+ .mid-grid .grid-item h3{
+  color: var(--main-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 7px 10px;
+ }
+ .mid-grid .grid-item p{
+  color: var(--secondary-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 0 5px !important;
+ }

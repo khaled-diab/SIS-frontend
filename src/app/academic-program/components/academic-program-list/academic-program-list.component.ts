@@ -69,12 +69,18 @@ export class AcademicProgramListComponent implements OnInit {
       this.dialog.open(CreateAcademicProgramComponent, {data: academicProgram});
       this.academicProgramService.academicProgramSaveCloseEvent.pipe(take(1)).subscribe(e => {
         this.dialog.closeAll();
+    
         if (e !== 'Cancel') {
-          this.snackBar.open('Academic Program Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
+          this.snackBar.open('Academic Progaram Saved Successfully', undefined, {duration: 4000, panelClass: 'successSnackBar'});
           console.log('here');
-          this.academicProgramService.academicProgramSaveCloseEvent.next(this.academicProgramRequestModel);
+          this.academicProgramService.getAllAcademicPrograms().subscribe(data => {
+            this.tableData = data;
+            this.dataSource.data = this.tableData;
+            AcademicProgramService.academicProgramList = this.tableData;
+          });
         }
-      }, error => {
+      },
+       error => {
         this.snackBar.open('Academic Program Saving Failed', undefined, {duration: 4000, panelClass: 'failedSnackBar'});
       });
     }

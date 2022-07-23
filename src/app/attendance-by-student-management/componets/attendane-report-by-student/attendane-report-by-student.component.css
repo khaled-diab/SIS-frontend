@@ -17,13 +17,18 @@ table {
   
   }
   .make-green {
-    background-color: #1E8B17;
+    color: #1E8B17;
+    font-weight: bold;
   }
   .make-red {
-    background-color:#F00B0B;
+    color:#F00B0B;
+    font-weight: bold;
+
   }
   .make-orange {
-    background-color:darkorange
+   color:darkorange;
+   font-weight: bold;
+
   }
   
   mat-header-cell {
@@ -127,4 +132,26 @@ table {
   }
   ::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
     stroke: var(--secondary-color)!important;
+ }
+ .mid-grid{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+ }
+ .mid-grid .grid-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ }
+ .mid-grid .grid-item h3{
+  color: var(--main-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 7px 10px;
+ }
+ .mid-grid .grid-item p{
+  color: var(--secondary-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 0 5px !important;
  }
