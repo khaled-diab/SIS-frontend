@@ -38,7 +38,7 @@
           <ng-container matColumnDef="rate">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Absent Average
             </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.rate}}{{' %'}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.rate | number :'1.0-2'}}{{' %'}}</mat-cell>
           </ng-container>
 
             <ng-container matColumnDef="statues">
